@@ -45,3 +45,6 @@
 .ionide
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,helm,git,ssh
+
+
+my-values.yaml
