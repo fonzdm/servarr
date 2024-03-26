@@ -1,0 +1,36 @@
+apiVersion: v2
+name: servarr
+description: Servarr complete helm chart for Kubernetes
+type: application
+version: 1.0.0
+appVersion: "1.0.0"
+
+dependencies:
+  - name: kube-prometheus-stack
+    version: 57.0.1
+    repository: "https://prometheus-community.github.io/helm-charts"
+  - name: sonarr
+    version: "21.2.1"
+    repository: "https://charts.truecharts.org"
+  - name: radarr
+    version: "21.2.1"
+    repository: "https://charts.truecharts.org"
+  - name: prowlarr
+    version: "16.2.1"
+    repository: "https://charts.truecharts.org"
+  - name: qbittorrent
+    version: "19.4.1"
+    repository: "https://charts.truecharts.org"
+  - name: jellyseerr
+    version: "9.4.1"
+    repository: "https://charts.truecharts.org"
+  - name: jellyfin
+    version: "18.4.2"
+    repository: "https://charts.truecharts.org"
+  - name: flaresolverr
+    version: "13.4.1"
+    repository: "https://charts.truecharts.org"
+
+maintainers:
+  - name: Alfonso De Masi
+    email: adm220297@proton.me

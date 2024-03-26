@@ -1,0 +1,387 @@
+global:
+  apikey: &apikey #INSERT YOUR API KEY HERE
+
+torrent:
+  username: # JUST FOR TRACKING PURPOSE, THE USERNAME IS CONFIGURED IN config/qbittorrent/qBittorrent.conf
+  password: # JUST FOR TRACKING PURPOSE, THE PASSWORD IS CONFIGURED IN config/qbittorrent/qBittorrent.conf
+
+indexers:
+- name: index-1
+  body: "#prowlarr api body to add the indexer, with escaped json format"
+
+### for tracking purpose, not used - replaced with pre-existing cluster issuer
+issuer:
+  server: https://acme-v02.api.letsencrypt.org/directory
+  email: # your email address
+  secretName: letsencrypt-prod
+  ingressClassName: nginx
+  cloudFlareKey: # your cloudflare key
+
+volumes:
+  storageClass: longhorn
+  downloads:
+    name: &downloads-volume downloads-volume
+    size: 100Gi
+  media:
+    name: &media-volume media-volume
+    size: 250Gi
+  torrentConfig:
+    name: &torrentConfig torrent-config
+    size: 250Mi
+
+kube-prometheus-stack:
+  grafana:
+    ingress:
+      enabled: true
+      ingressClassName: nginx
+      annotations:
+        kubernetes.io/ingress.class: nginx
+        cert-manager.io/cluster-issuer: letsencrypt-cloudflare
+      hosts:
+        - grafana.local
+      tls:
+        - secretName: grafana-tls
+          hosts:
+            - grafana.local
+
+sonarr:
+  workload:
+    main:
+      podSpec:
+        containers:
+          main:
+            env:
+              SONARR__API_KEY: *apikey
+  ingress:
+    sonarr-ing:
+      enabled: true
+      primary: true
+      required: true
+      expandObjectName: false
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-cloudflare
+      ingressClassName: "nginx"
+      hosts:
+        - host: sonarr.local
+          paths:
+            - path: /
+              pathType: Prefix
+      tls:
+        - hosts:
+            - sonarr.local
+          secretName: sonarr-tls
+      integrations:
+        certManager:
+          enabled: false
+        traefik:
+          enabled: false
+  persistence:
+    config:
+      enabled: true
+      type: pvc
+      size: 500Mi
+      accessModes: ReadWriteMany
+      storageClass: longhorn
+      targetSelector:
+        main:
+          main:
+            mountPath: /config
+        exportarr:
+          exportarr:
+            mountPath: /config
+            readOnly: true
+    media:
+      enabled: true
+      type: pvc
+      existingClaim: *media-volume
+      targetSelector:
+        main:
+          main:
+            mountPath: /mnt/media
+    downloads:
+      enabled: true
+      type: pvc
+      existingClaim: *downloads-volume
+      targetSelector:
+        main:
+          main:
+            mountPath: /mnt/downloads
+
+radarr:
+  workload:
+    main:
+      podSpec:
+        containers:
+          main:
+            env:
+              RADARR__API_KEY: *apikey
+  ingress:
+    radarr-ing:
+      enabled: true
+      primary: true
+      required: true
+      expandObjectName: false
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-cloudflare
+      ingressClassName: "nginx"
+      hosts:
+        - host: radarr.local
+          paths:
+            - path: /
+              pathType: Prefix
+      tls:
+        - hosts:
+            - radarr.local
+          secretName: radarr-tls
+      integrations:
+        certManager:
+          enabled: false
+        traefik:
+          enabled: false
+  persistence:
+    config:
+      enabled: true
+      type: pvc
+      size: 500Mi
+      accessModes: ReadWriteMany
+      storageClass: longhorn
+      targetSelector:
+        main:
+          main:
+            mountPath: /config
+        exportarr:
+          exportarr:
+            mountPath: /config
+            readOnly: true
+    media:
+      enabled: true
+      type: pvc
+      existingClaim: *media-volume
+      targetSelector:
+        main:
+          main:
+            mountPath: /mnt/media
+    downloads:
+      enabled: true
+      type: pvc
+      existingClaim: *downloads-volume
+      targetSelector:
+        main:
+          main:
+            mountPath: /mnt/downloads
+
+jellyfin:
+  ingress:
+    jellyfin-ing:
+      enabled: true
+      primary: true
+      required: true
+      expandObjectName: false
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-cloudflare
+      ingressClassName: "nginx"
+      hosts:
+        - host: jellyfin.local
+          paths:
+            - path: /
+              pathType: Prefix
+      tls:
+        - hosts:
+            - jellyfin.local
+          secretName: jellyfin-tls
+      integrations:
+        certManager:
+          enabled: false
+        traefik:
+          enabled: false
+  persistence:
+    transcode:
+      enabled: false
+    config:
+      enabled: true
+      type: pvc
+      size: 500Mi
+      accessModes: ReadWriteMany
+      storageClass: longhorn
+      targetSelector:
+        main:
+          main:
+            mountPath: /config
+        exportarr:
+          exportarr:
+            mountPath: /config
+            readOnly: true
+    media:
+      enabled: true
+      type: pvc
+      existingClaim: *media-volume
+      targetSelector:
+        main:
+          main:
+            mountPath: /mnt/media
+
+jellyseerr:
+  ingress:
+    jellyseerr-ing:
+      enabled: true
+      primary: true
+      required: true
+      expandObjectName: false
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-cloudflare
+      ingressClassName: "nginx"
+      hosts:
+        - host: jellyseerr.local
+          paths:
+            - path: /
+              pathType: Prefix
+      tls:
+        - hosts:
+            - jellyseerr.local
+          secretName: jellyseerr-tls
+      integrations:
+        certManager:
+          enabled: false
+        traefik:
+          enabled: false
+  persistence:
+    config:
+      enabled: true
+      type: pvc
+      size: 500Mi
+      accessModes: ReadWriteMany
+      storageClass: longhorn
+      targetSelector:
+        main:
+          main:
+            mountPath: /config
+        exportarr:
+          exportarr:
+            mountPath: /config
+            readOnly: true
+    media:
+      enabled: true
+      type: pvc
+      existingClaim: *media-volume
+      targetSelector:
+        main:
+          main:
+            mountPath: /mnt/media
+
+# $QBITTORRENT__USE_PROFILE
+qbittorrent:
+  workload:
+    main:
+      podSpec:
+        containers:
+          main:
+            env:
+              QBITTORRENT__USE_PROFILE: true
+  ingress:
+    qbittorrent-ing:
+      enabled: true
+      primary: true
+      required: true
+      expandObjectName: false
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-cloudflare
+      ingressClassName: "nginx"
+      hosts:
+        - host: torrent.local
+          paths:
+            - path: /
+              pathType: Prefix
+      tls:
+        - hosts:
+            - torrent.local
+          secretName: torrent-tls
+      integrations:
+        certManager:
+          enabled: false
+        traefik:
+          enabled: false
+  persistence:
+    config:
+      enabled: true
+      type: pvc
+      existingClaim: *torrentConfig
+      targetSelector:
+        main:
+          main:
+            mountPath: /config
+        exportarr:
+          exportarr:
+            mountPath: /config
+            readOnly: true
+    downloads:
+      enabled: true
+      type: pvc
+      existingClaim: *downloads-volume
+      targetSelector:
+        main:
+          main:
+            mountPath: /downloads
+
+prowlarr:
+  workload:
+    main:
+      podSpec:
+        containers:
+          main:
+            env:
+              PROWLARR__API_KEY: *apikey
+  ingress:
+    prowlarr-ing:
+      enabled: true
+      primary: true
+      required: true
+      expandObjectName: false
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-cloudflare
+      ingressClassName: "nginx"
+      hosts:
+        - host: prowlarr.local
+          paths:
+            - path: /
+              pathType: Prefix
+      tls:
+        - hosts:
+            - prowlarr.local
+          secretName: prowlarr-tls
+      integrations:
+        certManager:
+          enabled: false
+        traefik:
+          enabled: false
+  persistence:
+    config:
+      enabled: true
+      type: pvc
+      size: 500Mi
+      accessModes: ReadWriteMany
+      storageClass: longhorn
+      targetSelector:
+        main:
+          main:
+            mountPath: /config
+        exportarr:
+          exportarr:
+            mountPath: /config
+            readOnly: true
+
+flaresolverr:
+  persistence:
+    config:
+      enabled: true
+      type: pvc
+      size: 500Mi
+      accessModes: ReadWriteMany
+      storageClass: longhorn
+      targetSelector:
+        main:
+          main:
+            mountPath: /config
+        exportarr:
+          exportarr:
+            mountPath: /config
+            readOnly: true

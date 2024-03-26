@@ -1,0 +1,40 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: add-indexers
+  labels:
+    release: "{{ .Release.Name }}"
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+  annotations:
+    "helm.sh/hook": post-install
+    "helm.sh/hook-delete-policy": before-hook-creation
+    "helm.sh/hook-weight": "7"
+spec:
+  backoffLimit: 1
+  template:
+    metadata:
+      name: "{{.Release.Name}}-config-finalizer"
+      labels:
+        app: "{{ .Release.Name }}"
+    spec:
+      restartPolicy: Never
+      initContainers:
+        - name: init-prowlarr
+          image: rapidfort/curl:latest
+          command:
+            - "sh"
+            - "-c"
+            - "until curl  \"http://servarr-prowlarr.{{ .Release.Namespace }}.svc.cluster.local:9696\"; do echo waiting for servarr-prowlarr; sleep 5; done;"
+      containers:
+      # TODO: range over indexers and execute the cURL
+      {{- range $.Values.indexers }}
+      - name: "{{ .name }}"
+        image: "busybox:latest"
+        command:
+          - "/bin/sh"
+          - "-ec"
+        args:
+          - "echo {{ .name }}"
+          - "echo {{ .body }}"
+          - "sleep 5"
+      {{- end }}
