@@ -34,7 +34,5 @@ spec:
           - "/bin/sh"
           - "-ec"
         args:
-          - "echo {{ .name }}"
-          - "echo '{{ .body | toJson | print | replace "\"" "\\\"" }}'"
-          - "sleep 5"
+          - "curl -k -v -X POST \"http://servarr-prowlarr.{{ $.Release.Namespace }}.svc.cluster.local:9696/api/v1/indexers\" -d '{{ .body | toJson | print | replace "\"" "\\\"" }}' -H 'Content-Type: application/json' -H 'X-Api-Key: $(APIKEY)' -H 'X-Prowlarr-Client: true' -H 'X-Requested-With: XMLHttpRequest'"
       {{- end }}
