@@ -29,7 +29,7 @@ spec:
       # TODO: range over indexers and execute the cURL
       {{- range $.Values.indexers }}
       - name: "{{ .name }}"
-        image: "busybox:latest"
+        image: "rapidfort/curl:latest"
         command:
           - "/bin/sh"
           - "-ec"
