@@ -35,6 +35,6 @@ spec:
           - "-ec"
         args:
           - "echo {{ .name }}"
-          - "echo {{ .body }}"
+          - "echo '{{ .body | toJson | print | replace "\"" "\\\"" }}'"
           - "sleep 5"
       {{- end }}
