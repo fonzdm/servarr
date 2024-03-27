@@ -32,7 +32,7 @@ spec:
         image: "rapidfort/curl:latest"
         env:
           - name: APIKEY
-            value: "{{ .Values.global.apikey }}"
+            value: "{{ $.Values.global.apikey }}"
         command:
           - "/bin/sh"
           - "-ec"
