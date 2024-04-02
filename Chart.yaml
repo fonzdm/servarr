@@ -22,10 +22,10 @@ dependencies:
     version: "19.4.1"
     repository: "https://charts.truecharts.org"
   - name: jellyseerr
-    version: "9.4.1"
+    version: "9.5.2"
     repository: "https://charts.truecharts.org"
   - name: jellyfin
-    version: "18.4.2"
+    version: "18.7.7"
     repository: "https://charts.truecharts.org"
   - name: flaresolverr
     version: "13.4.1"
