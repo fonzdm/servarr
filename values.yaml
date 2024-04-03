@@ -3,6 +3,10 @@
 global:
   apikey: &apikey #INSERT YOUR API KEY HERE
 
+dash:
+  username: # Jellyfin username (used also for Jellyseerr)
+  password: # Jellyfin password (used also for Jellyseerr)
+
 torrent:
   username: # JUST FOR TRACKING PURPOSE, THE USERNAME IS CONFIGURED IN config/qbittorrent/qBittorrent.conf
   password: # JUST FOR TRACKING PURPOSE, THE PASSWORD IS CONFIGURED IN config/qbittorrent/qBittorrent.conf
@@ -556,6 +560,40 @@ radarr:
             mountPath: /mnt/downloads
 
 jellyfin:
+  fallbackDefaults:
+    storageClass:
+    probeType: http
+    serviceProtocol: tcp
+    serviceType: ClusterIP
+    persistenceType: pvc
+    pvcRetain: false
+    pvcSize: 100Gi
+    vctSize: 100Gi
+    accessModes:
+      - ReadWriteMany 
+    vctAccessModes:
+      - ReadWriteMany
+    probeTimeouts:
+      liveness:
+        initialDelaySeconds: 10
+        periodSeconds: 10
+        timeoutSeconds: 5
+        failureThreshold: 5
+        successThreshold: 1
+      readiness:
+        initialDelaySeconds: 10
+        periodSeconds: 10
+        timeoutSeconds: 5
+        failureThreshold: 5
+        successThreshold: 2
+      startup:
+        initialDelaySeconds: 10
+        periodSeconds: 5
+        timeoutSeconds: 2
+        failureThreshold: 60
+        successThreshold: 1
+    pgVersion: 16
+  serviceProtocol: tcp
   ingress:
     jellyfin-ing:
       enabled: true
@@ -606,6 +644,39 @@ jellyfin:
             mountPath: /mnt/media
 
 jellyseerr:
+  fallbackDefaults:
+    storageClass:
+    probeType: http
+    serviceProtocol: tcp
+    serviceType: ClusterIP
+    persistenceType: pvc
+    pvcRetain: false
+    pvcSize: 100Gi
+    vctSize: 100Gi
+    accessModes:
+      - ReadWriteMany 
+    vctAccessModes:
+      - ReadWriteMany
+    probeTimeouts:
+      liveness:
+        initialDelaySeconds: 10
+        periodSeconds: 10
+        timeoutSeconds: 5
+        failureThreshold: 5
+        successThreshold: 1
+      readiness:
+        initialDelaySeconds: 10
+        periodSeconds: 10
+        timeoutSeconds: 5
+        failureThreshold: 5
+        successThreshold: 2
+      startup:
+        initialDelaySeconds: 10
+        periodSeconds: 5
+        timeoutSeconds: 2
+        failureThreshold: 60
+        successThreshold: 1
+    pgVersion: 16
   ingress:
     jellyseerr-ing:
       enabled: true
@@ -639,7 +710,7 @@ jellyseerr:
       targetSelector:
         main:
           main:
-            mountPath: /config
+            mountPath: /app/config
         exportarr:
           exportarr:
             mountPath: /config
