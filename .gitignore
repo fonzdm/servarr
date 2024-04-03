@@ -50,3 +50,6 @@ Chart.lock
 my-values.yaml
 
 charts/*
+
+# do not push kubeconfig clusters
+*.kubeconfig
