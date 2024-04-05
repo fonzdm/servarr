@@ -2,6 +2,8 @@
 
 global:
   apikey: &apikey #INSERT YOUR API KEY HERE
+  storageClass: &storageClass #insert your storage class here, es: longhorn
+  certManagerClusterIssuer: &issuer # your cert manager cluster issuer, es: letsencrypt-cloudflare
 
 initJellyseerr: true # set to false if Jellyseerr setup should not be performed automatically
 notifications:
@@ -433,7 +435,7 @@ kube-prometheus-stack:
       ingressClassName: nginx
       annotations:
         kubernetes.io/ingress.class: nginx
-        cert-manager.io/cluster-issuer: letsencrypt-cloudflare
+        cert-manager.io/cluster-issuer: *issuer
       hosts:
         - grafana.local
       tls:
@@ -456,7 +458,7 @@ sonarr:
       required: true
       expandObjectName: false
       annotations:
-        cert-manager.io/cluster-issuer: letsencrypt-cloudflare
+        cert-manager.io/cluster-issuer: *issuer
       ingressClassName: "nginx"
       hosts:
         - host: sonarr.local
@@ -478,7 +480,7 @@ sonarr:
       type: pvc
       size: 500Mi
       accessModes: ReadWriteMany
-      storageClass: longhorn
+      storageClass: *storageClass
       targetSelector:
         main:
           main:
@@ -519,7 +521,7 @@ radarr:
       required: true
       expandObjectName: false
       annotations:
-        cert-manager.io/cluster-issuer: letsencrypt-cloudflare
+        cert-manager.io/cluster-issuer: *issuer
       ingressClassName: "nginx"
       hosts:
         - host: radarr.local
@@ -541,7 +543,7 @@ radarr:
       type: pvc
       size: 500Mi
       accessModes: ReadWriteMany
-      storageClass: longhorn
+      storageClass: *storageClass
       targetSelector:
         main:
           main:
@@ -609,7 +611,7 @@ jellyfin:
       required: true
       expandObjectName: false
       annotations:
-        cert-manager.io/cluster-issuer: letsencrypt-cloudflare
+        cert-manager.io/cluster-issuer: *issuer
       ingressClassName: "nginx"
       hosts:
         - host: jellyfin.local
@@ -633,7 +635,7 @@ jellyfin:
       type: pvc
       size: 500Mi
       accessModes: ReadWriteMany
-      storageClass: longhorn
+      storageClass: *storageClass
       targetSelector:
         main:
           main:
@@ -692,7 +694,7 @@ jellyseerr:
       required: true
       expandObjectName: false
       annotations:
-        cert-manager.io/cluster-issuer: letsencrypt-cloudflare
+        cert-manager.io/cluster-issuer: *issuer
       ingressClassName: "nginx"
       hosts:
         - host: jellyseerr.local
@@ -714,7 +716,7 @@ jellyseerr:
       type: pvc
       size: 500Mi
       accessModes: ReadWriteMany
-      storageClass: longhorn
+      storageClass: *storageClass
       targetSelector:
         main:
           main:
@@ -748,7 +750,7 @@ qbittorrent:
       required: true
       expandObjectName: false
       annotations:
-        cert-manager.io/cluster-issuer: letsencrypt-cloudflare
+        cert-manager.io/cluster-issuer: *issuer
       ingressClassName: "nginx"
       hosts:
         - host: torrent.local
@@ -801,7 +803,7 @@ prowlarr:
       required: true
       expandObjectName: false
       annotations:
-        cert-manager.io/cluster-issuer: letsencrypt-cloudflare
+        cert-manager.io/cluster-issuer: *issuer
       ingressClassName: "nginx"
       hosts:
         - host: prowlarr.local
@@ -823,7 +825,7 @@ prowlarr:
       type: pvc
       size: 500Mi
       accessModes: ReadWriteMany
-      storageClass: longhorn
+      storageClass: *storgeClass
       targetSelector:
         main:
           main:
@@ -840,7 +842,7 @@ flaresolverr:
       type: pvc
       size: 500Mi
       accessModes: ReadWriteMany
-      storageClass: longhorn
+      storageClass: *storageClass
       targetSelector:
         main:
           main:
