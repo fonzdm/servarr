@@ -2,7 +2,7 @@
 
 global:
   apikey: &apikey #INSERT YOUR API KEY HERE
-  storageClass: &storageClass #insert your storage class here, es: longhorn
+  storageClassName: &storageClassName #insert your storage class here, es: longhorn
   certManagerClusterIssuer: &issuer # your cert manager cluster issuer, es: letsencrypt-cloudflare
 
 initJellyseerr: true # set to false if Jellyseerr setup should not be performed automatically
@@ -10,7 +10,7 @@ notifications:
   telegram:
     enabled: true
     chat_id: # chat ID, check @get_id_bot for this
-    bot_apitoken: # your own telegram BOT api token 
+    bot_apitoken: # your own telegram BOT api token
 
 dash:
   username: # Jellyfin username (used also for Jellyseerr)
@@ -480,7 +480,7 @@ sonarr:
       type: pvc
       size: 500Mi
       accessModes: ReadWriteMany
-      storageClass: *storageClass
+      storageClass: *storageClassName
       targetSelector:
         main:
           main:
@@ -543,7 +543,7 @@ radarr:
       type: pvc
       size: 500Mi
       accessModes: ReadWriteMany
-      storageClass: *storageClass
+      storageClass: *storageClassName
       targetSelector:
         main:
           main:
@@ -580,7 +580,7 @@ jellyfin:
     pvcSize: 100Gi
     vctSize: 100Gi
     accessModes:
-      - ReadWriteMany 
+      - ReadWriteMany
     vctAccessModes:
       - ReadWriteMany
     probeTimeouts:
@@ -635,7 +635,7 @@ jellyfin:
       type: pvc
       size: 500Mi
       accessModes: ReadWriteMany
-      storageClass: *storageClass
+      storageClass: *storageClassName
       targetSelector:
         main:
           main:
@@ -664,7 +664,7 @@ jellyseerr:
     pvcSize: 100Gi
     vctSize: 100Gi
     accessModes:
-      - ReadWriteMany 
+      - ReadWriteMany
     vctAccessModes:
       - ReadWriteMany
     probeTimeouts:
@@ -716,7 +716,7 @@ jellyseerr:
       type: pvc
       size: 500Mi
       accessModes: ReadWriteMany
-      storageClass: *storageClass
+      storageClass: *storageClassName
       targetSelector:
         main:
           main:
@@ -825,7 +825,7 @@ prowlarr:
       type: pvc
       size: 500Mi
       accessModes: ReadWriteMany
-      storageClass: *storgeClass
+      storageClass: *storageClassName
       targetSelector:
         main:
           main:
@@ -842,7 +842,7 @@ flaresolverr:
       type: pvc
       size: 500Mi
       accessModes: ReadWriteMany
-      storageClass: *storageClass
+      storageClass: *storageClassName
       targetSelector:
         main:
           main:
@@ -851,3 +851,4 @@ flaresolverr:
           exportarr:
             mountPath: /config
             readOnly: true
+
