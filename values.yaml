@@ -4,6 +4,11 @@ global:
   apikey: &apikey #INSERT YOUR API KEY HERE
 
 initJellyseerr: true # set to false if Jellyseerr setup should not be performed automatically
+notifications:
+  telegram:
+    enabled: true
+    chat_id: # chat ID, check @get_id_bot for this
+    bot_apitoken: # your own telegram BOT api token 
 
 dash:
   username: # Jellyfin username (used also for Jellyseerr)

@@ -179,3 +179,16 @@ finalize_endpoint = "/api/v1/settings/initialize"
 finalize_body = {}
 
 finalize_response = make_post(finalize_endpoint, body=finalize_body)
+
+enable_telegram = os.getenv("TELEGRAM_NOTIFICATION_ENABLED", 'False').lower() in ('true', '1', 't')
+telegram_chat_id = os.getenv("TELEGRAM_CHAT_ID")
+telegram_apitoken = os.getenv("TELEGRAM_BOT_APITOKEN")
+
+if enable_telegram:
+    telegram_endpoint = "/api/v1/settings/notifications/telegram"
+    telegram_body = {"enabled":true,"types":4062,"options":{}}
+    telegram_body['options']= {"botAPI":telegram_apitoken,"chatId":telegram_chat_id,"sendSilently":false}
+
+    telegram_response = make_post(telegram_endpoint, body=telegram_body)
+
+

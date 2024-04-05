@@ -48,6 +48,12 @@ spec:
             value: "{{ $.Values.dash.mail }}"
           - name: APIKEY
             value: "{{ $.Values.global.apikey }}"
+          - name: TELEGRAM_NOTIFICATION_ENABLED
+            value: "{{ $.Values.notifications.telegram.enabled }}"
+          - name: TELEGRAM_CHAT_ID
+            value: "{{ $.Values.notifications.telegram.chat_id}}"
+          - name: TELEGRAM_BOT_APITOKEN
+            value: "{{ $.Values.notifications.telegram.bot_apitoken }}"
         command:
           - "/bin/sh"
           - "-ec"
