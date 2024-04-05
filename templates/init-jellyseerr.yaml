@@ -27,9 +27,19 @@ spec:
             - "-c"
             - "until curl \"http://servarr-jellyseerr.{{ .Release.Namespace }}.svc.cluster.local:10241\"; do echo waiting for servarr-jellyseerr; sleep 5; done;sleep 10;"
       containers:
-      - name: integrate-jellyfin
-        image: "rapidfort/curl:latest"
+      - name: initialize-jellyseer
+        image: "nyurik/alpine-python3-requests"
         env:
+          - name: PYTHONUNBUFFERED
+            value: "1"
+          - name: JELLYSEERR_HOST
+            value: "{{ .Release.Namespace }}-jellyseerr"
+          - name: JELLYSEERR_PORT
+            value: "10241"
+          - name: JELLYFIN_HOST
+            value: "{{ .Release.Namespace }}-jellyfin"
+          - name: JELLYFIN_PORT
+            value: "8096"
           - name: JELLYFIN_USERNAME
             value: "{{ $.Values.dash.username }}"
           - name: JELLYFIN_PASSWORD
@@ -42,35 +52,13 @@ spec:
           - "/bin/sh"
           - "-ec"
         args:
-          - "curl -k -v -H 'Content-Type: application/json' -X POST \"http://servarr-jellyseerr.{{ .Release.Namespace }}.svc.cluster.local:10241/api/v1/auth/jellyfin\" -d '{\"username\": \"$(JELLYFIN_USERNAME)\",\"password\": \"$(JELLYFIN_PASSWORD)\", \"hostname\": \"http://servarr-jellyfin:8096/\", \"email\": \"$(JELLYFIN_EMAIL)\" }'"
-      - name: integrate-sonarr
-        image: "rapidfort/curl:latest"
-        env:
-          - name: APIKEY
-            value: "{{ $.Values.global.apikey }}"
-        command:
-          - "/bin/sh"
-          - "-ec"
-        args:
-          - "curl -k -v -H 'Content-Type: application/json' -X POST \"http://servarr-jellyseerr.{{ .Release.Namespace }}.svc.cluster.local:10241/api/v1/settings/sonarr\" -d '{\"name\": \"Sonarr\", \"hostname\": \"servarr-sonarr\", \"port\": 8989, \"apiKey\": \"$(APIKEY)\", \"useSsl\": false, \"activeProfileId\": 4, \"activeLanguageProfileId\": 1, \"activeProfileName\": \"HD-1080p\", \"activeDirectory\": \"/mnt/media\", \"activeAnimeProfileId\": 4, \"activeAnimeLanguageProfileId\": 1,\"activeAnimeProfileName\": \"HD-1080p\", \"activeAnimeDirectory\": \"/mnt/media\", \"tags\": [], \"animeTags\": [], \"is4k\": false, \"isDefault\": true, \"enableSeasonFolders\": true,\"syncEnabled\": false, \"preventSearch\": false, \"tagRequests\": true}'"
-      - name: integrate-radarr
-        image: "rapidfort/curl:latest"
-        env:
-          - name: APIKEY
-            value: "{{ $.Values.global.apikey }}"
-        command:
-          - "/bin/sh"
-          - "-ec"
-        args:
-          - "curl -k -v -H 'Content-Type: application/json' -X POST \"http://servarr-jellyseerr.{{ .Release.Namespace }}.svc.cluster.local:10241/api/v1/settings/radarr\" -d '{\"name\": \"Radarr\",\"hostname\": \"servarr-radarr\",\"port\": 7878,\"apiKey\": \"$(APIKEY)\",\"useSsl\": false,\"activeProfileId\": 4,\"activeProfileName\": \"HD-1080p\",\"activeDirectory\": \"/mnt/media\",\"is4k\": false,\"minimumAvailability\": \"released\",\"tags\": [],\"isDefault\": true,\"syncEnabled\": false,\"preventSearch\": false,\"tagRequests\": true}'"
-      - name: finalize-initial-setup
-        image: "rapidfort/curl:latest"
-        env:
-          - name: APIKEY
-            value: "{{ $.Values.global.apikey }}"
-        command:
-          - "/bin/sh"
-          - "-ec"
-        args:
-          - "curl -k -v -H 'Content-Type: application/json' -X POST \"http://servarr-jellyseerr.{{ .Release.Namespace }}.svc.cluster.local:10241/api/v1/settings/initialize\""
+          - "python3 -u /mnt/init-jellyseerr.py 2>&1;"
+        volumeMounts:
+          - mountPath: "/mnt"
+            name: python-script
+      volumes:
+        - name: python-script
+          configMap:
+            name: init-jellyseerr-python-scripts
+
 {{- end }}
