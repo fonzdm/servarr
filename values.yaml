@@ -3,9 +3,12 @@
 global:
   apikey: &apikey #INSERT YOUR API KEY HERE
 
+initJellyseerr: true # set to false if Jellyseerr setup should not be performed automatically
+
 dash:
   username: # Jellyfin username (used also for Jellyseerr)
   password: # Jellyfin password (used also for Jellyseerr)
+  mail: # Jellyfin login mail, used for Jellyseerr integration
 
 torrent:
   username: # JUST FOR TRACKING PURPOSE, THE USERNAME IS CONFIGURED IN config/qbittorrent/qBittorrent.conf
