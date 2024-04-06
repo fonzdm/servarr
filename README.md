@@ -69,7 +69,7 @@ $ helm install <release-name> <servarr-chart> \
 
 | **Parameter** | **Optional** | **Description** | **Default Value** | **Example Value** |
 |---------------|--------------|-----------------|-------------------|-------------------|
-| `global.apikey` | Required | This field let you define a common API KEY that will be used to automate the entire integration. | `None` | `6d9df216-cac6-4f4a-9b25-5462026ce7be` |
+| `global.apikey` | Required | Define a common API key that will be used to automate the entire integration. | `None` | `6d9df216-cac6-4f4a-9b25-5462026ce7be` |
 | `global.storageClassName` | Required | Cluster storage class to be used for the volume creation. | `None` | `longhorn` |
 
 <!-- Table init with some values just to give the idea on how it will be. A lot of values (almost all of them) are missing and MUST be filled in the table. -->
