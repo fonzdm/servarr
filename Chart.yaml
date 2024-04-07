@@ -1,6 +1,6 @@
 apiVersion: v2
 name: servarr
-description: Servarr complete helm chart for Kubernetes
+description: Servarr complete Helm Chart for Kubernetes
 type: application
 version: 1.0.0
 appVersion: "1.0.0"
@@ -36,3 +36,4 @@ dependencies:
 maintainers:
   - name: Alfonso De Masi
     email: adm220297@proton.me
+    url: 
