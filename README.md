@@ -2,57 +2,35 @@
 
 This project is a complete Servarr Helm Chart that includes also Sonarr, Radarr, Prowlarr, qBitTorrent, Jellyseerr, Jellyfin and Flaresovlerr as sub-charts.
 
-<!--
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See [deployment](#deployment) for notes on how to deploy the project on a live system.
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
-
-```
-Give examples
-```
+- Git
+- Helm
+- Kuberentes Cluster (for testing purposes)
+- Python 3
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running
+1. Clone the repository:
 
-Say what the step will be
-
-```
-Give the example
+```shell
+$ git clone https://github.com/fonzdm/servarr.git && cd servarr
 ```
 
-And repeat
+2. Do your magic by updating/adding files 😎
+3. Prepare your `values.yaml`
+4. Try it in your cluster to check that everything is fine (replace the dot with the `servarr` folder if you workdir is different):
 
+```shell
+$ helm install servarr-dev . \
+--namespace servarr-dev \
+--create-namespace \
+--values values.yaml
 ```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
--->
 
 ## Deployment
 
