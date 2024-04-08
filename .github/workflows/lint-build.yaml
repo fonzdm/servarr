@@ -51,7 +51,7 @@ jobs:
         uses: azure/setup-helm@v4.1.0
 
       - name: Helm Dependency update
-        run: helm dependency update
+        run: helm dependency update --debug
 
       - name: Helm Template
         run: helm template servarr . --debug -f .github/ci/ci-values.yaml
