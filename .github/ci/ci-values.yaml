@@ -273,7 +273,7 @@ kube-prometheus-stack:
       ingressClassName: nginx
       annotations:
         kubernetes.io/ingress.class: nginx
-        #cert-manager.io/cluster-issuer: *issuer
+        cert-manager.io/cluster-issuer: *issuer
       hosts:
         - grafana.media.local
       tls:
@@ -296,7 +296,7 @@ sonarr:
       required: true
       expandObjectName: false
       annotations:
-        #cert-manager.io/cluster-issuer: *issuer
+        cert-manager.io/cluster-issuer: *issuer
       ingressClassName: "nginx"
       hosts:
         - host: sonarr.media.local
@@ -359,7 +359,7 @@ radarr:
       required: true
       expandObjectName: false
       annotations:
-        #cert-manager.io/cluster-issuer: *issuer
+        cert-manager.io/cluster-issuer: *issuer
       ingressClassName: "nginx"
       hosts:
         - host: radarr.media.local
@@ -449,7 +449,7 @@ jellyfin:
       required: true
       expandObjectName: false
       annotations:
-        #cert-manager.io/cluster-issuer: *issuer
+        cert-manager.io/cluster-issuer: *issuer
       ingressClassName: "nginx"
       hosts:
         - host: jellyfin.media.local
@@ -532,7 +532,7 @@ jellyseerr:
       required: true
       expandObjectName: false
       annotations:
-        #cert-manager.io/cluster-issuer: *issuer
+        cert-manager.io/cluster-issuer: *issuer
       ingressClassName: "nginx"
       hosts:
         - host: jellyseerr.media.local
@@ -588,7 +588,7 @@ qbittorrent:
       required: true
       expandObjectName: false
       annotations:
-        #cert-manager.io/cluster-issuer: *issuer
+        cert-manager.io/cluster-issuer: *issuer
       ingressClassName: "nginx"
       hosts:
         - host: torrent.media.local
@@ -641,7 +641,7 @@ prowlarr:
       required: true
       expandObjectName: false
       annotations:
-        #cert-manager.io/cluster-issuer: *issuer
+        cert-manager.io/cluster-issuer: *issuer
       ingressClassName: "nginx"
       hosts:
         - host: prowlarr.media.local
