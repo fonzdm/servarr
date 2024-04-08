@@ -3,6 +3,9 @@ global:
   storageClassName: &storageClassName "longhorn"
   certManagerClusterIssuer: &issuer "letsencrypt-cloudflare"
 
+metrics:
+  enabled: &metricsEnabled false
+
 initJellyseerr: true
 notifications:
   telegram:
@@ -266,22 +269,10 @@ volumes:
     name: &torrentConfig torrent-config
     size: 250Mi
 
-kube-prometheus-stack:
-  grafana:
-    ingress:
-      enabled: true
-      ingressClassName: nginx
-      annotations:
-        kubernetes.io/ingress.class: nginx
-        cert-manager.io/cluster-issuer: *issuer
-      hosts:
-        - grafana.media.local
-      tls:
-        - secretName: grafana-tls
-          hosts:
-            - grafana.media.local
-
 sonarr:
+  metrics:
+    main:
+      enabled: *metricsEnabled
   workload:
     main:
       podSpec:
@@ -345,6 +336,9 @@ sonarr:
             mountPath: /mnt/downloads
 
 radarr:
+  metrics:
+    main:
+      enabled: *metricsEnabled
   workload:
     main:
       podSpec:
@@ -408,6 +402,9 @@ radarr:
             mountPath: /mnt/downloads
 
 jellyfin:
+  metrics:
+    main:
+      enabled: *metricsEnabled
   fallbackDefaults:
     storageClass:
     probeType: http
@@ -492,6 +489,9 @@ jellyfin:
             mountPath: /mnt/media
 
 jellyseerr:
+  metrics:
+    main:
+      enabled: *metricsEnabled
   fallbackDefaults:
     storageClass:
     probeType: http
@@ -574,6 +574,9 @@ jellyseerr:
 
 # $QBITTORRENT__USE_PROFILE
 qbittorrent:
+  metrics:
+    main:
+      enabled: *metricsEnabled
   workload:
     main:
       podSpec:
@@ -627,6 +630,9 @@ qbittorrent:
             mountPath: /downloads
 
 prowlarr:
+  metrics:
+    main:
+      enabled: *metricsEnabled
   workload:
     main:
       podSpec:
@@ -674,6 +680,9 @@ prowlarr:
             readOnly: true
 
 flaresolverr:
+  metrics:
+    main:
+      enabled: *metricsEnabled
   persistence:
     config:
       enabled: true
