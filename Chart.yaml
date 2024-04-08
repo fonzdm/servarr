@@ -17,9 +17,6 @@ home: https://github.com/fonzdm/servarr
 sources:
   - https://github.com/fonzdm/servarr
 dependencies:
-  - name: kube-prometheus-stack
-    version: 57.0.1
-    repository: "https://prometheus-community.github.io/helm-charts"
   - name: sonarr
     version: "21.2.1"
     repository: "https://charts.truecharts.org"
@@ -45,4 +42,3 @@ dependencies:
 maintainers:
   - name: Alfonso De Masi
     email: adm220297@proton.me
-    url: 
