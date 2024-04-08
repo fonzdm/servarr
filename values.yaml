@@ -1,8 +1,8 @@
 # TEST for integration -2
 
 global:
-  apikey: &apikey #INSERT YOUR API KEY HERE
-  storageClassName: &storageClassName #insert your storage class here, es: longhorn
+  apikey: &apikey # INSERT YOUR API KEY HERE
+  storageClassName: &storageClassName # insert your storage class here, es: longhorn
   certManagerClusterIssuer: &issuer # your cert manager cluster issuer, es: letsencrypt-cloudflare
 
 initJellyseerr: true # set to false if Jellyseerr setup should not be performed automatically
@@ -408,7 +408,7 @@ indexers:
     tags: []
 
 
-### for tracking purpose, not used - replaced with pre-existing cluster issuer
+## for tracking purpose, not used - replaced with pre-existing cluster issuer
 issuer:
   server: https://acme-v02.api.letsencrypt.org/directory
   email: # your email address
