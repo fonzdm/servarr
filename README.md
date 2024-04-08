@@ -1,6 +1,7 @@
 # Servarr
 
 This project is a complete Servarr Helm Chart that includes also Sonarr, Radarr, Prowlarr, qBitTorrent, Jellyseerr, Jellyfin and Flaresovlerr as sub-charts.
+A working Prometheus stack is also deployed with this release, using a dedicated sub-chart that includes Prometheus's own CRDs.
 
 ## Getting Started
 
