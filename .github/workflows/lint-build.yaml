@@ -55,3 +55,6 @@ jobs:
 
       - name: Helm Template
         run: helm template servarr . --debug -f .github/ci/ci-values.yaml
+
+      - name: Create Package
+        run: helm package . 
