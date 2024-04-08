@@ -50,11 +50,8 @@ jobs:
       - name: Install Helm
         uses: azure/setup-helm@v4.1.0
 
-      # Temp solution to the lookup function used in the subcharts
-      # - name: Skip dependencies
-      #   uses: mikefarah/yq@master
-      #   with:
-      #     cmd: yq -i 'del(.dependencies)' Chart.yaml
+      - name: Helm Dependency update
+        run: helm dependency update servarr --debug
 
       - name: Helm Template
         run: helm template servarr . --debug -f .github/ci/ci-values.yaml
