@@ -68,11 +68,11 @@ See also the list of [contributors](https://github.com/fonzdm/servarr/contributo
 
 ###### Keep in mind that each dependency has its own author and their contributors. Please, reach them out on their repositories.
 
-<!--
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the GNU AGPL v3 License - see the [LICENSE](LICENSE) file for details.
 
+<!--
 ## Acknowledgments
 
 * Hat tip to anyone whose code was used
