@@ -1,5 +1,3 @@
-# TEST for integration -2
-
 global:
   apikey: &apikey #INSERT YOUR API KEY HERE
   storageClassName: &storageClassName #insert your storage class here, es: longhorn
