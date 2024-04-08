@@ -24,4 +24,4 @@ jobs:
         run: helm dependency update
 
       - name: Helm Template
-        run: helm template servarr . --debug -f ./github/workflows/ci-values.yaml
+        run: helm template servarr . --debug -f ./github/ci/ci-values.yaml
