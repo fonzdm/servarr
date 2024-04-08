@@ -27,4 +27,4 @@ jobs:
         run: helm dependency update
 
       - name: Helm Template
-        run: echo "I feel lost" && ls -halF && helm template servarr . --debug -f ./github/ci/ci-values.yaml
+        run: helm template servarr . --debug -f .github/ci/ci-values.yaml
