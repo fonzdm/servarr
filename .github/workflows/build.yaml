@@ -1,0 +1,27 @@
+name: Helm Chart Build
+
+on:
+  push:
+    branches:
+      - 'dev'
+  pull_request:
+    branches:
+      - 'dev'
+      - 'main'
+
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install Helm
+        uses: azure/setup-helm@v4.1.0
+
+      - name: Update dependencies
+        run: helm dependency update
+
+      - name: Helm Template
+        run: helm template servarr . --debug -f ./github/workflows/ci-values.yaml
