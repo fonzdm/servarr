@@ -16,3 +16,18 @@ PROWLARR_HOST = os.getenv("PROWLARR_HOST")
 SONARR_HOST = os.getenv("SONARR_HOST")
 RADARR_HOST = os.getenv("RADARR_HOST")
 NAMESPACE = os.getenv("NAMESPACE")
+
+def post(url: str, headers: dict, body: dict | None): # -> str | dict
+    """
+    Handle POST requests towards an url, logging both
+    the details before sending it and the response.
+
+    Parameters
+    ----------
+    url : str
+        HTTP request URL as string
+    headers : dict
+        HTTP headers to be used in the request
+    body : dict
+        Request body needed for the POST
+    """
