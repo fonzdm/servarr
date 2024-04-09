@@ -3,6 +3,7 @@
 import requests
 import os
 import logging
+from json import JSONDecodeError
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
