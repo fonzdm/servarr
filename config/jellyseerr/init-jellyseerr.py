@@ -67,17 +67,11 @@ def make_post(endpoint="", body=None):
     except JSONDecodeError:
         return response.text
 
-print("")
-print("#######################")
-print("Initizalizing JellySeer")
-print("#######################")
-print("")
+logger.info("Initizalizing JellySeer")
 
 ########## JELLYFIN INTEGRATION
 
-print("")
-print("Integrating Jellyfin")
-print("")
+logger.info("Integrating Jellyfin")
 
 jellyfin_endpoint = "/api/v1/auth/jellyfin"
 
@@ -91,13 +85,11 @@ jellyfin_body = {
 
 jellyfin_response = make_post(jellyfin_endpoint, body=jellyfin_body)
 
-print("Fetching info from response...")
+logger.debug("Fetching info from response..")
 token = jellyfin_response["jellyfinAuthToken"]
 device_id = jellyfin_response["jellyfinDeviceId"]
 
-print("")
-print("Device ID: {0}. Jellyfin Token: {1}".format(device_id, token))
-print("")
+logger.debug("Device ID: {0}. Jellyfin Token: {1}".format(device_id, token))
 
 ######### AUTH
 
@@ -116,9 +108,7 @@ print("")
 
 ############ SONARR
 
-print("")
-print("Integrating Sonarr")
-print("")
+logger.info("Integrating Sonarr")
 
 sonarr_endpoint = "/api/v1/settings/sonarr"
 sonarr_body = {
@@ -149,11 +139,7 @@ sonarr_response = make_post(sonarr_endpoint, body=sonarr_body)
 
 ############ RADARR
 
-print("")
-print("Integrating Radarr")
-print("")
-
-print("")
+logger.info("Integrating Radarr")
 
 radarr_endpoint = "/api/v1/settings/radarr"
 radarr_body = {
@@ -179,9 +165,7 @@ radarr_response = make_post(radarr_endpoint, body=radarr_body)
 
 ############ FINALIZE
 
-print("")
-print("Finalize")
-print("")
+logger.info("Finalization phase")
 
 finalize_endpoint = "/api/v1/settings/initialize"
 finalize_body = {}
