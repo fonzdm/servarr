@@ -56,15 +56,17 @@ $ helm install <release-name> <servarr-chart> \
 
 Please read [CONTRIBUTING.md](./CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
+## Contributors
+
+<a href="https://github.com/fonzdm/servarr/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=fonzdm/servarr" />
+</a>
+
+See the full list of [contributors](https://github.com/fonzdm/servarr/contributors) who participated in this project.
+
 ## Versioning
 
 We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [releases on this repository](https://github.com/fonzdm/servarr/releases). 
-
-## Authors
-
-* **Alfonso De Masi** - *Chart idea and main development* - [fonzdm](https://github.com/fonzdm)
-
-See also the list of [contributors](https://github.com/fonzdm/servarr/contributors) who participated in this project.
 
 ###### Keep in mind that each dependency has its own author and their contributors. Please, reach them out on their repositories.
 
