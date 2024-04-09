@@ -3,6 +3,7 @@
 import requests
 import os
 import logging
+from json import JSONDecodeError
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
@@ -51,3 +52,8 @@ def post(url: str, headers: dict, body: dict | None): # -> str | dict
         "Response body:",
         response.text
     ]))
+
+    try:
+        return {"code": response.status_code, "response": response.json()}
+    except JSONDecodeError:
+        return {"code": response.status_code, "response": response.text}
