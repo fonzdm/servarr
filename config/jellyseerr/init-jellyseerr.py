@@ -31,16 +31,25 @@ def make_get(endpoint=""):
     url = "{0}{1}".format(jellyseer_url, endpoint)
     print("Using url =  {0}".format(str(url)))
 
+    logger.debug(" ".join([
+        url,
+        "GET",
+        ", ".join([": ".join(header) for header in session.headers]),
+        ", ".join([": ".join(cookie) for cookie in session.cookies])
+    ]))
+
     response = session.get(
         url=url,
         verify=False,
     )
 
-    print(
-        "Response code: {0}. Response body: {1}".format(
-            str(response.status_code), str(response.text)
-        )
-    )
+    logger.debug(" ".join([
+        "Status Code:",
+        response.status_code,
+        "Response body:",
+        response.text
+    ]))
+
     response.raise_for_status()
     try:
         return response.json()
