@@ -44,3 +44,10 @@ def post(url: str, headers: dict, body: dict | None): # -> str | dict
         data=body,
         headers=headers
     )
+
+    logger.debug(" ".join([
+        "Status Code:",
+        response.status_code,
+        "Response body:",
+        response.text
+    ]))
