@@ -62,15 +62,28 @@ def make_post(endpoint="", body=None):
     print("Using url =  {0}".format(str(url)))
     print("Using body =  {0}".format(str(body)))
 
+    logger.debug(" ".join([
+        url,
+        "POST",
+        "Body:",
+        str(body),
+        ", ".join([": ".join(header) for header in session.headers]),
+        ", ".join([": ".join(cookie) for cookie in session.cookies])
+    ]))
+
     response = session.post(
         url=url,
         json=body,
         verify=False,
     )
 
-    print(
-        "Response code: {0}. Response body: {1}".format(str(response.status_code), str(response.text))
-        )
+    logger.debug(" ".join([
+        "Status Code:",
+        response.status_code,
+        "Response body:",
+        response.text
+    ]))
+    
     response.raise_for_status()
     try:
         return response.json()
