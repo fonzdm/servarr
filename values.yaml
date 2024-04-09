@@ -1,31 +1,38 @@
 global:
-  apikey: &apikey #INSERT YOUR API KEY HERE
-
-  storageClassName:
-    &storageClassName #insert your storage class here, es: longhorn
-
-  certManagerClusterIssuer:
-    &issuer # your cert manager cluster issuer, es: letsencrypt-cloudflare
-
+  ## Insert your API key here, e.g.: &apikey 123abc..
+  apikey: &apikey
+  ## Insert your storage class here, e.g.: &storageClassName longhorn
+  storageClassName: &storageClassName
+  ## Insert your cert manager cluster issuer, e.g.: letsencrypt-cloudflare
+  certManagerClusterIssuer: &issuer
 
 metrics:
   enabled: &metricsEnabled false
 
-initJellyseerr: true # set to false if Jellyseerr setup should not be performed automatically
+## Set initJellyseerr to false if Jellyseerr setup should not be performed automatically
+initJellyseerr: true
 notifications:
   telegram:
     enabled: true
-    chat_id: # chat ID, check @get_id_bot for this
-    bot_apitoken: # your own telegram BOT api token
+    ## Insert the Telegram Chat id, check @get_id_bot for this
+    chat_id:
+    ## Insert your Telegram Bot API token
+    bot_apitoken:
 
 dash:
-  username: # Jellyfin username (used also for Jellyseerr)
-  password: # Jellyfin password (used also for Jellyseerr)
-  mail: # Jellyfin login mail, used for Jellyseerr integration
+  ## Insert the Jellyfin username (will be used also for Jellyseerr)
+  username:
+  ## Insert Jellyfin password (will be used also for Jellyseerr)
+  password:
+  ## Insert Jellyfin login mail (will be used also for Jellyseerr integration)
+  mail:
 
 torrent:
-  username: # JUST FOR TRACKING PURPOSE, THE USERNAME IS CONFIGURED IN config/qbittorrent/qBittorrent.conf
-  password: # JUST FOR TRACKING PURPOSE, THE PASSWORD IS CONFIGURED IN config/qbittorrent/qBittorrent.conf
+  ## The following credentials are here just for tracking purposes
+  ## and they are not used to configure qBitTorrent.
+  ## The credentials are configured in config/qbittorrent/qBittorrent.conf
+  username:
+  password:
 
 indexers:
   - name: 1337x
@@ -413,13 +420,15 @@ indexers:
       supportsSearch: True
       tags: []
 
-### for tracking purpose, not used - replaced with pre-existing cluster issuer
+## For tracking purpose, not used - replaced with pre-existing cluster issuer
 issuer:
   server: https://acme-v02.api.letsencrypt.org/directory
-  email: # your email address
+  ## Insert your email address
+  email:
   secretName: letsencrypt-prod
   ingressClassName: nginx
-  cloudFlareKey: # your cloudflare key
+  ## Insert your CloudFlare key
+  cloudFlareKey:
 
 volumes:
   storageClass: longhorn
@@ -736,7 +745,7 @@ jellyseerr:
           main:
             mountPath: /mnt/media
 
-# $QBITTORRENT__USE_PROFILE
+## $QBITTORRENT__USE_PROFILE
 qbittorrent:
   metrics:
     main:
