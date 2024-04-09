@@ -31,3 +31,10 @@ def post(url: str, headers: dict, body: dict | None): # -> str | dict
     body : dict
         Request body needed for the POST
     """
+
+    logger.debug(" ".join([
+        "POST",
+        url,
+        ", ".join([": ".join(header) for header in headers]),
+        str(body)
+    ]))
