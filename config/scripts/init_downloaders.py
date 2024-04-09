@@ -38,3 +38,9 @@ def post(url: str, headers: dict, body: dict | None): # -> str | dict
         ", ".join([": ".join(header) for header in headers]),
         str(body)
     ]))
+
+    response = requests.post(
+        url=url,
+        data=body,
+        headers=headers
+    )
