@@ -29,7 +29,6 @@ session = requests.Session()
 def make_get(endpoint=""):
 
     url = "{0}{1}".format(jellyseer_url, endpoint)
-    print("Using url =  {0}".format(str(url)))
 
     logger.debug(" ".join([
         url,
@@ -59,8 +58,6 @@ def make_get(endpoint=""):
 def make_post(endpoint="", body=None):
 
     url = "{0}{1}".format(jellyseer_url, endpoint)
-    print("Using url =  {0}".format(str(url)))
-    print("Using body =  {0}".format(str(body)))
 
     logger.debug(" ".join([
         url,
@@ -83,7 +80,7 @@ def make_post(endpoint="", body=None):
         "Response body:",
         response.text
     ]))
-    
+
     response.raise_for_status()
     try:
         return response.json()
