@@ -6,3 +6,4 @@ repos:
         args:
           # Use root folder as the main repo dir is the chart itself
           - --chart-search-root=./
+          - --template-files=generated_README.md.gotmpl
