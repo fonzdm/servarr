@@ -4,5 +4,5 @@ repos:
     hooks:
       - id: helm-docs-container
         args:
-          # Make the tool search for charts only under the `example-charts` directory
+          # Use root folder as the main repo dir is the chart itself
           - --chart-search-root=./
