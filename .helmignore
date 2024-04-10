@@ -28,3 +28,4 @@ CONTRIBUTING.md
 
 my-values.yaml
 docs/*
+.pre-commit-config.yaml
