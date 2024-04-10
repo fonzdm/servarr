@@ -22,10 +22,6 @@
 *.tmproj
 .vscode/
 
-# Repo documentation
-README.md
-CONTRIBUTING.md
-
 my-values.yaml
 docs/*
 .pre-commit-config.yaml
