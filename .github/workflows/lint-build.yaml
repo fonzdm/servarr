@@ -35,7 +35,7 @@ jobs:
         uses: helm/chart-testing-action@v2.6.1
 
       - name: Run chart-testing (lint)
-        run: ct lint --chart-dirs=. --charts=. --validate-maintainers=false
+        run: ct lint --chart-dirs=servarr/ --charts=servarr/ --validate-maintainers=false
 
   build:
     name: build
@@ -54,7 +54,7 @@ jobs:
         run: helm dependency update --debug
 
       - name: Helm Template
-        run: helm template servarr . --debug -f .github/ci/ci-values.yaml
+        run: helm template servarr servarr/ --debug -f .github/ci/ci-values.yaml
 
       - name: Create Package
         run: helm package . 
