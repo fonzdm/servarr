@@ -51,10 +51,10 @@ jobs:
         uses: azure/setup-helm@v4.1.0
 
       - name: Helm Dependency update
-        run: helm dependency update --debug
+        run: helm dependency update servarr/ --debug
 
       - name: Helm Template
         run: helm template servarr servarr/ --debug -f .github/ci/ci-values.yaml
 
       - name: Create Package
-        run: helm package . 
+        run: helm package servarr/
