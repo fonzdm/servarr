@@ -35,5 +35,5 @@ jobs:
         uses: EndBug/add-and-commit@v9.1.1
         with:
           message: "docs: regenerate chart README.md"
-          add: "./README.md"
+          add: "servarr/README.md"
           pull: "--rebase --autostash"
