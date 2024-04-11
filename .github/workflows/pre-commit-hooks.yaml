@@ -1,4 +1,4 @@
-name: Helm Chart Doc Generator
+name: 'Helm Chart Doc Generator'
 
 on:
   push:
@@ -21,7 +21,7 @@ jobs:
         ref: ${{ github.head_ref }}
         fetch-depth: 0
 
-    - name: Run helm-docs
+    - name: Run helm-docs and push to the same branch
       uses: losisin/helm-docs-github-action@v1
       with:
         git-push: true
