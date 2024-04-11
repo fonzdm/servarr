@@ -13,7 +13,7 @@ metrics:
 initJellyseerr: true
 notifications:
   telegram:
-    enabled: true
+    enabled: false
     ## Insert the Telegram Chat id, check @get_id_bot for this
     chat_id:
     ## Insert your Telegram Bot API token
