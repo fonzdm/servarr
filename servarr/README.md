@@ -509,7 +509,7 @@ Servarr complete Helm Chart for Kubernetes
 | metrics.enabled | bool | `false` |  |
 | notifications.telegram.bot_apitoken | string | `nil` |  |
 | notifications.telegram.chat_id | string | `nil` |  |
-| notifications.telegram.enabled | bool | `true` |  |
+| notifications.telegram.enabled | bool | `false` |  |
 | prowlarr.ingress.prowlarr-ing.annotations."cert-manager.io/cluster-issuer" | string | `nil` |  |
 | prowlarr.ingress.prowlarr-ing.enabled | bool | `true` |  |
 | prowlarr.ingress.prowlarr-ing.expandObjectName | bool | `false` |  |
