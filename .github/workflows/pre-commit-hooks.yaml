@@ -16,11 +16,15 @@ jobs:
     steps:
     - uses: actions/checkout@v3
       with:
+
+
+    - uses: actions/checkout@v4
+      with:
         ref: ${{ github.head_ref }}
         fetch-depth: 0
 
-    - name: Render helm docs inside the README.md and push changes back to Working branch
-      uses: shaybentk/helm-docs-action@v0.0.1
-      with:
-        working-dir: servarr
-        git-push: "true"
+      - name: Run helm-docs
+        uses: losisin/helm-docs-github-action@v1
+        with:
+          git-push: true
+          chart-search-root: ./servarr
