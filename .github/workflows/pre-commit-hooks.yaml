@@ -14,26 +14,13 @@ jobs:
   helm-docs:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-        with:
-          ref: ${{ github.head_ref }}
-          fetch-depth: 0
+    - uses: actions/checkout@v3
+      with:
+        ref: ${{ github.head_ref }}
+        fetch-depth: 0
 
-      - uses: actions/setup-go@v3
-        with:
-          # renovate: go-version
-          go-version: 1.19.4
-
-      - name: Install helm-docs
-        # renovate: datasource=github-releases depName=norwoodj/helm-docs
-        run: go install github.com/norwoodj/helm-docs/cmd/helm-docs@v1.11.0
-
-      - name: regenerate documentation
-        run: $HOME/go/bin/helm-docs
-
-      - name: Commit updated docs
-        uses: EndBug/add-and-commit@v9.1.1
-        with:
-          message: "docs: regenerate chart README.md"
-          add: "servarr/README.md"
-          pull: "--rebase --autostash"
+    - name: Render helm docs inside the README.md and push changes back to Working branch
+      uses: shaybentk/helm-docs-action@v0.0.1
+      with:
+        working-dir: servarr
+        git-push: "true"
