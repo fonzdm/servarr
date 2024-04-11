@@ -15,13 +15,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-    - uses: actions/checkout@v4
+    - name: Checkout to current commit
+      uses: actions/checkout@v4
       with:
         ref: ${{ github.head_ref }}
         fetch-depth: 0
 
-      - name: Run helm-docs
-        uses: losisin/helm-docs-github-action@v1
-        with:
-          git-push: true
-          chart-search-root: ./servarr
+    - name: Run helm-docs
+      uses: losisin/helm-docs-github-action@v1
+      with:
+        git-push: true
+        chart-search-root: ./servarr
