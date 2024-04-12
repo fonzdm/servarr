@@ -42,6 +42,19 @@ Servarr complete Helm Chart for Kubernetes
 	</thead>
 	<tbody>
 		<tr>
+			<td>dash</td>
+			<td>object</td>
+			<td><pre lang="json">
+{
+  "mail": null,
+  "password": null,
+  "username": null
+}
+</pre>
+</td>
+			<td>Jellyfin User configuration section  @section jellyfin</td>
+		</tr>
+		<tr>
 			<td>dash.mail</td>
 			<td>string</td>
 			<td><pre lang="json">
@@ -69,85 +82,41 @@ null
 			<td>Insert the Jellyfin username (will be used also for Jellyseerr)</td>
 		</tr>
 		<tr>
-			<td>flaresolverr.metrics.main.enabled</td>
-			<td>bool</td>
+			<td>flaresolverr</td>
+			<td>object</td>
 			<td><pre lang="json">
-false
+{
+  "metrics": {
+    "main": {
+      "enabled": false
+    }
+  },
+  "persistence": {
+    "config": {
+      "accessModes": "ReadWriteMany",
+      "enabled": true,
+      "size": "500Mi",
+      "storageClass": "network-block",
+      "targetSelector": {
+        "exportarr": {
+          "exportarr": {
+            "mountPath": "/config",
+            "readOnly": true
+          }
+        },
+        "main": {
+          "main": {
+            "mountPath": "/config"
+          }
+        }
+      },
+      "type": "pvc"
+    }
+  }
+}
 </pre>
 </td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>flaresolverr.persistence.config.accessModes</td>
-			<td>string</td>
-			<td><pre lang="json">
-"ReadWriteMany"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>flaresolverr.persistence.config.enabled</td>
-			<td>bool</td>
-			<td><pre lang="json">
-true
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>flaresolverr.persistence.config.size</td>
-			<td>string</td>
-			<td><pre lang="json">
-"500Mi"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>flaresolverr.persistence.config.storageClass</td>
-			<td>string</td>
-			<td><pre lang="json">
-"network-block"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>flaresolverr.persistence.config.targetSelector.exportarr.exportarr.mountPath</td>
-			<td>string</td>
-			<td><pre lang="json">
-"/config"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>flaresolverr.persistence.config.targetSelector.exportarr.exportarr.readOnly</td>
-			<td>bool</td>
-			<td><pre lang="json">
-true
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>flaresolverr.persistence.config.targetSelector.main.main.mountPath</td>
-			<td>string</td>
-			<td><pre lang="json">
-"/config"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>flaresolverr.persistence.config.type</td>
-			<td>string</td>
-			<td><pre lang="json">
-"pvc"
-</pre>
-</td>
-			<td></td>
+			<td>Flaresolverr configuration section @section prowlarr</td>
 		</tr>
 		<tr>
 			<td>global.apikey</td>
@@ -156,7 +125,7 @@ true
 No default value is configured for security reasons, it is mandatory to set this parameter
 </pre>
 </td>
-			<td>Insert your API key here, e.g.: &apikey 123abc..</td>
+			<td>Insert your API key here, e.g.: &apikey 123abc.. @section global</td>
 		</tr>
 		<tr>
 			<td>global.certManagerClusterIssuer</td>
@@ -165,7 +134,7 @@ No default value is configured for security reasons, it is mandatory to set this
 No default value, leave empty if not required
 </pre>
 </td>
-			<td>Insert your cert manager cluster issuer, e.g.: letsencrypt-cloudflare</td>
+			<td>Insert your cert manager cluster issuer, e.g.: letsencrypt-cloudflare @section global</td>
 		</tr>
 		<tr>
 			<td>global.storageClassName</td>
@@ -174,7 +143,7 @@ No default value, leave empty if not required
 "network-block"
 </pre>
 </td>
-			<td>Insert your storage class here, e.g.: &storageClassName longhorn</td>
+			<td>Insert your storage class here, e.g.: &storageClassName longhorn @section global</td>
 		</tr>
 		<tr>
 			<td>indexers</td>
@@ -183,7 +152,7 @@ No default value, leave empty if not required
 The body of the 1337x index is provided as default
 </pre>
 </td>
-			<td>The indexers list. Each element of the list is the yaml-formatted boody of the [Prowlarr API request](https://prowlarr.com/docs/api/#/Indexer/post_api_v1_indexer) to add that index.</td>
+			<td>The indexers list. Each element of the list is the yaml-formatted boody of the [Prowlarr API request](https://prowlarr.com/docs/api/#/Indexer/post_api_v1_indexer) to add that index. @section prowlarr</td>
 		</tr>
 		<tr>
 			<td>initJellyseerr</td>
@@ -192,7 +161,7 @@ The body of the 1337x index is provided as default
 true
 </pre>
 </td>
-			<td>Set initJellyseerr to false if Jellyseerr setup should not be performed automatically</td>
+			<td>Set initJellyseerr to false if Jellyseerr setup should not be performed automatically @section Required</td>
 		</tr>
 		<tr>
 			<td>issuer</td>
@@ -207,7 +176,7 @@ true
 }
 </pre>
 </td>
-			<td>For tracking purpose, not used - replaced with pre-existing cluster issuer</td>
+			<td>For tracking purpose, not used - replaced with pre-existing cluster issuer @section Optional</td>
 		</tr>
 		<tr>
 			<td>issuer.cloudFlareKey</td>
@@ -228,490 +197,184 @@ null
 			<td>Insert your email address</td>
 		</tr>
 		<tr>
-			<td>jellyfin.ingress.jellyfin-ing.annotations."cert-manager.io/cluster-issuer"</td>
-			<td>string</td>
+			<td>jellyfin</td>
+			<td>object</td>
 			<td><pre lang="json">
-null
+{
+  "ingress": {
+    "jellyfin-ing": {
+      "annotations": {
+        "cert-manager.io/cluster-issuer": null
+      },
+      "enabled": true,
+      "expandObjectName": false,
+      "hosts": [
+        {
+          "host": "jellyfin.local",
+          "paths": [
+            {
+              "path": "/",
+              "pathType": "Prefix"
+            }
+          ]
+        }
+      ],
+      "ingressClassName": "nginx",
+      "integrations": {
+        "certManager": {
+          "enabled": false
+        },
+        "traefik": {
+          "enabled": false
+        }
+      },
+      "primary": true,
+      "required": true,
+      "tls": [
+        {
+          "hosts": [
+            "jellyfin.local"
+          ],
+          "secretName": "jellyfin-tls"
+        }
+      ]
+    }
+  },
+  "metrics": {
+    "main": {
+      "enabled": false
+    }
+  },
+  "persistence": {
+    "config": {
+      "accessModes": "ReadWriteMany",
+      "enabled": true,
+      "size": "500Mi",
+      "storageClass": "network-block",
+      "targetSelector": {
+        "exportarr": {
+          "exportarr": {
+            "mountPath": "/config",
+            "readOnly": true
+          }
+        },
+        "main": {
+          "main": {
+            "mountPath": "/config"
+          }
+        }
+      },
+      "type": "pvc"
+    },
+    "media": {
+      "enabled": true,
+      "existingClaim": "media-volume",
+      "targetSelector": {
+        "main": {
+          "main": {
+            "mountPath": "/mnt/media"
+          }
+        }
+      },
+      "type": "pvc"
+    },
+    "transcode": {
+      "enabled": false
+    }
+  },
+  "serviceProtocol": "tcp"
+}
 </pre>
 </td>
-			<td></td>
+			<td>Jellyfin configuration section @section jellyfin</td>
 		</tr>
 		<tr>
-			<td>jellyfin.ingress.jellyfin-ing.enabled</td>
-			<td>bool</td>
+			<td>jellyseerr</td>
+			<td>object</td>
 			<td><pre lang="json">
-true
+{
+  "ingress": {
+    "jellyseerr-ing": {
+      "annotations": {
+        "cert-manager.io/cluster-issuer": null
+      },
+      "enabled": true,
+      "expandObjectName": false,
+      "hosts": [
+        {
+          "host": "jellyseerr.local",
+          "paths": [
+            {
+              "path": "/",
+              "pathType": "Prefix"
+            }
+          ]
+        }
+      ],
+      "ingressClassName": "nginx",
+      "integrations": {
+        "certManager": {
+          "enabled": false
+        },
+        "traefik": {
+          "enabled": false
+        }
+      },
+      "primary": true,
+      "required": true,
+      "tls": [
+        {
+          "hosts": [
+            "jellyseerr.local"
+          ],
+          "secretName": "jellyseerr-tls"
+        }
+      ]
+    }
+  },
+  "metrics": {
+    "main": {
+      "enabled": false
+    }
+  },
+  "persistence": {
+    "config": {
+      "accessModes": "ReadWriteMany",
+      "enabled": true,
+      "size": "500Mi",
+      "storageClass": "network-block",
+      "targetSelector": {
+        "exportarr": {
+          "exportarr": {
+            "mountPath": "/config",
+            "readOnly": true
+          }
+        },
+        "main": {
+          "main": {
+            "mountPath": "/app/config"
+          }
+        }
+      },
+      "type": "pvc"
+    },
+    "media": {
+      "enabled": true,
+      "existingClaim": "media-volume",
+      "targetSelector": {
+        "main": {
+          "main": {
+            "mountPath": "/mnt/media"
+          }
+        }
+      },
+      "type": "pvc"
+    }
+  }
+}
 </pre>
 </td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>jellyfin.ingress.jellyfin-ing.expandObjectName</td>
-			<td>bool</td>
-			<td><pre lang="json">
-false
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>jellyfin.ingress.jellyfin-ing.hosts[0].host</td>
-			<td>string</td>
-			<td><pre lang="json">
-"jellyfin.local"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>jellyfin.ingress.jellyfin-ing.hosts[0].paths[0].path</td>
-			<td>string</td>
-			<td><pre lang="json">
-"/"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>jellyfin.ingress.jellyfin-ing.hosts[0].paths[0].pathType</td>
-			<td>string</td>
-			<td><pre lang="json">
-"Prefix"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>jellyfin.ingress.jellyfin-ing.ingressClassName</td>
-			<td>string</td>
-			<td><pre lang="json">
-"nginx"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>jellyfin.ingress.jellyfin-ing.integrations.certManager.enabled</td>
-			<td>bool</td>
-			<td><pre lang="json">
-false
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>jellyfin.ingress.jellyfin-ing.integrations.traefik.enabled</td>
-			<td>bool</td>
-			<td><pre lang="json">
-false
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>jellyfin.ingress.jellyfin-ing.primary</td>
-			<td>bool</td>
-			<td><pre lang="json">
-true
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>jellyfin.ingress.jellyfin-ing.required</td>
-			<td>bool</td>
-			<td><pre lang="json">
-true
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>jellyfin.ingress.jellyfin-ing.tls[0].hosts[0]</td>
-			<td>string</td>
-			<td><pre lang="json">
-"jellyfin.local"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>jellyfin.ingress.jellyfin-ing.tls[0].secretName</td>
-			<td>string</td>
-			<td><pre lang="json">
-"jellyfin-tls"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>jellyfin.metrics.main.enabled</td>
-			<td>bool</td>
-			<td><pre lang="json">
-false
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>jellyfin.persistence.config.accessModes</td>
-			<td>string</td>
-			<td><pre lang="json">
-"ReadWriteMany"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>jellyfin.persistence.config.enabled</td>
-			<td>bool</td>
-			<td><pre lang="json">
-true
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>jellyfin.persistence.config.size</td>
-			<td>string</td>
-			<td><pre lang="json">
-"500Mi"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>jellyfin.persistence.config.storageClass</td>
-			<td>string</td>
-			<td><pre lang="json">
-"network-block"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>jellyfin.persistence.config.targetSelector.exportarr.exportarr.mountPath</td>
-			<td>string</td>
-			<td><pre lang="json">
-"/config"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>jellyfin.persistence.config.targetSelector.exportarr.exportarr.readOnly</td>
-			<td>bool</td>
-			<td><pre lang="json">
-true
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>jellyfin.persistence.config.targetSelector.main.main.mountPath</td>
-			<td>string</td>
-			<td><pre lang="json">
-"/config"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>jellyfin.persistence.config.type</td>
-			<td>string</td>
-			<td><pre lang="json">
-"pvc"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>jellyfin.persistence.media.enabled</td>
-			<td>bool</td>
-			<td><pre lang="json">
-true
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>jellyfin.persistence.media.existingClaim</td>
-			<td>string</td>
-			<td><pre lang="json">
-"media-volume"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>jellyfin.persistence.media.targetSelector.main.main.mountPath</td>
-			<td>string</td>
-			<td><pre lang="json">
-"/mnt/media"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>jellyfin.persistence.media.type</td>
-			<td>string</td>
-			<td><pre lang="json">
-"pvc"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>jellyfin.persistence.transcode.enabled</td>
-			<td>bool</td>
-			<td><pre lang="json">
-false
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>jellyfin.serviceProtocol</td>
-			<td>string</td>
-			<td><pre lang="json">
-"tcp"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>jellyseerr.ingress.jellyseerr-ing.annotations."cert-manager.io/cluster-issuer"</td>
-			<td>string</td>
-			<td><pre lang="json">
-null
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>jellyseerr.ingress.jellyseerr-ing.enabled</td>
-			<td>bool</td>
-			<td><pre lang="json">
-true
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>jellyseerr.ingress.jellyseerr-ing.expandObjectName</td>
-			<td>bool</td>
-			<td><pre lang="json">
-false
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>jellyseerr.ingress.jellyseerr-ing.hosts[0].host</td>
-			<td>string</td>
-			<td><pre lang="json">
-"jellyseerr.local"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>jellyseerr.ingress.jellyseerr-ing.hosts[0].paths[0].path</td>
-			<td>string</td>
-			<td><pre lang="json">
-"/"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>jellyseerr.ingress.jellyseerr-ing.hosts[0].paths[0].pathType</td>
-			<td>string</td>
-			<td><pre lang="json">
-"Prefix"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>jellyseerr.ingress.jellyseerr-ing.ingressClassName</td>
-			<td>string</td>
-			<td><pre lang="json">
-"nginx"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>jellyseerr.ingress.jellyseerr-ing.integrations.certManager.enabled</td>
-			<td>bool</td>
-			<td><pre lang="json">
-false
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>jellyseerr.ingress.jellyseerr-ing.integrations.traefik.enabled</td>
-			<td>bool</td>
-			<td><pre lang="json">
-false
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>jellyseerr.ingress.jellyseerr-ing.primary</td>
-			<td>bool</td>
-			<td><pre lang="json">
-true
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>jellyseerr.ingress.jellyseerr-ing.required</td>
-			<td>bool</td>
-			<td><pre lang="json">
-true
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>jellyseerr.ingress.jellyseerr-ing.tls[0].hosts[0]</td>
-			<td>string</td>
-			<td><pre lang="json">
-"jellyseerr.local"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>jellyseerr.ingress.jellyseerr-ing.tls[0].secretName</td>
-			<td>string</td>
-			<td><pre lang="json">
-"jellyseerr-tls"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>jellyseerr.metrics.main.enabled</td>
-			<td>bool</td>
-			<td><pre lang="json">
-false
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>jellyseerr.persistence.config.accessModes</td>
-			<td>string</td>
-			<td><pre lang="json">
-"ReadWriteMany"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>jellyseerr.persistence.config.enabled</td>
-			<td>bool</td>
-			<td><pre lang="json">
-true
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>jellyseerr.persistence.config.size</td>
-			<td>string</td>
-			<td><pre lang="json">
-"500Mi"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>jellyseerr.persistence.config.storageClass</td>
-			<td>string</td>
-			<td><pre lang="json">
-"network-block"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>jellyseerr.persistence.config.targetSelector.exportarr.exportarr.mountPath</td>
-			<td>string</td>
-			<td><pre lang="json">
-"/config"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>jellyseerr.persistence.config.targetSelector.exportarr.exportarr.readOnly</td>
-			<td>bool</td>
-			<td><pre lang="json">
-true
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>jellyseerr.persistence.config.targetSelector.main.main.mountPath</td>
-			<td>string</td>
-			<td><pre lang="json">
-"/app/config"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>jellyseerr.persistence.config.type</td>
-			<td>string</td>
-			<td><pre lang="json">
-"pvc"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>jellyseerr.persistence.media.enabled</td>
-			<td>bool</td>
-			<td><pre lang="json">
-true
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>jellyseerr.persistence.media.existingClaim</td>
-			<td>string</td>
-			<td><pre lang="json">
-"media-volume"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>jellyseerr.persistence.media.targetSelector.main.main.mountPath</td>
-			<td>string</td>
-			<td><pre lang="json">
-"/mnt/media"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>jellyseerr.persistence.media.type</td>
-			<td>string</td>
-			<td><pre lang="json">
-"pvc"
-</pre>
-</td>
-			<td></td>
+			<td>Jallyseerr configuration section @section jellyseerr</td>
 		</tr>
 		<tr>
 			<td>metrics.enabled</td>
@@ -720,7 +383,22 @@ true
 false
 </pre>
 </td>
-			<td>Anchor to set wether to deploy the export sidecar pods or not. Requires the Prometheus stack</td>
+			<td>Anchor to set wether to deploy the export sidecar pods or not. Requires the Prometheus stack @section Required</td>
+		</tr>
+		<tr>
+			<td>notifications</td>
+			<td>object</td>
+			<td><pre lang="json">
+{
+  "telegram": {
+    "bot_apitoken": null,
+    "chat_id": null,
+    "enabled": true
+  }
+}
+</pre>
+</td>
+			<td>Sections wherer Jellyseerr notifications are configured. Only telegram notification is supported for now @section jellyseerr</td>
 		</tr>
 		<tr>
 			<td>notifications.telegram.bot_apitoken</td>
@@ -750,994 +428,418 @@ true
 			<td>Enable the Telegram notifications</td>
 		</tr>
 		<tr>
-			<td>prowlarr.ingress.prowlarr-ing.annotations."cert-manager.io/cluster-issuer"</td>
-			<td>string</td>
-			<td><pre lang="json">
-null
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>prowlarr.ingress.prowlarr-ing.enabled</td>
-			<td>bool</td>
-			<td><pre lang="json">
-true
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>prowlarr.ingress.prowlarr-ing.expandObjectName</td>
-			<td>bool</td>
-			<td><pre lang="json">
-false
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>prowlarr.ingress.prowlarr-ing.hosts[0].host</td>
-			<td>string</td>
-			<td><pre lang="json">
-"prowlarr.local"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>prowlarr.ingress.prowlarr-ing.hosts[0].paths[0].path</td>
-			<td>string</td>
-			<td><pre lang="json">
-"/"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>prowlarr.ingress.prowlarr-ing.hosts[0].paths[0].pathType</td>
-			<td>string</td>
-			<td><pre lang="json">
-"Prefix"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>prowlarr.ingress.prowlarr-ing.ingressClassName</td>
-			<td>string</td>
-			<td><pre lang="json">
-"nginx"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>prowlarr.ingress.prowlarr-ing.integrations.certManager.enabled</td>
-			<td>bool</td>
-			<td><pre lang="json">
-false
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>prowlarr.ingress.prowlarr-ing.integrations.traefik.enabled</td>
-			<td>bool</td>
-			<td><pre lang="json">
-false
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>prowlarr.ingress.prowlarr-ing.primary</td>
-			<td>bool</td>
-			<td><pre lang="json">
-true
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>prowlarr.ingress.prowlarr-ing.required</td>
-			<td>bool</td>
-			<td><pre lang="json">
-true
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>prowlarr.ingress.prowlarr-ing.tls[0].hosts[0]</td>
-			<td>string</td>
-			<td><pre lang="json">
-"prowlarr.local"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>prowlarr.ingress.prowlarr-ing.tls[0].secretName</td>
-			<td>string</td>
-			<td><pre lang="json">
-"prowlarr-tls"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>prowlarr.metrics.main.enabled</td>
-			<td>bool</td>
-			<td><pre lang="json">
-false
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>prowlarr.persistence.config.accessModes</td>
-			<td>string</td>
-			<td><pre lang="json">
-"ReadWriteMany"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>prowlarr.persistence.config.enabled</td>
-			<td>bool</td>
-			<td><pre lang="json">
-true
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>prowlarr.persistence.config.size</td>
-			<td>string</td>
-			<td><pre lang="json">
-"500Mi"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>prowlarr.persistence.config.storageClass</td>
-			<td>string</td>
-			<td><pre lang="json">
-"network-block"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>prowlarr.persistence.config.targetSelector.exportarr.exportarr.mountPath</td>
-			<td>string</td>
-			<td><pre lang="json">
-"/config"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>prowlarr.persistence.config.targetSelector.exportarr.exportarr.readOnly</td>
-			<td>bool</td>
-			<td><pre lang="json">
-true
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>prowlarr.persistence.config.targetSelector.main.main.mountPath</td>
-			<td>string</td>
-			<td><pre lang="json">
-"/config"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>prowlarr.persistence.config.type</td>
-			<td>string</td>
-			<td><pre lang="json">
-"pvc"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>prowlarr.workload.main.podSpec.containers.main.env.PROWLARR__API_KEY</td>
-			<td>string</td>
-			<td><pre lang="json">
-null
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>qbittorrent.ingress.qbittorrent-ing.annotations."cert-manager.io/cluster-issuer"</td>
-			<td>string</td>
-			<td><pre lang="json">
-null
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>qbittorrent.ingress.qbittorrent-ing.enabled</td>
-			<td>bool</td>
-			<td><pre lang="json">
-true
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>qbittorrent.ingress.qbittorrent-ing.expandObjectName</td>
-			<td>bool</td>
-			<td><pre lang="json">
-false
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>qbittorrent.ingress.qbittorrent-ing.hosts[0].host</td>
-			<td>string</td>
-			<td><pre lang="json">
-"torrent.local"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>qbittorrent.ingress.qbittorrent-ing.hosts[0].paths[0].path</td>
-			<td>string</td>
-			<td><pre lang="json">
-"/"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>qbittorrent.ingress.qbittorrent-ing.hosts[0].paths[0].pathType</td>
-			<td>string</td>
-			<td><pre lang="json">
-"Prefix"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>qbittorrent.ingress.qbittorrent-ing.ingressClassName</td>
-			<td>string</td>
-			<td><pre lang="json">
-"nginx"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>qbittorrent.ingress.qbittorrent-ing.integrations.certManager.enabled</td>
-			<td>bool</td>
-			<td><pre lang="json">
-false
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>qbittorrent.ingress.qbittorrent-ing.integrations.traefik.enabled</td>
-			<td>bool</td>
-			<td><pre lang="json">
-false
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>qbittorrent.ingress.qbittorrent-ing.primary</td>
-			<td>bool</td>
-			<td><pre lang="json">
-true
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>qbittorrent.ingress.qbittorrent-ing.required</td>
-			<td>bool</td>
-			<td><pre lang="json">
-true
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>qbittorrent.ingress.qbittorrent-ing.tls[0].hosts[0]</td>
-			<td>string</td>
-			<td><pre lang="json">
-"torrent.local"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>qbittorrent.ingress.qbittorrent-ing.tls[0].secretName</td>
-			<td>string</td>
-			<td><pre lang="json">
-"torrent-tls"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>qbittorrent.metrics.main.enabled</td>
-			<td>bool</td>
-			<td><pre lang="json">
-false
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>qbittorrent.persistence.config.enabled</td>
-			<td>bool</td>
-			<td><pre lang="json">
-true
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>qbittorrent.persistence.config.existingClaim</td>
-			<td>string</td>
-			<td><pre lang="json">
-"torrent-config"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>qbittorrent.persistence.config.targetSelector.exportarr.exportarr.mountPath</td>
-			<td>string</td>
-			<td><pre lang="json">
-"/config"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>qbittorrent.persistence.config.targetSelector.exportarr.exportarr.readOnly</td>
-			<td>bool</td>
-			<td><pre lang="json">
-true
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>qbittorrent.persistence.config.targetSelector.main.main.mountPath</td>
-			<td>string</td>
-			<td><pre lang="json">
-"/config"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>qbittorrent.persistence.config.type</td>
-			<td>string</td>
-			<td><pre lang="json">
-"pvc"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>qbittorrent.persistence.downloads.enabled</td>
-			<td>bool</td>
-			<td><pre lang="json">
-true
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>qbittorrent.persistence.downloads.existingClaim</td>
-			<td>string</td>
-			<td><pre lang="json">
-"downloads-volume"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>qbittorrent.persistence.downloads.targetSelector.main.main.mountPath</td>
-			<td>string</td>
-			<td><pre lang="json">
-"/downloads"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>qbittorrent.persistence.downloads.type</td>
-			<td>string</td>
-			<td><pre lang="json">
-"pvc"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>qbittorrent.workload.main.podSpec.containers.main.env.QBITTORRENT__USE_PROFILE</td>
-			<td>bool</td>
-			<td><pre lang="json">
-true
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>radarr.ingress.radarr-ing.annotations."cert-manager.io/cluster-issuer"</td>
-			<td>string</td>
-			<td><pre lang="json">
-null
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>radarr.ingress.radarr-ing.enabled</td>
-			<td>bool</td>
-			<td><pre lang="json">
-true
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>radarr.ingress.radarr-ing.expandObjectName</td>
-			<td>bool</td>
-			<td><pre lang="json">
-false
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>radarr.ingress.radarr-ing.hosts[0].host</td>
-			<td>string</td>
-			<td><pre lang="json">
-"radarr.local"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>radarr.ingress.radarr-ing.hosts[0].paths[0].path</td>
-			<td>string</td>
-			<td><pre lang="json">
-"/"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>radarr.ingress.radarr-ing.hosts[0].paths[0].pathType</td>
-			<td>string</td>
-			<td><pre lang="json">
-"Prefix"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>radarr.ingress.radarr-ing.ingressClassName</td>
-			<td>string</td>
-			<td><pre lang="json">
-"nginx"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>radarr.ingress.radarr-ing.integrations.certManager.enabled</td>
-			<td>bool</td>
-			<td><pre lang="json">
-false
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>radarr.ingress.radarr-ing.integrations.traefik.enabled</td>
-			<td>bool</td>
-			<td><pre lang="json">
-false
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>radarr.ingress.radarr-ing.primary</td>
-			<td>bool</td>
-			<td><pre lang="json">
-true
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>radarr.ingress.radarr-ing.required</td>
-			<td>bool</td>
-			<td><pre lang="json">
-true
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>radarr.ingress.radarr-ing.tls[0].hosts[0]</td>
-			<td>string</td>
-			<td><pre lang="json">
-"radarr.local"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>radarr.ingress.radarr-ing.tls[0].secretName</td>
-			<td>string</td>
-			<td><pre lang="json">
-"radarr-tls"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>radarr.metrics.main.enabled</td>
-			<td>bool</td>
-			<td><pre lang="json">
-false
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>radarr.persistence.config.accessModes</td>
-			<td>string</td>
-			<td><pre lang="json">
-"ReadWriteMany"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>radarr.persistence.config.enabled</td>
-			<td>bool</td>
-			<td><pre lang="json">
-true
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>radarr.persistence.config.size</td>
-			<td>string</td>
-			<td><pre lang="json">
-"500Mi"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>radarr.persistence.config.storageClass</td>
-			<td>string</td>
-			<td><pre lang="json">
-"network-block"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>radarr.persistence.config.targetSelector.exportarr.exportarr.mountPath</td>
-			<td>string</td>
-			<td><pre lang="json">
-"/config"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>radarr.persistence.config.targetSelector.exportarr.exportarr.readOnly</td>
-			<td>bool</td>
-			<td><pre lang="json">
-true
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>radarr.persistence.config.targetSelector.main.main.mountPath</td>
-			<td>string</td>
-			<td><pre lang="json">
-"/config"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>radarr.persistence.config.type</td>
-			<td>string</td>
-			<td><pre lang="json">
-"pvc"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>radarr.persistence.downloads.enabled</td>
-			<td>bool</td>
-			<td><pre lang="json">
-true
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>radarr.persistence.downloads.existingClaim</td>
-			<td>string</td>
-			<td><pre lang="json">
-"downloads-volume"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>radarr.persistence.downloads.targetSelector.main.main.mountPath</td>
-			<td>string</td>
-			<td><pre lang="json">
-"/mnt/downloads"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>radarr.persistence.downloads.type</td>
-			<td>string</td>
-			<td><pre lang="json">
-"pvc"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>radarr.persistence.media.enabled</td>
-			<td>bool</td>
-			<td><pre lang="json">
-true
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>radarr.persistence.media.existingClaim</td>
-			<td>string</td>
-			<td><pre lang="json">
-"media-volume"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>radarr.persistence.media.targetSelector.main.main.mountPath</td>
-			<td>string</td>
-			<td><pre lang="json">
-"/mnt/media"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>radarr.persistence.media.type</td>
-			<td>string</td>
-			<td><pre lang="json">
-"pvc"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>radarr.workload.main.podSpec.containers.main.env.RADARR__API_KEY</td>
-			<td>string</td>
-			<td><pre lang="json">
-null
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>sonarr.ingress.sonarr-ing.annotations."cert-manager.io/cluster-issuer"</td>
-			<td>string</td>
-			<td><pre lang="json">
-null
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>sonarr.ingress.sonarr-ing.enabled</td>
-			<td>bool</td>
-			<td><pre lang="json">
-true
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>sonarr.ingress.sonarr-ing.expandObjectName</td>
-			<td>bool</td>
-			<td><pre lang="json">
-false
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>sonarr.ingress.sonarr-ing.hosts[0].host</td>
-			<td>string</td>
-			<td><pre lang="json">
-"sonarr.local"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>sonarr.ingress.sonarr-ing.hosts[0].paths[0].path</td>
-			<td>string</td>
-			<td><pre lang="json">
-"/"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>sonarr.ingress.sonarr-ing.hosts[0].paths[0].pathType</td>
-			<td>string</td>
-			<td><pre lang="json">
-"Prefix"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>sonarr.ingress.sonarr-ing.ingressClassName</td>
-			<td>string</td>
-			<td><pre lang="json">
-"nginx"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>sonarr.ingress.sonarr-ing.integrations.certManager.enabled</td>
-			<td>bool</td>
-			<td><pre lang="json">
-false
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>sonarr.ingress.sonarr-ing.integrations.traefik.enabled</td>
-			<td>bool</td>
-			<td><pre lang="json">
-false
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>sonarr.ingress.sonarr-ing.primary</td>
-			<td>bool</td>
-			<td><pre lang="json">
-true
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>sonarr.ingress.sonarr-ing.required</td>
-			<td>bool</td>
-			<td><pre lang="json">
-true
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>sonarr.ingress.sonarr-ing.tls[0].hosts[0]</td>
-			<td>string</td>
-			<td><pre lang="json">
-"sonarr.local"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>sonarr.ingress.sonarr-ing.tls[0].secretName</td>
-			<td>string</td>
-			<td><pre lang="json">
-"sonarr-tls"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>sonarr.metrics.main.enabled</td>
-			<td>bool</td>
-			<td><pre lang="json">
-false
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>sonarr.persistence.config.accessModes</td>
-			<td>string</td>
-			<td><pre lang="json">
-"ReadWriteMany"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>sonarr.persistence.config.enabled</td>
-			<td>bool</td>
-			<td><pre lang="json">
-true
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>sonarr.persistence.config.size</td>
-			<td>string</td>
-			<td><pre lang="json">
-"500Mi"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>sonarr.persistence.config.storageClass</td>
-			<td>string</td>
-			<td><pre lang="json">
-"network-block"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>sonarr.persistence.config.targetSelector.exportarr.exportarr.mountPath</td>
-			<td>string</td>
-			<td><pre lang="json">
-"/config"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>sonarr.persistence.config.targetSelector.exportarr.exportarr.readOnly</td>
-			<td>bool</td>
-			<td><pre lang="json">
-true
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>sonarr.persistence.config.targetSelector.main.main.mountPath</td>
-			<td>string</td>
-			<td><pre lang="json">
-"/config"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>sonarr.persistence.config.type</td>
-			<td>string</td>
-			<td><pre lang="json">
-"pvc"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>sonarr.persistence.downloads.enabled</td>
-			<td>bool</td>
-			<td><pre lang="json">
-true
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>sonarr.persistence.downloads.existingClaim</td>
-			<td>string</td>
-			<td><pre lang="json">
-"downloads-volume"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>sonarr.persistence.downloads.targetSelector.main.main.mountPath</td>
-			<td>string</td>
-			<td><pre lang="json">
-"/mnt/downloads"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>sonarr.persistence.downloads.type</td>
-			<td>string</td>
-			<td><pre lang="json">
-"pvc"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>sonarr.persistence.media.enabled</td>
-			<td>bool</td>
-			<td><pre lang="json">
-true
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>sonarr.persistence.media.existingClaim</td>
-			<td>string</td>
-			<td><pre lang="json">
-"media-volume"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>sonarr.persistence.media.targetSelector.main.main.mountPath</td>
-			<td>string</td>
-			<td><pre lang="json">
-"/mnt/media"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>sonarr.persistence.media.type</td>
-			<td>string</td>
-			<td><pre lang="json">
-"pvc"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>sonarr.workload.main.podSpec.containers.main.env.SONARR__API_KEY</td>
-			<td>string</td>
-			<td><pre lang="json">
-null
-</pre>
-</td>
-			<td></td>
+			<td>prowlarr</td>
+			<td>object</td>
+			<td><pre lang="json">
+{
+  "ingress": {
+    "prowlarr-ing": {
+      "annotations": {
+        "cert-manager.io/cluster-issuer": null
+      },
+      "enabled": true,
+      "expandObjectName": false,
+      "hosts": [
+        {
+          "host": "prowlarr.local",
+          "paths": [
+            {
+              "path": "/",
+              "pathType": "Prefix"
+            }
+          ]
+        }
+      ],
+      "ingressClassName": "nginx",
+      "integrations": {
+        "certManager": {
+          "enabled": false
+        },
+        "traefik": {
+          "enabled": false
+        }
+      },
+      "primary": true,
+      "required": true,
+      "tls": [
+        {
+          "hosts": [
+            "prowlarr.local"
+          ],
+          "secretName": "prowlarr-tls"
+        }
+      ]
+    }
+  },
+  "metrics": {
+    "main": {
+      "enabled": false
+    }
+  },
+  "persistence": {
+    "config": {
+      "accessModes": "ReadWriteMany",
+      "enabled": true,
+      "size": "500Mi",
+      "storageClass": "network-block",
+      "targetSelector": {
+        "exportarr": {
+          "exportarr": {
+            "mountPath": "/config",
+            "readOnly": true
+          }
+        },
+        "main": {
+          "main": {
+            "mountPath": "/config"
+          }
+        }
+      },
+      "type": "pvc"
+    }
+  },
+  "workload": {
+    "main": {
+      "podSpec": {
+        "containers": {
+          "main": {
+            "env": {
+              "PROWLARR__API_KEY": null
+            }
+          }
+        }
+      }
+    }
+  }
+}
+</pre>
+</td>
+			<td>Prowlarr configuration section @section prowlarr</td>
+		</tr>
+		<tr>
+			<td>qbittorrent</td>
+			<td>object</td>
+			<td><pre lang="json">
+{
+  "ingress": {
+    "qbittorrent-ing": {
+      "annotations": {
+        "cert-manager.io/cluster-issuer": null
+      },
+      "enabled": true,
+      "expandObjectName": false,
+      "hosts": [
+        {
+          "host": "torrent.local",
+          "paths": [
+            {
+              "path": "/",
+              "pathType": "Prefix"
+            }
+          ]
+        }
+      ],
+      "ingressClassName": "nginx",
+      "integrations": {
+        "certManager": {
+          "enabled": false
+        },
+        "traefik": {
+          "enabled": false
+        }
+      },
+      "primary": true,
+      "required": true,
+      "tls": [
+        {
+          "hosts": [
+            "torrent.local"
+          ],
+          "secretName": "torrent-tls"
+        }
+      ]
+    }
+  },
+  "metrics": {
+    "main": {
+      "enabled": false
+    }
+  },
+  "persistence": {
+    "config": {
+      "enabled": true,
+      "existingClaim": "torrent-config",
+      "targetSelector": {
+        "exportarr": {
+          "exportarr": {
+            "mountPath": "/config",
+            "readOnly": true
+          }
+        },
+        "main": {
+          "main": {
+            "mountPath": "/config"
+          }
+        }
+      },
+      "type": "pvc"
+    },
+    "downloads": {
+      "enabled": true,
+      "existingClaim": "downloads-volume",
+      "targetSelector": {
+        "main": {
+          "main": {
+            "mountPath": "/downloads"
+          }
+        }
+      },
+      "type": "pvc"
+    }
+  },
+  "workload": {
+    "main": {
+      "podSpec": {
+        "containers": {
+          "main": {
+            "env": {
+              "QBITTORRENT__USE_PROFILE": true
+            }
+          }
+        }
+      }
+    }
+  }
+}
+</pre>
+</td>
+			<td>qBitTorrent configuration section @section torrent</td>
+		</tr>
+		<tr>
+			<td>radarr</td>
+			<td>object</td>
+			<td><pre lang="json">
+{
+  "ingress": {
+    "radarr-ing": {
+      "annotations": {
+        "cert-manager.io/cluster-issuer": null
+      },
+      "enabled": true,
+      "expandObjectName": false,
+      "hosts": [
+        {
+          "host": "radarr.local",
+          "paths": [
+            {
+              "path": "/",
+              "pathType": "Prefix"
+            }
+          ]
+        }
+      ],
+      "ingressClassName": "nginx",
+      "integrations": {
+        "certManager": {
+          "enabled": false
+        },
+        "traefik": {
+          "enabled": false
+        }
+      },
+      "primary": true,
+      "required": true,
+      "tls": [
+        {
+          "hosts": [
+            "radarr.local"
+          ],
+          "secretName": "radarr-tls"
+        }
+      ]
+    }
+  },
+  "metrics": {
+    "main": {
+      "enabled": false
+    }
+  },
+  "persistence": {
+    "config": {
+      "accessModes": "ReadWriteMany",
+      "enabled": true,
+      "size": "500Mi",
+      "storageClass": "network-block",
+      "targetSelector": {
+        "exportarr": {
+          "exportarr": {
+            "mountPath": "/config",
+            "readOnly": true
+          }
+        },
+        "main": {
+          "main": {
+            "mountPath": "/config"
+          }
+        }
+      },
+      "type": "pvc"
+    },
+    "downloads": {
+      "enabled": true,
+      "existingClaim": "downloads-volume",
+      "targetSelector": {
+        "main": {
+          "main": {
+            "mountPath": "/mnt/downloads"
+          }
+        }
+      },
+      "type": "pvc"
+    },
+    "media": {
+      "enabled": true,
+      "existingClaim": "media-volume",
+      "targetSelector": {
+        "main": {
+          "main": {
+            "mountPath": "/mnt/media"
+          }
+        }
+      },
+      "type": "pvc"
+    }
+  },
+  "workload": {
+    "main": {
+      "podSpec": {
+        "containers": {
+          "main": {
+            "env": {
+              "RADARR__API_KEY": null
+            }
+          }
+        }
+      }
+    }
+  }
+}
+</pre>
+</td>
+			<td>Radarr configuration section @section radarr</td>
+		</tr>
+		<tr>
+			<td>sonarr</td>
+			<td>object</td>
+			<td><pre lang="json">
+{
+  "ingress": {
+    "sonarr-ing": {
+      "annotations": {
+        "cert-manager.io/cluster-issuer": null
+      },
+      "enabled": true,
+      "expandObjectName": false,
+      "hosts": [
+        {
+          "host": "sonarr.local",
+          "paths": [
+            {
+              "path": "/",
+              "pathType": "Prefix"
+            }
+          ]
+        }
+      ],
+      "ingressClassName": "nginx",
+      "integrations": {
+        "certManager": {
+          "enabled": false
+        },
+        "traefik": {
+          "enabled": false
+        }
+      },
+      "primary": true,
+      "required": true,
+      "tls": [
+        {
+          "hosts": [
+            "sonarr.local"
+          ],
+          "secretName": "sonarr-tls"
+        }
+      ]
+    }
+  },
+  "metrics": {
+    "main": {
+      "enabled": false
+    }
+  },
+  "persistence": {
+    "config": {
+      "accessModes": "ReadWriteMany",
+      "enabled": true,
+      "size": "500Mi",
+      "storageClass": "network-block",
+      "targetSelector": {
+        "exportarr": {
+          "exportarr": {
+            "mountPath": "/config",
+            "readOnly": true
+          }
+        },
+        "main": {
+          "main": {
+            "mountPath": "/config"
+          }
+        }
+      },
+      "type": "pvc"
+    },
+    "downloads": {
+      "enabled": true,
+      "existingClaim": "downloads-volume",
+      "targetSelector": {
+        "main": {
+          "main": {
+            "mountPath": "/mnt/downloads"
+          }
+        }
+      },
+      "type": "pvc"
+    },
+    "media": {
+      "enabled": true,
+      "existingClaim": "media-volume",
+      "targetSelector": {
+        "main": {
+          "main": {
+            "mountPath": "/mnt/media"
+          }
+        }
+      },
+      "type": "pvc"
+    }
+  },
+  "workload": {
+    "main": {
+      "podSpec": {
+        "containers": {
+          "main": {
+            "env": {
+              "SONARR__API_KEY": null
+            }
+          }
+        }
+      }
+    }
+  }
+}
+</pre>
+</td>
+			<td>Sonarr configuration section @section sonarr</td>
 		</tr>
 		<tr>
 			<td>torrent</td>
@@ -1749,7 +851,7 @@ null
 }
 </pre>
 </td>
-			<td>The following credentials are here just for tracking purposes and they are not used to configure qBitTorrent. The credentials are configured in config/qbittorrent/qBittorrent.conf</td>
+			<td>The following credentials are here just for tracking purposes and they are not used to configure qBitTorrent. The credentials are configured in config/qbittorrent/qBittorrent.conf @section torrent</td>
 		</tr>
 		<tr>
 			<td>torrent.password</td>
@@ -1770,67 +872,27 @@ null
 			<td>username of the qBitTorrent admin user</td>
 		</tr>
 		<tr>
-			<td>volumes.downloads.name</td>
-			<td>string</td>
+			<td>volumes</td>
+			<td>object</td>
 			<td><pre lang="json">
-"downloads-volume"
+{
+  "downloads": {
+    "name": "downloads-volume",
+    "size": "100Gi"
+  },
+  "media": {
+    "name": "media-volume",
+    "size": "250Gi"
+  },
+  "storageClass": "longhorn",
+  "torrentConfig": {
+    "name": "torrent-config",
+    "size": "250Mi"
+  }
+}
 </pre>
 </td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>volumes.downloads.size</td>
-			<td>string</td>
-			<td><pre lang="json">
-"100Gi"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>volumes.media.name</td>
-			<td>string</td>
-			<td><pre lang="json">
-"media-volume"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>volumes.media.size</td>
-			<td>string</td>
-			<td><pre lang="json">
-"250Gi"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>volumes.storageClass</td>
-			<td>string</td>
-			<td><pre lang="json">
-"longhorn"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>volumes.torrentConfig.name</td>
-			<td>string</td>
-			<td><pre lang="json">
-"torrent-config"
-</pre>
-</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>volumes.torrentConfig.size</td>
-			<td>string</td>
-			<td><pre lang="json">
-"250Mi"
-</pre>
-</td>
-			<td></td>
+			<td>Volumes configuration section @section Required</td>
 		</tr>
 	</tbody>
 </table>
