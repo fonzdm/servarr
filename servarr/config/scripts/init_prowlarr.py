@@ -14,6 +14,8 @@ logger.addHandler(console_handler)
 
 PROWLARR_HOST = os.getenv("PROWLARR_HOST")
 API_KEY = os.getenv("API_KEY")
+TORRENT_USERNAME = os.getenv("TORRENT_USERNAME")
+TORRENT_PASSWORD = os.getenv("TORRENT_PASSWORD")
 
 def post(url: str, headers: dict, body: dict):
     """
@@ -183,6 +185,92 @@ body = {
 
 res = post(
     url="http://{}/api/v1/applications".format(PROWLARR_HOST),
+    headers=headers,
+    body=body
+)
+
+# TO-DO: Check for response status code and decide what to do
+
+logger.info("Setup qBitTorrent in Prowlarr")
+
+headers = {
+    "content-type": "application/json",
+    "x-api-key": API_KEY,
+    "x-requested-with": "XMLHttpRequest"
+}
+
+body = {
+    "enable": true,
+    "protocol": "torrent",
+    "priority": 1,
+    "removeCompletedDownloads": true,
+    "removeFailedDownloads": true,
+    "name": "qBittorrent",
+    "fields": [
+        {
+            "name": "host",
+            "value": "servarr-qbittorrent"
+        },
+        {
+            "name": "port",
+            "value": "10095"
+        },
+        {
+            "name": "useSsl",
+            "value": false
+        },
+        {
+            "name": "urlBase"
+        },
+        {
+            "name": "username",
+            "value": TORRENT_USERNAME
+        },
+        {
+            "name": "password",
+            "value": TORRENT_PASSWORD
+        },
+        {
+            "name": "movieCategory",
+            "value": "radarr"
+        },
+        {
+            "name": "movieImportedCategory"
+        },
+        {
+            "name": "recentMoviePriority",
+            "value": 0
+        },
+        {
+            "name": "olderMoviePriority",
+            "value": 0
+        },
+        {
+            "name": "initialState",
+            "value": 0
+        },
+        {
+            "name": "sequentialOrder",
+            "value": false
+        },
+        {
+            "name": "firstAndLast",
+            "value": false
+        },
+        {
+            "name": "contentLayout",
+            "value": 0
+        }
+    ],
+    "implementationName": "qBittorrent",
+    "implementation": "QBittorrent",
+    "configContract": "QBittorrentSettings",
+    "infoLink": "https://wiki.servarr.com/radarr/supported#qbittorrent",
+    "tags": []
+}
+
+res = post(
+    url="http://{}/api/v1/downloadclient".format(PROWLARR_HOST),
     headers=headers,
     body=body
 )
