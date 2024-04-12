@@ -74,3 +74,60 @@ res = post(
 )
 
 # TO-DO: Check for response status code and decide what to do
+
+logger.info("Setup Radarr in Prowlarr")
+
+headers = {
+    "content-type": "application/json",
+    "x-api-key": API_KEY,
+    "x-requested-with": "XMLHttpRequest",
+    "X-Prowlarr-Client": "true"
+}
+
+body = {
+    "syncLevel": "fullSync",
+    "fields": [
+        {
+            "name": "prowlarrUrl",
+            "value": "http://servarr-prowlarr:9696"
+        },
+        {
+            "name": "baseUrl",
+            "value": "http://servarr-radarr:7878"
+        },
+        {
+            "name": "apiKey",
+            "value": API_KEY
+        },
+        {
+            "name": "syncCategories",
+            "value": [
+                2000,
+                2010,
+                2020,
+                2030,
+                2040,
+                2045,
+                2050,
+                2060,
+                2070,
+                2080,
+                2090
+            ]
+        }
+    ],
+    "implementationName": "Radarr",
+    "implementation": "Radarr",
+    "configContract": "RadarrSettings",
+    "infoLink": "https://wiki.servarr.com/prowlarr/supported#radarr",
+    "tags": [],
+    "name": "Radarr"
+}
+
+res = post(
+    url="http://{}/api/v1/applications".format(PROWLARR_HOST),
+    headers=headers,
+    body=body
+)
+
+# TO-DO: Check for response status code and decide what to do
