@@ -17,6 +17,8 @@ API_KEY = os.getenv("API_KEY")
 TORRENT_USERNAME = os.getenv("TORRENT_USERNAME")
 TORRENT_PASSWORD = os.getenv("TORRENT_PASSWORD")
 TORRENT_HOST = os.getenv("TORRENT_HOST", "servarr-qbittorrent")
+PROWLARR_SERVICE = os.getenv("PROWLARR_SERVICE", "servarr-prowlarr")
+RADARR_SERVICE = os.getenv("RADARR_SERVICE", "servarr-radarr")
 
 def post(url: str, headers: dict, body: dict):
     """
@@ -92,11 +94,11 @@ body = {
     "fields": [
         {
             "name": "prowlarrUrl",
-            "value": "http://servarr-prowlarr:9696"
+            "value": "http://{}:9696".format(PROWLARR_SERVICE)
         },
         {
             "name": "baseUrl",
-            "value": "http://servarr-radarr:7878"
+            "value": "http://{}:7878".format(RADARR_SERVICE)
         },
         {
             "name": "apiKey",
