@@ -23,44 +23,44 @@ initJellyseerr: true
 notifications:
   telegram:
     # -- Enable the Telegram notifications
-    # @section -- jellyseerr
+    # @section -- Jellyseerr
     enabled: true
     # -- (string) Insert the Telegram Chat id, check @get_id_bot for this
-    # @section -- jellyseerr
+    # @section -- Jellyseerr
     # @default -- No default value
     chat_id:
     # -- (string) Insert your Telegram Bot API token
-    # @section -- jellyseerr
+    # @section -- Jellyseerr
     # @default -- No default value
     bot_apitoken:
 
 dash:
   # -- (string) Insert the Jellyfin username (will be used also for Jellyseerr)
-  # @section -- jellyfin
+  # @section -- Jellyfin
   # @default -- No default value
   username:
   # -- (string) Insert Jellyfin password (will be used also for Jellyseerr)
-  # @section -- jellyfin
+  # @section -- Jellyfin
   # @default -- No default value
   password:
   # -- (string) Insert Jellyfin login mail (will be used also for Jellyseerr integration)
-  # @section -- jellyfin
+  # @section -- Jellyfin
   # @default -- No default value
   mail:
 
 torrent:
   # -- (string) username of the qBitTorrent admin user
-  # @section -- torrent
+  # @section -- Torrent
   # @default -- No default value
   username:
   # -- (string) password of the qBitTorrent admin user
-  # @section -- torrent
+  # @section -- Torrent
   # @default -- No default value
   password:
 
 # -- The indexers list. Each element of the list is the yaml-formatted boody of the [Prowlarr API request](https://prowlarr.com/docs/api/#/Indexer/post_api_v1_indexer) to add that index.
 # @default -- The body of the 1337x index is provided as default
-# @section -- prowlarr
+# @section -- Prowlarr
 indexers:
   # @ignored
   - name: 1337x
@@ -467,11 +467,11 @@ issuer:
 
 volumes:
   # -- (string) Storage class of the PVCs. Refer to global.storageClassName, as this is automatically set using the anchor
-  # @section -- Required
+  # @section -- Storage
   # @default -- equal to global.storageClassName value, do not edit
   storageClass: *storageClassName
   # -- configuration of the volume used for torrent downloads
-  # @section -- Required
+  # @section -- Storage
   # @default -- See the sub fields
   downloads:
     # -- Name of the download pvc. Leave the anchor declaration, as it will be used in the service configuration
@@ -481,7 +481,7 @@ volumes:
     # @section -- Required
     size: 100Gi
   # -- configuration of the volume used for media storage (i.e.: where movies and tv shows file will be permanently stored)
-  # @section -- Required
+  # @section -- Storage
   # @default -- See the sub fields
   media:
     # -- Name of the media pvc. Leave the anchor declaration, as it will be used in the service configuration
@@ -491,7 +491,7 @@ volumes:
     # @section -- Required
     size: 250Gi
   # -- configuration of the volume used for qBitTorrent internal configuration
-  # @section -- Required
+  # @section -- Storage
   # @default -- See the sub fields
   torrentConfig:
     # -- Name of the torrent configuration pvc. Leave the anchor declaration, as it will be used in the service configuration
