@@ -45,26 +45,23 @@ $ helm install <release-name> <servarr-chart> \
 
 ### Values
 
-| **Parameter** | **Optional** | **Description** | **Default Value** | **Example Value** |
-|---------------|--------------|-----------------|-------------------|-------------------|
-| `global.apikey` | Required | Define a common API key that will be used to automate the entire integration. | `None` | `6d9df216-cac6-4f4a-9b25-5462026ce7be` |
-| `global.storageClassName` | Required | Cluster storage class to be used for the volume creation. | `None` | `longhorn` |
-
-<!-- Table init with some values just to give the idea on how it will be. A lot of values (almost all of them) are missing and MUST be filled in the table. -->
+Please read [Helm Chart README.md](./servarr/README.md) for details on how to configure the values needed for this chart.
 
 ## Contributing
 
 Please read [CONTRIBUTING.md](./CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
+## Contributors
+
+<a href="https://github.com/fonzdm/servarr/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=fonzdm/servarr" />
+</a>
+
+See the full list of [contributors](https://github.com/fonzdm/servarr/contributors) who participated in this project.
+
 ## Versioning
 
 We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [releases on this repository](https://github.com/fonzdm/servarr/releases). 
-
-## Authors
-
-* **Alfonso De Masi** - *Chart idea and main development* - [fonzdm](https://github.com/fonzdm)
-
-See also the list of [contributors](https://github.com/fonzdm/servarr/contributors) who participated in this project.
 
 ###### Keep in mind that each dependency has its own author and their contributors. Please, reach them out on their repositories.
 
