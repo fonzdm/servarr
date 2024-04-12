@@ -43,15 +43,6 @@ Servarr complete Helm Chart for Kubernetes
 	</thead>
 	<tbody>
 		<tr>
-			<td>dash</td>
-			<td>object</td>
-			<td><pre lang="">
-See the sub fields
-</pre>
-</td>
-			<td>Jellyfin User configuration section </td>
-		</tr>
-		<tr>
 			<td>dash.mail</td>
 			<td>string</td>
 			<td><pre lang="">
@@ -138,7 +129,7 @@ The body of the 1337x index is provided as default
 		</tr>
 	</tbody>
 </table>
-<h3>Required</h3>
+<h3>Optional</h3>
 <table>
 	<thead>
 		<th>Key</th>
@@ -148,14 +139,43 @@ The body of the 1337x index is provided as default
 	</thead>
 	<tbody>
 		<tr>
-			<td>initJellyseerr</td>
-			<td>bool</td>
-			<td><pre lang="json">
-true
+			<td>issuer</td>
+			<td>object</td>
+			<td><pre lang="">
+See the sub fields
 </pre>
 </td>
-			<td>Set initJellyseerr to false if Jellyseerr setup should not be performed automatically</td>
+			<td>For tracking purpose, not used - replaced with pre-existing cluster issuer</td>
 		</tr>
+		<tr>
+			<td>issuer.cloudFlareKey</td>
+			<td>string</td>
+			<td><pre lang="json">
+null
+</pre>
+</td>
+			<td>Insert your CloudFlare key</td>
+		</tr>
+		<tr>
+			<td>issuer.email</td>
+			<td>string</td>
+			<td><pre lang="json">
+null
+</pre>
+</td>
+			<td>Insert your email address</td>
+		</tr>
+	</tbody>
+</table>
+<h3>Required</h3>
+<table>
+	<thead>
+		<th>Key</th>
+		<th>Type</th>
+		<th>Default</th>
+		<th>Description</th>
+	</thead>
+	<tbody>
 		<tr>
 			<td>metrics.enabled</td>
 			<td>bool</td>
@@ -266,44 +286,6 @@ See the sub fields
 		</tr>
 	</tbody>
 </table>
-<h3>Optional</h3>
-<table>
-	<thead>
-		<th>Key</th>
-		<th>Type</th>
-		<th>Default</th>
-		<th>Description</th>
-	</thead>
-	<tbody>
-		<tr>
-			<td>issuer</td>
-			<td>object</td>
-			<td><pre lang="">
-See the sub fields
-</pre>
-</td>
-			<td>For tracking purpose, not used - replaced with pre-existing cluster issuer</td>
-		</tr>
-		<tr>
-			<td>issuer.cloudFlareKey</td>
-			<td>string</td>
-			<td><pre lang="json">
-null
-</pre>
-</td>
-			<td>Insert your CloudFlare key</td>
-		</tr>
-		<tr>
-			<td>issuer.email</td>
-			<td>string</td>
-			<td><pre lang="json">
-null
-</pre>
-</td>
-			<td>Insert your email address</td>
-		</tr>
-	</tbody>
-</table>
 <h3>jellyseerr</h3>
 <table>
 	<thead>
@@ -314,19 +296,10 @@ null
 	</thead>
 	<tbody>
 		<tr>
-			<td>notifications</td>
-			<td>object</td>
-			<td><pre lang="">
-See the sub fields
-</pre>
-</td>
-			<td>Sections wherer Jellyseerr notifications are configured. Only telegram notification is supported for now</td>
-		</tr>
-		<tr>
 			<td>notifications.telegram.bot_apitoken</td>
 			<td>string</td>
-			<td><pre lang="json">
-null
+			<td><pre lang="">
+No default value
 </pre>
 </td>
 			<td>Insert your Telegram Bot API token</td>
@@ -334,8 +307,8 @@ null
 		<tr>
 			<td>notifications.telegram.chat_id</td>
 			<td>string</td>
-			<td><pre lang="json">
-null
+			<td><pre lang="">
+No default value
 </pre>
 </td>
 			<td>Insert the Telegram Chat id, check @get_id_bot for this</td>
@@ -360,15 +333,6 @@ true
 		<th>Description</th>
 	</thead>
 	<tbody>
-		<tr>
-			<td>torrent</td>
-			<td>object</td>
-			<td><pre lang="">
-See the sub fields
-</pre>
-</td>
-			<td>The following credentials are here just for tracking purposes and they are not used to configure qBitTorrent. The credentials are configured in config/qbittorrent/qBittorrent.conf</td>
-		</tr>
 		<tr>
 			<td>torrent.password</td>
 			<td>string</td>
