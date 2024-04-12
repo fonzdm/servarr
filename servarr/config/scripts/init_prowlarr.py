@@ -19,6 +19,7 @@ TORRENT_PASSWORD = os.getenv("TORRENT_PASSWORD")
 TORRENT_HOST = os.getenv("TORRENT_HOST", "servarr-qbittorrent")
 PROWLARR_SERVICE = os.getenv("PROWLARR_SERVICE", "servarr-prowlarr")
 RADARR_SERVICE = os.getenv("RADARR_SERVICE", "servarr-radarr")
+FLARESOLVERR_SERVICE = os.getenv("FLARESOLVERR_SERVICE", "servarr-flaresolverr")
 
 def post(url: str, headers: dict, body: dict):
     """
@@ -290,6 +291,40 @@ body = {
 
 res = post(
     url="http://{}/api/v3/remotepathmapping".format(PROWLARR_HOST),
+    headers=headers,
+    body=body
+)
+
+# TO-DO: Check for response status code and decide what to do
+
+logger.info("Setup Flaresolverr in Prowlarr")
+
+body = {
+    "onHealthIssue": false,
+    "supportsOnHealthIssue": false,
+    "includeHealthWarnings": false,
+    "name": "FlareSolverr",
+    "fields": [
+        {
+            "name": "host",
+            "value": "http://{}:8191/".format(FLARESOLVERR_SERVICE)
+        },
+        {
+            "name": "requestTimeout",
+            "value": 60
+        }
+    ],
+    "implementationName": "FlareSolverr",
+    "implementation": "FlareSolverr",
+    "configContract": "FlareSolverrSettings",
+    "infoLink": "https://wiki.servarr.com/prowlarr/supported#flaresolverr",
+    "tags": [
+        1
+    ]
+}
+
+res = post(
+    url="http://{}/api/v1/indexerProxy".format(PROWLARR_HOST),
     headers=headers,
     body=body
 )
