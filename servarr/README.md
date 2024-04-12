@@ -66,7 +66,7 @@ Servarr complete Helm Chart for Kubernetes
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| indexers | list | The body of the 1337x index is provided as default | The indexers list. Each element of the list is the yaml-formatted boody of the [Prowlarr API request](https://prowlarr.com/docs/api/#/Indexer/post_api_v1_indexer) to add that index. |
+| indexers | list | The body of the 1337x index is provided as default | The indexers list. Each element of the list is the yaml-formatted body of the [Prowlarr API request](https://prowlarr.com/docs/api/#/Indexer/post_api_v1_indexer) to add that index. |
 
 ### Issuer
 
