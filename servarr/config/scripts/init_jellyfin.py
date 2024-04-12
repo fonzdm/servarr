@@ -265,3 +265,13 @@ res = post(
 )
 
 # TO-DO: Check for response status code and decide what to do
+
+logger.info("Finalize the setup")
+
+res = post(
+    url="http://{}/.svc.cluster.local:8096/Startup/Complete".format(JELLYFIN_HOST),
+    headers={},
+    body={}
+)
+
+# TO-DO: Check for response status code and decide what to do
