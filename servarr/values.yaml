@@ -1,14 +1,14 @@
 global:
   # -- (string) Insert your API key here, e.g.: &apikey 123abc..
   # @default -- No default value is configured for security reasons, it is mandatory to set this parameter
-  # @section -- global
+  # @section -- Global
   apikey: &apikey
   # -- (string) Insert your storage class here, e.g.: &storageClassName longhorn
-  # @section -- global
+  # @section -- Global
   storageClassName: &storageClassName "network-block"
   # -- (string) Insert your cert manager cluster issuer, e.g.: letsencrypt-cloudflare
   # @default -- No default value, leave empty if not required
-  # @section -- global
+  # @section -- Global
   certManagerClusterIssuer: &issuer
 
 metrics:
