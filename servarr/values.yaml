@@ -1,40 +1,39 @@
 global:
-  # Insert your API key here, e.g.: &apikey 123abc..
+  # -- Insert your API key here, e.g.: &apikey 123abc..
   apikey: &apikey
-  # Insert your storage class here, e.g.: &storageClassName longhorn
+  # -- Insert your storage class here, e.g.: &storageClassName longhorn
   storageClassName: &storageClassName
-  # Insert your cert manager cluster issuer, e.g.: letsencrypt-cloudflare
+  # -- Insert your cert manager cluster issuer, e.g.: letsencrypt-cloudflare
   certManagerClusterIssuer: &issuer
 
 metrics:
   enabled: &metricsEnabled false
 
-# Set initJellyseerr to false if Jellyseerr setup should not be performed automatically
+# -- Set initJellyseerr to false if Jellyseerr setup should not be performed automatically
 initJellyseerr: true
 notifications:
   telegram:
+    # -- Enable the Telegram notifications
     enabled: true
-    # Insert the Telegram Chat id, check @get_id_bot for this
+    # -- Insert the Telegram Chat id, check @get_id_bot for this
     chat_id:
-    # Insert your Telegram Bot API token
+    # -- Insert your Telegram Bot API token
     bot_apitoken:
 
 dash:
-  # Insert the Jellyfin username (will be used also for Jellyseerr)
+  # -- Insert the Jellyfin username (will be used also for Jellyseerr)
   username:
-  # Insert Jellyfin password (will be used also for Jellyseerr)
+  # -- Insert Jellyfin password (will be used also for Jellyseerr)
   password:
-  # Insert Jellyfin login mail (will be used also for Jellyseerr integration)
+  # -- Insert Jellyfin login mail (will be used also for Jellyseerr integration)
   mail:
 
 torrent:
-  # The following credentials are here just for tracking purposes
-  # and they are not used to configure qBitTorrent.
-  # The credentials are configured in config/qbittorrent/qBittorrent.conf
+  # --The following credentials are here just for tracking purposes and they are not used to configure qBitTorrent. The credentials are configured in config/qbittorrent/qBittorrent.conf
   username:
   password:
 
-# The indexers list
+# -- The indexers list
 indexers:
   - name: 1337x
     body:
@@ -421,14 +420,14 @@ indexers:
       supportsSearch: True
       tags: []
 
-# For tracking purpose, not used - replaced with pre-existing cluster issuer
+# -- For tracking purpose, not used - replaced with pre-existing cluster issuer
 issuer:
   server: https://acme-v02.api.letsencrypt.org/directory
-  # Insert your email address
+  # -- Insert your email address
   email:
   secretName: letsencrypt-prod
   ingressClassName: nginx
-  # Insert your CloudFlare key
+  # -- Insert your CloudFlare key
   cloudFlareKey:
 
 volumes:
