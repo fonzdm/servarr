@@ -1,27 +1,27 @@
 global:
   # -- (string) Insert your API key here, e.g.: &apikey 123abc..
   # @default -- No default value is configured for security reasons, it is mandatory to set this parameter
-  # @section global
+  # @section -- global
   apikey: &apikey
   # -- (string) Insert your storage class here, e.g.: &storageClassName longhorn
-  # @section global
+  # @section -- global
   storageClassName: &storageClassName "network-block"
   # -- (string) Insert your cert manager cluster issuer, e.g.: letsencrypt-cloudflare
   # @default -- No default value, leave empty if not required
-  # @section global
+  # @section -- global
   certManagerClusterIssuer: &issuer
 
 metrics:
   # -- Anchor to set wether to deploy the export sidecar pods or not.
   # Requires the Prometheus stack
-  # @section Required
+  # @section -- Required
   enabled: &metricsEnabled false
 
 # -- Set initJellyseerr to false if Jellyseerr setup should not be performed automatically
-# @section Required
+# @section -- Required
 initJellyseerr: true
 # -- Sections wherer Jellyseerr notifications are configured. Only telegram notification is supported for now
-# @section jellyseerr
+# @section -- jellyseerr
 notifications:
   telegram:
     # -- Enable the Telegram notifications
@@ -32,7 +32,7 @@ notifications:
     bot_apitoken:
 
 # -- Jellyfin User configuration section 
-# @section jellyfin
+# @section -- jellyfin
 dash:
   # -- Insert the Jellyfin username (will be used also for Jellyseerr)
   username:
@@ -42,7 +42,7 @@ dash:
   mail:
 
 # --The following credentials are here just for tracking purposes and they are not used to configure qBitTorrent. The credentials are configured in config/qbittorrent/qBittorrent.conf
-# @section torrent
+# @section -- torrent
 torrent:
   # -- (string) username of the qBitTorrent admin user
   username:
@@ -51,7 +51,7 @@ torrent:
 
 # -- The indexers list. Each element of the list is the yaml-formatted boody of the [Prowlarr API request](https://prowlarr.com/docs/api/#/Indexer/post_api_v1_indexer) to add that index.
 # @default -- The body of the 1337x index is provided as default
-# @section prowlarr
+# @section -- prowlarr
 indexers:
   # @ignored
   - name: 1337x
@@ -440,7 +440,7 @@ indexers:
       tags: []
 
 # -- For tracking purpose, not used - replaced with pre-existing cluster issuer
-# @section Optional
+# @section -- Optional
 issuer:
   server: https://acme-v02.api.letsencrypt.org/directory
   # -- Insert your email address
@@ -451,7 +451,7 @@ issuer:
   cloudFlareKey:
 
 # -- Volumes configuration section
-# @section Required
+# @section -- Required
 volumes:
   storageClass: longhorn
   downloads:
@@ -465,7 +465,7 @@ volumes:
     size: 250Mi
 
 # -- Sonarr configuration section
-# @section sonarr
+# @section -- sonarr
 sonarr:
   metrics:
     main:
@@ -533,7 +533,7 @@ sonarr:
             mountPath: /mnt/downloads
 
 # -- Radarr configuration section
-# @section radarr
+# @section -- radarr
 radarr:
   metrics:
     main:
@@ -601,7 +601,7 @@ radarr:
             mountPath: /mnt/downloads
 
 # -- Jellyfin configuration section
-# @section jellyfin
+# @section -- jellyfin
 jellyfin:
   metrics:
     main:
@@ -691,7 +691,7 @@ jellyfin:
             mountPath: /mnt/media
 
 # -- Jallyseerr configuration section
-# @section jellyseerr
+# @section -- jellyseerr
 jellyseerr:
   metrics:
     main:
@@ -778,7 +778,7 @@ jellyseerr:
             mountPath: /mnt/media
 
 # -- qBitTorrent configuration section
-# @section torrent
+# @section -- torrent
 qbittorrent:
   metrics:
     main:
@@ -836,7 +836,7 @@ qbittorrent:
             mountPath: /downloads
 
 # -- Prowlarr configuration section
-# @section prowlarr
+# @section -- prowlarr
 prowlarr:
   metrics:
     main:
@@ -888,7 +888,7 @@ prowlarr:
             readOnly: true
 
 # -- Flaresolverr configuration section
-# @section prowlarr
+# @section -- prowlarr
 flaresolverr:
   metrics:
     main:
