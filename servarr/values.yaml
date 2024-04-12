@@ -22,31 +22,47 @@ metrics:
 initJellyseerr: true
 # -- Sections wherer Jellyseerr notifications are configured. Only telegram notification is supported for now
 # @section -- jellyseerr
+# @default -- See the sub fields
 notifications:
   telegram:
     # -- Enable the Telegram notifications
+    # @section -- jellyseerr
     enabled: true
-    # -- Insert the Telegram Chat id, check @get_id_bot for this
+    # -- (string) Insert the Telegram Chat id, check @get_id_bot for this
+    # @section -- jellyseerr
     chat_id:
-    # -- Insert your Telegram Bot API token
+    # -- (string) Insert your Telegram Bot API token
+    # @section -- jellyseerr
     bot_apitoken:
 
 # -- Jellyfin User configuration section 
 # @section -- jellyfin
+# @default -- See the sub fields
 dash:
-  # -- Insert the Jellyfin username (will be used also for Jellyseerr)
+  # -- (string) Insert the Jellyfin username (will be used also for Jellyseerr)
+  # @section -- jellyfin
+  # @default -- No default value
   username:
-  # -- Insert Jellyfin password (will be used also for Jellyseerr)
+  # -- (string) Insert Jellyfin password (will be used also for Jellyseerr)
+  # @section -- jellyfin
+  # @default -- No default value
   password:
-  # -- Insert Jellyfin login mail (will be used also for Jellyseerr integration)
+  # -- (string) Insert Jellyfin login mail (will be used also for Jellyseerr integration)
+  # @section -- jellyfin
+  # @default -- No default value
   mail:
 
 # --The following credentials are here just for tracking purposes and they are not used to configure qBitTorrent. The credentials are configured in config/qbittorrent/qBittorrent.conf
 # @section -- torrent
+# @default -- See the sub fields
 torrent:
   # -- (string) username of the qBitTorrent admin user
+  # @section -- torrent
+  # @default -- No default value
   username:
   # -- (string) password of the qBitTorrent admin user
+  # @section -- torrent
+  # @default -- No default value
   password:
 
 # -- The indexers list. Each element of the list is the yaml-formatted boody of the [Prowlarr API request](https://prowlarr.com/docs/api/#/Indexer/post_api_v1_indexer) to add that index.
@@ -441,35 +457,68 @@ indexers:
 
 # -- For tracking purpose, not used - replaced with pre-existing cluster issuer
 # @section -- Optional
+# @default -- See the sub fields
 issuer:
+  # @section -- Optional
   server: https://acme-v02.api.letsencrypt.org/directory
   # -- Insert your email address
+  # @section -- Optional
   email:
+  # @section -- Optional
   secretName: letsencrypt-prod
+  # @section -- Optional
   ingressClassName: nginx
   # -- Insert your CloudFlare key
+  # @section -- Optional
   cloudFlareKey:
 
 # -- Volumes configuration section
 # @section -- Required
+# @default -- See the sub fields
 volumes:
-  storageClass: longhorn
+  # -- (string) Storage class of the PVCs. Refer to global.storageClassName, as this is automatically set using the anchor
+  # @section -- Required
+  # @default -- equal to global.storageClassName value, do not edit
+  storageClass: *storageClassName
+  # -- configuration of the volume used for torrent downloads
+  # @section -- Required
+  # @default -- See the sub fields
   downloads:
+    # -- Name of the download pvc. Leave the anchor declaration, as it will be used in the service configuration
+    # @section -- Required
     name: &downloads-volume downloads-volume
+    # -- Size of the downloads volume, in Kubernets format
+    # @section -- Required
     size: 100Gi
+  # -- configuration of the volume used for media storage (i.e.: where movies and tv shows file will be permanently stored)
+  # @section -- Required
+  # @default -- See the sub fields
   media:
+    # -- Name of the media pvc. Leave the anchor declaration, as it will be used in the service configuration
+    # @section -- Required
     name: &media-volume media-volume
+    # -- Size of the media volume, in Kubernets format
+    # @section -- Required
     size: 250Gi
+  # -- configuration of the volume used for qBitTorrent internal configuration
+  # @section -- Required
+  # @default -- See the sub fields
   torrentConfig:
+    # -- Name of the torrent configuration pvc. Leave the anchor declaration, as it will be used in the service configuration
+    # @section -- Required
     name: &torrentConfig torrent-config
+    # -- Size of the torrent configuration volume, in Kubernets format
+    # @section -- Required
     size: 250Mi
 
 # -- Sonarr configuration section
 # @section -- sonarr
 sonarr:
+  # @ignore
   metrics:
     main:
       enabled: *metricsEnabled
+  # @ignore
   workload:
     main:
       podSpec:
@@ -477,7 +526,9 @@ sonarr:
           main:
             env:
               SONARR__API_KEY: *apikey
+  # @ignore
   ingress:
+    # @ignore
     sonarr-ing:
       enabled: true
       primary: true
@@ -487,7 +538,9 @@ sonarr:
         cert-manager.io/cluster-issuer: *issuer
       ingressClassName: "nginx"
       hosts:
-        - host: sonarr.local
+        - # -- FQDN of the sonarr service
+          # @section -- sonarr
+          host: sonarr.local
           paths:
             - path: /
               pathType: Prefix
@@ -500,6 +553,7 @@ sonarr:
           enabled: false
         traefik:
           enabled: false
+  # @ignore
   persistence:
     config:
       enabled: true
@@ -515,6 +569,7 @@ sonarr:
           exportarr:
             mountPath: /config
             readOnly: true
+    # @ignore
     media:
       enabled: true
       type: pvc
@@ -523,6 +578,7 @@ sonarr:
         main:
           main:
             mountPath: /mnt/media
+    # @ignore
     downloads:
       enabled: true
       type: pvc
@@ -535,9 +591,11 @@ sonarr:
 # -- Radarr configuration section
 # @section -- radarr
 radarr:
+  # @ignore
   metrics:
     main:
       enabled: *metricsEnabled
+  # @ignore
   workload:
     main:
       podSpec:
@@ -545,7 +603,9 @@ radarr:
           main:
             env:
               RADARR__API_KEY: *apikey
+  # @ignore
   ingress:
+    # @ignore
     radarr-ing:
       enabled: true
       primary: true
@@ -555,7 +615,9 @@ radarr:
         cert-manager.io/cluster-issuer: *issuer
       ingressClassName: "nginx"
       hosts:
-        - host: radarr.local
+        - # -- FQDN of the Radarr service
+          # @section -- radarr
+          host: radarr.local
           paths:
             - path: /
               pathType: Prefix
