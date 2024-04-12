@@ -16,6 +16,7 @@ PROWLARR_HOST = os.getenv("PROWLARR_HOST")
 API_KEY = os.getenv("API_KEY")
 TORRENT_USERNAME = os.getenv("TORRENT_USERNAME")
 TORRENT_PASSWORD = os.getenv("TORRENT_PASSWORD")
+TORRENT_HOST = os.getenv("TORRENT_HOST", "servarr-qbittorrent")
 
 def post(url: str, headers: dict, body: dict):
     """
@@ -209,7 +210,7 @@ body = {
     "fields": [
         {
             "name": "host",
-            "value": "servarr-qbittorrent"
+            "value": TORRENT_HOST
         },
         {
             "name": "port",
