@@ -58,9 +58,9 @@ Servarr complete Helm Chart for Kubernetes
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| global.apikey | string | No default value is configured for security reasons | Insert your API key here, e.g.: &apikey 123abc.. Do not remove the `&apikey` anchor! |
-| global.certManagerClusterIssuer | string | No default value, leave empty if not required | Insert your cert manager cluster issuer, e.g.: letsencrypt-cloudflare Do not remove the `&issuer` anchor! |
-| global.storageClassName | string | `"network-block"` | Insert your storage class here, e.g.: &storageClassName longhorn Do not remove the `&storageClassName` anchor! |
+| global.apikey | string | No default value is configured for security reasons | Insert your Prowlarr, Sonarr, Radarr API key here (one to rule them all!).  Do not remove the `&apikey` anchor! |
+| global.certManagerClusterIssuer | string | No default value, leave empty if not required | Insert your cert manager cluster issuer, e.g.: letsencrypt-cloudflare.  Do not remove the `&issuer` anchor! |
+| global.storageClassName | string | `"network-block"` | Insert your storage class here, e.g.: &storageClassName network-block.  Do not remove the `&storageClassName` anchor! |
 
 ### Prowlarr
 
@@ -80,12 +80,12 @@ Servarr complete Helm Chart for Kubernetes
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| metrics.enabled | bool | `false` | Anchor to set wether to deploy the export sidecar pods or not. Requires the Prometheus stack. Do not remove the `&metricsEnabled` anchor! |
-| volumes.downloads.name | string | `"downloads-volume"` | Name of the download pvc. Leave the anchor declaration, as it will be used in the service configuration Do not remove the `&downloads-volume` anchor! |
+| metrics.enabled | bool | `false` | Anchor to set wether to deploy the export sidecar pods or not. Requires the Prometheus stack.  Do not remove the `&metricsEnabled` anchor! |
+| volumes.downloads.name | string | `"downloads-volume"` | Name of the download pvc.  Do not remove the `&downloads-volume` anchor! |
 | volumes.downloads.size | string | `"100Gi"` | Size of the downloads volume, in Kubernets format |
-| volumes.media.name | string | `"media-volume"` | Name of the media pvc. Leave the anchor declaration, as it will be used in the service configuration Do not remove the `&media-volume` anchor! |
+| volumes.media.name | string | `"media-volume"` | Name of the media pvc.  Do not remove the `&media-volume` anchor! |
 | volumes.media.size | string | `"250Gi"` | Size of the media volume, in Kubernets format |
-| volumes.torrentConfig.name | string | `"torrent-config"` | Name of the torrent configuration pvc. Leave the anchor declaration, as it will be used in the service configuration Do not remove the `&torrentConfig` anchor! |
+| volumes.torrentConfig.name | string | `"torrent-config"` | Name of the torrent configuration pvc.  Do not remove the `&torrentConfig` anchor! |
 | volumes.torrentConfig.size | string | `"250Mi"` | Size of the torrent configuration volume, in Kubernets format |
 
 ### Jellyseerr
@@ -109,7 +109,6 @@ Servarr complete Helm Chart for Kubernetes
 |-----|------|---------|-------------|
 | volumes.downloads | object | See the sub fields | configuration of the volume used for torrent downloads |
 | volumes.media | object | See the sub fields | configuration of the volume used for media storage (i.e.: where movies and tv shows file will be permanently stored) |
-| volumes.storageClass | string | equal to global.storageClassName value, do not edit | Storage class of the PVCs. Refer to global.storageClassName, as this is automatically set using the anchor |
 | volumes.torrentConfig | object | See the sub fields | configuration of the volume used for qBitTorrent internal configuration |
 
 
