@@ -39,45 +39,19 @@ Servarr complete Helm Chart for Kubernetes
 | flaresolverr.persistence.config.accessModes | string | `"ReadWriteMany"` |  |
 | flaresolverr.persistence.config.enabled | bool | `true` |  |
 | flaresolverr.persistence.config.size | string | `"500Mi"` |  |
-| flaresolverr.persistence.config.storageClass | string | `nil` |  |
+| flaresolverr.persistence.config.storageClass | string | `"network-block"` |  |
 | flaresolverr.persistence.config.targetSelector.exportarr.exportarr.mountPath | string | `"/config"` |  |
 | flaresolverr.persistence.config.targetSelector.exportarr.exportarr.readOnly | bool | `true` |  |
 | flaresolverr.persistence.config.targetSelector.main.main.mountPath | string | `"/config"` |  |
 | flaresolverr.persistence.config.type | string | `"pvc"` |  |
-| global.apikey | string | `nil` | Insert your API key here, e.g.: &apikey 123abc.. |
-| global.certManagerClusterIssuer | string | `nil` | Insert your cert manager cluster issuer, e.g.: letsencrypt-cloudflare |
-| global.storageClassName | string | `nil` | Insert your storage class here, e.g.: &storageClassName longhorn |
+| global.apikey | string | No default value is configured for security reasons, it is mandatory to set this parameter | Insert your API key here, e.g.: &apikey 123abc.. |
+| global.certManagerClusterIssuer | string | No default value, leave empty if not required | Insert your cert manager cluster issuer, e.g.: letsencrypt-cloudflare |
+| global.storageClassName | string | `"network-block"` | Insert your storage class here, e.g.: &storageClassName longhorn |
 | indexers | list | The body of the 1337x index is provided as default | The indexers list. Each element of the list is the yaml-formatted boody of the [Prowlarr API request](https://prowlarr.com/docs/api/#/Indexer/post_api_v1_indexer) to add that index. |
 | initJellyseerr | bool | `true` | Set initJellyseerr to false if Jellyseerr setup should not be performed automatically |
 | issuer | object | `{"cloudFlareKey":null,"email":null,"ingressClassName":"nginx","secretName":"letsencrypt-prod","server":"https://acme-v02.api.letsencrypt.org/directory"}` | For tracking purpose, not used - replaced with pre-existing cluster issuer |
 | issuer.cloudFlareKey | string | `nil` | Insert your CloudFlare key |
 | issuer.email | string | `nil` | Insert your email address |
-| jellyfin.fallbackDefaults.accessModes[0] | string | `"ReadWriteMany"` |  |
-| jellyfin.fallbackDefaults.persistenceType | string | `"pvc"` |  |
-| jellyfin.fallbackDefaults.pgVersion | int | `16` |  |
-| jellyfin.fallbackDefaults.probeTimeouts.liveness.failureThreshold | int | `5` |  |
-| jellyfin.fallbackDefaults.probeTimeouts.liveness.initialDelaySeconds | int | `10` |  |
-| jellyfin.fallbackDefaults.probeTimeouts.liveness.periodSeconds | int | `10` |  |
-| jellyfin.fallbackDefaults.probeTimeouts.liveness.successThreshold | int | `1` |  |
-| jellyfin.fallbackDefaults.probeTimeouts.liveness.timeoutSeconds | int | `5` |  |
-| jellyfin.fallbackDefaults.probeTimeouts.readiness.failureThreshold | int | `5` |  |
-| jellyfin.fallbackDefaults.probeTimeouts.readiness.initialDelaySeconds | int | `10` |  |
-| jellyfin.fallbackDefaults.probeTimeouts.readiness.periodSeconds | int | `10` |  |
-| jellyfin.fallbackDefaults.probeTimeouts.readiness.successThreshold | int | `2` |  |
-| jellyfin.fallbackDefaults.probeTimeouts.readiness.timeoutSeconds | int | `5` |  |
-| jellyfin.fallbackDefaults.probeTimeouts.startup.failureThreshold | int | `60` |  |
-| jellyfin.fallbackDefaults.probeTimeouts.startup.initialDelaySeconds | int | `10` |  |
-| jellyfin.fallbackDefaults.probeTimeouts.startup.periodSeconds | int | `5` |  |
-| jellyfin.fallbackDefaults.probeTimeouts.startup.successThreshold | int | `1` |  |
-| jellyfin.fallbackDefaults.probeTimeouts.startup.timeoutSeconds | int | `2` |  |
-| jellyfin.fallbackDefaults.probeType | string | `"http"` |  |
-| jellyfin.fallbackDefaults.pvcRetain | bool | `false` |  |
-| jellyfin.fallbackDefaults.pvcSize | string | `"100Gi"` |  |
-| jellyfin.fallbackDefaults.serviceProtocol | string | `"tcp"` |  |
-| jellyfin.fallbackDefaults.serviceType | string | `"ClusterIP"` |  |
-| jellyfin.fallbackDefaults.storageClass | string | `nil` |  |
-| jellyfin.fallbackDefaults.vctAccessModes[0] | string | `"ReadWriteMany"` |  |
-| jellyfin.fallbackDefaults.vctSize | string | `"100Gi"` |  |
 | jellyfin.ingress.jellyfin-ing.annotations."cert-manager.io/cluster-issuer" | string | `nil` |  |
 | jellyfin.ingress.jellyfin-ing.enabled | bool | `true` |  |
 | jellyfin.ingress.jellyfin-ing.expandObjectName | bool | `false` |  |
@@ -95,7 +69,7 @@ Servarr complete Helm Chart for Kubernetes
 | jellyfin.persistence.config.accessModes | string | `"ReadWriteMany"` |  |
 | jellyfin.persistence.config.enabled | bool | `true` |  |
 | jellyfin.persistence.config.size | string | `"500Mi"` |  |
-| jellyfin.persistence.config.storageClass | string | `nil` |  |
+| jellyfin.persistence.config.storageClass | string | `"network-block"` |  |
 | jellyfin.persistence.config.targetSelector.exportarr.exportarr.mountPath | string | `"/config"` |  |
 | jellyfin.persistence.config.targetSelector.exportarr.exportarr.readOnly | bool | `true` |  |
 | jellyfin.persistence.config.targetSelector.main.main.mountPath | string | `"/config"` |  |
@@ -106,32 +80,6 @@ Servarr complete Helm Chart for Kubernetes
 | jellyfin.persistence.media.type | string | `"pvc"` |  |
 | jellyfin.persistence.transcode.enabled | bool | `false` |  |
 | jellyfin.serviceProtocol | string | `"tcp"` |  |
-| jellyseerr.fallbackDefaults.accessModes[0] | string | `"ReadWriteMany"` |  |
-| jellyseerr.fallbackDefaults.persistenceType | string | `"pvc"` |  |
-| jellyseerr.fallbackDefaults.pgVersion | int | `16` |  |
-| jellyseerr.fallbackDefaults.probeTimeouts.liveness.failureThreshold | int | `5` |  |
-| jellyseerr.fallbackDefaults.probeTimeouts.liveness.initialDelaySeconds | int | `10` |  |
-| jellyseerr.fallbackDefaults.probeTimeouts.liveness.periodSeconds | int | `10` |  |
-| jellyseerr.fallbackDefaults.probeTimeouts.liveness.successThreshold | int | `1` |  |
-| jellyseerr.fallbackDefaults.probeTimeouts.liveness.timeoutSeconds | int | `5` |  |
-| jellyseerr.fallbackDefaults.probeTimeouts.readiness.failureThreshold | int | `5` |  |
-| jellyseerr.fallbackDefaults.probeTimeouts.readiness.initialDelaySeconds | int | `10` |  |
-| jellyseerr.fallbackDefaults.probeTimeouts.readiness.periodSeconds | int | `10` |  |
-| jellyseerr.fallbackDefaults.probeTimeouts.readiness.successThreshold | int | `2` |  |
-| jellyseerr.fallbackDefaults.probeTimeouts.readiness.timeoutSeconds | int | `5` |  |
-| jellyseerr.fallbackDefaults.probeTimeouts.startup.failureThreshold | int | `60` |  |
-| jellyseerr.fallbackDefaults.probeTimeouts.startup.initialDelaySeconds | int | `10` |  |
-| jellyseerr.fallbackDefaults.probeTimeouts.startup.periodSeconds | int | `5` |  |
-| jellyseerr.fallbackDefaults.probeTimeouts.startup.successThreshold | int | `1` |  |
-| jellyseerr.fallbackDefaults.probeTimeouts.startup.timeoutSeconds | int | `2` |  |
-| jellyseerr.fallbackDefaults.probeType | string | `"http"` |  |
-| jellyseerr.fallbackDefaults.pvcRetain | bool | `false` |  |
-| jellyseerr.fallbackDefaults.pvcSize | string | `"100Gi"` |  |
-| jellyseerr.fallbackDefaults.serviceProtocol | string | `"tcp"` |  |
-| jellyseerr.fallbackDefaults.serviceType | string | `"ClusterIP"` |  |
-| jellyseerr.fallbackDefaults.storageClass | string | `nil` |  |
-| jellyseerr.fallbackDefaults.vctAccessModes[0] | string | `"ReadWriteMany"` |  |
-| jellyseerr.fallbackDefaults.vctSize | string | `"100Gi"` |  |
 | jellyseerr.ingress.jellyseerr-ing.annotations."cert-manager.io/cluster-issuer" | string | `nil` |  |
 | jellyseerr.ingress.jellyseerr-ing.enabled | bool | `true` |  |
 | jellyseerr.ingress.jellyseerr-ing.expandObjectName | bool | `false` |  |
@@ -149,7 +97,7 @@ Servarr complete Helm Chart for Kubernetes
 | jellyseerr.persistence.config.accessModes | string | `"ReadWriteMany"` |  |
 | jellyseerr.persistence.config.enabled | bool | `true` |  |
 | jellyseerr.persistence.config.size | string | `"500Mi"` |  |
-| jellyseerr.persistence.config.storageClass | string | `nil` |  |
+| jellyseerr.persistence.config.storageClass | string | `"network-block"` |  |
 | jellyseerr.persistence.config.targetSelector.exportarr.exportarr.mountPath | string | `"/config"` |  |
 | jellyseerr.persistence.config.targetSelector.exportarr.exportarr.readOnly | bool | `true` |  |
 | jellyseerr.persistence.config.targetSelector.main.main.mountPath | string | `"/app/config"` |  |
@@ -158,7 +106,7 @@ Servarr complete Helm Chart for Kubernetes
 | jellyseerr.persistence.media.existingClaim | string | `"media-volume"` |  |
 | jellyseerr.persistence.media.targetSelector.main.main.mountPath | string | `"/mnt/media"` |  |
 | jellyseerr.persistence.media.type | string | `"pvc"` |  |
-| metrics.enabled | bool | `false` |  |
+| metrics.enabled | bool | `false` | Anchor to set wether to deploy the export sidecar pods or not. Requires the Prometheus stack |
 | notifications.telegram.bot_apitoken | string | `nil` | Insert your Telegram Bot API token |
 | notifications.telegram.chat_id | string | `nil` | Insert the Telegram Chat id, check @get_id_bot for this |
 | notifications.telegram.enabled | bool | `true` | Enable the Telegram notifications |
@@ -179,7 +127,7 @@ Servarr complete Helm Chart for Kubernetes
 | prowlarr.persistence.config.accessModes | string | `"ReadWriteMany"` |  |
 | prowlarr.persistence.config.enabled | bool | `true` |  |
 | prowlarr.persistence.config.size | string | `"500Mi"` |  |
-| prowlarr.persistence.config.storageClass | string | `nil` |  |
+| prowlarr.persistence.config.storageClass | string | `"network-block"` |  |
 | prowlarr.persistence.config.targetSelector.exportarr.exportarr.mountPath | string | `"/config"` |  |
 | prowlarr.persistence.config.targetSelector.exportarr.exportarr.readOnly | bool | `true` |  |
 | prowlarr.persistence.config.targetSelector.main.main.mountPath | string | `"/config"` |  |
@@ -227,7 +175,7 @@ Servarr complete Helm Chart for Kubernetes
 | radarr.persistence.config.accessModes | string | `"ReadWriteMany"` |  |
 | radarr.persistence.config.enabled | bool | `true` |  |
 | radarr.persistence.config.size | string | `"500Mi"` |  |
-| radarr.persistence.config.storageClass | string | `nil` |  |
+| radarr.persistence.config.storageClass | string | `"network-block"` |  |
 | radarr.persistence.config.targetSelector.exportarr.exportarr.mountPath | string | `"/config"` |  |
 | radarr.persistence.config.targetSelector.exportarr.exportarr.readOnly | bool | `true` |  |
 | radarr.persistence.config.targetSelector.main.main.mountPath | string | `"/config"` |  |
@@ -258,7 +206,7 @@ Servarr complete Helm Chart for Kubernetes
 | sonarr.persistence.config.accessModes | string | `"ReadWriteMany"` |  |
 | sonarr.persistence.config.enabled | bool | `true` |  |
 | sonarr.persistence.config.size | string | `"500Mi"` |  |
-| sonarr.persistence.config.storageClass | string | `nil` |  |
+| sonarr.persistence.config.storageClass | string | `"network-block"` |  |
 | sonarr.persistence.config.targetSelector.exportarr.exportarr.mountPath | string | `"/config"` |  |
 | sonarr.persistence.config.targetSelector.exportarr.exportarr.readOnly | bool | `true` |  |
 | sonarr.persistence.config.targetSelector.main.main.mountPath | string | `"/config"` |  |
@@ -272,8 +220,9 @@ Servarr complete Helm Chart for Kubernetes
 | sonarr.persistence.media.targetSelector.main.main.mountPath | string | `"/mnt/media"` |  |
 | sonarr.persistence.media.type | string | `"pvc"` |  |
 | sonarr.workload.main.podSpec.containers.main.env.SONARR__API_KEY | string | `nil` |  |
-| torrent.password | string | `nil` |  |
-| torrent.username | string | `nil` | The following credentials are here just for tracking purposes and they are not used to configure qBitTorrent. The credentials are configured in config/qbittorrent/qBittorrent.conf |
+| torrent | object | `{"password":null,"username":null}` | The following credentials are here just for tracking purposes and they are not used to configure qBitTorrent. The credentials are configured in config/qbittorrent/qBittorrent.conf |
+| torrent.password | string | `nil` | password of the qBitTorrent admin user |
+| torrent.username | string | `nil` | username of the qBitTorrent admin user |
 | volumes.downloads.name | string | `"downloads-volume"` |  |
 | volumes.downloads.size | string | `"100Gi"` |  |
 | volumes.media.name | string | `"media-volume"` |  |
