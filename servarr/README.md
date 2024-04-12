@@ -33,6 +33,7 @@ Servarr complete Helm Chart for Kubernetes
 
 ## Values
 
+<h3>jellyfin</h3>
 <table>
 	<thead>
 		<th>Key</th>
@@ -52,149 +53,7 @@ Servarr complete Helm Chart for Kubernetes
 }
 </pre>
 </td>
-			<td>Jellyfin User configuration section  @section jellyfin</td>
-		</tr>
-		<tr>
-			<td>dash.mail</td>
-			<td>string</td>
-			<td><pre lang="json">
-null
-</pre>
-</td>
-			<td>Insert Jellyfin login mail (will be used also for Jellyseerr integration)</td>
-		</tr>
-		<tr>
-			<td>dash.password</td>
-			<td>string</td>
-			<td><pre lang="json">
-null
-</pre>
-</td>
-			<td>Insert Jellyfin password (will be used also for Jellyseerr)</td>
-		</tr>
-		<tr>
-			<td>dash.username</td>
-			<td>string</td>
-			<td><pre lang="json">
-null
-</pre>
-</td>
-			<td>Insert the Jellyfin username (will be used also for Jellyseerr)</td>
-		</tr>
-		<tr>
-			<td>flaresolverr</td>
-			<td>object</td>
-			<td><pre lang="json">
-{
-  "metrics": {
-    "main": {
-      "enabled": false
-    }
-  },
-  "persistence": {
-    "config": {
-      "accessModes": "ReadWriteMany",
-      "enabled": true,
-      "size": "500Mi",
-      "storageClass": "network-block",
-      "targetSelector": {
-        "exportarr": {
-          "exportarr": {
-            "mountPath": "/config",
-            "readOnly": true
-          }
-        },
-        "main": {
-          "main": {
-            "mountPath": "/config"
-          }
-        }
-      },
-      "type": "pvc"
-    }
-  }
-}
-</pre>
-</td>
-			<td>Flaresolverr configuration section @section prowlarr</td>
-		</tr>
-		<tr>
-			<td>global.apikey</td>
-			<td>string</td>
-			<td><pre lang="">
-No default value is configured for security reasons, it is mandatory to set this parameter
-</pre>
-</td>
-			<td>Insert your API key here, e.g.: &apikey 123abc.. @section global</td>
-		</tr>
-		<tr>
-			<td>global.certManagerClusterIssuer</td>
-			<td>string</td>
-			<td><pre lang="">
-No default value, leave empty if not required
-</pre>
-</td>
-			<td>Insert your cert manager cluster issuer, e.g.: letsencrypt-cloudflare @section global</td>
-		</tr>
-		<tr>
-			<td>global.storageClassName</td>
-			<td>string</td>
-			<td><pre lang="json">
-"network-block"
-</pre>
-</td>
-			<td>Insert your storage class here, e.g.: &storageClassName longhorn @section global</td>
-		</tr>
-		<tr>
-			<td>indexers</td>
-			<td>list</td>
-			<td><pre lang="">
-The body of the 1337x index is provided as default
-</pre>
-</td>
-			<td>The indexers list. Each element of the list is the yaml-formatted boody of the [Prowlarr API request](https://prowlarr.com/docs/api/#/Indexer/post_api_v1_indexer) to add that index. @section prowlarr</td>
-		</tr>
-		<tr>
-			<td>initJellyseerr</td>
-			<td>bool</td>
-			<td><pre lang="json">
-true
-</pre>
-</td>
-			<td>Set initJellyseerr to false if Jellyseerr setup should not be performed automatically @section Required</td>
-		</tr>
-		<tr>
-			<td>issuer</td>
-			<td>object</td>
-			<td><pre lang="json">
-{
-  "cloudFlareKey": null,
-  "email": null,
-  "ingressClassName": "nginx",
-  "secretName": "letsencrypt-prod",
-  "server": "https://acme-v02.api.letsencrypt.org/directory"
-}
-</pre>
-</td>
-			<td>For tracking purpose, not used - replaced with pre-existing cluster issuer @section Optional</td>
-		</tr>
-		<tr>
-			<td>issuer.cloudFlareKey</td>
-			<td>string</td>
-			<td><pre lang="json">
-null
-</pre>
-</td>
-			<td>Insert your CloudFlare key</td>
-		</tr>
-		<tr>
-			<td>issuer.email</td>
-			<td>string</td>
-			<td><pre lang="json">
-null
-</pre>
-</td>
-			<td>Insert your email address</td>
+			<td>Jellyfin User configuration section </td>
 		</tr>
 		<tr>
 			<td>jellyfin</td>
@@ -286,52 +145,24 @@ null
 }
 </pre>
 </td>
-			<td>Jellyfin configuration section @section jellyfin</td>
+			<td>Jellyfin configuration section</td>
 		</tr>
+	</tbody>
+</table>
+<h3>prowlarr</h3>
+<table>
+	<thead>
+		<th>Key</th>
+		<th>Type</th>
+		<th>Default</th>
+		<th>Description</th>
+	</thead>
+	<tbody>
 		<tr>
-			<td>jellyseerr</td>
+			<td>flaresolverr</td>
 			<td>object</td>
 			<td><pre lang="json">
 {
-  "ingress": {
-    "jellyseerr-ing": {
-      "annotations": {
-        "cert-manager.io/cluster-issuer": null
-      },
-      "enabled": true,
-      "expandObjectName": false,
-      "hosts": [
-        {
-          "host": "jellyseerr.local",
-          "paths": [
-            {
-              "path": "/",
-              "pathType": "Prefix"
-            }
-          ]
-        }
-      ],
-      "ingressClassName": "nginx",
-      "integrations": {
-        "certManager": {
-          "enabled": false
-        },
-        "traefik": {
-          "enabled": false
-        }
-      },
-      "primary": true,
-      "required": true,
-      "tls": [
-        {
-          "hosts": [
-            "jellyseerr.local"
-          ],
-          "secretName": "jellyseerr-tls"
-        }
-      ]
-    }
-  },
   "metrics": {
     "main": {
       "enabled": false
@@ -352,19 +183,7 @@ null
         },
         "main": {
           "main": {
-            "mountPath": "/app/config"
-          }
-        }
-      },
-      "type": "pvc"
-    },
-    "media": {
-      "enabled": true,
-      "existingClaim": "media-volume",
-      "targetSelector": {
-        "main": {
-          "main": {
-            "mountPath": "/mnt/media"
+            "mountPath": "/config"
           }
         }
       },
@@ -374,58 +193,16 @@ null
 }
 </pre>
 </td>
-			<td>Jallyseerr configuration section @section jellyseerr</td>
+			<td>Flaresolverr configuration section</td>
 		</tr>
 		<tr>
-			<td>metrics.enabled</td>
-			<td>bool</td>
-			<td><pre lang="json">
-false
+			<td>indexers</td>
+			<td>list</td>
+			<td><pre lang="">
+The body of the 1337x index is provided as default
 </pre>
 </td>
-			<td>Anchor to set wether to deploy the export sidecar pods or not. Requires the Prometheus stack @section Required</td>
-		</tr>
-		<tr>
-			<td>notifications</td>
-			<td>object</td>
-			<td><pre lang="json">
-{
-  "telegram": {
-    "bot_apitoken": null,
-    "chat_id": null,
-    "enabled": true
-  }
-}
-</pre>
-</td>
-			<td>Sections wherer Jellyseerr notifications are configured. Only telegram notification is supported for now @section jellyseerr</td>
-		</tr>
-		<tr>
-			<td>notifications.telegram.bot_apitoken</td>
-			<td>string</td>
-			<td><pre lang="json">
-null
-</pre>
-</td>
-			<td>Insert your Telegram Bot API token</td>
-		</tr>
-		<tr>
-			<td>notifications.telegram.chat_id</td>
-			<td>string</td>
-			<td><pre lang="json">
-null
-</pre>
-</td>
-			<td>Insert the Telegram Chat id, check @get_id_bot for this</td>
-		</tr>
-		<tr>
-			<td>notifications.telegram.enabled</td>
-			<td>bool</td>
-			<td><pre lang="json">
-true
-</pre>
-</td>
-			<td>Enable the Telegram notifications</td>
+			<td>The indexers list. Each element of the list is the yaml-formatted boody of the [Prowlarr API request](https://prowlarr.com/docs/api/#/Indexer/post_api_v1_indexer) to add that index.</td>
 		</tr>
 		<tr>
 			<td>prowlarr</td>
@@ -514,8 +291,249 @@ true
 }
 </pre>
 </td>
-			<td>Prowlarr configuration section @section prowlarr</td>
+			<td>Prowlarr configuration section</td>
 		</tr>
+	</tbody>
+</table>
+<h3>global</h3>
+<table>
+	<thead>
+		<th>Key</th>
+		<th>Type</th>
+		<th>Default</th>
+		<th>Description</th>
+	</thead>
+	<tbody>
+		<tr>
+			<td>global.apikey</td>
+			<td>string</td>
+			<td><pre lang="">
+No default value is configured for security reasons, it is mandatory to set this parameter
+</pre>
+</td>
+			<td>Insert your API key here, e.g.: &apikey 123abc..</td>
+		</tr>
+		<tr>
+			<td>global.certManagerClusterIssuer</td>
+			<td>string</td>
+			<td><pre lang="">
+No default value, leave empty if not required
+</pre>
+</td>
+			<td>Insert your cert manager cluster issuer, e.g.: letsencrypt-cloudflare</td>
+		</tr>
+		<tr>
+			<td>global.storageClassName</td>
+			<td>string</td>
+			<td><pre lang="json">
+"network-block"
+</pre>
+</td>
+			<td>Insert your storage class here, e.g.: &storageClassName longhorn</td>
+		</tr>
+	</tbody>
+</table>
+<h3>Required</h3>
+<table>
+	<thead>
+		<th>Key</th>
+		<th>Type</th>
+		<th>Default</th>
+		<th>Description</th>
+	</thead>
+	<tbody>
+		<tr>
+			<td>initJellyseerr</td>
+			<td>bool</td>
+			<td><pre lang="json">
+true
+</pre>
+</td>
+			<td>Set initJellyseerr to false if Jellyseerr setup should not be performed automatically</td>
+		</tr>
+		<tr>
+			<td>metrics.enabled</td>
+			<td>bool</td>
+			<td><pre lang="json">
+false
+</pre>
+</td>
+			<td>Anchor to set wether to deploy the export sidecar pods or not. Requires the Prometheus stack</td>
+		</tr>
+		<tr>
+			<td>volumes</td>
+			<td>object</td>
+			<td><pre lang="json">
+{
+  "downloads": {
+    "name": "downloads-volume",
+    "size": "100Gi"
+  },
+  "media": {
+    "name": "media-volume",
+    "size": "250Gi"
+  },
+  "storageClass": "longhorn",
+  "torrentConfig": {
+    "name": "torrent-config",
+    "size": "250Mi"
+  }
+}
+</pre>
+</td>
+			<td>Volumes configuration section</td>
+		</tr>
+	</tbody>
+</table>
+<h3>Optional</h3>
+<table>
+	<thead>
+		<th>Key</th>
+		<th>Type</th>
+		<th>Default</th>
+		<th>Description</th>
+	</thead>
+	<tbody>
+		<tr>
+			<td>issuer</td>
+			<td>object</td>
+			<td><pre lang="json">
+{
+  "cloudFlareKey": null,
+  "email": null,
+  "ingressClassName": "nginx",
+  "secretName": "letsencrypt-prod",
+  "server": "https://acme-v02.api.letsencrypt.org/directory"
+}
+</pre>
+</td>
+			<td>For tracking purpose, not used - replaced with pre-existing cluster issuer</td>
+		</tr>
+	</tbody>
+</table>
+<h3>jellyseerr</h3>
+<table>
+	<thead>
+		<th>Key</th>
+		<th>Type</th>
+		<th>Default</th>
+		<th>Description</th>
+	</thead>
+	<tbody>
+		<tr>
+			<td>jellyseerr</td>
+			<td>object</td>
+			<td><pre lang="json">
+{
+  "ingress": {
+    "jellyseerr-ing": {
+      "annotations": {
+        "cert-manager.io/cluster-issuer": null
+      },
+      "enabled": true,
+      "expandObjectName": false,
+      "hosts": [
+        {
+          "host": "jellyseerr.local",
+          "paths": [
+            {
+              "path": "/",
+              "pathType": "Prefix"
+            }
+          ]
+        }
+      ],
+      "ingressClassName": "nginx",
+      "integrations": {
+        "certManager": {
+          "enabled": false
+        },
+        "traefik": {
+          "enabled": false
+        }
+      },
+      "primary": true,
+      "required": true,
+      "tls": [
+        {
+          "hosts": [
+            "jellyseerr.local"
+          ],
+          "secretName": "jellyseerr-tls"
+        }
+      ]
+    }
+  },
+  "metrics": {
+    "main": {
+      "enabled": false
+    }
+  },
+  "persistence": {
+    "config": {
+      "accessModes": "ReadWriteMany",
+      "enabled": true,
+      "size": "500Mi",
+      "storageClass": "network-block",
+      "targetSelector": {
+        "exportarr": {
+          "exportarr": {
+            "mountPath": "/config",
+            "readOnly": true
+          }
+        },
+        "main": {
+          "main": {
+            "mountPath": "/app/config"
+          }
+        }
+      },
+      "type": "pvc"
+    },
+    "media": {
+      "enabled": true,
+      "existingClaim": "media-volume",
+      "targetSelector": {
+        "main": {
+          "main": {
+            "mountPath": "/mnt/media"
+          }
+        }
+      },
+      "type": "pvc"
+    }
+  }
+}
+</pre>
+</td>
+			<td>Jallyseerr configuration section</td>
+		</tr>
+		<tr>
+			<td>notifications</td>
+			<td>object</td>
+			<td><pre lang="json">
+{
+  "telegram": {
+    "bot_apitoken": null,
+    "chat_id": null,
+    "enabled": true
+  }
+}
+</pre>
+</td>
+			<td>Sections wherer Jellyseerr notifications are configured. Only telegram notification is supported for now</td>
+		</tr>
+	</tbody>
+</table>
+<h3>torrent</h3>
+<table>
+	<thead>
+		<th>Key</th>
+		<th>Type</th>
+		<th>Default</th>
+		<th>Description</th>
+	</thead>
+	<tbody>
 		<tr>
 			<td>qbittorrent</td>
 			<td>object</td>
@@ -613,8 +631,31 @@ true
 }
 </pre>
 </td>
-			<td>qBitTorrent configuration section @section torrent</td>
+			<td>qBitTorrent configuration section</td>
 		</tr>
+		<tr>
+			<td>torrent</td>
+			<td>object</td>
+			<td><pre lang="json">
+{
+  "password": null,
+  "username": null
+}
+</pre>
+</td>
+			<td>The following credentials are here just for tracking purposes and they are not used to configure qBitTorrent. The credentials are configured in config/qbittorrent/qBittorrent.conf</td>
+		</tr>
+	</tbody>
+</table>
+<h3>radarr</h3>
+<table>
+	<thead>
+		<th>Key</th>
+		<th>Type</th>
+		<th>Default</th>
+		<th>Description</th>
+	</thead>
+	<tbody>
 		<tr>
 			<td>radarr</td>
 			<td>object</td>
@@ -726,8 +767,19 @@ true
 }
 </pre>
 </td>
-			<td>Radarr configuration section @section radarr</td>
+			<td>Radarr configuration section</td>
 		</tr>
+	</tbody>
+</table>
+<h3>sonarr</h3>
+<table>
+	<thead>
+		<th>Key</th>
+		<th>Type</th>
+		<th>Default</th>
+		<th>Description</th>
+	</thead>
+	<tbody>
 		<tr>
 			<td>sonarr</td>
 			<td>object</td>
@@ -839,61 +891,110 @@ true
 }
 </pre>
 </td>
-			<td>Sonarr configuration section @section sonarr</td>
+			<td>Sonarr configuration section</td>
 		</tr>
-		<tr>
-			<td>torrent</td>
-			<td>object</td>
-			<td><pre lang="json">
-{
-  "password": null,
-  "username": null
-}
-</pre>
-</td>
-			<td>The following credentials are here just for tracking purposes and they are not used to configure qBitTorrent. The credentials are configured in config/qbittorrent/qBittorrent.conf @section torrent</td>
-		</tr>
-		<tr>
-			<td>torrent.password</td>
-			<td>string</td>
-			<td><pre lang="json">
+	</tbody>
+</table>
+
+<h3>Other Values</h3>
+<table>
+	<thead>
+		<th>Key</th>
+		<th>Type</th>
+		<th>Default</th>
+		<th>Description</th>
+	</thead>
+	<tbody>
+	<tr>
+		<td>dash.mail</td>
+		<td>string</td>
+		<td><pre lang="json">
 null
 </pre>
 </td>
-			<td>password of the qBitTorrent admin user</td>
-		</tr>
-		<tr>
-			<td>torrent.username</td>
-			<td>string</td>
-			<td><pre lang="json">
+		<td>Insert Jellyfin login mail (will be used also for Jellyseerr integration)</td>
+	</tr>
+	<tr>
+		<td>dash.password</td>
+		<td>string</td>
+		<td><pre lang="json">
 null
 </pre>
 </td>
-			<td>username of the qBitTorrent admin user</td>
-		</tr>
-		<tr>
-			<td>volumes</td>
-			<td>object</td>
-			<td><pre lang="json">
-{
-  "downloads": {
-    "name": "downloads-volume",
-    "size": "100Gi"
-  },
-  "media": {
-    "name": "media-volume",
-    "size": "250Gi"
-  },
-  "storageClass": "longhorn",
-  "torrentConfig": {
-    "name": "torrent-config",
-    "size": "250Mi"
-  }
-}
+		<td>Insert Jellyfin password (will be used also for Jellyseerr)</td>
+	</tr>
+	<tr>
+		<td>dash.username</td>
+		<td>string</td>
+		<td><pre lang="json">
+null
 </pre>
 </td>
-			<td>Volumes configuration section @section Required</td>
-		</tr>
+		<td>Insert the Jellyfin username (will be used also for Jellyseerr)</td>
+	</tr>
+	<tr>
+		<td>issuer.cloudFlareKey</td>
+		<td>string</td>
+		<td><pre lang="json">
+null
+</pre>
+</td>
+		<td>Insert your CloudFlare key</td>
+	</tr>
+	<tr>
+		<td>issuer.email</td>
+		<td>string</td>
+		<td><pre lang="json">
+null
+</pre>
+</td>
+		<td>Insert your email address</td>
+	</tr>
+	<tr>
+		<td>notifications.telegram.bot_apitoken</td>
+		<td>string</td>
+		<td><pre lang="json">
+null
+</pre>
+</td>
+		<td>Insert your Telegram Bot API token</td>
+	</tr>
+	<tr>
+		<td>notifications.telegram.chat_id</td>
+		<td>string</td>
+		<td><pre lang="json">
+null
+</pre>
+</td>
+		<td>Insert the Telegram Chat id, check @get_id_bot for this</td>
+	</tr>
+	<tr>
+		<td>notifications.telegram.enabled</td>
+		<td>bool</td>
+		<td><pre lang="json">
+true
+</pre>
+</td>
+		<td>Enable the Telegram notifications</td>
+	</tr>
+	<tr>
+		<td>torrent.password</td>
+		<td>string</td>
+		<td><pre lang="json">
+null
+</pre>
+</td>
+		<td>password of the qBitTorrent admin user</td>
+	</tr>
+	<tr>
+		<td>torrent.username</td>
+		<td>string</td>
+		<td><pre lang="json">
+null
+</pre>
+</td>
+		<td>username of the qBitTorrent admin user</td>
+	</tr>
 	</tbody>
 </table>
 
