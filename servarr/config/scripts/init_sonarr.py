@@ -54,3 +54,4 @@ def post(url: str, headers: dict, body: dict):
         return {"code": response.status_code, "response": response.json()}
     except JSONDecodeError:
         return {"code": response.status_code, "response": response.text}
+
