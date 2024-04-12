@@ -279,3 +279,19 @@ res = post(
 )
 
 # TO-DO: Check for response status code and decide what to do
+
+logger.info("Setup Remote Path Mapping")
+
+body = {
+    "host": "servarr-qbittorrent",
+    "remotePath": "/downloads",
+    "localPath":"/mnt/downloads/"
+}
+
+res = post(
+    url="http://{}/api/v3/remotepathmapping".format(PROWLARR_HOST),
+    headers=headers,
+    body=body
+)
+
+# TO-DO: Check for response status code and decide what to do
