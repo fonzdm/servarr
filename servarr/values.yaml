@@ -1,14 +1,14 @@
 global:
-  # -- (string) Insert your API key here, e.g.: &apikey 123abc..
+  # -- (string) Insert your Prowlarr, Sonarr, Radarr API key here (one to rule them all!). 
   # Do not remove the `&apikey` anchor!
   # @default -- No default value is configured for security reasons
   # @section -- Global
   apikey: &apikey
-  # -- (string) Insert your storage class here, e.g.: &storageClassName longhorn
+  # -- (string) Insert your storage class here, e.g.: &storageClassName network-block. 
   # Do not remove the `&storageClassName` anchor!
   # @section -- Global
   storageClassName: &storageClassName "network-block"
-  # -- (string) Insert your cert manager cluster issuer, e.g.: letsencrypt-cloudflare
+  # -- (string) Insert your cert manager cluster issuer, e.g.: letsencrypt-cloudflare. 
   # Do not remove the `&issuer` anchor!
   # @default -- No default value, leave empty if not required
   # @section -- Global
@@ -16,7 +16,7 @@ global:
 
 metrics:
   # -- Anchor to set wether to deploy the export sidecar pods or not.
-  # Requires the Prometheus stack.
+  # Requires the Prometheus stack. 
   # Do not remove the `&metricsEnabled` anchor!
   # @section -- Required
   enabled: &metricsEnabled false
@@ -470,15 +470,13 @@ issuer:
   cloudFlareKey:
 
 volumes:
-  # -- (string) Storage class of the PVCs. Refer to global.storageClassName, as this is automatically set using the anchor
-  # @section -- Storage
-  # @default -- equal to global.storageClassName value, do not edit
+  # @ignore
   storageClass: *storageClassName
   # -- configuration of the volume used for torrent downloads
   # @section -- Storage
   # @default -- See the sub fields
   downloads:
-    # -- Name of the download pvc. Leave the anchor declaration, as it will be used in the service configuration
+    # -- Name of the download pvc. 
     # Do not remove the `&downloads-volume` anchor!
     # @section -- Required
     name: &downloads-volume downloads-volume
@@ -489,7 +487,7 @@ volumes:
   # @section -- Storage
   # @default -- See the sub fields
   media:
-    # -- Name of the media pvc. Leave the anchor declaration, as it will be used in the service configuration
+    # -- Name of the media pvc. 
     # Do not remove the `&media-volume` anchor!
     # @section -- Required
     name: &media-volume media-volume
@@ -500,7 +498,7 @@ volumes:
   # @section -- Storage
   # @default -- See the sub fields
   torrentConfig:
-    # -- Name of the torrent configuration pvc. Leave the anchor declaration, as it will be used in the service configuration
+    # -- Name of the torrent configuration pvc. 
     # Do not remove the `&torrentConfig` anchor!
     # @section -- Required
     name: &torrentConfig torrent-config
