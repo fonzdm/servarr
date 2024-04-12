@@ -511,8 +511,7 @@ volumes:
     # @section -- Required
     size: 250Mi
 
-# -- Sonarr configuration section
-# @section -- sonarr
+# @ignore
 sonarr:
   # @ignore
   metrics:
@@ -588,8 +587,7 @@ sonarr:
           main:
             mountPath: /mnt/downloads
 
-# -- Radarr configuration section
-# @section -- radarr
+# @ignore
 radarr:
   # @ignore
   metrics:
@@ -662,8 +660,7 @@ radarr:
           main:
             mountPath: /mnt/downloads
 
-# -- Jellyfin configuration section
-# @section -- jellyfin
+# @ignore
 jellyfin:
   metrics:
     main:
@@ -752,8 +749,7 @@ jellyfin:
           main:
             mountPath: /mnt/media
 
-# -- Jallyseerr configuration section
-# @section -- jellyseerr
+# @ignore
 jellyseerr:
   metrics:
     main:
@@ -839,8 +835,7 @@ jellyseerr:
           main:
             mountPath: /mnt/media
 
-# -- qBitTorrent configuration section
-# @section -- torrent
+# @ignore
 qbittorrent:
   metrics:
     main:
@@ -897,8 +892,7 @@ qbittorrent:
           main:
             mountPath: /downloads
 
-# -- Prowlarr configuration section
-# @section -- prowlarr
+# @ignore
 prowlarr:
   metrics:
     main:
@@ -949,8 +943,7 @@ prowlarr:
             mountPath: /config
             readOnly: true
 
-# -- Flaresolverr configuration section
-# @section -- prowlarr
+# @ignore
 flaresolverr:
   metrics:
     main:
