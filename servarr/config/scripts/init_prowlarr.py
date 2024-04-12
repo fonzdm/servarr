@@ -131,3 +131,60 @@ res = post(
 )
 
 # TO-DO: Check for response status code and decide what to do
+
+logger.info("Setup Sonarr in Prowlarr")
+
+body = {
+    "syncLevel": "fullSync",
+    "fields": [
+        {
+            "name": "prowlarrUrl",
+            "value": "http://servarr-prowlarr:9696"
+        },
+        {
+            "name": "baseUrl",
+            "value": "http://servarr-sonarr:8989"
+        },
+        {
+            "name": "apiKey",
+            "value": API_KEY
+        },
+        {
+            "name": "syncCategories",
+            "value": [
+                5000,
+                5010,
+                5020,
+                5030,
+                5040,
+                5045,
+                5050,
+                5090
+            ]
+        },
+        {
+            "name": "animeSyncCategories",
+            "value": [
+                5070
+            ]
+        },
+        {
+            "name": "syncAnimeStandardFormatSearch",
+            "value": false
+        }
+    ],
+    "implementationName": "Sonarr",
+    "implementation": "Sonarr",
+    "configContract": "SonarrSettings",
+    "infoLink": "https://wiki.servarr.com/prowlarr/supported#sonarr",
+    "tags": [],
+    "name": "Sonarr"
+}
+
+res = post(
+    url="http://{}/api/v1/applications".format(PROWLARR_HOST),
+    headers=headers,
+    body=body
+)
+
+# TO-DO: Check for response status code and decide what to do
