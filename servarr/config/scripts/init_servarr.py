@@ -11,3 +11,6 @@ console_handler = logging.StreamHandler()
 log_format = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 console_handler.setFormatter(log_format)
 logger.addHandler(console_handler)
+
+SERVARR_HOST = os.getenv("SERVARR_HOST")
+API_KEY = os.getenv("API_KEY")
