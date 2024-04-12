@@ -465,9 +465,6 @@ issuer:
   # @section -- Optional
   cloudFlareKey:
 
-# -- Volumes configuration section
-# @section -- Required
-# @default -- See the sub fields
 volumes:
   # -- (string) Storage class of the PVCs. Refer to global.storageClassName, as this is automatically set using the anchor
   # @section -- Required
