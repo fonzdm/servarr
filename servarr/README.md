@@ -71,7 +71,7 @@ No default value
 		</tr>
 	</tbody>
 </table>
-<h3>global</h3>
+<h3>Global</h3>
 <table>
 	<thead>
 		<th>Key</th>
