@@ -1,23 +1,18 @@
 global:
-  # -- (string) Insert your Prowlarr, Sonarr, Radarr API key here (one to rule them all!). 
-  # Do not remove the `&apikey` anchor!
+  # -- (string) Insert your Prowlarr, Sonarr, Radarr API key here (one to rule them all!). Do not remove the `&apikey` anchor!
   # @default -- No default value is configured for security reasons
   # @section -- Global
   apikey: &apikey
-  # -- (string) Insert your storage class here, e.g.: &storageClassName network-block. 
-  # Do not remove the `&storageClassName` anchor!
+  # -- (string) Insert your storage class here, e.g.: &storageClassName network-block. Do not remove the `&storageClassName` anchor!
   # @section -- Global
   storageClassName: &storageClassName "network-block"
-  # -- (string) Insert your cert manager cluster issuer, e.g.: letsencrypt-cloudflare. 
-  # Do not remove the `&issuer` anchor!
+  # -- (string) Insert your cert manager cluster issuer, e.g.: letsencrypt-cloudflare. Do not remove the `&issuer` anchor!
   # @default -- No default value, leave empty if not required
   # @section -- Global
   certManagerClusterIssuer: &issuer
 
 metrics:
-  # -- Anchor to set wether to deploy the export sidecar pods or not.
-  # Requires the Prometheus stack. 
-  # Do not remove the `&metricsEnabled` anchor!
+  # -- Anchor to set wether to deploy the export sidecar pods or not. Requires the Prometheus stack. Do not remove the `&metricsEnabled` anchor!
   # @section -- Required
   enabled: &metricsEnabled false
 
@@ -396,7 +391,7 @@ indexers:
         searchParams:
           - q
           - q
-        supportsRawSearch: False
+        supportsRawSearch: false
         tvSearchParams:
           - q
           - season
@@ -405,7 +400,7 @@ indexers:
       definitionName: ilcorsaroblu
       description: il CorSaRo Blu is an ITALIAN Semi-Private site for TV / MOVIES / GENERAL
       downloadClientId: 0
-      enable: True
+      enable: true
       fields:
         - name: definitionFile
           value: ilcorsaroblu
@@ -424,7 +419,7 @@ indexers:
         - name: password
           value: ""
         - name: freeleech
-          value: False
+          value: false
         - name: sort
           value: 1
         - name: type
@@ -444,12 +439,12 @@ indexers:
       priority: 25
       privacy: semiPrivate
       protocol: torrent
-      redirect: False
+      redirect: false
       sortName: il corsaro blu
-      supportsPagination: False
-      supportsRedirect: False
-      supportsRss: True
-      supportsSearch: True
+      supportsPagination: false
+      supportsRedirect: false
+      supportsRss: true
+      supportsSearch: true
       tags: []
 
 # -- For tracking purpose, not used - replaced with pre-existing cluster issuer
@@ -476,8 +471,7 @@ volumes:
   # @section -- Storage
   # @default -- See the sub fields
   downloads:
-    # -- Name of the download pvc. 
-    # Do not remove the `&downloads-volume` anchor!
+    # -- Name of the download pvc. Do not remove the `&downloads-volume` anchor!
     # @section -- Required
     name: &downloads-volume downloads-volume
     # -- Size of the downloads volume, in Kubernets format
@@ -487,8 +481,7 @@ volumes:
   # @section -- Storage
   # @default -- See the sub fields
   media:
-    # -- Name of the media pvc. 
-    # Do not remove the `&media-volume` anchor!
+    # -- Name of the media pvc. Do not remove the `&media-volume` anchor!
     # @section -- Required
     name: &media-volume media-volume
     # -- Size of the media volume, in Kubernets format
@@ -498,8 +491,7 @@ volumes:
   # @section -- Storage
   # @default -- See the sub fields
   torrentConfig:
-    # -- Name of the torrent configuration pvc. 
-    # Do not remove the `&torrentConfig` anchor!
+    # -- Name of the torrent configuration pvc. Do not remove the `&torrentConfig` anchor!
     # @section -- Required
     name: &torrentConfig torrent-config
     # -- Size of the torrent configuration volume, in Kubernets format
