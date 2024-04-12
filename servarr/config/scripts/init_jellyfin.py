@@ -12,11 +12,9 @@ log_format = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(messa
 console_handler.setFormatter(log_format)
 logger.addHandler(console_handler)
 
-APIKEY = os.getenv("APIKEY")
 JELLYFIN_HOST = os.getenv("JELLYFIN_HOST")
 JELLYFIN_USERNAME = os.getenv("JELLYFIN_USERNAME")
 JELLYFIN_PASSWORD = os.getenv("JELLYFIN_PASSWORD")
-NAMESPACE = os.getenv("NAMESPACE")
 # TO-DO: Those two variables should be part of the env I guess
 COUNTRY_CODE = "IT"
 PREFERRED_LANGUAGE = "it"
