@@ -54,3 +54,23 @@ def post(url: str, headers: dict, body: dict):
         return {"code": response.status_code, "response": response.json()}
     except JSONDecodeError:
         return {"code": response.status_code, "response": response.text}
+    
+logger.info("Setup Flaresolverr tags in Prowlarr")
+
+headers = {
+    "content-type": "application/json",
+    "x-api-key": API_KEY,
+    "x-requested-with": "XMLHttpRequest"
+}
+
+body = {
+    "label":"flare"
+}
+
+res = post(
+    url="http://{}/api/v1/tag".format(PROWLARR_HOST),
+    headers=headers,
+    body=body
+)
+
+# TO-DO: Check for response status code and decide what to do
