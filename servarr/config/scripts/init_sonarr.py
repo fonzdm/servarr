@@ -143,3 +143,19 @@ res = post(
 )
 
 # TO-DO: Check for response status code and decide what to do
+
+logger.info("Setup qBitTorrent Remote Path Mapping in Sonarr")
+
+body = {
+    "host": "servarr-qbittorrent",
+    "remotePath": "/downloads",
+    "localPath": "/mnt/downloads/"
+}
+
+res = post(
+    url="http://{}/api/v3/remotepathmapping".format(SONARR_HOST),
+    headers=headers,
+    body=body
+)
+
+# TO-DO: Check for response status code and decide what to do
