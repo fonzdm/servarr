@@ -25,3 +25,4 @@
 my-values.yaml
 docs/*
 .pre-commit-config.yaml
+README.md.gotmpl
