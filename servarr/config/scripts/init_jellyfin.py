@@ -76,3 +76,26 @@ res = post(
 )
 
 # TO-DO: Check for response status code and decide what to do
+
+# The following GET seems to be required, otherwise
+# Jellyfin will be mad at us.
+
+logger.info("Ping GET user endpoint")
+
+logger.debug(" ".join([
+    "GET",
+    "http://{}/.svc.cluster.local:8096/Startup/User".format(JELLYFIN_HOST),
+    ", ".join([": ".join(header) for header in headers])
+]))
+
+response = requests.get(
+    url=url,
+    headers=headers
+)
+
+logger.debug(" ".join([
+    "Status Code:",
+    response.status_code,
+    "Response body:",
+    response.text
+]))
