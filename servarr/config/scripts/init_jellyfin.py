@@ -15,9 +15,8 @@ logger.addHandler(console_handler)
 JELLYFIN_HOST = os.getenv("JELLYFIN_HOST")
 JELLYFIN_USERNAME = os.getenv("JELLYFIN_USERNAME")
 JELLYFIN_PASSWORD = os.getenv("JELLYFIN_PASSWORD")
-# TO-DO: Those two variables should be part of the env I guess
-COUNTRY_CODE = "IT"
-PREFERRED_LANGUAGE = "it"
+COUNTRY_CODE = os.getenv("COUNTRY_CODE", "IT")
+PREFERRED_LANGUAGE = os.getenv("PREFERRED_LANGUAGE", "it")
 
 def post(url: str, headers: dict, body: dict | None): # -> str | dict
     """
