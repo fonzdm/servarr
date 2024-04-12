@@ -60,24 +60,27 @@ def post(url: str, headers: dict, body: dict | None): # -> str | dict
         return {"code": response.status_code, "response": response.json()}
     except JSONDecodeError:
         return {"code": response.status_code, "response": response.text}
+
+def setup_location():   
+    logger.info("Setup Location")
+
+    headers = {
+        "Content-Type": "application/json"
+    }
+
+    body = {
+        "UICulture": "en-US",
+        "MetadataCountryCode": COUNTRY_CODE,
+        "PreferredMetadataLanguage": PREFERRED_LANGUAGE
+    }
+
+    res = post(
+        url="http://{}/.svc.cluster.local:8096/Startup/Configuration".format(JELLYFIN_HOST)
+    )
     
-logger.info("Setup Location")
+    # TO-DO: Check for response status code and decide what to do
 
-headers = {
-    "Content-Type": "application/json"
-}
-
-body = {
-    "UICulture": "en-US",
-    "MetadataCountryCode": COUNTRY_CODE,
-    "PreferredMetadataLanguage": PREFERRED_LANGUAGE
-}
-
-res = post(
-    url="http://{}/.svc.cluster.local:8096/Startup/Configuration".format(JELLYFIN_HOST)
-)
-
-# TO-DO: Check for response status code and decide what to do
+setup_location()
 
 # The following GET seems to be required, otherwise
 # Jellyfin will be mad at us.
@@ -243,3 +246,7 @@ res = post(
 )
 
 # TO-DO: Check for response status code and decide what to do
+
+logger.debug("For some reason we have to setup the location twice..")
+
+setup_location()
