@@ -186,15 +186,6 @@ false
 			<td>Anchor to set wether to deploy the export sidecar pods or not. Requires the Prometheus stack</td>
 		</tr>
 		<tr>
-			<td>volumes</td>
-			<td>object</td>
-			<td><pre lang="">
-See the sub fields
-</pre>
-</td>
-			<td>Volumes configuration section</td>
-		</tr>
-		<tr>
 			<td>volumes.downloads</td>
 			<td>object</td>
 			<td><pre lang="">
