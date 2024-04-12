@@ -1,7 +1,6 @@
 global:
   # -- (string) Insert your API key here, e.g.: &apikey 123abc..
-  # > [!IMPORTANT]
-  # > Do not remove the `&apikey` anchor!
+  # ###Do not remove the `&apikey` anchor!
   # @default -- No default value is configured for security reasons
   # @section -- Global
   apikey: &apikey
