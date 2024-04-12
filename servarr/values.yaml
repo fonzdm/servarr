@@ -1,6 +1,8 @@
 global:
   # -- (string) Insert your API key here, e.g.: &apikey 123abc..
-  # @default -- No default value is configured for security reasons, it is mandatory to set this parameter
+  # > [!IMPORTANT]
+  # > Do not remove the `&apikey` anchor!
+  # @default -- No default value is configured for security reasons
   # @section -- Global
   apikey: &apikey
   # -- (string) Insert your storage class here, e.g.: &storageClassName longhorn
