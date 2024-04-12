@@ -45,7 +45,7 @@ $ helm install <release-name> <servarr-chart> \
 
 ### Values
 
-Please read [README.md](./servarr/README.md) for details on how to configure the values needed for this chart.
+Please read [Helm Chart README.md](./servarr/README.md) for details on how to configure the values needed for this chart.
 
 ## Contributing
 
