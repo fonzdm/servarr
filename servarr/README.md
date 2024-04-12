@@ -30,7 +30,8 @@ Servarr complete Helm Chart for Kubernetes
 | https://charts.truecharts.org | radarr | 21.2.1 |
 | https://charts.truecharts.org | sonarr | 21.2.1 |
 
-# Important Notice
+> [!IMPORTANT]  
+> Important Notice
 
 Please consider that this chart is a collection of several public helm charts.
 These are included as sub-charts of the Servarr chart and, due to some Helm limitation, some configuration are only possible via values file.
@@ -38,7 +39,8 @@ For this reason, the servarr default [values.yaml](#./values.yaml) included in t
 but don't you worry! I provided some handy values, using [yaml anchros](https://medium.com/@kinghuang/docker-compose-anchors-aliases-extensions-a1e4105d70bd), to defined top-level fields.
 Follow the table below and forget everything else. 
 
-## Please, do not remove Anchors when you see them (the strage syntax with the `&`)
+> [!CAUTION] 
+> Please, do not remove Anchors when you see them (the strage syntax with the `&`)
 
 ## Values
 
