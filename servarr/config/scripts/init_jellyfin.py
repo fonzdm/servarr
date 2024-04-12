@@ -15,6 +15,9 @@ logger.addHandler(console_handler)
 APIKEY = os.getenv("APIKEY")
 JELLYFIN_HOST_HOST = os.getenv("PROWLARR_HOST")
 NAMESPACE = os.getenv("NAMESPACE")
+# TO-DO: Those two variables should be part of the env I guess
+COUNTRY_CODE = "IT"
+PREFERRED_LANGUAGE = "it"
 
 def post(url: str, headers: dict, body: dict | None): # -> str | dict
     """
@@ -56,3 +59,20 @@ def post(url: str, headers: dict, body: dict | None): # -> str | dict
     except JSONDecodeError:
         return {"code": response.status_code, "response": response.text}
     
+logger.info("Setup Location")
+
+headers = {
+    "Content-Type": "application/json"
+}
+
+body = {
+    "UICulture": "en-US",
+    "MetadataCountryCode": COUNTRY_CODE,
+    "PreferredMetadataLanguage": PREFERRED_LANGUAGE
+}
+
+res = post(
+    url="http://{}/.svc.cluster.local:8096/Startup/Configuration".format(JELLYFIN_HOST)
+)
+
+# TO-DO: Check for response status code and decide what to do
