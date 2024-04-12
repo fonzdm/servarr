@@ -448,20 +448,20 @@ indexers:
       tags: []
 
 # -- For tracking purpose, not used - replaced with pre-existing cluster issuer
-# @section -- Optional
+# @section -- Issuer
 # @default -- See the sub fields
 issuer:
-  # @section -- Optional
+  # @section -- Issuer
   server: https://acme-v02.api.letsencrypt.org/directory
   # -- Insert your email address
-  # @section -- Optional
+  # @section -- Issuer
   email:
-  # @section -- Optional
+  # @section -- Issuer
   secretName: letsencrypt-prod
-  # @section -- Optional
+  # @section -- Issuer
   ingressClassName: nginx
   # -- Insert your CloudFlare key
-  # @section -- Optional
+  # @section -- Issuer
   cloudFlareKey:
 
 volumes:
@@ -472,30 +472,30 @@ volumes:
   # @default -- See the sub fields
   downloads:
     # -- Name of the download pvc. Do not remove the `&downloads-volume` anchor!
-    # @section -- Required
+    # @section -- Storage
     name: &downloads-volume downloads-volume
     # -- Size of the downloads volume, in Kubernets format
-    # @section -- Required
+    # @section -- Storage
     size: 100Gi
   # -- configuration of the volume used for media storage (i.e.: where movies and tv shows file will be permanently stored)
   # @section -- Storage
   # @default -- See the sub fields
   media:
     # -- Name of the media pvc. Do not remove the `&media-volume` anchor!
-    # @section -- Required
+    # @section -- Storage
     name: &media-volume media-volume
     # -- Size of the media volume, in Kubernets format
-    # @section -- Required
+    # @section -- Storage
     size: 250Gi
   # -- configuration of the volume used for qBitTorrent internal configuration
   # @section -- Storage
   # @default -- See the sub fields
   torrentConfig:
     # -- Name of the torrent configuration pvc. Do not remove the `&torrentConfig` anchor!
-    # @section -- Required
+    # @section -- Storage
     name: &torrentConfig torrent-config
     # -- Size of the torrent configuration volume, in Kubernets format
-    # @section -- Required
+    # @section -- Storage
     size: 250Mi
 
 # @ignore
