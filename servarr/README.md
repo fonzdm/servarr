@@ -30,6 +30,8 @@ Servarr complete Helm Chart for Kubernetes
 | https://charts.truecharts.org | radarr | 21.2.1 |
 | https://charts.truecharts.org | sonarr | 21.2.1 |
 
+---
+
 > [!IMPORTANT]  
 > Please consider that this chart is a collection of several public helm charts.
 > These are included as sub-charts of the Servarr chart and, due to some Helm limitation, some configuration are only possible via values file.
@@ -39,6 +41,8 @@ Servarr complete Helm Chart for Kubernetes
 
 > [!CAUTION] 
 > Please, do not remove Anchors when you see them (the strage syntax with the `&`)
+
+---
 
 ## Values
 
@@ -54,7 +58,7 @@ Servarr complete Helm Chart for Kubernetes
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| global.apikey | string | No default value is configured for security reasons, it is mandatory to set this parameter | Insert your API key here, e.g.: &apikey 123abc.. |
+| global.apikey | string | No default value is configured for security reasons | Insert your API key here, e.g.: &apikey 123abc.. > [!IMPORTANT] > Do not remove the `&apikey` anchor! |
 | global.certManagerClusterIssuer | string | No default value, leave empty if not required | Insert your cert manager cluster issuer, e.g.: letsencrypt-cloudflare |
 | global.storageClassName | string | `"network-block"` | Insert your storage class here, e.g.: &storageClassName longhorn |
 
