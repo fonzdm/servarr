@@ -159,3 +159,17 @@ res = post(
 )
 
 # TO-DO: Check for response status code and decide what to do
+
+logger.info("Setup Root Folder in Sonarr")
+
+body = {
+    "path":"/mnt/media/"
+}
+
+res = post(
+    url="http://{}/api/v3/rootFolder".format(SONARR_HOST),
+    headers=headers,
+    body=body
+)
+
+# TO-DO: Check for response status code and decide what to do
