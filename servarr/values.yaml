@@ -13,7 +13,7 @@ global:
 
 metrics:
   # -- Anchor to set wether to deploy the export sidecar pods or not. Requires the Prometheus stack. Do not remove the `&metricsEnabled` anchor!
-  # @section -- Required
+  # @section -- Metrics
   enabled: &metricsEnabled false
 
 # @ignore
