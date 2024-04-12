@@ -56,23 +56,3 @@ def post(url: str, headers: dict, body: dict | None): # -> str | dict
     except JSONDecodeError:
         return {"code": response.status_code, "response": response.text}
     
-logger.info("Add Flaresolverr tags into Prowlarr")
-
-headers = {
-    "content-type": "application/json",
-    "x-api-key": APIKEY,
-    "x-requested-with": "XMLHttpRequest"
-}
-
-data = {
-    "label": "flare"
-}
-
-res = post(
-    url="http:{}:9696/api/v1/tag".format(PROWLARR_HOST),
-    headers=headers,
-    body=data
-)
-
-# TO-DO: Check the response status code and decide whether to exit
-#        or just show the error in the log and keep going.
