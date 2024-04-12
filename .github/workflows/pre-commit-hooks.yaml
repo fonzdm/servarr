@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - 'dev'
-      - 'docs/values-description'
+      - 'main'
   pull_request:
     branches:
       - 'dev'
@@ -28,4 +28,3 @@ jobs:
         git-push-user-name: "Servarr Bot 🤖"
         git-push-user-email: "servarr-bot@fonzdm.xyz"
         chart-search-root: ./servarr
-        template-files: README.md.gotmpl
