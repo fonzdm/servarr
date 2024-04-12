@@ -33,8 +33,9 @@ torrent:
   username:
   password:
 
-# -- The indexers list
+# -- The indexers list. Each element of the list is the yaml-formatted boody of the [Prowlarr API request](https://prowlarr.com/docs/api/#/Indexer/post_api_v1_indexer) to add that index.
 indexers:
+  # @ignored
   - name: 1337x
     body:
       added: "0001-01-01T00:00:00Z"
