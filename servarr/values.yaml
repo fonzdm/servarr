@@ -17,12 +17,9 @@ metrics:
   # @section -- Required
   enabled: &metricsEnabled false
 
-# -- Set initJellyseerr to false if Jellyseerr setup should not be performed automatically
-# @section -- Required
+# @ignore
 initJellyseerr: true
-# -- Sections wherer Jellyseerr notifications are configured. Only telegram notification is supported for now
-# @section -- jellyseerr
-# @default -- See the sub fields
+
 notifications:
   telegram:
     # -- Enable the Telegram notifications
@@ -30,14 +27,13 @@ notifications:
     enabled: true
     # -- (string) Insert the Telegram Chat id, check @get_id_bot for this
     # @section -- jellyseerr
+    # @default -- No default value
     chat_id:
     # -- (string) Insert your Telegram Bot API token
     # @section -- jellyseerr
+    # @default -- No default value
     bot_apitoken:
 
-# -- Jellyfin User configuration section 
-# @section -- jellyfin
-# @default -- See the sub fields
 dash:
   # -- (string) Insert the Jellyfin username (will be used also for Jellyseerr)
   # @section -- jellyfin
@@ -52,9 +48,6 @@ dash:
   # @default -- No default value
   mail:
 
-# --The following credentials are here just for tracking purposes and they are not used to configure qBitTorrent. The credentials are configured in config/qbittorrent/qBittorrent.conf
-# @section -- torrent
-# @default -- See the sub fields
 torrent:
   # -- (string) username of the qBitTorrent admin user
   # @section -- torrent
