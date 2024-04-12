@@ -58,7 +58,7 @@ Servarr complete Helm Chart for Kubernetes
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| global.apikey | string | No default value is configured for security reasons | Insert your API key here, e.g.: &apikey 123abc.. > [!IMPORTANT] > Do not remove the `&apikey` anchor! |
+| global.apikey | string | No default value is configured for security reasons | Insert your API key here, e.g.: &apikey 123abc.. ###Do not remove the `&apikey` anchor! |
 | global.certManagerClusterIssuer | string | No default value, leave empty if not required | Insert your cert manager cluster issuer, e.g.: letsencrypt-cloudflare |
 | global.storageClassName | string | `"network-block"` | Insert your storage class here, e.g.: &storageClassName longhorn |
 
