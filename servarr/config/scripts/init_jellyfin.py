@@ -250,3 +250,18 @@ res = post(
 logger.debug("For some reason we have to setup the location twice..")
 
 setup_location()
+
+logger.info("Setup the remote access")
+
+body = {
+    "EnableRemoteAccess": "true",
+    "EnableAutomaticPortMapping": "false"
+}
+
+res = post(
+    url="http://{}/.svc.cluster.local:8096/Startup/RemoteAccess".format(JELLYFIN_HOST),
+    headers=headers,
+    body=body
+)
+
+# TO-DO: Check for response status code and decide what to do
