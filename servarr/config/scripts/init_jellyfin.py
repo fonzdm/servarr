@@ -13,9 +13,7 @@ console_handler.setFormatter(log_format)
 logger.addHandler(console_handler)
 
 APIKEY = os.getenv("APIKEY")
-PROWLARR_HOST = os.getenv("PROWLARR_HOST")
-SONARR_HOST = os.getenv("SONARR_HOST")
-RADARR_HOST = os.getenv("RADARR_HOST")
+JELLYFIN_HOST_HOST = os.getenv("PROWLARR_HOST")
 NAMESPACE = os.getenv("NAMESPACE")
 
 def post(url: str, headers: dict, body: dict | None): # -> str | dict
