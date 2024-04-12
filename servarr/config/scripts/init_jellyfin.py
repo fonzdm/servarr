@@ -13,7 +13,7 @@ console_handler.setFormatter(log_format)
 logger.addHandler(console_handler)
 
 APIKEY = os.getenv("APIKEY")
-JELLYFIN_HOST_HOST = os.getenv("PROWLARR_HOST")
+JELLYFIN_HOST = os.getenv("JELLYFIN_HOST")
 NAMESPACE = os.getenv("NAMESPACE")
 # TO-DO: Those two variables should be part of the env I guess
 COUNTRY_CODE = "IT"
