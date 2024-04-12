@@ -14,6 +14,8 @@ logger.addHandler(console_handler)
 
 APIKEY = os.getenv("APIKEY")
 JELLYFIN_HOST = os.getenv("JELLYFIN_HOST")
+JELLYFIN_USERNAME = os.getenv("JELLYFIN_USERNAME")
+JELLYFIN_PASSWORD = os.getenv("JELLYFIN_PASSWORD")
 NAMESPACE = os.getenv("NAMESPACE")
 # TO-DO: Those two variables should be part of the env I guess
 COUNTRY_CODE = "IT"
@@ -99,3 +101,18 @@ logger.debug(" ".join([
     "Response body:",
     response.text
 ]))
+
+logger.info("Setup the new user")
+
+body = {
+    "Name": JELLYFIN_USERNAME,
+    "Password": JELLYFIN_PASSWORD
+}
+
+res = post(
+    url="http://{}/.svc.cluster.local:8096/Startup/User".format(JELLYFIN_HOST),
+    headers=headers,
+    body=body
+)
+
+# TO-DO: Check for response status code and decide what to do
