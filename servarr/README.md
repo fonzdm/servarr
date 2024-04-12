@@ -76,7 +76,7 @@ Servarr complete Helm Chart for Kubernetes
 | issuer.cloudFlareKey | string | `nil` | Insert your CloudFlare key |
 | issuer.email | string | `nil` | Insert your email address |
 
-### Required
+### Metrics
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
