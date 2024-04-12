@@ -524,9 +524,7 @@ sonarr:
         cert-manager.io/cluster-issuer: *issuer
       ingressClassName: "nginx"
       hosts:
-        - # -- FQDN of the sonarr service
-          # @section -- sonarr
-          host: sonarr.local
+        - host: sonarr.local
           paths:
             - path: /
               pathType: Prefix
@@ -600,9 +598,7 @@ radarr:
         cert-manager.io/cluster-issuer: *issuer
       ingressClassName: "nginx"
       hosts:
-        - # -- FQDN of the Radarr service
-          # @section -- radarr
-          host: radarr.local
+        - host: radarr.local
           paths:
             - path: /
               pathType: Prefix
@@ -652,7 +648,7 @@ jellyfin:
   metrics:
     main:
       enabled: *metricsEnabled
-  # @ignore 
+  # @ignore
   fallbackDefaults:
     storageClass:
     probeType: http
@@ -741,7 +737,7 @@ jellyseerr:
   metrics:
     main:
       enabled: *metricsEnabled
-  # @ignore 
+  # @ignore
   fallbackDefaults:
     storageClass:
     probeType: http
