@@ -116,3 +116,130 @@ res = post(
 )
 
 # TO-DO: Check for response status code and decide what to do
+
+logger.info("Setup the library")
+
+body = {
+    "LibraryOptions": {
+        "EnableArchiveMediaFiles": "false",
+        "EnablePhotos": "true",
+        "EnableRealtimeMonitor": "true",
+        "ExtractChapterImagesDuringLibraryScan": "true",
+        "EnableChapterImageExtraction": "true",
+        "EnableInternetProviders": "true",
+        "SaveLocalMetadata": "true",
+        "EnableAutomaticSeriesGrouping": "false",
+        "PreferredMetadataLanguage": PREFERRED_LANGUAGE,
+        "MetadataCountryCode": COUNTRY_CODE,
+        "SeasonZeroDisplayName": "Specials",
+        "AutomaticRefreshIntervalDays": 0,
+        "EnableEmbeddedTitles": "false",
+        "EnableEmbeddedEpisodeInfos": "false",
+        "AllowEmbeddedSubtitles": "AllowAll",
+        "SkipSubtitlesIfEmbeddedSubtitlesPresent": "false",
+        "SkipSubtitlesIfAudioTrackMatches": "false",
+        "SaveSubtitlesWithMedia": "true",
+        "RequirePerfectSubtitleMatch": "true",
+        "AutomaticallyAddToCollection": "false",
+        "MetadataSavers": [],
+        "TypeOptions": [
+            {
+                "Type": "Series",
+                "MetadataFetchers": [
+                    "TheMovieDb",
+                    "The Open Movie Database"
+                ],
+                "MetadataFetcherOrder": [
+                    "TheMovieDb",
+                    "The Open Movie Database"
+                ],
+                "ImageFetchers": [
+                    "TheMovieDb"
+                ],
+                "ImageFetcherOrder": [
+                    "TheMovieDb"
+                ]
+            },
+            {
+                "Type": "Season",
+                "MetadataFetchers": [
+                    "TheMovieDb"
+                ],
+                "MetadataFetcherOrder": [
+                    "TheMovieDb"
+                ],
+                "ImageFetchers": [
+                    "TheMovieDb"
+                ],
+                "ImageFetcherOrder": [
+                    "TheMovieDb"
+                ]
+            },
+            {
+                "Type": "Episode",
+                "MetadataFetchers": [
+                    "TheMovieDb",
+                    "The Open Movie Database"
+                ],
+                "MetadataFetcherOrder": [
+                    "TheMovieDb",
+                    "The Open Movie Database"
+                ],
+                "ImageFetchers": [
+                    "TheMovieDb",
+                    "The Open Movie Database",
+                    "Embedded Image Extractor",
+                    "Screen Grabber"
+                ],
+                "ImageFetcherOrder": [
+                    "TheMovieDb",
+                    "The Open Movie Database",
+                    "Embedded Image Extractor",
+                    "Screen Grabber"
+                ]
+            },
+            {
+                "Type": "Movie",
+                "MetadataFetchers": [
+                    "TheMovieDb",
+                    "The Open Movie Database"
+                ],
+                "MetadataFetcherOrder": [
+                    "TheMovieDb",
+                    "The Open Movie Database"
+                ],
+                "ImageFetchers": [
+                    "TheMovieDb",
+                    "The Open Movie Database",
+                    "Embedded Image Extractor",
+                    "Screen Grabber"
+                ],
+                "ImageFetcherOrder": [
+                    "TheMovieDb",
+                    "The Open Movie Database",
+                    "Embedded Image Extractor",
+                    "Screen Grabber"
+                ]
+            }
+        ],
+        "LocalMetadataReaderOrder": [
+            "Nfo"
+        ],
+        "SubtitleDownloadLanguages": [],
+        "DisabledSubtitleFetchers": [],
+        "SubtitleFetcherOrder": [],
+        "PathInfos": [
+            {
+                "Path": "/mnt/media"
+            }
+        ]
+    }
+}
+
+res = post(
+    url="http://{}/.svc.cluster.local:8096/Library/VirtualFolders?refreshLibrary=false&name=Library".format(JELLYFIN_HOST),
+    headers=headers,
+    body=body
+)
+
+# TO-DO: Check for response status code and decide what to do
