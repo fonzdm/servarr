@@ -45,15 +45,38 @@ Servarr complete Helm Chart for Kubernetes
 		<tr>
 			<td>dash</td>
 			<td>object</td>
-			<td><pre lang="json">
-{
-  "mail": null,
-  "password": null,
-  "username": null
-}
+			<td><pre lang="">
+See the sub fields
 </pre>
 </td>
 			<td>Jellyfin User configuration section </td>
+		</tr>
+		<tr>
+			<td>dash.mail</td>
+			<td>string</td>
+			<td><pre lang="">
+No default value
+</pre>
+</td>
+			<td>Insert Jellyfin login mail (will be used also for Jellyseerr integration)</td>
+		</tr>
+		<tr>
+			<td>dash.password</td>
+			<td>string</td>
+			<td><pre lang="">
+No default value
+</pre>
+</td>
+			<td>Insert Jellyfin password (will be used also for Jellyseerr)</td>
+		</tr>
+		<tr>
+			<td>dash.username</td>
+			<td>string</td>
+			<td><pre lang="">
+No default value
+</pre>
+</td>
+			<td>Insert the Jellyfin username (will be used also for Jellyseerr)</td>
 		</tr>
 		<tr>
 			<td>jellyfin</td>
@@ -363,25 +386,101 @@ false
 		<tr>
 			<td>volumes</td>
 			<td>object</td>
-			<td><pre lang="json">
-{
-  "downloads": {
-    "name": "downloads-volume",
-    "size": "100Gi"
-  },
-  "media": {
-    "name": "media-volume",
-    "size": "250Gi"
-  },
-  "storageClass": "longhorn",
-  "torrentConfig": {
-    "name": "torrent-config",
-    "size": "250Mi"
-  }
-}
+			<td><pre lang="">
+See the sub fields
 </pre>
 </td>
 			<td>Volumes configuration section</td>
+		</tr>
+		<tr>
+			<td>volumes.downloads</td>
+			<td>object</td>
+			<td><pre lang="">
+See the sub fields
+</pre>
+</td>
+			<td>configuration of the volume used for torrent downloads</td>
+		</tr>
+		<tr>
+			<td>volumes.downloads.name</td>
+			<td>string</td>
+			<td><pre lang="json">
+"downloads-volume"
+</pre>
+</td>
+			<td>Name of the download pvc. Leave the anchor declaration, as it will be used in the service configuration</td>
+		</tr>
+		<tr>
+			<td>volumes.downloads.size</td>
+			<td>string</td>
+			<td><pre lang="json">
+"100Gi"
+</pre>
+</td>
+			<td>Size of the downloads volume, in Kubernets format</td>
+		</tr>
+		<tr>
+			<td>volumes.media</td>
+			<td>object</td>
+			<td><pre lang="">
+See the sub fields
+</pre>
+</td>
+			<td>configuration of the volume used for media storage (i.e.: where movies and tv shows file will be permanently stored)</td>
+		</tr>
+		<tr>
+			<td>volumes.media.name</td>
+			<td>string</td>
+			<td><pre lang="json">
+"media-volume"
+</pre>
+</td>
+			<td>Name of the media pvc. Leave the anchor declaration, as it will be used in the service configuration</td>
+		</tr>
+		<tr>
+			<td>volumes.media.size</td>
+			<td>string</td>
+			<td><pre lang="json">
+"250Gi"
+</pre>
+</td>
+			<td>Size of the media volume, in Kubernets format</td>
+		</tr>
+		<tr>
+			<td>volumes.storageClass</td>
+			<td>string</td>
+			<td><pre lang="">
+equal to global.storageClassName value, do not edit
+</pre>
+</td>
+			<td>Storage class of the PVCs. Refer to global.storageClassName, as this is automatically set using the anchor</td>
+		</tr>
+		<tr>
+			<td>volumes.torrentConfig</td>
+			<td>object</td>
+			<td><pre lang="">
+See the sub fields
+</pre>
+</td>
+			<td>configuration of the volume used for qBitTorrent internal configuration</td>
+		</tr>
+		<tr>
+			<td>volumes.torrentConfig.name</td>
+			<td>string</td>
+			<td><pre lang="json">
+"torrent-config"
+</pre>
+</td>
+			<td>Name of the torrent configuration pvc. Leave the anchor declaration, as it will be used in the service configuration</td>
+		</tr>
+		<tr>
+			<td>volumes.torrentConfig.size</td>
+			<td>string</td>
+			<td><pre lang="json">
+"250Mi"
+</pre>
+</td>
+			<td>Size of the torrent configuration volume, in Kubernets format</td>
 		</tr>
 	</tbody>
 </table>
@@ -397,17 +496,29 @@ false
 		<tr>
 			<td>issuer</td>
 			<td>object</td>
-			<td><pre lang="json">
-{
-  "cloudFlareKey": null,
-  "email": null,
-  "ingressClassName": "nginx",
-  "secretName": "letsencrypt-prod",
-  "server": "https://acme-v02.api.letsencrypt.org/directory"
-}
+			<td><pre lang="">
+See the sub fields
 </pre>
 </td>
 			<td>For tracking purpose, not used - replaced with pre-existing cluster issuer</td>
+		</tr>
+		<tr>
+			<td>issuer.cloudFlareKey</td>
+			<td>string</td>
+			<td><pre lang="json">
+null
+</pre>
+</td>
+			<td>Insert your CloudFlare key</td>
+		</tr>
+		<tr>
+			<td>issuer.email</td>
+			<td>string</td>
+			<td><pre lang="json">
+null
+</pre>
+</td>
+			<td>Insert your email address</td>
 		</tr>
 	</tbody>
 </table>
@@ -511,17 +622,38 @@ false
 		<tr>
 			<td>notifications</td>
 			<td>object</td>
-			<td><pre lang="json">
-{
-  "telegram": {
-    "bot_apitoken": null,
-    "chat_id": null,
-    "enabled": true
-  }
-}
+			<td><pre lang="">
+See the sub fields
 </pre>
 </td>
 			<td>Sections wherer Jellyseerr notifications are configured. Only telegram notification is supported for now</td>
+		</tr>
+		<tr>
+			<td>notifications.telegram.bot_apitoken</td>
+			<td>string</td>
+			<td><pre lang="json">
+null
+</pre>
+</td>
+			<td>Insert your Telegram Bot API token</td>
+		</tr>
+		<tr>
+			<td>notifications.telegram.chat_id</td>
+			<td>string</td>
+			<td><pre lang="json">
+null
+</pre>
+</td>
+			<td>Insert the Telegram Chat id, check @get_id_bot for this</td>
+		</tr>
+		<tr>
+			<td>notifications.telegram.enabled</td>
+			<td>bool</td>
+			<td><pre lang="json">
+true
+</pre>
+</td>
+			<td>Enable the Telegram notifications</td>
 		</tr>
 	</tbody>
 </table>
@@ -636,14 +768,29 @@ false
 		<tr>
 			<td>torrent</td>
 			<td>object</td>
-			<td><pre lang="json">
-{
-  "password": null,
-  "username": null
-}
+			<td><pre lang="">
+See the sub fields
 </pre>
 </td>
 			<td>The following credentials are here just for tracking purposes and they are not used to configure qBitTorrent. The credentials are configured in config/qbittorrent/qBittorrent.conf</td>
+		</tr>
+		<tr>
+			<td>torrent.password</td>
+			<td>string</td>
+			<td><pre lang="">
+No default value
+</pre>
+</td>
+			<td>password of the qBitTorrent admin user</td>
+		</tr>
+		<tr>
+			<td>torrent.username</td>
+			<td>string</td>
+			<td><pre lang="">
+No default value
+</pre>
+</td>
+			<td>username of the qBitTorrent admin user</td>
 		</tr>
 	</tbody>
 </table>
@@ -661,50 +808,6 @@ false
 			<td>object</td>
 			<td><pre lang="json">
 {
-  "ingress": {
-    "radarr-ing": {
-      "annotations": {
-        "cert-manager.io/cluster-issuer": null
-      },
-      "enabled": true,
-      "expandObjectName": false,
-      "hosts": [
-        {
-          "host": "radarr.local",
-          "paths": [
-            {
-              "path": "/",
-              "pathType": "Prefix"
-            }
-          ]
-        }
-      ],
-      "ingressClassName": "nginx",
-      "integrations": {
-        "certManager": {
-          "enabled": false
-        },
-        "traefik": {
-          "enabled": false
-        }
-      },
-      "primary": true,
-      "required": true,
-      "tls": [
-        {
-          "hosts": [
-            "radarr.local"
-          ],
-          "secretName": "radarr-tls"
-        }
-      ]
-    }
-  },
-  "metrics": {
-    "main": {
-      "enabled": false
-    }
-  },
   "persistence": {
     "config": {
       "accessModes": "ReadWriteMany",
@@ -749,19 +852,6 @@ false
         }
       },
       "type": "pvc"
-    }
-  },
-  "workload": {
-    "main": {
-      "podSpec": {
-        "containers": {
-          "main": {
-            "env": {
-              "RADARR__API_KEY": null
-            }
-          }
-        }
-      }
     }
   }
 }
@@ -784,217 +874,11 @@ false
 			<td>sonarr</td>
 			<td>object</td>
 			<td><pre lang="json">
-{
-  "ingress": {
-    "sonarr-ing": {
-      "annotations": {
-        "cert-manager.io/cluster-issuer": null
-      },
-      "enabled": true,
-      "expandObjectName": false,
-      "hosts": [
-        {
-          "host": "sonarr.local",
-          "paths": [
-            {
-              "path": "/",
-              "pathType": "Prefix"
-            }
-          ]
-        }
-      ],
-      "ingressClassName": "nginx",
-      "integrations": {
-        "certManager": {
-          "enabled": false
-        },
-        "traefik": {
-          "enabled": false
-        }
-      },
-      "primary": true,
-      "required": true,
-      "tls": [
-        {
-          "hosts": [
-            "sonarr.local"
-          ],
-          "secretName": "sonarr-tls"
-        }
-      ]
-    }
-  },
-  "metrics": {
-    "main": {
-      "enabled": false
-    }
-  },
-  "persistence": {
-    "config": {
-      "accessModes": "ReadWriteMany",
-      "enabled": true,
-      "size": "500Mi",
-      "storageClass": "network-block",
-      "targetSelector": {
-        "exportarr": {
-          "exportarr": {
-            "mountPath": "/config",
-            "readOnly": true
-          }
-        },
-        "main": {
-          "main": {
-            "mountPath": "/config"
-          }
-        }
-      },
-      "type": "pvc"
-    },
-    "downloads": {
-      "enabled": true,
-      "existingClaim": "downloads-volume",
-      "targetSelector": {
-        "main": {
-          "main": {
-            "mountPath": "/mnt/downloads"
-          }
-        }
-      },
-      "type": "pvc"
-    },
-    "media": {
-      "enabled": true,
-      "existingClaim": "media-volume",
-      "targetSelector": {
-        "main": {
-          "main": {
-            "mountPath": "/mnt/media"
-          }
-        }
-      },
-      "type": "pvc"
-    }
-  },
-  "workload": {
-    "main": {
-      "podSpec": {
-        "containers": {
-          "main": {
-            "env": {
-              "SONARR__API_KEY": null
-            }
-          }
-        }
-      }
-    }
-  }
-}
+{}
 </pre>
 </td>
 			<td>Sonarr configuration section</td>
 		</tr>
-	</tbody>
-</table>
-
-<h3>Other Values</h3>
-<table>
-	<thead>
-		<th>Key</th>
-		<th>Type</th>
-		<th>Default</th>
-		<th>Description</th>
-	</thead>
-	<tbody>
-	<tr>
-		<td>dash.mail</td>
-		<td>string</td>
-		<td><pre lang="json">
-null
-</pre>
-</td>
-		<td>Insert Jellyfin login mail (will be used also for Jellyseerr integration)</td>
-	</tr>
-	<tr>
-		<td>dash.password</td>
-		<td>string</td>
-		<td><pre lang="json">
-null
-</pre>
-</td>
-		<td>Insert Jellyfin password (will be used also for Jellyseerr)</td>
-	</tr>
-	<tr>
-		<td>dash.username</td>
-		<td>string</td>
-		<td><pre lang="json">
-null
-</pre>
-</td>
-		<td>Insert the Jellyfin username (will be used also for Jellyseerr)</td>
-	</tr>
-	<tr>
-		<td>issuer.cloudFlareKey</td>
-		<td>string</td>
-		<td><pre lang="json">
-null
-</pre>
-</td>
-		<td>Insert your CloudFlare key</td>
-	</tr>
-	<tr>
-		<td>issuer.email</td>
-		<td>string</td>
-		<td><pre lang="json">
-null
-</pre>
-</td>
-		<td>Insert your email address</td>
-	</tr>
-	<tr>
-		<td>notifications.telegram.bot_apitoken</td>
-		<td>string</td>
-		<td><pre lang="json">
-null
-</pre>
-</td>
-		<td>Insert your Telegram Bot API token</td>
-	</tr>
-	<tr>
-		<td>notifications.telegram.chat_id</td>
-		<td>string</td>
-		<td><pre lang="json">
-null
-</pre>
-</td>
-		<td>Insert the Telegram Chat id, check @get_id_bot for this</td>
-	</tr>
-	<tr>
-		<td>notifications.telegram.enabled</td>
-		<td>bool</td>
-		<td><pre lang="json">
-true
-</pre>
-</td>
-		<td>Enable the Telegram notifications</td>
-	</tr>
-	<tr>
-		<td>torrent.password</td>
-		<td>string</td>
-		<td><pre lang="json">
-null
-</pre>
-</td>
-		<td>password of the qBitTorrent admin user</td>
-	</tr>
-	<tr>
-		<td>torrent.username</td>
-		<td>string</td>
-		<td><pre lang="json">
-null
-</pre>
-</td>
-		<td>username of the qBitTorrent admin user</td>
-	</tr>
 	</tbody>
 </table>
 
