@@ -30,333 +30,83 @@ Servarr complete Helm Chart for Kubernetes
 | https://charts.truecharts.org | radarr | 21.2.1 |
 | https://charts.truecharts.org | sonarr | 21.2.1 |
 
+# Important Notice
+
+Please consider that this chart is a collection of several public helm charts.
+These are included as sub-charts of the Servarr chart and, due to some Helm limitation, some configuration are only possible via values file.
+For this reason, the servarr default [values.yaml](#./values.yaml) included in the chart is quite huge and it used to model the configuration of the subcharts.
+but don't you worry! I provided some handy values, using [yaml anchros](https://medium.com/@kinghuang/docker-compose-anchors-aliases-extensions-a1e4105d70bd), to defined top-level fields.
+Follow the table below and forget everything else. 
+
+## Please, do not remove Anchors when you see them (the strage syntax with the `&`)
 
 ## Values
 
-<h3>Jellyfin</h3>
-<table>
-	<thead>
-		<th>Key</th>
-		<th>Type</th>
-		<th>Default</th>
-		<th>Description</th>
-	</thead>
-	<tbody>
-		<tr>
-			<td>dash.mail</td>
-			<td>string</td>
-			<td><pre lang="">
-No default value
-</pre>
-</td>
-			<td>Insert Jellyfin login mail (will be used also for Jellyseerr integration)</td>
-		</tr>
-		<tr>
-			<td>dash.password</td>
-			<td>string</td>
-			<td><pre lang="">
-No default value
-</pre>
-</td>
-			<td>Insert Jellyfin password (will be used also for Jellyseerr)</td>
-		</tr>
-		<tr>
-			<td>dash.username</td>
-			<td>string</td>
-			<td><pre lang="">
-No default value
-</pre>
-</td>
-			<td>Insert the Jellyfin username (will be used also for Jellyseerr)</td>
-		</tr>
-	</tbody>
-</table>
-<h3>Global</h3>
-<table>
-	<thead>
-		<th>Key</th>
-		<th>Type</th>
-		<th>Default</th>
-		<th>Description</th>
-	</thead>
-	<tbody>
-		<tr>
-			<td>global.apikey</td>
-			<td>string</td>
-			<td><pre lang="">
-No default value is configured for security reasons, it is mandatory to set this parameter
-</pre>
-</td>
-			<td>Insert your API key here, e.g.: &apikey 123abc..</td>
-		</tr>
-		<tr>
-			<td>global.certManagerClusterIssuer</td>
-			<td>string</td>
-			<td><pre lang="">
-No default value, leave empty if not required
-</pre>
-</td>
-			<td>Insert your cert manager cluster issuer, e.g.: letsencrypt-cloudflare</td>
-		</tr>
-		<tr>
-			<td>global.storageClassName</td>
-			<td>string</td>
-			<td><pre lang="json">
-"network-block"
-</pre>
-</td>
-			<td>Insert your storage class here, e.g.: &storageClassName longhorn</td>
-		</tr>
-	</tbody>
-</table>
-<h3>Prowlarr</h3>
-<table>
-	<thead>
-		<th>Key</th>
-		<th>Type</th>
-		<th>Default</th>
-		<th>Description</th>
-	</thead>
-	<tbody>
-		<tr>
-			<td>indexers</td>
-			<td>list</td>
-			<td><pre lang="">
-The body of the 1337x index is provided as default
-</pre>
-</td>
-			<td>The indexers list. Each element of the list is the yaml-formatted boody of the [Prowlarr API request](https://prowlarr.com/docs/api/#/Indexer/post_api_v1_indexer) to add that index.</td>
-		</tr>
-	</tbody>
-</table>
-<h3>Optional</h3>
-<table>
-	<thead>
-		<th>Key</th>
-		<th>Type</th>
-		<th>Default</th>
-		<th>Description</th>
-	</thead>
-	<tbody>
-		<tr>
-			<td>issuer</td>
-			<td>object</td>
-			<td><pre lang="">
-See the sub fields
-</pre>
-</td>
-			<td>For tracking purpose, not used - replaced with pre-existing cluster issuer</td>
-		</tr>
-		<tr>
-			<td>issuer.cloudFlareKey</td>
-			<td>string</td>
-			<td><pre lang="json">
-null
-</pre>
-</td>
-			<td>Insert your CloudFlare key</td>
-		</tr>
-		<tr>
-			<td>issuer.email</td>
-			<td>string</td>
-			<td><pre lang="json">
-null
-</pre>
-</td>
-			<td>Insert your email address</td>
-		</tr>
-	</tbody>
-</table>
-<h3>Required</h3>
-<table>
-	<thead>
-		<th>Key</th>
-		<th>Type</th>
-		<th>Default</th>
-		<th>Description</th>
-	</thead>
-	<tbody>
-		<tr>
-			<td>metrics.enabled</td>
-			<td>bool</td>
-			<td><pre lang="json">
-false
-</pre>
-</td>
-			<td>Anchor to set wether to deploy the export sidecar pods or not. Requires the Prometheus stack</td>
-		</tr>
-		<tr>
-			<td>volumes.downloads.name</td>
-			<td>string</td>
-			<td><pre lang="json">
-"downloads-volume"
-</pre>
-</td>
-			<td>Name of the download pvc. Leave the anchor declaration, as it will be used in the service configuration</td>
-		</tr>
-		<tr>
-			<td>volumes.downloads.size</td>
-			<td>string</td>
-			<td><pre lang="json">
-"100Gi"
-</pre>
-</td>
-			<td>Size of the downloads volume, in Kubernets format</td>
-		</tr>
-		<tr>
-			<td>volumes.media.name</td>
-			<td>string</td>
-			<td><pre lang="json">
-"media-volume"
-</pre>
-</td>
-			<td>Name of the media pvc. Leave the anchor declaration, as it will be used in the service configuration</td>
-		</tr>
-		<tr>
-			<td>volumes.media.size</td>
-			<td>string</td>
-			<td><pre lang="json">
-"250Gi"
-</pre>
-</td>
-			<td>Size of the media volume, in Kubernets format</td>
-		</tr>
-		<tr>
-			<td>volumes.torrentConfig.name</td>
-			<td>string</td>
-			<td><pre lang="json">
-"torrent-config"
-</pre>
-</td>
-			<td>Name of the torrent configuration pvc. Leave the anchor declaration, as it will be used in the service configuration</td>
-		</tr>
-		<tr>
-			<td>volumes.torrentConfig.size</td>
-			<td>string</td>
-			<td><pre lang="json">
-"250Mi"
-</pre>
-</td>
-			<td>Size of the torrent configuration volume, in Kubernets format</td>
-		</tr>
-	</tbody>
-</table>
-<h3>Jellyseerr</h3>
-<table>
-	<thead>
-		<th>Key</th>
-		<th>Type</th>
-		<th>Default</th>
-		<th>Description</th>
-	</thead>
-	<tbody>
-		<tr>
-			<td>notifications.telegram.bot_apitoken</td>
-			<td>string</td>
-			<td><pre lang="">
-No default value
-</pre>
-</td>
-			<td>Insert your Telegram Bot API token</td>
-		</tr>
-		<tr>
-			<td>notifications.telegram.chat_id</td>
-			<td>string</td>
-			<td><pre lang="">
-No default value
-</pre>
-</td>
-			<td>Insert the Telegram Chat id, check @get_id_bot for this</td>
-		</tr>
-		<tr>
-			<td>notifications.telegram.enabled</td>
-			<td>bool</td>
-			<td><pre lang="json">
-true
-</pre>
-</td>
-			<td>Enable the Telegram notifications</td>
-		</tr>
-	</tbody>
-</table>
-<h3>Torrent</h3>
-<table>
-	<thead>
-		<th>Key</th>
-		<th>Type</th>
-		<th>Default</th>
-		<th>Description</th>
-	</thead>
-	<tbody>
-		<tr>
-			<td>torrent.password</td>
-			<td>string</td>
-			<td><pre lang="">
-No default value
-</pre>
-</td>
-			<td>password of the qBitTorrent admin user</td>
-		</tr>
-		<tr>
-			<td>torrent.username</td>
-			<td>string</td>
-			<td><pre lang="">
-No default value
-</pre>
-</td>
-			<td>username of the qBitTorrent admin user</td>
-		</tr>
-	</tbody>
-</table>
-<h3>Storage</h3>
-<table>
-	<thead>
-		<th>Key</th>
-		<th>Type</th>
-		<th>Default</th>
-		<th>Description</th>
-	</thead>
-	<tbody>
-		<tr>
-			<td>volumes.downloads</td>
-			<td>object</td>
-			<td><pre lang="">
-See the sub fields
-</pre>
-</td>
-			<td>configuration of the volume used for torrent downloads</td>
-		</tr>
-		<tr>
-			<td>volumes.media</td>
-			<td>object</td>
-			<td><pre lang="">
-See the sub fields
-</pre>
-</td>
-			<td>configuration of the volume used for media storage (i.e.: where movies and tv shows file will be permanently stored)</td>
-		</tr>
-		<tr>
-			<td>volumes.storageClass</td>
-			<td>string</td>
-			<td><pre lang="">
-equal to global.storageClassName value, do not edit
-</pre>
-</td>
-			<td>Storage class of the PVCs. Refer to global.storageClassName, as this is automatically set using the anchor</td>
-		</tr>
-		<tr>
-			<td>volumes.torrentConfig</td>
-			<td>object</td>
-			<td><pre lang="">
-See the sub fields
-</pre>
-</td>
-			<td>configuration of the volume used for qBitTorrent internal configuration</td>
-		</tr>
-	</tbody>
-</table>
+### Jellyfin
 
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| dash.mail | string | No default value | Insert Jellyfin login mail (will be used also for Jellyseerr integration) |
+| dash.password | string | No default value | Insert Jellyfin password (will be used also for Jellyseerr) |
+| dash.username | string | No default value | Insert the Jellyfin username (will be used also for Jellyseerr) |
 
+### Global
+
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| global.apikey | string | No default value is configured for security reasons, it is mandatory to set this parameter | Insert your API key here, e.g.: &apikey 123abc.. |
+| global.certManagerClusterIssuer | string | No default value, leave empty if not required | Insert your cert manager cluster issuer, e.g.: letsencrypt-cloudflare |
+| global.storageClassName | string | `"network-block"` | Insert your storage class here, e.g.: &storageClassName longhorn |
+
+### Prowlarr
+
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| indexers | list | The body of the 1337x index is provided as default | The indexers list. Each element of the list is the yaml-formatted boody of the [Prowlarr API request](https://prowlarr.com/docs/api/#/Indexer/post_api_v1_indexer) to add that index. |
+
+### Optional
+
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| issuer | object | See the sub fields | For tracking purpose, not used - replaced with pre-existing cluster issuer |
+| issuer.cloudFlareKey | string | `nil` | Insert your CloudFlare key |
+| issuer.email | string | `nil` | Insert your email address |
+
+### Required
+
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| metrics.enabled | bool | `false` | Anchor to set wether to deploy the export sidecar pods or not. Requires the Prometheus stack |
+| volumes.downloads.name | string | `"downloads-volume"` | Name of the download pvc. Leave the anchor declaration, as it will be used in the service configuration |
+| volumes.downloads.size | string | `"100Gi"` | Size of the downloads volume, in Kubernets format |
+| volumes.media.name | string | `"media-volume"` | Name of the media pvc. Leave the anchor declaration, as it will be used in the service configuration |
+| volumes.media.size | string | `"250Gi"` | Size of the media volume, in Kubernets format |
+| volumes.torrentConfig.name | string | `"torrent-config"` | Name of the torrent configuration pvc. Leave the anchor declaration, as it will be used in the service configuration |
+| volumes.torrentConfig.size | string | `"250Mi"` | Size of the torrent configuration volume, in Kubernets format |
+
+### Jellyseerr
+
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| notifications.telegram.bot_apitoken | string | No default value | Insert your Telegram Bot API token |
+| notifications.telegram.chat_id | string | No default value | Insert the Telegram Chat id, check @get_id_bot for this |
+| notifications.telegram.enabled | bool | `true` | Enable the Telegram notifications |
+
+### Torrent
+
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| torrent.password | string | No default value | password of the qBitTorrent admin user |
+| torrent.username | string | No default value | username of the qBitTorrent admin user |
+
+### Storage
+
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| volumes.downloads | object | See the sub fields | configuration of the volume used for torrent downloads |
+| volumes.media | object | See the sub fields | configuration of the volume used for media storage (i.e.: where movies and tv shows file will be permanently stored) |
+| volumes.storageClass | string | equal to global.storageClassName value, do not edit | Storage class of the PVCs. Refer to global.storageClassName, as this is automatically set using the anchor |
+| volumes.torrentConfig | object | See the sub fields | configuration of the volume used for qBitTorrent internal configuration |
 
 
 ----------------------------------------------
