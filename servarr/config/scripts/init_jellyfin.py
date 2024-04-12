@@ -72,7 +72,7 @@ def setup_location():
     }
 
     res = post(
-        url="http://{}/.svc.cluster.local:8096/Startup/Configuration".format(JELLYFIN_HOST)
+        url="http://{}/Startup/Configuration".format(JELLYFIN_HOST)
     )
     
     # TO-DO: Check for response status code and decide what to do
@@ -86,7 +86,7 @@ logger.info("Ping GET user endpoint")
 
 logger.debug(" ".join([
     "GET",
-    "http://{}/.svc.cluster.local:8096/Startup/User".format(JELLYFIN_HOST),
+    "http://{}/Startup/User".format(JELLYFIN_HOST),
     ", ".join([": ".join(header) for header in headers])
 ]))
 
@@ -110,7 +110,7 @@ body = {
 }
 
 res = post(
-    url="http://{}/.svc.cluster.local:8096/Startup/User".format(JELLYFIN_HOST),
+    url="http://{}/Startup/User".format(JELLYFIN_HOST),
     headers=headers,
     body=body
 )
@@ -237,7 +237,7 @@ body = {
 }
 
 res = post(
-    url="http://{}/.svc.cluster.local:8096/Library/VirtualFolders?refreshLibrary=false&name=Library".format(JELLYFIN_HOST),
+    url="http://{}/Library/VirtualFolders?refreshLibrary=false&name=Library".format(JELLYFIN_HOST),
     headers=headers,
     body=body
 )
@@ -256,7 +256,7 @@ body = {
 }
 
 res = post(
-    url="http://{}/.svc.cluster.local:8096/Startup/RemoteAccess".format(JELLYFIN_HOST),
+    url="http://{}/Startup/RemoteAccess".format(JELLYFIN_HOST),
     headers=headers,
     body=body
 )
@@ -266,7 +266,7 @@ res = post(
 logger.info("Finalize the setup")
 
 res = post(
-    url="http://{}/.svc.cluster.local:8096/Startup/Complete".format(JELLYFIN_HOST),
+    url="http://{}/Startup/Complete".format(JELLYFIN_HOST),
     headers={},
     body={}
 )
