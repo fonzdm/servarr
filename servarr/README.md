@@ -33,7 +33,7 @@ Servarr complete Helm Chart for Kubernetes
 
 ## Values
 
-<h3>jellyfin</h3>
+<h3>Jellyfin</h3>
 <table>
 	<thead>
 		<th>Key</th>
@@ -109,7 +109,7 @@ No default value, leave empty if not required
 		</tr>
 	</tbody>
 </table>
-<h3>prowlarr</h3>
+<h3>Prowlarr</h3>
 <table>
 	<thead>
 		<th>Key</th>
@@ -186,15 +186,6 @@ false
 			<td>Anchor to set wether to deploy the export sidecar pods or not. Requires the Prometheus stack</td>
 		</tr>
 		<tr>
-			<td>volumes.downloads</td>
-			<td>object</td>
-			<td><pre lang="">
-See the sub fields
-</pre>
-</td>
-			<td>configuration of the volume used for torrent downloads</td>
-		</tr>
-		<tr>
 			<td>volumes.downloads.name</td>
 			<td>string</td>
 			<td><pre lang="json">
@@ -213,15 +204,6 @@ See the sub fields
 			<td>Size of the downloads volume, in Kubernets format</td>
 		</tr>
 		<tr>
-			<td>volumes.media</td>
-			<td>object</td>
-			<td><pre lang="">
-See the sub fields
-</pre>
-</td>
-			<td>configuration of the volume used for media storage (i.e.: where movies and tv shows file will be permanently stored)</td>
-		</tr>
-		<tr>
 			<td>volumes.media.name</td>
 			<td>string</td>
 			<td><pre lang="json">
@@ -238,24 +220,6 @@ See the sub fields
 </pre>
 </td>
 			<td>Size of the media volume, in Kubernets format</td>
-		</tr>
-		<tr>
-			<td>volumes.storageClass</td>
-			<td>string</td>
-			<td><pre lang="">
-equal to global.storageClassName value, do not edit
-</pre>
-</td>
-			<td>Storage class of the PVCs. Refer to global.storageClassName, as this is automatically set using the anchor</td>
-		</tr>
-		<tr>
-			<td>volumes.torrentConfig</td>
-			<td>object</td>
-			<td><pre lang="">
-See the sub fields
-</pre>
-</td>
-			<td>configuration of the volume used for qBitTorrent internal configuration</td>
 		</tr>
 		<tr>
 			<td>volumes.torrentConfig.name</td>
@@ -277,7 +241,7 @@ See the sub fields
 		</tr>
 	</tbody>
 </table>
-<h3>jellyseerr</h3>
+<h3>Jellyseerr</h3>
 <table>
 	<thead>
 		<th>Key</th>
@@ -315,7 +279,7 @@ true
 		</tr>
 	</tbody>
 </table>
-<h3>torrent</h3>
+<h3>Torrent</h3>
 <table>
 	<thead>
 		<th>Key</th>
@@ -341,6 +305,53 @@ No default value
 </pre>
 </td>
 			<td>username of the qBitTorrent admin user</td>
+		</tr>
+	</tbody>
+</table>
+<h3>Storage</h3>
+<table>
+	<thead>
+		<th>Key</th>
+		<th>Type</th>
+		<th>Default</th>
+		<th>Description</th>
+	</thead>
+	<tbody>
+		<tr>
+			<td>volumes.downloads</td>
+			<td>object</td>
+			<td><pre lang="">
+See the sub fields
+</pre>
+</td>
+			<td>configuration of the volume used for torrent downloads</td>
+		</tr>
+		<tr>
+			<td>volumes.media</td>
+			<td>object</td>
+			<td><pre lang="">
+See the sub fields
+</pre>
+</td>
+			<td>configuration of the volume used for media storage (i.e.: where movies and tv shows file will be permanently stored)</td>
+		</tr>
+		<tr>
+			<td>volumes.storageClass</td>
+			<td>string</td>
+			<td><pre lang="">
+equal to global.storageClassName value, do not edit
+</pre>
+</td>
+			<td>Storage class of the PVCs. Refer to global.storageClassName, as this is automatically set using the anchor</td>
+		</tr>
+		<tr>
+			<td>volumes.torrentConfig</td>
+			<td>object</td>
+			<td><pre lang="">
+See the sub fields
+</pre>
+</td>
+			<td>configuration of the volume used for qBitTorrent internal configuration</td>
 		</tr>
 	</tbody>
 </table>
