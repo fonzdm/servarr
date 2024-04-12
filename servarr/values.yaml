@@ -1,12 +1,16 @@
 global:
-  # -- Insert your API key here, e.g.: &apikey 123abc..
+  # -- (string) Insert your API key here, e.g.: &apikey 123abc..
+  # @default -- No default value is configured for security reasons, it is mandatory to set this parameter
   apikey: &apikey
-  # -- Insert your storage class here, e.g.: &storageClassName longhorn
-  storageClassName: &storageClassName
-  # -- Insert your cert manager cluster issuer, e.g.: letsencrypt-cloudflare
+  # -- (string) Insert your storage class here, e.g.: &storageClassName longhorn
+  storageClassName: &storageClassName "network-block"
+  # -- (string) Insert your cert manager cluster issuer, e.g.: letsencrypt-cloudflare
+  # @default -- No default value, leave empty if not required
   certManagerClusterIssuer: &issuer
 
 metrics:
+  # -- Anchor to set wether to deploy the export sidecar pods or not.
+  # Requires the Prometheus stack
   enabled: &metricsEnabled false
 
 # -- Set initJellyseerr to false if Jellyseerr setup should not be performed automatically
@@ -28,9 +32,11 @@ dash:
   # -- Insert Jellyfin login mail (will be used also for Jellyseerr integration)
   mail:
 
+# --The following credentials are here just for tracking purposes and they are not used to configure qBitTorrent. The credentials are configured in config/qbittorrent/qBittorrent.conf
 torrent:
-  # --The following credentials are here just for tracking purposes and they are not used to configure qBitTorrent. The credentials are configured in config/qbittorrent/qBittorrent.conf
+  # -- (string) username of the qBitTorrent admin user
   username:
+  # -- (string) password of the qBitTorrent admin user
   password:
 
 # -- The indexers list. Each element of the list is the yaml-formatted boody of the [Prowlarr API request](https://prowlarr.com/docs/api/#/Indexer/post_api_v1_indexer) to add that index.
@@ -580,6 +586,7 @@ jellyfin:
   metrics:
     main:
       enabled: *metricsEnabled
+  # @ignore 
   fallbackDefaults:
     storageClass:
     probeType: http
@@ -667,6 +674,7 @@ jellyseerr:
   metrics:
     main:
       enabled: *metricsEnabled
+  # @ignore 
   fallbackDefaults:
     storageClass:
     probeType: http
