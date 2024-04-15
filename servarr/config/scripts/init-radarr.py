@@ -141,3 +141,17 @@ post(
     headers=headers,
     body=body
 )
+
+logger.info("Setup Remote Path Mapping")
+
+body = {
+    "host": "servarr-qbittorrent",
+    "remotePath": "/downloads",
+    "localPath": "/mnt/downloads/"
+}
+
+post(
+    url="http://{}/api/v3/remotepathmapping".format(RADARR_HOST),
+    headers=headers,
+    body=body
+)
