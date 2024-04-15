@@ -155,3 +155,15 @@ post(
     headers=headers,
     body=body
 )
+
+logger.info("Setup Root Folder")
+
+body = {
+    "path": "/mnt/media/"
+}
+
+post(
+    url="http://{}/api/v3/rootFolder".format(RADARR_HOST),
+    headers=headers,
+    body=body
+)
