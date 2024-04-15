@@ -14,6 +14,9 @@ logger.addHandler(console_handler)
 
 RADARR_HOST = os.getenv("RADARR_HOST")
 API_KEY = os.getenv("API_KEY")
+TORRENT_SERVICE = os.getenv("TORRENT_SERVICE")
+TORRENT_USERNAME = os.getenv("TORRENT_ADMIN")
+TORRENT_PASSWORD = os.getenv("TORRENT_PASSWORD")
 
 def post(url: str, headers: dict, body: dict):
     """
@@ -54,3 +57,87 @@ def post(url: str, headers: dict, body: dict):
         return {"code": response.status_code, "response": response.json()}
     except JSONDecodeError:
         return {"code": response.status_code, "response": response.text}
+    
+logger.info("Setup qBitTorrent in Radarr")
+
+headers = {
+    "content-type": "application/json",
+    "x-api-key": API_KEY,
+    "x-requested-with": "XMLHttpRequest"
+}
+
+body = {
+    "enable": true,
+    "protocol": "torrent",
+    "priority": 1,
+    "removeCompletedDownloads": true,
+    "removeFailedDownloads": true,
+    "name": "qBittorrent",
+    "fields": [
+        {
+            "name": "host",
+            "value": TORRENT_SERVICE
+        },
+        {
+            "name": "port",
+            "value": "10095"
+        },
+        {
+            "name": "useSsl",
+            "value": false
+        },
+        {
+            "name": "urlBase"
+        },
+        {
+            "name": "username",
+            "value": TORRENT_USERNAME
+        },
+        {
+            "name": "password",
+            "value": TORRENT_PASSWORD
+        },
+        {
+            "name": "movieCategory",
+            "value": "radarr"
+        },
+        {
+            "name": "movieImportedCategory"
+        },
+        {
+            "name": "recentMoviePriority",
+            "value": 0
+        },
+        {
+            "name": "olderMoviePriority",
+            "value": 0
+        },
+        {
+            "name": "initialState",
+            "value": 0
+        },
+        {
+            "name": "sequentialOrder",
+            "value": false
+        },
+        {
+            "name": "firstAndLast",
+            "value": false
+        },
+        {
+            "name": "contentLayout",
+            "value": 0
+        }
+    ],
+    "implementationName": "qBittorrent",
+    "implementation": "QBittorrent",
+    "configContract": "QBittorrentSettings",
+    "infoLink": "https://wiki.servarr.com/radarr/supported#qbittorrent",
+    "tags": []
+}
+
+post(
+    url="http://{}/api/v3/downloadclient".format(RADARR_HOST),
+    headers=headers,
+    body=body
+)
