@@ -46,6 +46,10 @@ dash:
   # @section -- Jellyfin
   # @default -- No default value
   mail:
+  # -- (string) Inser the Jellyfin country code
+  # @section -- Jellyfin
+  # @default -- IT
+  countryCode: "IT"
 
 torrent:
   # -- (string) username of the qBitTorrent admin user
