@@ -4,4 +4,10 @@ metadata:
   name: init-jellyseerr-python-scripts
 data:
 {{ ( tpl (.Files.Glob "config/scripts/init-jellyseerr.py" ).AsConfig . ) | indent 2 }}
-
+---
+apiVersion: v1
+kind: ConfigMap 
+metadata:
+  name: init-radarr-script
+data:
+{{ ( tpl (.Files.Glob "config/scripts/init-radarr.py" ).AsConfig . ) | indent 2 }}
