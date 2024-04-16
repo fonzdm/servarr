@@ -204,16 +204,16 @@ headers = {
 }
 
 body = {
-    "enable": true,
+    "enable": "true",
     "protocol": "torrent",
     "priority": 1,
-    "removeCompletedDownloads": true,
-    "removeFailedDownloads": true,
+    "removeCompletedDownloads": "true",
+    "removeFailedDownloads": "true",
     "name": "qBittorrent",
     "fields": [
         {
             "name": "host",
-            "value": TORRENT_HOST
+            "value": TORRENT_SERVICE
         },
         {
             "name": "port",
@@ -221,7 +221,7 @@ body = {
         },
         {
             "name": "useSsl",
-            "value": false
+            "value": "false"
         },
         {
             "name": "urlBase"
@@ -255,11 +255,11 @@ body = {
         },
         {
             "name": "sequentialOrder",
-            "value": false
+            "value": "false"
         },
         {
             "name": "firstAndLast",
-            "value": false
+            "value": "false"
         },
         {
             "name": "contentLayout",
@@ -300,9 +300,9 @@ res = post(
 logger.info("Setup Flaresolverr in Prowlarr")
 
 body = {
-    "onHealthIssue": false,
-    "supportsOnHealthIssue": false,
-    "includeHealthWarnings": false,
+    "onHealthIssue": "false",
+    "supportsOnHealthIssue": "false",
+    "includeHealthWarnings": "false",
     "name": "FlareSolverr",
     "fields": [
         {
