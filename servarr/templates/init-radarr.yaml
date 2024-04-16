@@ -34,7 +34,7 @@ spec:
           - name: PYTHONUNBUFFERED
             value: "1"
           - name: RADARR_HOST
-            value: "{{ .Release.Namespace }}-radarr:7878"
+            value: "servarr-radarr.{{ .Release.Namespace }}.svc.cluster.local:7878"
           - name: APIKEY
             value: "{{ $.Values.global.apikey }}"
           - name: TORRENT_SERVICE
