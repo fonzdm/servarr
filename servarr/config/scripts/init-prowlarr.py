@@ -176,7 +176,7 @@ body = {
         },
         {
             "name": "syncAnimeStandardFormatSearch",
-            "value": false
+            "value": "false"
         }
     ],
     "implementationName": "Sonarr",
