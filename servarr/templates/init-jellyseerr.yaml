@@ -9,7 +9,7 @@ metadata:
   annotations:
     "helm.sh/hook": post-install, post-upgrade
     "helm.sh/hook-delete-policy": before-hook-creation
-    "helm.sh/hook-weight": "11"
+    "helm.sh/hook-weight": "40"
 spec:
   backoffLimit: 1
   template:
