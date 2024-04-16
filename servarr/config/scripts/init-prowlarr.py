@@ -307,7 +307,7 @@ body = {
     "fields": [
         {
             "name": "host",
-            "value": "http://{}:8191/".format(FLARESOLVERR_SERVICE)
+            "value": "http://{}/".format(FLARESOLVERR_SERVICE)
         },
         {
             "name": "requestTimeout",
