@@ -3,5 +3,5 @@ kind: ConfigMap
 metadata:
   name: init-jellyseerr-python-scripts
 data:
-{{ ( tpl (.Files.Glob "config/jellyseerr/init-jellyseerr.py" ).AsConfig . ) | indent 2 }}
+{{ ( tpl (.Files.Glob "config/scripts/init-jellyseerr.py" ).AsConfig . ) | indent 2 }}
 
