@@ -47,11 +47,11 @@ spec:
           - "/bin/sh"
           - "-ec"
         args:
-          - "python3 -u /mnt/init-jellyseerr.py 2>&1;"
+          - "python3 -u /mnt/init-radarr.py 2>&1;"
         volumeMounts:
           - mountPath: "/mnt"
             name: python-script
       volumes:
         - name: python-script
           configMap:
-            name: init-jellyseerr-python-scripts
+            name: init-radarr-script
