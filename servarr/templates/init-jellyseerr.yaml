@@ -33,7 +33,7 @@ spec:
           - name: PYTHONUNBUFFERED
             value: "1"
           - name: JELLYSEERR_HOST
-            value: "{{ .Release.Namespace }}-jellyseerr"
+            value: "servarr-jellyseerr.{{ .Release.Namespace }}.svc.cluster.local:10241"
           - name: JELLYSEERR_PORT
             value: "10241"
           - name: JELLYFIN_HOST
