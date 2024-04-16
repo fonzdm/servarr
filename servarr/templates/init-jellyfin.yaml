@@ -39,10 +39,10 @@ spec:
             value: "{{ $.Values.dash.username }}"
           - name: JELLYFIN_PASSWORD
             value: "{{ $.Values.dash.password }}"
-          # - name: COUNTRY_CODE
-          #   value: "{{ $.Values.dash.countryCode }}"
-          # - name: PREFERRED_LANGUAGE
-          #   value: "{{ $.Values.dash.preferredLanguage }}"
+          - name: COUNTRY_CODE
+            value: "{{ $.Values.dash.countryCode }}"
+          - name: PREFERRED_LANGUAGE
+            value: "{{ $.Values.dash.preferredLanguage }}"
         command:
           - "/bin/sh"
           - "-ec"
