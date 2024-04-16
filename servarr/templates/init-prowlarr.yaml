@@ -53,11 +53,11 @@ spec:
           - "/bin/sh"
           - "-ec"
         args:
-          - "python3 -u /mnt/init-sonarr.py 2>&1;"
+          - "python3 -u /mnt/init-prowlarr.py 2>&1;"
         volumeMounts:
           - mountPath: "/mnt"
             name: python-script
       volumes:
         - name: python-script
           configMap:
-            name: init-sonarr-script
+            name: init-prowlarr-script
