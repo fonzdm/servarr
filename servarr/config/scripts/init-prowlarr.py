@@ -95,11 +95,11 @@ body = {
     "fields": [
         {
             "name": "prowlarrUrl",
-            "value": "http://{}:9696".format(PROWLARR_SERVICE)
+            "value": "http://{}".format(PROWLARR_SERVICE)
         },
         {
             "name": "baseUrl",
-            "value": "http://{}:7878".format(RADARR_SERVICE)
+            "value": "http://{}".format(RADARR_SERVICE)
         },
         {
             "name": "apiKey",
@@ -145,7 +145,7 @@ body = {
     "fields": [
         {
             "name": "prowlarrUrl",
-            "value": "http://servarr-prowlarr:9696"
+            "value": "http://{}".format(PROWLARR_SERVICE)
         },
         {
             "name": "baseUrl",
