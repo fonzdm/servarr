@@ -34,7 +34,7 @@ spec:
           - name: PYTHONUNBUFFERED
             value: "1"
           - name: SONARR_HOST
-            value: "{{ .Release.Namespace }}-sonarr:8989"
+            value: "servarr-sonarr.{{ .Release.Namespace }}.svc.cluster.local:8989"
           - name: APIKEY
             value: "{{ $.Values.global.apikey }}"
           - name: TORRENT_SERVICE
