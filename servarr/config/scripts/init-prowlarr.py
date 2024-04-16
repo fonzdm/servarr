@@ -16,10 +16,10 @@ PROWLARR_HOST = os.getenv("PROWLARR_HOST")
 API_KEY = os.getenv("API_KEY")
 TORRENT_USERNAME = os.getenv("TORRENT_USERNAME")
 TORRENT_PASSWORD = os.getenv("TORRENT_PASSWORD")
-TORRENT_SERVICE = os.getenv("TORRENT_SERVICE", "servarr-qbittorrent")
-PROWLARR_SERVICE = os.getenv("PROWLARR_SERVICE", "servarr-prowlarr")
-RADARR_SERVICE = os.getenv("RADARR_SERVICE", "servarr-radarr")
-FLARESOLVERR_SERVICE = os.getenv("FLARESOLVERR_SERVICE", "servarr-flaresolverr")
+TORRENT_SERVICE = os.getenv("TORRENT_SERVICE")
+PROWLARR_SERVICE = os.getenv("PROWLARR_SERVICE")
+RADARR_SERVICE = os.getenv("RADARR_SERVICE")
+FLARESOLVERR_SERVICE = os.getenv("FLARESOLVERR_SERVICE")
 
 def post(url: str, headers: dict, body: dict):
     """
