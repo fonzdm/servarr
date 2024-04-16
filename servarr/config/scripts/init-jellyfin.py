@@ -79,6 +79,10 @@ def setup_location():
 
 setup_location()
 
+headers = {
+    "Content-Type": "application/json"
+}
+
 # The following GET seems to be required, otherwise
 # Jellyfin will be mad at us.
 
@@ -91,7 +95,7 @@ logger.debug(" ".join([
 ]))
 
 response = requests.get(
-    url=url,
+    url="http://{}/Startup/User".format(JELLYFIN_HOST),
     headers=headers
 )
 
