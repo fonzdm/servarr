@@ -4,6 +4,7 @@ import requests
 import os
 import logging
 from json import JSONDecodeError
+import json
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
@@ -331,3 +332,27 @@ res = post(
 )
 
 # TO-DO: Check for response status code and decide what to do
+
+indexersFile = "/mnt/indexers.json"
+if os.path.isfile(indexersFile):
+    logger.info("Setup Prowlarr indexers")
+
+    with open(indexersFile) as file:
+        indexers = json.load(file)
+    
+    headers = {
+        "Content-Type": "application/json",
+        "X-Api-Key": API_KEY,
+        "X-Prowlarr-Client": "true",
+        "X-Requested-With": "XMLHttpRequest"
+    }
+
+    for index in indexers:
+        logger.debug("Setup {} index".format(index["name"]))
+        post(
+            url="http://{}/api/v1/indexer".format(PROWLARR_HOST),
+            body=index["body"],
+            headers=headers
+        )
+    
+    # TO-DO: Check for response status code and decide what to do
