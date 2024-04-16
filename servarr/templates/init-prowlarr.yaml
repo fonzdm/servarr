@@ -49,6 +49,8 @@ spec:
             value: "{{ .Release.Namespace }}-radarr:7878"
           - name: FLARESOLVERR_SERVICE
             value: "{{ .Release.Namespace }}-flaresolverr:8191"
+          - name: SONARR_SERVICE
+            value: "{{ .Release.Namespace }}-sonarr:8989"
         command:
           - "/bin/sh"
           - "-ec"

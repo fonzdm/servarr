@@ -20,6 +20,7 @@ TORRENT_SERVICE = os.getenv("TORRENT_SERVICE")
 PROWLARR_SERVICE = os.getenv("PROWLARR_SERVICE")
 RADARR_SERVICE = os.getenv("RADARR_SERVICE")
 FLARESOLVERR_SERVICE = os.getenv("FLARESOLVERR_SERVICE")
+SONARR_SERVICE = os.getenv("SONARR_SERVICE")
 
 def post(url: str, headers: dict, body: dict):
     """
@@ -149,7 +150,7 @@ body = {
         },
         {
             "name": "baseUrl",
-            "value": "http://servarr-sonarr:8989"
+            "value": "http://{}".format(SONARR_SERVICE)
         },
         {
             "name": "apiKey",
