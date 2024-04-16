@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: jellyfin-init
+  name: prowlarr-init
   labels:
     release: "{{ .Release.Name }}"
     chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
@@ -22,82 +22,36 @@ spec:
         - name: wait-for-jellyfin
           image: rapidfort/curl:latest
           command:
-            - "sh"
-            - "-c"
-            - "until curl  \"http://servarr-jellyfin.{{ .Release.Namespace }}.svc.cluster.local:8096\"; do echo waiting for servarr-jellyfin; sleep 5; done;sleep 10;"
+            [
+              "sh",
+              "-c",
+              "until curl  \"http://servarr-jellyfin.{{ .Release.Namespace }}.svc.cluster.local:8096\"; do echo waiting for servarr-jellyfin; sleep 5; done;sleep 10;",
+            ]
       containers:
-      - name: setup-location
-        image: "rapidfort/curl:latest"
+      - name: initialize-jellyfin
+        image: "nyurik/alpine-python3-requests"
         env:
-          - name: APIKEY
-            value: "{{ $.Values.global.apikey }}"
-        command:
-          - "/bin/sh"
-          - "-ec"
-        args:
-          - "curl -k -v -H 'Content-Type: application/json' -X POST \"http://servarr-jellyfin.{{ $.Release.Namespace }}.svc.cluster.local:8096/Startup/Configuration\" -d '{\"UICulture\":\"en-US\",\"MetadataCountryCode\":\"IT\",\"PreferredMetadataLanguage\":\"it\"}'"
-      - name: get-first-user
-        image: "rapidfort/curl:latest"
-        env:
-          - name: APIKEY
-            value: "{{ $.Values.global.apikey }}"
-        command:
-          - "/bin/sh"
-          - "-ec"
-        args:
-          - "curl -k -v -H 'Content-Type: application/json' \"http://servarr-jellyfin.{{ $.Release.Namespace }}.svc.cluster.local:8096/Startup/User\""
-      - name: setup-user
-        image: "rapidfort/curl:latest"
-        env:
+          - name: PYTHONUNBUFFERED
+            value: "1"
+          - name: JELLYFIN_HOST
+            value: "servarr-jellyfin.{{ .Release.Namespace }}.svc.cluster.local:8096"
           - name: JELLYFIN_USERNAME
             value: "{{ $.Values.dash.username }}"
           - name: JELLYFIN_PASSWORD
             value: "{{ $.Values.dash.password }}"
-          - name: APIKEY
-            value: "{{ $.Values.global.apikey }}"
+          # - name: COUNTRY_CODE
+          #   value: "{{ $.Values.dash.countryCode }}"
+          # - name: PREFERRED_LANGUAGE
+          #   value: "{{ $.Values.dash.preferredLanguage }}"
         command:
           - "/bin/sh"
           - "-ec"
         args:
-          - "curl -k -v -H 'Content-Type: application/json' -X POST \"http://servarr-jellyfin.{{ $.Release.Namespace }}.svc.cluster.local:8096/Startup/User\" -d '{\"Name\": \"$(JELLYFIN_USERNAME)\", \"Password\": \"$(JELLYFIN_PASSWORD)\"}'"
-      - name: setup-library
-        image: "rapidfort/curl:latest"
-        env:
-          - name: APIKEY
-            value: "{{ $.Values.global.apikey }}"
-        command:
-          - "/bin/sh"
-          - "-ec"
-        args:
-          - "curl -k -v -H 'Content-Type: application/json' -X POST \"http://servarr-jellyfin.{{ $.Release.Namespace }}.svc.cluster.local:8096/Library/VirtualFolders?refreshLibrary=false&name=Library\" -d '{\"LibraryOptions\":{\"EnableArchiveMediaFiles\":false,\"EnablePhotos\":true,\"EnableRealtimeMonitor\":true,\"ExtractChapterImagesDuringLibraryScan\":true,\"EnableChapterImageExtraction\":true,\"EnableInternetProviders\":true,\"SaveLocalMetadata\":true,\"EnableAutomaticSeriesGrouping\":false,\"PreferredMetadataLanguage\":\"it\",\"MetadataCountryCode\":\"IT\",\"SeasonZeroDisplayName\":\"Specials\",\"AutomaticRefreshIntervalDays\":0,\"EnableEmbeddedTitles\":false,\"EnableEmbeddedEpisodeInfos\":false,\"AllowEmbeddedSubtitles\":\"AllowAll\",\"SkipSubtitlesIfEmbeddedSubtitlesPresent\":false,\"SkipSubtitlesIfAudioTrackMatches\":false,\"SaveSubtitlesWithMedia\":true,\"RequirePerfectSubtitleMatch\":true,\"AutomaticallyAddToCollection\":false,\"MetadataSavers\":[],\"TypeOptions\":[{\"Type\":\"Series\",\"MetadataFetchers\":[\"TheMovieDb\",\"The Open Movie Database\"],\"MetadataFetcherOrder\":[\"TheMovieDb\",\"The Open Movie Database\"],\"ImageFetchers\":[\"TheMovieDb\"],\"ImageFetcherOrder\":[\"TheMovieDb\"]},{\"Type\":\"Season\",\"MetadataFetchers\":[\"TheMovieDb\"],\"MetadataFetcherOrder\":[\"TheMovieDb\"],\"ImageFetchers\":[\"TheMovieDb\"],\"ImageFetcherOrder\":[\"TheMovieDb\"]},{\"Type\":\"Episode\",\"MetadataFetchers\":[\"TheMovieDb\",\"The Open Movie Database\"],\"MetadataFetcherOrder\":[\"TheMovieDb\",\"The Open Movie Database\"],\"ImageFetchers\":[\"TheMovieDb\",\"The Open Movie Database\",\"Embedded Image Extractor\",\"Screen Grabber\"],\"ImageFetcherOrder\":[\"TheMovieDb\",\"The Open Movie Database\",\"Embedded Image Extractor\",\"Screen Grabber\"]},{\"Type\":\"Movie\",\"MetadataFetchers\":[\"TheMovieDb\",\"The Open Movie Database\"],\"MetadataFetcherOrder\":[\"TheMovieDb\",\"The Open Movie Database\"],\"ImageFetchers\":[\"TheMovieDb\",\"The Open Movie Database\",\"Embedded Image Extractor\",\"Screen Grabber\"],\"ImageFetcherOrder\":[\"TheMovieDb\",\"The Open Movie Database\",\"Embedded Image Extractor\",\"Screen Grabber\"]}],\"LocalMetadataReaderOrder\":[\"Nfo\"],\"SubtitleDownloadLanguages\":[],\"DisabledSubtitleFetchers\":[],\"SubtitleFetcherOrder\":[],\"PathInfos\":[{\"Path\":\"/mnt/media\"}]}}'"
-      - name: setup-location-2
-        image: "rapidfort/curl:latest"
-        env:
-          - name: APIKEY
-            value: "{{ $.Values.global.apikey }}"
-        command:
-          - "/bin/sh"
-          - "-ec"
-        args:
-          - "curl -k -v -H 'Content-Type: application/json' -X POST \"http://servarr-jellyfin.{{ $.Release.Namespace }}.svc.cluster.local:8096/Startup/Configuration\" -d '{\"UICulture\":\"en-US\",\"MetadataCountryCode\":\"IT\",\"PreferredMetadataLanguage\":\"it\"}'"
-      - name: setup-remote-access
-        image: "rapidfort/curl:latest"
-        env:
-          - name: APIKEY
-            value: "{{ $.Values.global.apikey }}"
-        command:
-          - "/bin/sh"
-          - "-ec"
-        args:
-          - "curl -k -v -H 'Content-Type: application/json' -X POST \"http://servarr-jellyfin.{{ $.Release.Namespace }}.svc.cluster.local:8096/Startup/RemoteAccess\" -d '{\"EnableRemoteAccess\":true,\"EnableAutomaticPortMapping\":false}'"
-      - name: setup-wizard-completion
-        image: "rapidfort/curl:latest"
-        env:
-          - name: APIKEY
-            value: "{{ $.Values.global.apikey }}"
-        command:
-          - "/bin/sh"
-          - "-ec"
-        args:
-          - "curl -k -v -X POST \"http://servarr-jellyfin.{{ $.Release.Namespace }}.svc.cluster.local:8096/Startup/Complete\" --data-raw ''"
-
+          - "python3 -u /mnt/init-jellyfin.py 2>&1;"
+        volumeMounts:
+          - mountPath: "/mnt"
+            name: python-script
+      volumes:
+        - name: python-script
+          configMap:
+            name: init-jellyfin-script
