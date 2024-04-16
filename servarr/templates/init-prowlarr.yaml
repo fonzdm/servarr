@@ -28,7 +28,7 @@ spec:
               "until curl  \"http://servarr-prowlarr.{{ .Release.Namespace }}.svc.cluster.local:9696\"; do echo waiting for servarr-prowlarr; sleep 5; done;",
             ]
       containers:
-      - name: initialize-jellyfin
+      - name: initialize-prowlarr
         image: "nyurik/alpine-python3-requests"
         env:
           - name: PYTHONUNBUFFERED
