@@ -48,7 +48,7 @@ def post(url: str, headers: dict, body: dict | None): # -> str | dict
 
     logger.debug(" ".join([
         "Status Code:",
-        response.status_code,
+        str(response.status_code),
         "Response body:",
         response.text
     ]))
