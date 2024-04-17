@@ -18,7 +18,7 @@ JELLYFIN_PASSWORD = os.getenv("JELLYFIN_PASSWORD")
 COUNTRY_CODE = os.getenv("COUNTRY_CODE", "IT")
 PREFERRED_LANGUAGE = os.getenv("PREFERRED_LANGUAGE", "it")
 
-def post(url: str, headers: dict, body: dict | None): # -> str | dict
+def post(url: str, headers: dict, body: dict):
     """
     Handle POST requests towards an url, logging both
     the details before sending it and the response.
