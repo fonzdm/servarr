@@ -12,7 +12,7 @@ log_format = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(messa
 console_handler.setFormatter(log_format)
 logger.addHandler(console_handler)
 
-APIKEY = os.getenv("APIKEY")
+API_KEY = os.getenv("API_KEY")
 JELLYFIN_USERNAME = os.getenv("JELLYFIN_USERNAME")
 JELLYFIN_PASSWORD = os.getenv("JELLYFIN_PASSWORD")
 JELLYFIN_EMAIL = os.getenv("JELLYFIN_EMAIL")
