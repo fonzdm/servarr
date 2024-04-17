@@ -46,7 +46,7 @@ spec:
             value: "{{ $.Values.dash.password }}"
           - name: JELLYFIN_EMAIL
             value: "{{ $.Values.dash.mail }}"
-          - name: APIKEY
+          - name: API_KEY
             value: "{{ $.Values.global.apikey }}"
           - name: TELEGRAM_NOTIFICATION_ENABLED
             value: "{{ $.Values.notifications.telegram.enabled }}"

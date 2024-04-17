@@ -35,7 +35,7 @@ spec:
             value: "1"
           - name: PROWLARR_HOST
             value: "servarr-prowlarr.{{ .Release.Namespace }}.svc.cluster.local:9696"
-          - name: APIKEY
+          - name: API_KEY
             value: "{{ $.Values.global.apikey }}"
           - name: TORRENT_SERVICE
             value: "{{ .Release.Namespace }}-qbittorrent"

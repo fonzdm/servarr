@@ -35,7 +35,7 @@ spec:
             value: "1"
           - name: RADARR_HOST
             value: "servarr-radarr.{{ .Release.Namespace }}.svc.cluster.local:7878"
-          - name: APIKEY
+          - name: API_KEY
             value: "{{ $.Values.global.apikey }}"
           - name: TORRENT_SERVICE
             value: "{{ .Release.Namespace }}-qbittorrent"

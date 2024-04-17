@@ -35,7 +35,7 @@ spec:
             value: "1"
           - name: SONARR_HOST
             value: "servarr-sonarr.{{ .Release.Namespace }}.svc.cluster.local:8989"
-          - name: APIKEY
+          - name: API_KEY
             value: "{{ $.Values.global.apikey }}"
           - name: TORRENT_SERVICE
             value: "{{ .Release.Namespace }}-qbittorrent"
