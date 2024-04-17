@@ -36,7 +36,7 @@ def post(url: str, headers: dict, body: dict | None): # -> str | dict
     logger.debug(" ".join([
         "POST",
         url,
-        ", ".join([": ".join(header) for header in headers]),
+        ", ".join(f'{key}: {value}' for key,value in headers.items()),
         str(body)
     ]))
 
