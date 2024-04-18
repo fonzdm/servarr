@@ -9,7 +9,7 @@ metadata:
     helm.sh/hook-weight: "-5"
     helm.sh/hook-delete-policy: hook-failed
 spec:
-  storageClassName: {{ .Values.volumes.storageClasss }}
+  storageClassName: {{ .Values.volumes.storageClass }}
   accessModes:
     - ReadWriteMany
   resources:
@@ -30,7 +30,7 @@ metadata:
     helm.sh/hook-weight: "-5"
     helm.sh/hook-delete-policy: hook-failed
 spec:
-  storageClassName: {{ .Values.volumes.storageClasss }}
+  storageClassName: {{ .Values.volumes.storageClass }}
   accessModes:
     - ReadWriteMany
   resources:
@@ -51,7 +51,7 @@ metadata:
     helm.sh/hook-weight: "-5"
     helm.sh/hook-delete-policy: hook-failed
 spec:
-  storageClassName: {{ .Values.volumes.storageClasss }}
+  storageClassName: {{ .Values.volumes.storageClass }}
   accessModes:
     - ReadWriteMany
   resources:
