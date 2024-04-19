@@ -44,7 +44,7 @@ def make_get(endpoint=""):
 
     logger.debug(" ".join([
         "Status Code:",
-        response.status_code,
+        str(response.status_code),
         "Response body:",
         response.text
     ]))
