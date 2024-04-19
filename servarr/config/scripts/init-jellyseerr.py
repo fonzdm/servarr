@@ -33,8 +33,8 @@ def make_get(endpoint=""):
     logger.debug(" ".join([
         url,
         "GET",
-        ", ".join([": ".join(header) for header in session.headers]),
-        ", ".join([": ".join(cookie) for cookie in session.cookies])
+        ", ".join([f'{key}: {value}' for key,value in session.headers.items()]),
+        ", ".join([f'{key}: {value}' for key,value in session.cookies.items()])
     ]))
 
     response = session.get(
