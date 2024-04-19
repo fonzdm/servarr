@@ -89,7 +89,7 @@ headers = {
     "content-type": "application/json",
     "x-api-key": API_KEY,
     "x-requested-with": "XMLHttpRequest",
-    "X-Prowlarr-Client": True
+    "X-Prowlarr-Client": "true"
 }
 
 body = {
