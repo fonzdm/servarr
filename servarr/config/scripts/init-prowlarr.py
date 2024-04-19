@@ -47,7 +47,7 @@ def post(url: str, headers: dict, body: dict):
 
     response = requests.post(
         url=url,
-        data=body,
+        json=body,
         headers=headers
     )
 
