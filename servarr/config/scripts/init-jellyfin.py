@@ -72,7 +72,9 @@ def setup_location():
     }
 
     res = post(
-        url="http://{}/Startup/Configuration".format(JELLYFIN_HOST)
+        url="http://{}/Startup/Configuration".format(JELLYFIN_HOST),
+        headers=headers,
+        body=body
     )
     
     # TO-DO: Check for response status code and decide what to do
