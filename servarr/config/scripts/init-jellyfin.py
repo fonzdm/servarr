@@ -127,26 +127,26 @@ logger.info("Setup the library")
 
 body = {
     "LibraryOptions": {
-        "EnableArchiveMediaFiles": "false",
-        "EnablePhotos": "true",
-        "EnableRealtimeMonitor": "true",
-        "ExtractChapterImagesDuringLibraryScan": "true",
-        "EnableChapterImageExtraction": "true",
-        "EnableInternetProviders": "true",
-        "SaveLocalMetadata": "true",
-        "EnableAutomaticSeriesGrouping": "false",
+        "EnableArchiveMediaFiles": False,
+        "EnablePhotos": True,
+        "EnableRealtimeMonitor": True,
+        "ExtractChapterImagesDuringLibraryScan": True,
+        "EnableChapterImageExtraction": True,
+        "EnableInternetProviders": True,
+        "SaveLocalMetadata": True,
+        "EnableAutomaticSeriesGrouping": False,
         "PreferredMetadataLanguage": PREFERRED_LANGUAGE,
         "MetadataCountryCode": COUNTRY_CODE,
         "SeasonZeroDisplayName": "Specials",
         "AutomaticRefreshIntervalDays": 0,
-        "EnableEmbeddedTitles": "false",
-        "EnableEmbeddedEpisodeInfos": "false",
+        "EnableEmbeddedTitles": False,
+        "EnableEmbeddedEpisodeInfos": False,
         "AllowEmbeddedSubtitles": "AllowAll",
-        "SkipSubtitlesIfEmbeddedSubtitlesPresent": "false",
-        "SkipSubtitlesIfAudioTrackMatches": "false",
-        "SaveSubtitlesWithMedia": "true",
-        "RequirePerfectSubtitleMatch": "true",
-        "AutomaticallyAddToCollection": "false",
+        "SkipSubtitlesIfEmbeddedSubtitlesPresent": False,
+        "SkipSubtitlesIfAudioTrackMatches": False,
+        "SaveSubtitlesWithMedia": True,
+        "RequirePerfectSubtitleMatch": True,
+        "AutomaticallyAddToCollection": False,
         "MetadataSavers": [],
         "TypeOptions": [
             {
@@ -257,8 +257,8 @@ setup_location()
 logger.info("Setup the remote access")
 
 body = {
-    "EnableRemoteAccess": "true",
-    "EnableAutomaticPortMapping": "false"
+    "EnableRemoteAccess": True,
+    "EnableAutomaticPortMapping": False
 }
 
 res = post(

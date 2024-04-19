@@ -89,7 +89,7 @@ headers = {
     "content-type": "application/json",
     "x-api-key": API_KEY,
     "x-requested-with": "XMLHttpRequest",
-    "X-Prowlarr-Client": "true"
+    "X-Prowlarr-Client": True
 }
 
 body = {
@@ -178,7 +178,7 @@ body = {
         },
         {
             "name": "syncAnimeStandardFormatSearch",
-            "value": "false"
+            "value": False
         }
     ],
     "implementationName": "Sonarr",
@@ -206,11 +206,11 @@ headers = {
 }
 
 body = {
-    "enable": "true",
+    "enable": True,
     "protocol": "torrent",
     "priority": 1,
-    "removeCompletedDownloads": "true",
-    "removeFailedDownloads": "true",
+    "removeCompletedDownloads": True,
+    "removeFailedDownloads": True,
     "name": "qBittorrent",
     "fields": [
         {
@@ -223,7 +223,7 @@ body = {
         },
         {
             "name": "useSsl",
-            "value": "false"
+            "value": False
         },
         {
             "name": "urlBase"
@@ -257,11 +257,11 @@ body = {
         },
         {
             "name": "sequentialOrder",
-            "value": "false"
+            "value": False
         },
         {
             "name": "firstAndLast",
-            "value": "false"
+            "value": False
         },
         {
             "name": "contentLayout",
@@ -302,9 +302,9 @@ res = post(
 logger.info("Setup Flaresolverr in Prowlarr")
 
 body = {
-    "onHealthIssue": "false",
-    "supportsOnHealthIssue": "false",
-    "includeHealthWarnings": "false",
+    "onHealthIssue": False,
+    "supportsOnHealthIssue": False,
+    "includeHealthWarnings": False,
     "name": "FlareSolverr",
     "fields": [
         {

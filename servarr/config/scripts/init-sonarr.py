@@ -67,11 +67,11 @@ headers = {
 }
 
 body = {
-    "enable": "true",
+    "enable": True,
     "protocol": "torrent",
     "priority": 1,
-    "removeCompletedDownloads": "true",
-    "removeFailedDownloads": "true",
+    "removeCompletedDownloads": True,
+    "removeFailedDownloads": True,
     "name": "qBittorrent",
     "fields": [
         {
@@ -84,7 +84,7 @@ body = {
         },
         {
             "name": "useSsl",
-            "value": "false"
+            "value": False
         },
         {
             "name": "urlBase"
@@ -118,11 +118,11 @@ body = {
         },
         {
             "name": "sequentialOrder",
-            "value": "false"
+            "value": False
         },
         {
             "name": "firstAndLast",
-            "value": "false"
+            "value": False
         },
         {
             "name": "contentLayout",
