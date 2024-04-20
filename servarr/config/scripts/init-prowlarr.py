@@ -15,7 +15,7 @@ logger.addHandler(console_handler)
 
 PROWLARR_HOST = os.getenv("PROWLARR_HOST")
 API_KEY = os.getenv("API_KEY")
-TORRENT_USERNAME = os.getenv("TORRENT_USERNAME")
+TORRENT_USERNAME = os.getenv("TORRENT_ADMIN")
 TORRENT_PASSWORD = os.getenv("TORRENT_PASSWORD")
 TORRENT_SERVICE = os.getenv("TORRENT_SERVICE")
 PROWLARR_SERVICE = os.getenv("PROWLARR_SERVICE")
