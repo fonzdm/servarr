@@ -25,7 +25,6 @@ metadata:
   name: init-prowlarr-script
 data:
 {{ ( tpl (.Files.Glob "config/scripts/init-prowlarr.py" ).AsConfig . ) | indent 2 }}
-
 ---
 apiVersion: v1
 kind: ConfigMap 
@@ -36,7 +35,7 @@ data:
 {{ if .Values.indexers }}
   indexers.json: {{ $.Values.indexers | toJson | quote}}
 {{ end }}
-
+---
 apiVersion: v1
 kind: ConfigMap 
 metadata:
