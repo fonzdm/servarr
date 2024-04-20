@@ -45,12 +45,9 @@ Proxy\Profiles\RSS=true
 [Preferences]
 General\Locale=en
 MailNotification\req_auth=true
-WebUI\AuthSubnetWhitelist=192.168.0.0/24, 10.1.0.0/24
-WebUI\AuthSubnetWhitelistEnabled=true
 WebUI\HostHeaderValidation=false
 WebUI\LocalHostAuth=false
 
-#### UPDATE this value
 WebUI\Password_PBKDF2="{{`{{ torrentPassword }}`}}"
 WebUI\UseUPnP=false
 WebUI\Username={{`{{ torrentUsername }}`}}
