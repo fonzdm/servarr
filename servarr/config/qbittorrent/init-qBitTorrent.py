@@ -136,7 +136,7 @@ logger.info("Rendered configuration file:\n\n{0}\n\n".format(conf_rendered))
 logger.info("Checking if target directory exists")
 
 if not os.path.exists(QBITTORRENT_CONF_FILEPATH):
-    logger.warn("{0} does not exists, will create it".format(QBITTORRENT_CONF_FILEPATH))
+    logger.warning("{0} does not exists, will create it".format(QBITTORRENT_CONF_FILEPATH))
     try:
         os.makedirs(QBITTORRENT_CONF_FILEPATH)
     except Exception:
