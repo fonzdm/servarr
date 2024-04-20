@@ -30,13 +30,13 @@ spec:
             - "/bin/sh"
             - "-ec"
           args:
-            - "python3 -u /tmp/init-qBitTorrent.py 2>&1;"
+            - "python3 -u /tmp/init-qbittorrent.py 2>&1;"
           volumeMounts:
             - name: torrent-config-volume
               mountPath: /mnt
             - name: init-script
-              mountPath: /tmp/init-qBitTorrent.py
-              subPath: init-qBitTorrent.py
+              mountPath: /tmp/init-qbittorrent.py
+              subPath: init-qbittorrent.py 
       volumes:
       - name: torrent-config-volume
         persistentVolumeClaim:
