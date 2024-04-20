@@ -20,52 +20,30 @@ spec:
       restartPolicy: Never
       containers:
         - name: qbt-config-injector
-          image: "busybox:latest"
+          image: "dinutac/jinja2docker:latest"
+          env:
+            - name: TORRENT_USERNAME
+              value: {{ .Values.torrent.username }}
+            - name: TORRENT_PASSWORD
+              value: {{ .Values.torrent.password }}
           command:
-          - "sh"
-          - "-c"
-          - |
-            echo "-- DEBUG: qBitTorrent config file being used"
-            cat /tmp/qBittorrent.conf
-            if mkdir -p /mnt/qBittorrent/config/ ; then
-              echo "-- INFO: Created qBitTorrent config directory"
-            else
-              echo "-- ERROR: An error occurred during the creation of the following path: /mnt/qBittorrent/config/"
-              exit 1
-            fi
-            if cp -p /tmp/qBittorrent.conf /mnt/qBittorrent/config/qBittorrent.conf ; then
-              echo "-- INFO: qBitTorrent config file moved in its config directory"
-            else
-              echo "-- ERROR: An error occurred during the qBitTorrent config copy to /mnt/qBittorrent/config/qBittorrent.conf"
-              exit 1
-            fi
-            if chown -R 568:568 /mnt/ ; then
-              echo "-- INFO: /mnt owner changed!"
-            else
-              echo "-- ERROR: An error occurred during the /mnt owner change"
-              exit 1
-            fi
-            if chmod 0644 /mnt/qBittorrent/config/qBittorrent.conf ; then
-              echo "-- INFO: qBitTorrent config file permissions changed!"
-            else
-              echo "-- ERROR: An error occurred while changing the qBitTorrent config file permissions"
-              exit 1
-            fi
-            echo "-- DEBUG: /mnt/qBitTorrent/config/ directory content"
-            ls -la /mnt/qBittorrent/config/
+            - "/bin/sh"
+            - "-ec"
+          args:
+            - "python3 -u /tmp/init-qbittorrent.py 2>&1;"
           volumeMounts:
             - name: torrent-config-volume
               mountPath: /mnt
-            - name: profile-config
-              mountPath: /tmp/qBittorrent.conf
-              subPath: qBittorrent.conf
+            - name: init-script
+              mountPath: /tmp/init-qbittorrent.py
+              subPath: init-qbittorrent.py 
       volumes:
       - name: torrent-config-volume
         persistentVolumeClaim:
           claimName: {{ .Values.volumes.torrentConfig.name }}
-      - name: profile-config
-        secret:
-          secretName: qbittorrent-profile-config
+      - name: init-script
+        configMap:
+          name: init-qbittorrent-python-script
           defaultMode: 0644
           # items:
           # - key: qBittorrent.conf
