@@ -46,4 +46,4 @@ metadata:
     helm.sh/hook-delete-policy: hook-failed, before-hook-creation
   name: init-qbittorrent-python-script
 data:
-{{ ( tpl (.Files.Glob "config/qbittorrent/init-qbittorrent.py" ).AsConfig . ) | indent 2 }}
+{{ ( tpl (.Files.Glob "config/scripts/init-qbittorrent.py" ).AsConfig . ) | indent 2 }}
