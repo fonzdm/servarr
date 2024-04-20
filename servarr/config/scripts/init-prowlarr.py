@@ -1,7 +1,7 @@
 #!/usr/local/bin/python3
 
 import requests
-import os
+import os, sys
 import logging
 from json import JSONDecodeError
 import json
