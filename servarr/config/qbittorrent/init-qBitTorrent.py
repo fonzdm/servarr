@@ -110,7 +110,7 @@ hidden_password = (
 )
 logger.info("Password (hidden) to be set: {0}".format(hidden_password))
 
-logger.info("Generating qBitTorrent compliant hased password")
+logger.info("Generating qBitTorrent compliant hashed password")
 try:
     hashed_password = qbittorrent_passwd(TORRENT_PASSWORD)
 except Exception:
