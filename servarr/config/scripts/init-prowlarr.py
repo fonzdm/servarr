@@ -81,7 +81,9 @@ res = post(
     body=body
 )
 
-# TO-DO: Check for response status code and decide what to do
+if res["code"] != 201:
+    logger.error("There was an error while setting the Flaresolverr tags!")
+    sys.exit(1)
 
 logger.info("Setup Radarr in Prowlarr")
 
@@ -138,7 +140,9 @@ res = post(
     body=body
 )
 
-# TO-DO: Check for response status code and decide what to do
+if res["code"] != 201:
+    logger.error("There was an error while setting Radarr in Prowlarr!")
+    sys.exit(1)
 
 logger.info("Setup Sonarr in Prowlarr")
 
@@ -195,7 +199,9 @@ res = post(
     body=body
 )
 
-# TO-DO: Check for response status code and decide what to do
+if res["code"] != 201:
+    logger.error("There was an error while setting Sonarr in Prowlarr!")
+    sys.exit(1)
 
 logger.info("Setup qBitTorrent in Prowlarr")
 
@@ -281,7 +287,9 @@ res = post(
     body=body
 )
 
-# TO-DO: Check for response status code and decide what to do
+if res["code"] != 201:
+    logger.error("There was an error while setting qBitTorrent in Prowlarr!")
+    sys.exit(1)
 
 logger.info("Setup Remote Path Mapping")
 
@@ -297,7 +305,9 @@ res = post(
     body=body
 )
 
-# TO-DO: Check for response status code and decide what to do
+if res["code"] != 201:
+    logger.error("There was an error while setting the Remote Path Mapping!")
+    sys.exit(1)
 
 logger.info("Setup Flaresolverr in Prowlarr")
 
@@ -331,7 +341,9 @@ res = post(
     body=body
 )
 
-# TO-DO: Check for response status code and decide what to do
+if res["code"] != 201:
+    logger.error("There was an error while setting Flaresolverr in Prowlarr!")
+    sys.exit(1)
 
 indexersFile = "/mnt/indexers.json"
 if os.path.isfile(indexersFile):
@@ -349,10 +361,11 @@ if os.path.isfile(indexersFile):
 
     for index in indexers:
         logger.debug("Setup {} index".format(index["name"]))
-        post(
+        res = post(
             url="http://{}/api/v1/indexer".format(PROWLARR_HOST),
             body=index["body"],
             headers=headers
         )
-    
-    # TO-DO: Check for response status code and decide what to do
+
+        if res["code"] != 201:
+            logger.error("There was an error while setting the indexer {}!".format(index["name"]))

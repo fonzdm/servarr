@@ -136,11 +136,15 @@ body = {
     "tags": []
 }
 
-post(
+res = post(
     url="http://{}/api/v3/downloadclient".format(RADARR_HOST),
     headers=headers,
     body=body
 )
+
+if res["code"] != 201:
+    logger.error("There was an error while setting qBitTorrent in Radarr!")
+    sys.exit(1)
 
 logger.info("Setup Remote Path Mapping")
 
@@ -150,11 +154,15 @@ body = {
     "localPath": "/mnt/downloads/"
 }
 
-post(
+res = post(
     url="http://{}/api/v3/remotepathmapping".format(RADARR_HOST),
     headers=headers,
     body=body
 )
+
+if res["code"] != 201:
+    logger.error("There was an error while setting the Remote Path Mapping!")
+    sys.exit(1)
 
 logger.info("Setup Root Folder")
 
@@ -162,8 +170,12 @@ body = {
     "path": "/mnt/media/"
 }
 
-post(
+res = post(
     url="http://{}/api/v3/rootFolder".format(RADARR_HOST),
     headers=headers,
     body=body
 )
+
+if res["code"] != 201:
+    logger.error("There was an error while setting the Root Folder!")
+    sys.exit(1)

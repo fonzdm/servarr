@@ -77,7 +77,9 @@ def setup_location():
         body=body
     )
     
-    # TO-DO: Check for response status code and decide what to do
+    if res["code"] != 201:
+        logger.error("There was an error while setting the location!")
+        sys.exit(1)
 
 setup_location()
 
@@ -121,7 +123,9 @@ res = post(
     body=body
 )
 
-# TO-DO: Check for response status code and decide what to do
+if res["code"] != 201:
+    logger.error("There was an error while setting the user {}!".format(JELLYFIN_USERNAME))
+    sys.exit(1)
 
 logger.info("Setup the library")
 
@@ -248,7 +252,9 @@ res = post(
     body=body
 )
 
-# TO-DO: Check for response status code and decide what to do
+if res["code"] != 201:
+    logger.error("There was an error while setting the library!")
+    sys.exit(1)
 
 logger.debug("For some reason we have to setup the location twice..")
 
@@ -267,7 +273,9 @@ res = post(
     body=body
 )
 
-# TO-DO: Check for response status code and decide what to do
+if res["code"] != 201:
+    logger.error("There was an error while setting the remote access!")
+    sys.exit(1)
 
 logger.info("Finalize the setup")
 
@@ -277,4 +285,6 @@ res = post(
     body={}
 )
 
-# TO-DO: Check for response status code and decide what to do
+if res["code"] != 201:
+    logger.error("There was an error while finalizing the Jellyfin setup!")
+    sys.exit(1)

@@ -142,7 +142,9 @@ res = post(
     body=body
 )
 
-# TO-DO: Check for response status code and decide what to do
+if res["code"] != 201:
+    logger.error("There was an error while setting qBitTorrent in Sonarr!")
+    sys.exit(1)
 
 logger.info("Setup qBitTorrent Remote Path Mapping in Sonarr")
 
@@ -158,7 +160,9 @@ res = post(
     body=body
 )
 
-# TO-DO: Check for response status code and decide what to do
+if res["code"] != 201:
+    logger.error("There was an error while setting the Remote Path Mapping!")
+    sys.exit(1)
 
 logger.info("Setup Root Folder in Sonarr")
 
@@ -172,4 +176,6 @@ res = post(
     body=body
 )
 
-# TO-DO: Check for response status code and decide what to do
+if res["code"] != 201:
+    logger.error("There was an error while setting the Root Folder!")
+    sys.exit(1)
