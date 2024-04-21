@@ -21,7 +21,7 @@ These instructions will get you a copy of the project up and running on your loc
 $ git clone https://github.com/fonzdm/servarr.git && cd servarr
 ```
 
-2. Do your magic by updating/adding files 😎
+2. Do your magic ✨
 3. Prepare your [`values.yaml`](#values)
 4. Try it in your cluster to check that everything is fine (replace the `servarr/` with the chart folder if your workdir is different):
 
