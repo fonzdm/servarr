@@ -64,8 +64,8 @@ def make_post(endpoint="", body=None):
         "POST",
         "Body:",
         str(body),
-        ", ".join([": ".join(header) for header in session.headers]),
-        ", ".join([": ".join(cookie) for cookie in session.cookies])
+        ", ".join([f'{key}: {value}' for key,value in session.headers.items()]),
+        ", ".join([f'{key}: {value}' for key,value in session.cookies.items()])
     ]))
 
     response = session.post(
@@ -76,7 +76,7 @@ def make_post(endpoint="", body=None):
 
     logger.debug(" ".join([
         "Status Code:",
-        response.status_code,
+        str(response.status_code),
         "Response body:",
         response.text
     ]))
