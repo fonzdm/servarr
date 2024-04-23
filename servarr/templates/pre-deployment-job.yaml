@@ -20,7 +20,7 @@ spec:
       restartPolicy: Never
       containers:
         - name: qbt-config-injector
-          image: "dinutac/jinja2docker:latest"
+          image: dinutac/jinja2docker:2.1.8
           imagePullPolicy: IfNotPresent
           env:
             - name: TORRENT_USERNAME
