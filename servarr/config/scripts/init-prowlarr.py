@@ -212,11 +212,11 @@ headers = {
 }
 
 body = {
-    "enable": True,
+    "enable": true,
     "protocol": "torrent",
     "priority": 1,
-    "removeCompletedDownloads": True,
-    "removeFailedDownloads": True,
+    "categories": [],
+    "supportsCategories": true,
     "name": "qBittorrent",
     "fields": [
         {
@@ -229,7 +229,7 @@ body = {
         },
         {
             "name": "useSsl",
-            "value": False
+            "value": false
         },
         {
             "name": "urlBase"
@@ -243,18 +243,11 @@ body = {
             "value": TORRENT_PASSWORD
         },
         {
-            "name": "movieCategory",
-            "value": "radarr"
+            "name": "category",
+            "value": "prowlarr"
         },
         {
-            "name": "movieImportedCategory"
-        },
-        {
-            "name": "recentMoviePriority",
-            "value": 0
-        },
-        {
-            "name": "olderMoviePriority",
+            "name": "priority",
             "value": 0
         },
         {
@@ -263,11 +256,11 @@ body = {
         },
         {
             "name": "sequentialOrder",
-            "value": False
+            "value": false
         },
         {
             "name": "firstAndLast",
-            "value": False
+            "value": false
         },
         {
             "name": "contentLayout",
@@ -277,7 +270,7 @@ body = {
     "implementationName": "qBittorrent",
     "implementation": "QBittorrent",
     "configContract": "QBittorrentSettings",
-    "infoLink": "https://wiki.servarr.com/radarr/supported#qbittorrent",
+    "infoLink": "https://wiki.servarr.com/prowlarr/supported#qbittorrent",
     "tags": []
 }
 
