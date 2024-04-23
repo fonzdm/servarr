@@ -108,7 +108,7 @@ spec:
             - "/bin/sh"
             - "-ec"
           args:
-            - "curl -k -X POST \"http://servarr-prowlarr.{{ .Release.Namespace }}.svc.cluster.local:9696/api/v1/downloadclient\" -H 'content-type: application/json' -H 'x-api-key: $(APIKEY)' -H 'x-requested-with: XMLHttpRequest' -d '{\"enable\":true,\"protocol\":\"torrent\",\"priority\":1,\"removeCompletedDownloads\":true,\"removeFailedDownloads\":true,\"name\":\"qBittorrent\",\"fields\":[{\"name\":\"host\",\"value\":\"servarr-qbittorrent\"},{\"name\":\"port\",\"value\":\"10095\"},{\"name\":\"useSsl\",\"value\":false},{\"name\":\"urlBase\"},{\"name\":\"username\",\"value\":\"$(TORRENT_ADMIN)\"},{\"name\":\"password\",\"value\":\"$(TORRENT_PASSWORD)\"},{\"name\":\"movieCategory\",\"value\":\"radarr\"},{\"name\":\"movieImportedCategory\"},{\"name\":\"recentMoviePriority\",\"value\":0},{\"name\":\"olderMoviePriority\",\"value\":0},{\"name\":\"initialState\",\"value\":0},{\"name\":\"sequentialOrder\",\"value\":false},{\"name\":\"firstAndLast\",\"value\":false},{\"name\":\"contentLayout\",\"value\":0}],\"implementationName\":\"qBittorrent\",\"implementation\":\"QBittorrent\",\"configContract\":\"QBittorrentSettings\",\"infoLink\":\"https://wiki.servarr.com/radarr/supported#qbittorrent\",\"tags\":[]}'" 
+            - "curl -k -X POST \"http://servarr-prowlarr.{{ .Release.Namespace }}.svc.cluster.local:9696/api/v1/downloadclient\" -H 'content-type: application/json' -H 'x-api-key: $(APIKEY)' -H 'x-requested-with: XMLHttpRequest' -d '{\"enable\":true,\"protocol\":\"torrent\",\"priority\":1,\"categories\":[],\"supportsCategories\":true,\"name\":\"qBittorrent\",\"fields\":[{\"name\":\"host\",\"value\":\"{{ .Release.Namespace }}-qbittorrent\"},{\"name\":\"port\",\"value\":\"10095\"},{\"name\":\"useSsl\",\"value\":false},{\"name\":\"urlBase\"},{\"name\":\"username\",\"value\":\"$(TORRENT_ADMIN)\"},{\"name\":\"password\",\"value\":\"$(TORRENT_PASSWORD)\"},{\"name\":\"category\",\"value\":\"prowlarr\"},{\"name\":\"priority\",\"value\":0},{\"name\":\"initialState\",\"value\":0},{\"name\":\"sequentialOrder\",\"value\":false},{\"name\":\"firstAndLast\",\"value\":false},{\"name\":\"contentLayout\",\"value\":0}],\"implementationName\":\"qBittorrent\",\"implementation\":\"QBittorrent\",\"configContract\":\"QBittorrentSettings\",\"infoLink\":\"https://wiki.servarr.com/prowlarr/supported#qbittorrent\",\"tags\":[]}'"
           env:
             - name: APIKEY
               value: "{{ .Values.global.apikey }}"
@@ -133,16 +133,6 @@ spec:
             - "-ec"
           args:
             - "curl -k -X POST \"http://servarr-radarr.{{ .Release.Namespace }}.svc.cluster.local:7878/api/v3/remotepathmapping\" -H 'content-type: application/json' -H 'x-api-key: $(APIKEY)' -H 'x-requested-with: XMLHttpRequest' -d '{\"host\":\"servarr-qbittorrent\",\"remotePath\":\"/downloads\",\"localPath\":\"/mnt/downloads/\"}'" 
-          env:
-            - name: APIKEY
-              value: "{{ .Values.global.apikey }}"
-        - name: prowlarr-vs-qbt-remote-mapping-finalizer
-          image: "rapidfort/curl:latest"
-          command:
-            - "/bin/sh"
-            - "-ec"
-          args:
-            - "curl -k -X POST \"http://servarr-prowlarr.{{ .Release.Namespace }}.svc.cluster.local:9696/api/v3/remotepathmapping\" -H 'content-type: application/json' -H 'x-api-key: $(APIKEY)' -H 'x-requested-with: XMLHttpRequest' -d '{\"host\":\"servarr-qbittorrent\",\"remotePath\":\"/downloads\",\"localPath\":\"/mnt/downloads/\"}'" 
           env:
             - name: APIKEY
               value: "{{ .Values.global.apikey }}"
