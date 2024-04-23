@@ -21,7 +21,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: wait-for-jellyseerr
-          image: rapidfort/curl:latest
+          image: rapidfort/curl:8.7.1
           command:
             - "sh"
             - "-c"
