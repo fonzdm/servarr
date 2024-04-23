@@ -21,6 +21,7 @@ spec:
       initContainers:
         - name: wait-for-jellyfin
           image: rapidfort/curl:8.7.1
+          imagePullPolicy: IfNotPresent
           command:
             [
               "sh",
@@ -30,6 +31,7 @@ spec:
       containers:
       - name: initialize-jellyfin
         image: "nyurik/alpine-python3-requests"
+        imagePullPolicy: IfNotPresent
         env:
           - name: PYTHONUNBUFFERED
             value: "1"

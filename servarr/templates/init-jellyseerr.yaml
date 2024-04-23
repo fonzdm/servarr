@@ -22,6 +22,7 @@ spec:
       initContainers:
         - name: wait-for-jellyseerr
           image: rapidfort/curl:8.7.1
+          imagePullPolicy: IfNotPresent
           command:
             - "sh"
             - "-c"
@@ -29,6 +30,7 @@ spec:
       containers:
       - name: initialize-jellyseer
         image: "nyurik/alpine-python3-requests"
+        imagePullPolicy: IfNotPresent
         env:
           - name: PYTHONUNBUFFERED
             value: "1"

@@ -21,6 +21,7 @@ spec:
       containers:
         - name: qbt-config-injector
           image: "dinutac/jinja2docker:latest"
+          imagePullPolicy: IfNotPresent
           env:
             - name: TORRENT_USERNAME
               value: {{ .Values.torrent.username }}
