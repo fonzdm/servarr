@@ -123,7 +123,7 @@ res = post(
     body=body
 )
 
-if res["code"] != 201:
+if res["code"] != 204:
     logger.error("There was an error while setting the user {}!".format(JELLYFIN_USERNAME))
     sys.exit(1)
 
