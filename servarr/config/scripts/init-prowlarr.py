@@ -284,24 +284,6 @@ if res["code"] != 201:
     logger.error("There was an error while setting qBitTorrent in Prowlarr!")
     sys.exit(1)
 
-logger.info("Setup Remote Path Mapping")
-
-body = {
-    "host": "servarr-qbittorrent",
-    "remotePath": "/downloads",
-    "localPath":"/mnt/downloads/"
-}
-
-res = post(
-    url="http://{}/api/v3/remotepathmapping".format(PROWLARR_HOST),
-    headers=headers,
-    body=body
-)
-
-if res["code"] != 201:
-    logger.error("There was an error while setting the Remote Path Mapping!")
-    sys.exit(1)
-
 logger.info("Setup Flaresolverr in Prowlarr")
 
 body = {
