@@ -285,6 +285,6 @@ res = post(
     body={}
 )
 
-if res["code"] != 201:
+if res["code"] != 204:
     logger.error("There was an error while finalizing the Jellyfin setup!")
     sys.exit(1)
