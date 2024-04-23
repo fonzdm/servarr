@@ -95,7 +95,7 @@ logger.info("Ping GET user endpoint")
 logger.debug(" ".join([
     "GET",
     "http://{}/Startup/User".format(JELLYFIN_HOST),
-    ", ".join([": ".join(header) for header in headers])
+    ", ".join(f'{key}: {value}' for key,value in headers.items()),
 ]))
 
 response = requests.get(
