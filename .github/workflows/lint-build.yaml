@@ -3,11 +3,11 @@ name: Helm Chart Lint & Build
 on:
   push:
     branches:
-      - 'dev'
+      - "dev"
   pull_request:
     branches:
-      - 'dev'
-      - 'main'
+      - "dev"
+      - "main"
 
 jobs:
   lint:
@@ -35,7 +35,7 @@ jobs:
         uses: helm/chart-testing-action@v2.6.1
 
       - name: Run chart-testing (lint)
-        run: ct lint --chart-dirs=servarr/ --charts=servarr/ --validate-maintainers=false
+        run: ct lint --chart-dirs=servarr/servarr-chart --charts=servarr/servarr-chart --validate-maintainers=false
 
   build:
     name: build
@@ -51,10 +51,10 @@ jobs:
         uses: azure/setup-helm@v4.1.0
 
       - name: Helm Dependency update
-        run: helm dependency update servarr/ --debug
+        run: helm dependency update servarr/servarr-chart --debug
 
       - name: Helm Template
-        run: helm template servarr servarr/ --debug -f .github/ci/ci-values.yaml
+        run: helm template servarr servarr/servarr-chart --debug -f .github/ci/ci-values.yaml
 
       - name: Create Package
-        run: helm package servarr/
+        run: helm package servarr/servarr-chart

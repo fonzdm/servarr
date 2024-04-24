@@ -1,25 +1,26 @@
-* **Please check if the PR fulfills these requirements**
-- [ ] The branch naming convention follows our guidelines
-- [ ] Docs have been added / updated (for bug fixes / features)
+- **Please check if the PR fulfills these requirements**
 
-* **What kind of change does this PR introduce?** (Bug fix, feature, docs update, ...)
+* [ ] The branch naming convention follows our guidelines
+* [ ] Docs have been added / updated (for bug fixes / features)
 
-<placeholder>
-
-* **What is the current behavior?** (You can also link to an open issue here)
+- **What kind of change does this PR introduce?** (Bug fix, feature, docs update, ...)
 
 <placeholder>
 
-* **What is the new behavior (if this is a feature change)?**
+- **What is the current behavior?** (You can also link to an open issue here)
 
 <placeholder>
 
-* **Does this PR introduce a breaking change?** (What changes might users need to make in their application due to this PR?)
+- **What is the new behavior (if this is a feature change)?**
 
 <placeholder>
 
-* **Other information**:
+- **Does this PR introduce a breaking change?** (What changes might users need to make in their application due to this PR?)
 
 <placeholder>
 
-<!-- By submitting this Pull Request, you agree to follow our [Code of Conduct](https://github.com/fonzdm/servarr/CONTRIBUTING.md) -->
+- **Other information**:
+
+<placeholder>
+
+<!-- By submitting this Pull Request, you agree to follow our [Code of Conduct](https://github.com/fonzdm/servarr/servarr-chartCONTRIBUTING.md) -->

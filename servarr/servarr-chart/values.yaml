@@ -1,0 +1,956 @@
+global:
+  # -- (string) Insert your Prowlarr, Sonarr, Radarr API key here (one to rule them all!). Do not remove the `&apikey` anchor!
+  # @default -- No default value is configured for security reasons
+  # @section -- Global
+  apikey: &apikey
+  # -- (string) Insert your storage class here, e.g.: &storageClassName network-block. Do not remove the `&storageClassName` anchor!
+  # @section -- Global
+  storageClassName: &storageClassName "network-block"
+  # -- (string) Insert your cert manager cluster issuer, e.g.: letsencrypt-cloudflare. Do not remove the `&issuer` anchor!
+  # @default -- No default value, leave empty if not required
+  # @section -- Global
+  certManagerClusterIssuer: &issuer
+
+metrics:
+  # -- Anchor to set wether to deploy the export sidecar pods or not. Requires the Prometheus stack. Do not remove the `&metricsEnabled` anchor!
+  # @section -- Metrics
+  enabled: &metricsEnabled false
+
+# @ignore
+initJellyseerr: true
+
+notifications:
+  telegram:
+    # -- Enable the Telegram notifications
+    # @section -- Jellyseerr
+    enabled: true
+    # -- (string) Insert the Telegram Chat id, check @get_id_bot for this
+    # @section -- Jellyseerr
+    # @default -- No default value
+    chat_id:
+    # -- (string) Insert your Telegram Bot API token
+    # @section -- Jellyseerr
+    # @default -- No default value
+    bot_apitoken:
+
+dash:
+  # -- (string) Insert the Jellyfin username (will be used also for Jellyseerr)
+  # @section -- Jellyfin
+  # @default -- No default value
+  username:
+  # -- (string) Insert Jellyfin password (will be used also for Jellyseerr)
+  # @section -- Jellyfin
+  # @default -- No default value
+  password:
+  # -- (string) Insert Jellyfin login mail (will be used also for Jellyseerr integration)
+  # @section -- Jellyfin
+  # @default -- No default value
+  mail:
+  # -- (string) Insert the Jellyfin country code
+  # @section -- Jellyfin
+  # @default -- US
+  countryCode: "US"
+  # -- (string) Insert the Jellyfin preferred language
+  # @section -- Jellyfin
+  # @default -- en
+  preferredLanguage: "en"
+
+torrent:
+  # -- (string) username of the qBitTorrent admin user
+  # @section -- Torrent
+  # @default -- No default value
+  username:
+  # -- (string) password of the qBitTorrent admin user. Must be at least of 8 characters.
+  # @section -- Torrent
+  # @default -- No default value
+  password:
+
+# -- The indexers list. Each element of the list is the yaml-formatted body of the [Prowlarr API request](https://prowlarr.com/docs/api/#/Indexer/post_api_v1_indexer) to add that index.
+# @default -- The body of the 1337x index is provided as default
+# @section -- Prowlarr
+indexers:
+  # @ignored
+  - name: 1337x
+    body:
+      added: "0001-01-01T00:00:00Z"
+      appProfileId: 1
+      capabilities:
+        bookSearchParams:
+          - q
+        categories:
+          - id: 5000
+            name: TV
+            subCategories:
+              - id: 5070
+                name: TV/Anime
+                subCategories: []
+              - id: 5040
+                name: TV/HD
+                subCategories: []
+              - id: 5030
+                name: TV/SD
+                subCategories: []
+              - id: 5080
+                name: TV/Documentary
+                subCategories: []
+          - id: 3000
+            name: Audio
+            subCategories:
+              - id: 3010
+                name: Audio/MP3
+                subCategories: []
+              - id: 3040
+                name: Audio/Lossless
+                subCategories: []
+              - id: 3020
+                name: Audio/Video
+                subCategories: []
+              - id: 3050
+                name: Audio/Other
+                subCategories: []
+              - id: 3030
+                name: Audio/Audiobook
+                subCategories: []
+          - id: 2000
+            name: Movies
+            subCategories:
+              - id: 2070
+                name: Movies/DVD
+                subCategories: []
+              - id: 2030
+                name: Movies/SD
+                subCategories: []
+              - id: 2010
+                name: Movies/Foreign
+                subCategories: []
+              - id: 2040
+                name: Movies/HD
+                subCategories: []
+              - id: 2060
+                name: Movies/3D
+                subCategories: []
+              - id: 2045
+                name: Movies/UHD
+                subCategories: []
+          - id: 4000
+            name: PC
+            subCategories:
+              - id: 4030
+                name: PC/Mac
+                subCategories: []
+              - id: 4070
+                name: PC/Mobile-Android
+                subCategories: []
+              - id: 4060
+                name: PC/Mobile-iOS
+                subCategories: []
+              - id: 4050
+                name: PC/Games
+                subCategories: []
+              - id: 4040
+                name: PC/Mobile-Other
+                subCategories: []
+          - id: 1000
+            name: Console
+            subCategories:
+              - id: 1080
+                name: Console/PS3
+                subCategories: []
+              - id: 1020
+                name: Console/PSP
+                subCategories: []
+              - id: 1040
+                name: Console/XBox
+                subCategories: []
+              - id: 1050
+                name: Console/XBox 360
+                subCategories: []
+              - id: 1090
+                name: Console/Other
+                subCategories: []
+              - id: 1030
+                name: Console/Wii
+                subCategories: []
+              - id: 1010
+                name: Console/NDS
+                subCategories: []
+              - id: 1110
+                name: Console/3DS
+                subCategories: []
+              - id: 1180
+                name: Console/PS4
+                subCategories: []
+          - id: 6000
+            name: XXX
+            subCategories:
+              - id: 6010
+                name: XXX/DVD
+                subCategories: []
+              - id: 6060
+                name: XXX/ImageSet
+                subCategories: []
+          - id: 8000
+            name: Other
+            subCategories:
+              - id: 8010
+                name: Other/Misc
+                subCategories: []
+          - id: 7000
+            name: Books
+            subCategories:
+              - id: 7020
+                name: Books/EBook
+                subCategories: []
+              - id: 7030
+                name: Books/Comics
+                subCategories: []
+        limitsDefault: 100
+        limitsMax: 100
+        movieSearchParams:
+          - q
+        musicSearchParams:
+          - q
+          - album
+          - artist
+        searchParams:
+          - q
+          - q
+        supportsRawSearch: true
+        tvSearchParams:
+          - q
+          - season
+          - ep
+      configContract: CardigannSettings
+      definitionName: 1337x
+      description: 1337X is a Public torrent site that offers verified torrent downloads
+      downloadClientId: 0
+      enable: true
+      fields:
+        - name: definitionFile
+          value: 1337x
+        - name: baseUrl
+          value: https://1337x.proxyninja.org/
+        - name: baseSettings.queryLimit
+        - name: baseSettings.grabLimit
+        - name: baseSettings.limitsUnit
+          value: 0
+        - name: torrentBaseSettings.appMinimumSeeders
+        - name: torrentBaseSettings.seedRatio
+        - name: torrentBaseSettings.seedTime
+        - name: torrentBaseSettings.packSeedTime
+        - name: downloadlink
+          value: 1
+        - name: downloadlink2
+          value: 0
+        - name: sort
+          value: 0
+        - name: type
+          value: 1
+      implementation: Cardigann
+      implementationName: Cardigann
+      indexerUrls:
+        - https://1337x.to/
+        - https://1337x.st/
+        - https://x1337x.ws/
+        - https://x1337x.eu/
+        - https://x1337x.se/
+        - https://1337x.so/
+        - https://1337x.unblockit.africa/
+        - https://1337x.unblockninja.com/
+        - https://1337x.ninjaproxy1.com/
+        - https://1337x.proxyninja.org/
+        - https://1337x.torrentbay.st/
+      infoLink: https://wiki.servarr.com/prowlarr/supported-indexers#1337x
+      language: en-US
+      legacyUrls:
+        - https://1337x.is/
+        - https://1337x.gd/
+        - https://1337x.nocensor.lol/
+        - https://1337x.unblockit.ink/
+        - https://1337x.nocensor.art/
+        - https://1337x.unblockit.bio/
+        - https://1337x.unblockit.boo/
+        - https://1337x.mrunblock.guru/
+        - https://1337x.mrunblock.life/
+        - https://1337x.unblockit.click/
+        - https://1337x.unblockit.asia/
+        - https://1337x.unblockit.mov/
+        - https://1337x.unblockit.rsvp/
+        - https://1337x.unblockit.vegas/
+        - https://1337x.unblockit.esq/
+        - https://1337x.unblockit.zip/
+        - https://1337x.unblockit.foo/
+        - https://1337x.unblockit.ing/
+        - https://1337x.mrunblock.bond/
+        - https://1337x.unblockit.date/
+        - https://1337x.unblockit.dad/
+      name: 1337x
+      priority: 25
+      privacy: public
+      protocol: torrent
+      redirect: false
+      sortName: 1337x
+      supportsPagination: false
+      supportsRedirect: false
+      supportsRss: true
+      supportsSearch: true
+      tags:
+        - 1
+  - name: ilcorsaroblu
+    body:
+      appProfileId: 1
+      capabilities:
+        bookSearchParams:
+          - q
+        categories:
+          - id: 6000
+            name: XXX
+            subCategories: []
+          - id: 4000
+            name: PC
+            subCategories:
+              - id: 4070
+                name: PC/Mobile-Android
+                subCategories: []
+              - id: 4060
+                name: PC/Mobile-iOS
+                subCategories: []
+              - id: 4010
+                name: PC/0day
+                subCategories: []
+              - id: 4030
+                name: PC/Mac
+                subCategories: []
+              - id: 4050
+                name: PC/Games
+                subCategories: []
+          - id: 7000
+            name: Books
+            subCategories:
+              - id: 7020
+                name: Books/EBook
+                subCategories: []
+              - id: 7030
+                name: Books/Comics
+                subCategories: []
+              - id: 7010
+                name: Books/Mags
+                subCategories: []
+          - id: 1000
+            name: Console
+            subCategories:
+              - id: 1040
+                name: Console/XBox
+                subCategories: []
+              - id: 1010
+                name: Console/NDS
+                subCategories: []
+          - id: 3000
+            name: Audio
+            subCategories:
+              - id: 3010
+                name: Audio/MP3
+                subCategories: []
+          - id: 2000
+            name: Movies
+            subCategories:
+              - id: 2040
+                name: Movies/HD
+                subCategories: []
+              - id: 2020
+                name: Movies/Other
+                subCategories: []
+              - id: 2070
+                name: Movies/DVD
+                subCategories: []
+              - id: 2060
+                name: Movies/3D
+                subCategories: []
+              - id: 2045
+                name: Movies/UHD
+                subCategories: []
+          - id: 5000
+            name: TV
+            subCategories:
+              - id: 5030
+                name: TV/SD
+                subCategories: []
+              - id: 5040
+                name: TV/HD
+                subCategories: []
+              - id: 5070
+                name: TV/Anime
+                subCategories: []
+              - id: 5060
+                name: TV/Sport
+                subCategories: []
+              - id: 5080
+                name: TV/Documentary
+                subCategories: []
+          - id: 8000
+            name: Other
+            subCategories: []
+        limitsDefault: 100
+        limitsMax: 100
+        movieSearchParams:
+          - q
+        musicSearchParams:
+          - q
+        searchParams:
+          - q
+          - q
+        supportsRawSearch: false
+        tvSearchParams:
+          - q
+          - season
+          - ep
+      configContract: CardigannSettings
+      definitionName: ilcorsaroblu
+      description: il CorSaRo Blu is an ITALIAN Semi-Private site for TV / MOVIES / GENERAL
+      downloadClientId: 0
+      enable: true
+      fields:
+        - name: definitionFile
+          value: ilcorsaroblu
+        - name: baseUrl
+          value: "https://ilcorsaroblu.org/"
+        - name: baseSettings.queryLimit
+        - name: baseSettings.grabLimit
+        - name: baseSettings.limitsUnit
+          value: 0
+        - name: torrentBaseSettings.appMinimumSeeders
+        - name: torrentBaseSettings.seedRatio
+        - name: torrentBaseSettings.seedTime
+        - name: torrentBaseSettings.packSeedTime
+        - name: username
+          value: ""
+        - name: password
+          value: ""
+        - name: freeleech
+          value: false
+        - name: sort
+          value: 1
+        - name: type
+          value: 1
+      implementation: Cardigann
+      implementationName: Cardigann
+      indexerUrls:
+        - "https://ilcorsaroblu.org/"
+      infoLink: "https://wiki.servarr.com/prowlarr/supported-indexers#ilcorsaroblu"
+      language: it-IT
+      legacyUrls:
+        - "http://ilcorsaroblu.org/"
+        - "https://www.ilcorsaroblu.info/"
+        - "https://www.ilcorsaroblu.org/"
+        - "https://ilcorsaroblu.online/"
+      name: Il Corsaro Blu
+      priority: 25
+      privacy: semiPrivate
+      protocol: torrent
+      redirect: false
+      sortName: il corsaro blu
+      supportsPagination: false
+      supportsRedirect: false
+      supportsRss: true
+      supportsSearch: true
+      tags: []
+
+# -- For tracking purpose, not used - replaced with pre-existing cluster issuer
+# @section -- Issuer
+# @default -- See the sub fields
+issuer:
+  # @section -- Issuer
+  server: https://acme-v02.api.letsencrypt.org/directory
+  # -- Insert your email address
+  # @section -- Issuer
+  email:
+  # @section -- Issuer
+  secretName: letsencrypt-prod
+  # @section -- Issuer
+  ingressClassName: nginx
+  # -- Insert your CloudFlare key
+  # @section -- Issuer
+  cloudFlareKey:
+
+volumes:
+  # @ignore
+  storageClass: *storageClassName
+  # -- configuration of the volume used for torrent downloads
+  # @section -- Storage
+  # @default -- See the sub fields
+  downloads:
+    # -- Name of the download pvc. Do not remove the `&downloads-volume` anchor!
+    # @section -- Storage
+    name: &downloads-volume downloads-volume
+    # -- Size of the downloads volume, in Kubernets format
+    # @section -- Storage
+    size: 100Gi
+  # -- configuration of the volume used for media storage (i.e.: where movies and tv shows file will be permanently stored)
+  # @section -- Storage
+  # @default -- See the sub fields
+  media:
+    # -- Name of the media pvc. Do not remove the `&media-volume` anchor!
+    # @section -- Storage
+    name: &media-volume media-volume
+    # -- Size of the media volume, in Kubernets format
+    # @section -- Storage
+    size: 250Gi
+  # -- configuration of the volume used for qBitTorrent internal configuration
+  # @section -- Storage
+  # @default -- See the sub fields
+  torrentConfig:
+    # -- Name of the torrent configuration pvc. Do not remove the `&torrentConfig` anchor!
+    # @section -- Storage
+    name: &torrentConfig torrent-config
+    # -- Size of the torrent configuration volume, in Kubernets format
+    # @section -- Storage
+    size: 250Mi
+
+# @ignore
+sonarr:
+  # @ignore
+  metrics:
+    main:
+      enabled: *metricsEnabled
+  # @ignore
+  workload:
+    main:
+      podSpec:
+        containers:
+          main:
+            env:
+              SONARR__API_KEY: *apikey
+  # @ignore
+  ingress:
+    # @ignore
+    sonarr-ing:
+      enabled: true
+      primary: true
+      required: true
+      expandObjectName: false
+      annotations:
+        cert-manager.io/cluster-issuer: *issuer
+      ingressClassName: "nginx"
+      hosts:
+        - host: sonarr.local
+          paths:
+            - path: /
+              pathType: Prefix
+      tls:
+        - hosts:
+            - sonarr.local
+          secretName: sonarr-tls
+      integrations:
+        certManager:
+          enabled: false
+        traefik:
+          enabled: false
+  # @ignore
+  persistence:
+    config:
+      enabled: true
+      type: pvc
+      size: 500Mi
+      accessModes: ReadWriteMany
+      storageClass: *storageClassName
+      targetSelector:
+        main:
+          main:
+            mountPath: /config
+        exportarr:
+          exportarr:
+            mountPath: /config
+            readOnly: true
+    # @ignore
+    media:
+      enabled: true
+      type: pvc
+      existingClaim: *media-volume
+      targetSelector:
+        main:
+          main:
+            mountPath: /mnt/media
+    # @ignore
+    downloads:
+      enabled: true
+      type: pvc
+      existingClaim: *downloads-volume
+      targetSelector:
+        main:
+          main:
+            mountPath: /mnt/downloads
+
+# @ignore
+radarr:
+  # @ignore
+  metrics:
+    main:
+      enabled: *metricsEnabled
+  # @ignore
+  workload:
+    main:
+      podSpec:
+        containers:
+          main:
+            env:
+              RADARR__API_KEY: *apikey
+  # @ignore
+  ingress:
+    # @ignore
+    radarr-ing:
+      enabled: true
+      primary: true
+      required: true
+      expandObjectName: false
+      annotations:
+        cert-manager.io/cluster-issuer: *issuer
+      ingressClassName: "nginx"
+      hosts:
+        - host: radarr.local
+          paths:
+            - path: /
+              pathType: Prefix
+      tls:
+        - hosts:
+            - radarr.local
+          secretName: radarr-tls
+      integrations:
+        certManager:
+          enabled: false
+        traefik:
+          enabled: false
+  persistence:
+    config:
+      enabled: true
+      type: pvc
+      size: 500Mi
+      accessModes: ReadWriteMany
+      storageClass: *storageClassName
+      targetSelector:
+        main:
+          main:
+            mountPath: /config
+        exportarr:
+          exportarr:
+            mountPath: /config
+            readOnly: true
+    media:
+      enabled: true
+      type: pvc
+      existingClaim: *media-volume
+      targetSelector:
+        main:
+          main:
+            mountPath: /mnt/media
+    downloads:
+      enabled: true
+      type: pvc
+      existingClaim: *downloads-volume
+      targetSelector:
+        main:
+          main:
+            mountPath: /mnt/downloads
+
+# @ignore
+jellyfin:
+  metrics:
+    main:
+      enabled: *metricsEnabled
+  # @ignore
+  fallbackDefaults:
+    storageClass:
+    probeType: http
+    serviceProtocol: tcp
+    serviceType: ClusterIP
+    persistenceType: pvc
+    pvcRetain: false
+    pvcSize: 100Gi
+    vctSize: 100Gi
+    accessModes:
+      - ReadWriteMany
+    vctAccessModes:
+      - ReadWriteMany
+    probeTimeouts:
+      liveness:
+        initialDelaySeconds: 10
+        periodSeconds: 10
+        timeoutSeconds: 5
+        failureThreshold: 5
+        successThreshold: 1
+      readiness:
+        initialDelaySeconds: 10
+        periodSeconds: 10
+        timeoutSeconds: 5
+        failureThreshold: 5
+        successThreshold: 2
+      startup:
+        initialDelaySeconds: 10
+        periodSeconds: 5
+        timeoutSeconds: 2
+        failureThreshold: 60
+        successThreshold: 1
+    pgVersion: 16
+  serviceProtocol: tcp
+  ingress:
+    jellyfin-ing:
+      enabled: true
+      primary: true
+      required: true
+      expandObjectName: false
+      annotations:
+        cert-manager.io/cluster-issuer: *issuer
+      ingressClassName: "nginx"
+      hosts:
+        - host: jellyfin.local
+          paths:
+            - path: /
+              pathType: Prefix
+      tls:
+        - hosts:
+            - jellyfin.local
+          secretName: jellyfin-tls
+      integrations:
+        certManager:
+          enabled: false
+        traefik:
+          enabled: false
+  persistence:
+    transcode:
+      enabled: false
+    config:
+      enabled: true
+      type: pvc
+      size: 500Mi
+      accessModes: ReadWriteMany
+      storageClass: *storageClassName
+      targetSelector:
+        main:
+          main:
+            mountPath: /config
+        exportarr:
+          exportarr:
+            mountPath: /config
+            readOnly: true
+    media:
+      enabled: true
+      type: pvc
+      existingClaim: *media-volume
+      targetSelector:
+        main:
+          main:
+            mountPath: /mnt/media
+
+# @ignore
+jellyseerr:
+  metrics:
+    main:
+      enabled: *metricsEnabled
+  # @ignore
+  fallbackDefaults:
+    storageClass:
+    probeType: http
+    serviceProtocol: tcp
+    serviceType: ClusterIP
+    persistenceType: pvc
+    pvcRetain: false
+    pvcSize: 100Gi
+    vctSize: 100Gi
+    accessModes:
+      - ReadWriteMany
+    vctAccessModes:
+      - ReadWriteMany
+    probeTimeouts:
+      liveness:
+        initialDelaySeconds: 10
+        periodSeconds: 10
+        timeoutSeconds: 5
+        failureThreshold: 5
+        successThreshold: 1
+      readiness:
+        initialDelaySeconds: 10
+        periodSeconds: 10
+        timeoutSeconds: 5
+        failureThreshold: 5
+        successThreshold: 2
+      startup:
+        initialDelaySeconds: 10
+        periodSeconds: 5
+        timeoutSeconds: 2
+        failureThreshold: 60
+        successThreshold: 1
+    pgVersion: 16
+  ingress:
+    jellyseerr-ing:
+      enabled: true
+      primary: true
+      required: true
+      expandObjectName: false
+      annotations:
+        cert-manager.io/cluster-issuer: *issuer
+      ingressClassName: "nginx"
+      hosts:
+        - host: jellyseerr.local
+          paths:
+            - path: /
+              pathType: Prefix
+      tls:
+        - hosts:
+            - jellyseerr.local
+          secretName: jellyseerr-tls
+      integrations:
+        certManager:
+          enabled: false
+        traefik:
+          enabled: false
+  persistence:
+    config:
+      enabled: true
+      type: pvc
+      size: 500Mi
+      accessModes: ReadWriteMany
+      storageClass: *storageClassName
+      targetSelector:
+        main:
+          main:
+            mountPath: /app/config
+        exportarr:
+          exportarr:
+            mountPath: /config
+            readOnly: true
+    media:
+      enabled: true
+      type: pvc
+      existingClaim: *media-volume
+      targetSelector:
+        main:
+          main:
+            mountPath: /mnt/media
+
+# @ignore
+qbittorrent:
+  metrics:
+    main:
+      enabled: *metricsEnabled
+  workload:
+    main:
+      podSpec:
+        containers:
+          main:
+            env:
+              QBITTORRENT__USE_PROFILE: true
+  ingress:
+    qbittorrent-ing:
+      enabled: true
+      primary: true
+      required: true
+      expandObjectName: false
+      annotations:
+        cert-manager.io/cluster-issuer: *issuer
+      ingressClassName: "nginx"
+      hosts:
+        - host: torrent.local
+          paths:
+            - path: /
+              pathType: Prefix
+      tls:
+        - hosts:
+            - torrent.local
+          secretName: torrent-tls
+      integrations:
+        certManager:
+          enabled: false
+        traefik:
+          enabled: false
+  persistence:
+    config:
+      enabled: true
+      type: pvc
+      existingClaim: *torrentConfig
+      targetSelector:
+        main:
+          main:
+            mountPath: /config
+        exportarr:
+          exportarr:
+            mountPath: /config
+            readOnly: true
+    downloads:
+      enabled: true
+      type: pvc
+      existingClaim: *downloads-volume
+      targetSelector:
+        main:
+          main:
+            mountPath: /downloads
+
+# @ignore
+prowlarr:
+  metrics:
+    main:
+      enabled: *metricsEnabled
+  workload:
+    main:
+      podSpec:
+        containers:
+          main:
+            env:
+              PROWLARR__API_KEY: *apikey
+  ingress:
+    prowlarr-ing:
+      enabled: true
+      primary: true
+      required: true
+      expandObjectName: false
+      annotations:
+        cert-manager.io/cluster-issuer: *issuer
+      ingressClassName: "nginx"
+      hosts:
+        - host: prowlarr.local
+          paths:
+            - path: /
+              pathType: Prefix
+      tls:
+        - hosts:
+            - prowlarr.local
+          secretName: prowlarr-tls
+      integrations:
+        certManager:
+          enabled: false
+        traefik:
+          enabled: false
+  persistence:
+    config:
+      enabled: true
+      type: pvc
+      size: 500Mi
+      accessModes: ReadWriteMany
+      storageClass: *storageClassName
+      targetSelector:
+        main:
+          main:
+            mountPath: /config
+        exportarr:
+          exportarr:
+            mountPath: /config
+            readOnly: true
+
+# @ignore
+flaresolverr:
+  metrics:
+    main:
+      enabled: *metricsEnabled
+  persistence:
+    config:
+      enabled: true
+      type: pvc
+      size: 500Mi
+      accessModes: ReadWriteMany
+      storageClass: *storageClassName
+      targetSelector:
+        main:
+          main:
+            mountPath: /config
+        exportarr:
+          exportarr:
+            mountPath: /config
+            readOnly: true

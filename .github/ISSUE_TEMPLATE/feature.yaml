@@ -1,9 +1,6 @@
 name: "💡 Feature Request"
 description: Create a new ticket for a new feature request
-labels: [
-  "enhancement",
-  "needs triage"
-]
+labels: ["enhancement", "needs triage"]
 
 body:
   - type: textarea
@@ -26,7 +23,7 @@ body:
     id: terms
     attributes:
       label: Code of Conduct
-      description: By submitting this issue, you agree to follow our [Code of Conduct](https://github.com/fonzdm/servarr/CONTRIBUTING.md)
+      description: By submitting this issue, you agree to follow our [Code of Conduct](https://github.com/fonzdm/servarr/servarr-chartCONTRIBUTING.md)
       options:
         - label: I agree to follow this project's Code of Conduct
           required: true

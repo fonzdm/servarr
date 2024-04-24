@@ -1,0 +1,48 @@
+apiVersion: v1
+kind: ConfigMap 
+metadata:
+  name: init-jellyseerr-python-scripts
+data:
+{{ ( tpl (.Files.Glob "config/scripts/init-jellyseerr.py" ).AsConfig . ) | indent 2 }}
+---
+apiVersion: v1
+kind: ConfigMap 
+metadata:
+  name: init-radarr-script
+data:
+{{ ( tpl (.Files.Glob "config/scripts/init-radarr.py" ).AsConfig . ) | indent 2 }}
+---
+apiVersion: v1
+kind: ConfigMap 
+metadata:
+  name: init-sonarr-script
+data:
+{{ ( tpl (.Files.Glob "config/scripts/init-sonarr.py" ).AsConfig . ) | indent 2 }}
+---
+apiVersion: v1
+kind: ConfigMap 
+metadata:
+  name: init-prowlarr-script
+data:
+{{ ( tpl (.Files.Glob "config/scripts/init-prowlarr.py" ).AsConfig . ) | indent 2 }}
+{{ if .Values.indexers }}
+  indexers.json: {{ $.Values.indexers | toJson | quote}}
+{{ end }}
+---
+apiVersion: v1
+kind: ConfigMap 
+metadata:
+  name: init-jellyfin-script
+data:
+{{ ( tpl (.Files.Glob "config/scripts/init-jellyfin.py" ).AsConfig . ) | indent 2 }}
+---
+apiVersion: v1
+kind: ConfigMap 
+metadata:
+  annotations:
+    helm.sh/hook: pre-install,pre-upgrade
+    helm.sh/hook-weight: "-5"
+    helm.sh/hook-delete-policy: hook-failed, before-hook-creation
+  name: init-qbittorrent-python-script
+data:
+{{ ( tpl (.Files.Glob "config/scripts/init-qbittorrent.py" ).AsConfig . ) | indent 2 }}

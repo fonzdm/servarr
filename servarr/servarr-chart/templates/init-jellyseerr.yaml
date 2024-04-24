@@ -1,0 +1,72 @@
+{{- if .Values.initJellyseerr -}}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: jellyseer-init
+  labels:
+    release: "{{ .Release.Name }}"
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+  annotations:
+    "helm.sh/hook": post-install
+    "helm.sh/hook-delete-policy": before-hook-creation
+    "helm.sh/hook-weight": "40"
+spec:
+  backoffLimit: 1
+  template:
+    metadata:
+      name: "{{.Release.Name}}-jellyseer-finalizer"
+      labels:
+        app: "{{ .Release.Name }}"
+    spec:
+      restartPolicy: Never
+      initContainers:
+        - name: wait-for-jellyseerr
+          image: rapidfort/curl:8.7.1
+          imagePullPolicy: IfNotPresent
+          command:
+            - "sh"
+            - "-c"
+            - "until curl \"http://{{ .Release.Namespace }}-jellyseerr.{{ .Release.Namespace }}.svc.cluster.local:10241\"; do echo waiting for servarr-jellyseerr; sleep 5; done;sleep 10;"
+      containers:
+      - name: initialize-jellyseer
+        image: "nyurik/alpine-python3-requests"
+        imagePullPolicy: IfNotPresent
+        env:
+          - name: PYTHONUNBUFFERED
+            value: "1"
+          - name: JELLYSEERR_HOST
+            value: "{{ .Release.Namespace }}-jellyseerr.{{ .Release.Namespace }}.svc.cluster.local"
+          - name: JELLYSEERR_PORT
+            value: "10241"
+          - name: JELLYFIN_HOST
+            value: "{{ .Release.Namespace }}-jellyfin"
+          - name: JELLYFIN_PORT
+            value: "8096"
+          - name: JELLYFIN_USERNAME
+            value: "{{ $.Values.dash.username }}"
+          - name: JELLYFIN_PASSWORD
+            value: "{{ $.Values.dash.password }}"
+          - name: JELLYFIN_EMAIL
+            value: "{{ $.Values.dash.mail }}"
+          - name: API_KEY
+            value: "{{ $.Values.global.apikey }}"
+          - name: TELEGRAM_NOTIFICATION_ENABLED
+            value: "{{ $.Values.notifications.telegram.enabled }}"
+          - name: TELEGRAM_CHAT_ID
+            value: "{{ $.Values.notifications.telegram.chat_id}}"
+          - name: TELEGRAM_BOT_APITOKEN
+            value: "{{ $.Values.notifications.telegram.bot_apitoken }}"
+        command:
+          - "/bin/sh"
+          - "-ec"
+        args:
+          - "python3 -u /mnt/init-jellyseerr.py 2>&1;"
+        volumeMounts:
+          - mountPath: "/mnt"
+            name: python-script
+      volumes:
+        - name: python-script
+          configMap:
+            name: init-jellyseerr-python-scripts
+
+{{- end }}
