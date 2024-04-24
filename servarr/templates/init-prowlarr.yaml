@@ -26,7 +26,7 @@ spec:
             [
               "sh",
               "-c",
-              "until curl  \"http://servarr-prowlarr.{{ .Release.Namespace }}.svc.cluster.local:9696\"; do echo waiting for servarr-prowlarr; sleep 5; done;",
+              "until curl  \"http://{{ .Release.Namespace }}-prowlarr.{{ .Release.Namespace }}.svc.cluster.local:9696\"; do echo waiting for servarr-prowlarr; sleep 5; done;",
             ]
       containers:
       - name: initialize-prowlarr
@@ -36,7 +36,7 @@ spec:
           - name: PYTHONUNBUFFERED
             value: "1"
           - name: PROWLARR_HOST
-            value: "servarr-prowlarr.{{ .Release.Namespace }}.svc.cluster.local:9696"
+            value: "{{ .Release.Namespace }}-prowlarr.{{ .Release.Namespace }}.svc.cluster.local:9696"
           - name: API_KEY
             value: "{{ $.Values.global.apikey }}"
           - name: TORRENT_SERVICE

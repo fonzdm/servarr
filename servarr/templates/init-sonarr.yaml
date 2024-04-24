@@ -26,7 +26,7 @@ spec:
             [
               "sh",
               "-c",
-              "until curl  \"http://servarr-sonarr.{{ .Release.Namespace }}.svc.cluster.local:8989\"; do echo waiting for servarr-sonarr; sleep 5; done;",
+              "until curl  \"http://{{ .Release.Namespace }}-sonarr.{{ .Release.Namespace }}.svc.cluster.local:8989\"; do echo waiting for servarr-sonarr; sleep 5; done;",
             ]
       containers:
       - name: initialize-sonarr
@@ -36,7 +36,7 @@ spec:
           - name: PYTHONUNBUFFERED
             value: "1"
           - name: SONARR_HOST
-            value: "servarr-sonarr.{{ .Release.Namespace }}.svc.cluster.local:8989"
+            value: "{{ .Release.Namespace }}-sonarr.{{ .Release.Namespace }}.svc.cluster.local:8989"
           - name: API_KEY
             value: "{{ $.Values.global.apikey }}"
           - name: TORRENT_SERVICE

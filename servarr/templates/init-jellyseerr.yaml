@@ -26,7 +26,7 @@ spec:
           command:
             - "sh"
             - "-c"
-            - "until curl \"http://servarr-jellyseerr.{{ .Release.Namespace }}.svc.cluster.local:10241\"; do echo waiting for servarr-jellyseerr; sleep 5; done;sleep 10;"
+            - "until curl \"http://{{ .Release.Namespace }}-jellyseerr.{{ .Release.Namespace }}.svc.cluster.local:10241\"; do echo waiting for servarr-jellyseerr; sleep 5; done;sleep 10;"
       containers:
       - name: initialize-jellyseer
         image: "nyurik/alpine-python3-requests"
@@ -35,7 +35,7 @@ spec:
           - name: PYTHONUNBUFFERED
             value: "1"
           - name: JELLYSEERR_HOST
-            value: "servarr-jellyseerr.{{ .Release.Namespace }}.svc.cluster.local"
+            value: "{{ .Release.Namespace }}-jellyseerr.{{ .Release.Namespace }}.svc.cluster.local"
           - name: JELLYSEERR_PORT
             value: "10241"
           - name: JELLYFIN_HOST

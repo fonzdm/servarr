@@ -26,7 +26,7 @@ spec:
             [
               "sh",
               "-c",
-              "until curl  \"http://servarr-radarr.{{ .Release.Namespace }}.svc.cluster.local:7878\"; do echo waiting for servarr-radarr; sleep 5; done;",
+              "until curl  \"http://{{ .Release.Namespace }}-radarr.{{ .Release.Namespace }}.svc.cluster.local:7878\"; do echo waiting for servarr-radarr; sleep 5; done;",
             ]
       containers:
       - name: initialize-radarr
@@ -36,7 +36,7 @@ spec:
           - name: PYTHONUNBUFFERED
             value: "1"
           - name: RADARR_HOST
-            value: "servarr-radarr.{{ .Release.Namespace }}.svc.cluster.local:7878"
+            value: "{{ .Release.Namespace }}-radarr.{{ .Release.Namespace }}.svc.cluster.local:7878"
           - name: API_KEY
             value: "{{ $.Values.global.apikey }}"
           - name: TORRENT_SERVICE
