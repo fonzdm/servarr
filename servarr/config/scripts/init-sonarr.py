@@ -16,7 +16,7 @@ SONARR_HOST = os.getenv("SONARR_HOST")
 API_KEY = os.getenv("API_KEY")
 TORRENT_USERNAME = os.getenv("TORRENT_ADMIN")
 TORRENT_PASSWORD = os.getenv("TORRENT_PASSWORD")
-TORRENT_SERVICE = os.getenv("TORRENT_SERVICE", "servarr-qbittorrent")
+TORRENT_SERVICE = os.getenv("TORRENT_SERVICE")
 
 def post(url: str, headers: dict, body: dict):
     """
