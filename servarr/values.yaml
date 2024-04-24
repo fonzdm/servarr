@@ -52,8 +52,8 @@ dash:
   countryCode: "IT"
   # -- (string) Insert the Jellyfin preferred language
   # @section -- Jellyfin
-  # @default -- it
-  preferredLanguage: "it"
+  # @default -- en
+  preferredLanguage: "en"
 
 torrent:
   # -- (string) username of the qBitTorrent admin user
