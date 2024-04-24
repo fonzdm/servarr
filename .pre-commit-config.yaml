@@ -5,5 +5,5 @@ repos:
       - id: helm-docs-container
         args:
           # Use root folder as the main repo dir is the chart itself
-          - --chart-search-root=servarr
+          - --chart-search-root=servarr/servarr-chart
           - --template-files=README.md.gotmpl
