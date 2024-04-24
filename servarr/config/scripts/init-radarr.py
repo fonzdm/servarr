@@ -149,7 +149,7 @@ if res["code"] != 201:
 logger.info("Setup Remote Path Mapping")
 
 body = {
-    "host": "servarr-qbittorrent",
+    "host": TORRENT_SERVICE,
     "remotePath": "/downloads",
     "localPath": "/mnt/downloads/"
 }
