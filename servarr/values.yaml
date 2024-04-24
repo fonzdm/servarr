@@ -48,8 +48,8 @@ dash:
   mail:
   # -- (string) Insert the Jellyfin country code
   # @section -- Jellyfin
-  # @default -- IT
-  countryCode: "IT"
+  # @default -- US
+  countryCode: "US"
   # -- (string) Insert the Jellyfin preferred language
   # @section -- Jellyfin
   # @default -- en
