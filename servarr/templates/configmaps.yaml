@@ -25,6 +25,9 @@ metadata:
   name: init-prowlarr-script
 data:
 {{ ( tpl (.Files.Glob "config/scripts/init-prowlarr.py" ).AsConfig . ) | indent 2 }}
+{{ if .Values.indexers }}
+  indexers.json: {{ $.Values.indexers | toJson | quote}}
+{{ end }}
 ---
 apiVersion: v1
 kind: ConfigMap 
@@ -32,9 +35,6 @@ metadata:
   name: init-jellyfin-script
 data:
 {{ ( tpl (.Files.Glob "config/scripts/init-jellyfin.py" ).AsConfig . ) | indent 2 }}
-{{ if .Values.indexers }}
-  indexers.json: {{ $.Values.indexers | toJson | quote}}
-{{ end }}
 ---
 apiVersion: v1
 kind: ConfigMap 
