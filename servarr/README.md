@@ -50,8 +50,10 @@ Servarr complete Helm Chart for Kubernetes
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| dash.countryCode | string | US | Insert the Jellyfin country code |
 | dash.mail | string | No default value | Insert Jellyfin login mail (will be used also for Jellyseerr integration) |
 | dash.password | string | No default value | Insert Jellyfin password (will be used also for Jellyseerr) |
+| dash.preferredLanguage | string | en | Insert the Jellyfin preferred language |
 | dash.username | string | No default value | Insert the Jellyfin username (will be used also for Jellyseerr) |
 
 ### Global

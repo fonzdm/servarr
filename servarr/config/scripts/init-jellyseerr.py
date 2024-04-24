@@ -12,7 +12,7 @@ log_format = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(messa
 console_handler.setFormatter(log_format)
 logger.addHandler(console_handler)
 
-APIKEY = os.getenv("APIKEY")
+API_KEY = os.getenv("API_KEY")
 JELLYFIN_USERNAME = os.getenv("JELLYFIN_USERNAME")
 JELLYFIN_PASSWORD = os.getenv("JELLYFIN_PASSWORD")
 JELLYFIN_EMAIL = os.getenv("JELLYFIN_EMAIL")
@@ -33,8 +33,8 @@ def make_get(endpoint=""):
     logger.debug(" ".join([
         url,
         "GET",
-        ", ".join([": ".join(header) for header in session.headers]),
-        ", ".join([": ".join(cookie) for cookie in session.cookies])
+        ", ".join([f'{key}: {value}' for key,value in session.headers.items()]),
+        ", ".join([f'{key}: {value}' for key,value in session.cookies.items()])
     ]))
 
     response = session.get(
@@ -44,7 +44,7 @@ def make_get(endpoint=""):
 
     logger.debug(" ".join([
         "Status Code:",
-        response.status_code,
+        str(response.status_code),
         "Response body:",
         response.text
     ]))
@@ -64,8 +64,8 @@ def make_post(endpoint="", body=None):
         "POST",
         "Body:",
         str(body),
-        ", ".join([": ".join(header) for header in session.headers]),
-        ", ".join([": ".join(cookie) for cookie in session.cookies])
+        ", ".join([f'{key}: {value}' for key,value in session.headers.items()]),
+        ", ".join([f'{key}: {value}' for key,value in session.cookies.items()])
     ]))
 
     response = session.post(
@@ -76,7 +76,7 @@ def make_post(endpoint="", body=None):
 
     logger.debug(" ".join([
         "Status Code:",
-        response.status_code,
+        str(response.status_code),
         "Response body:",
         response.text
     ]))
@@ -135,7 +135,7 @@ sonarr_body = {
     "name": "Sonarr",
     "hostname": "servarr-sonarr",
     "port": 8989,
-    "apiKey": APIKEY,
+    "apiKey": API_KEY,
     "useSsl": False,
     "activeProfileId": 4,
     "activeLanguageProfileId": 1,
@@ -166,7 +166,7 @@ radarr_body = {
     "name": "Radarr",
     "hostname": "servarr-radarr",
     "port": 7878,
-    "apiKey": APIKEY,
+    "apiKey": API_KEY,
     "useSsl": False,
     "activeProfileId": 4,
     "activeProfileName": "HD-1080p",

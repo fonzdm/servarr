@@ -1,0 +1,59 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: sonarr-init
+  labels:
+    release: "{{ .Release.Name }}"
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+  annotations:
+    "helm.sh/hook": post-install
+    "helm.sh/hook-delete-policy": before-hook-creation
+    "helm.sh/hook-weight": "10"
+spec:
+  backoffLimit: 1
+  template:
+    metadata:
+      name: "{{.Release.Name}}-sonarr-finalizer"
+      labels:
+        app: "{{ .Release.Name }}"
+    spec:
+      restartPolicy: Never
+      initContainers:
+        - name: wait-for-sonarr
+          image: rapidfort/curl:8.7.1
+          imagePullPolicy: IfNotPresent
+          command:
+            [
+              "sh",
+              "-c",
+              "until curl  \"http://{{ .Release.Namespace }}-sonarr.{{ .Release.Namespace }}.svc.cluster.local:8989\"; do echo waiting for servarr-sonarr; sleep 5; done;",
+            ]
+      containers:
+      - name: initialize-sonarr
+        image: "nyurik/alpine-python3-requests"
+        imagePullPolicy: IfNotPresent
+        env:
+          - name: PYTHONUNBUFFERED
+            value: "1"
+          - name: SONARR_HOST
+            value: "{{ .Release.Namespace }}-sonarr.{{ .Release.Namespace }}.svc.cluster.local:8989"
+          - name: API_KEY
+            value: "{{ $.Values.global.apikey }}"
+          - name: TORRENT_SERVICE
+            value: "{{ .Release.Namespace }}-qbittorrent"
+          - name: TORRENT_ADMIN
+            value: "{{ $.Values.torrent.username }}"
+          - name: TORRENT_PASSWORD
+            value: "{{ $.Values.torrent.password }}"
+        command:
+          - "/bin/sh"
+          - "-ec"
+        args:
+          - "python3 -u /mnt/init-sonarr.py 2>&1;"
+        volumeMounts:
+          - mountPath: "/mnt"
+            name: python-script
+      volumes:
+        - name: python-script
+          configMap:
+            name: init-sonarr-script

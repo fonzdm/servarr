@@ -1,0 +1,67 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: prowlarr-init
+  labels:
+    release: "{{ .Release.Name }}"
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+  annotations:
+    "helm.sh/hook": post-install
+    "helm.sh/hook-delete-policy": before-hook-creation
+    "helm.sh/hook-weight": "20"
+spec:
+  backoffLimit: 1
+  template:
+    metadata:
+      name: "{{.Release.Name}}-prowlarr-finalizer"
+      labels:
+        app: "{{ .Release.Name }}"
+    spec:
+      restartPolicy: Never
+      initContainers:
+        - name: wait-for-prowlarr
+          image: rapidfort/curl:8.7.1
+          imagePullPolicy: IfNotPresent
+          command:
+            [
+              "sh",
+              "-c",
+              "until curl  \"http://{{ .Release.Namespace }}-prowlarr.{{ .Release.Namespace }}.svc.cluster.local:9696\"; do echo waiting for servarr-prowlarr; sleep 5; done;",
+            ]
+      containers:
+      - name: initialize-prowlarr
+        image: "nyurik/alpine-python3-requests"
+        imagePullPolicy: IfNotPresent
+        env:
+          - name: PYTHONUNBUFFERED
+            value: "1"
+          - name: PROWLARR_HOST
+            value: "{{ .Release.Namespace }}-prowlarr.{{ .Release.Namespace }}.svc.cluster.local:9696"
+          - name: API_KEY
+            value: "{{ $.Values.global.apikey }}"
+          - name: TORRENT_SERVICE
+            value: "{{ .Release.Namespace }}-qbittorrent"
+          - name: TORRENT_ADMIN
+            value: "{{ $.Values.torrent.username }}"
+          - name: TORRENT_PASSWORD
+            value: "{{ $.Values.torrent.password }}"
+          - name: PROWLARR_SERVICE
+            value: "{{ .Release.Namespace }}-prowlarr:9696"
+          - name: RADARR_SERVICE
+            value: "{{ .Release.Namespace }}-radarr:7878"
+          - name: FLARESOLVERR_SERVICE
+            value: "{{ .Release.Namespace }}-flaresolverr:8191"
+          - name: SONARR_SERVICE
+            value: "{{ .Release.Namespace }}-sonarr:8989"
+        command:
+          - "/bin/sh"
+          - "-ec"
+        args:
+          - "python3 -u /mnt/init-prowlarr.py 2>&1;"
+        volumeMounts:
+          - mountPath: "/mnt"
+            name: python-script-and-indexers
+      volumes:
+        - name: python-script-and-indexers
+          configMap:
+            name: init-prowlarr-script
