@@ -46,11 +46,11 @@ dash:
   # @section -- Jellyfin
   # @default -- No default value
   mail:
-  # -- (string) Inser the Jellyfin country code
+  # -- (string) Insert the Jellyfin country code
   # @section -- Jellyfin
   # @default -- IT
   countryCode: "IT"
-  # -- (string) Inser the Jellyfin preferred language
+  # -- (string) Insert the Jellyfin preferred language
   # @section -- Jellyfin
   # @default -- it
   preferredLanguage: "it"
