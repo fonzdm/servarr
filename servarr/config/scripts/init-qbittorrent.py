@@ -50,7 +50,7 @@ WebUI\LocalHostAuth=false
 {{- if not (default .Values.qbittorrent.csrf_protection false) }}
 WebUI\CSRFProtection=false
 WebUI\ClickjackingProtection=false
-{{- else }}
+{{- end }}
 WebUI\Password_PBKDF2="{{`{{ torrentPassword }}`}}"
 WebUI\UseUPnP=false
 WebUI\Username={{`{{ torrentUsername }}`}}
