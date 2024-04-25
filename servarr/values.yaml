@@ -828,6 +828,10 @@ jellyseerr:
 
 # @ignore
 qbittorrent:
+  # -- Whether to enable or disable CSRF Protection on qBitTorrent WebGUI
+  # @section -- Torrent
+  # @default -- false
+  csrf_protection: false
   metrics:
     main:
       enabled: *metricsEnabled
