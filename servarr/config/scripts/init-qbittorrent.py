@@ -47,7 +47,7 @@ General\Locale=en
 MailNotification\req_auth=true
 WebUI\HostHeaderValidation=false
 WebUI\LocalHostAuth=false
-{%- if .Values.qbittorrent.csrf_protection %}
+{%- if not .Values.qbittorrent.csrf_protection %}
 WebUI\CSRFProtection=false
 WebUI\ClickjackingProtection=false
 {%- else %}
