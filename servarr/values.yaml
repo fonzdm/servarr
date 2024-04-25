@@ -826,11 +826,16 @@ jellyseerr:
           main:
             mountPath: /mnt/media
 
-# @ignore
 qbittorrent:
+  # -- Whether to enable or disable CSRF Protection on qBitTorrent WebGUI
+  # @section -- Torrent
+  # @default -- false
+  csrf_protection: false
+  # @ignore
   metrics:
     main:
       enabled: *metricsEnabled
+  # @ignore
   workload:
     main:
       podSpec:
@@ -838,6 +843,7 @@ qbittorrent:
           main:
             env:
               QBITTORRENT__USE_PROFILE: true
+  # @ignore
   ingress:
     qbittorrent-ing:
       enabled: true
@@ -861,6 +867,7 @@ qbittorrent:
           enabled: false
         traefik:
           enabled: false
+  # @ignore
   persistence:
     config:
       enabled: true

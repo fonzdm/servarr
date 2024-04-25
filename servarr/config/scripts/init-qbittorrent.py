@@ -47,7 +47,10 @@ General\Locale=en
 MailNotification\req_auth=true
 WebUI\HostHeaderValidation=false
 WebUI\LocalHostAuth=false
-
+{{- if not (default .Values.qbittorrent.csrf_protection false) }}
+WebUI\CSRFProtection=false
+WebUI\ClickjackingProtection=false
+{{- end }}
 WebUI\Password_PBKDF2="{{`{{ torrentPassword }}`}}"
 WebUI\UseUPnP=false
 WebUI\Username={{`{{ torrentUsername }}`}}

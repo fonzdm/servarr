@@ -96,6 +96,7 @@ Servarr complete Helm Chart for Kubernetes
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| qbittorrent.csrf_protection | bool | false | Whether to enable or disable CSRF Protection on qBitTorrent WebGUI |
 | torrent.password | string | No default value | password of the qBitTorrent admin user. Must be at least of 8 characters. |
 | torrent.username | string | No default value | username of the qBitTorrent admin user |
 
