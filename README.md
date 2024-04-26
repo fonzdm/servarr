@@ -21,8 +21,21 @@ These instructions will get you a copy of the project up and running on your loc
 $ git clone https://github.com/fonzdm/servarr.git && cd servarr
 ```
 
-2. Prepare your [`values.yaml`](#values)
-3. Try it in your cluster to check that everything is fine (replace the `servarr/` with the chart folder if your workdir is different):
+2. Retrieve the dependencies
+
+```shell
+$ helm dependency update
+```
+
+> [!NOTE]
+> If the previous command fails or goes in timeout (or takes too much), try adding the truecharts Helm repository:
+> ```shell
+> $ helm repo add truecharts https://charts.truecharts.org
+> ```
+> and then execute again the `helm dependency update` command.
+  
+3. Prepare your [`values.yaml`](#values)
+4. Try it in your cluster to check that everything is fine (replace the `servarr/` with the chart folder if your workdir is different):
 
 ```shell
 $ helm install servarr-dev servarr/ \
