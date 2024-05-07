@@ -6,6 +6,10 @@ global:
   # -- (string) Insert your storage class here, e.g.: &storageClassName network-block. Do not remove the `&storageClassName` anchor!
   # @section -- Global
   storageClassName: &storageClassName "network-block"
+  # -- (string) Insert your ingress class here, e.g.: &ingressClassName nginx. Do not remove the `&ingressCassName` anchor!
+  # @default -- No default value, leave empty to use the default Ingress Class.
+  # @section -- Global
+  ingressClassName: &ingressClassName
   # -- (string) Insert your cert manager cluster issuer, e.g.: letsencrypt-cloudflare. Do not remove the `&issuer` anchor!
   # @default -- No default value, leave empty if not required
   # @section -- Global
@@ -467,7 +471,7 @@ issuer:
   # @section -- Issuer
   secretName: letsencrypt-prod
   # @section -- Issuer
-  ingressClassName: nginx
+  ingressClassName: *ingressClassName
   # -- Insert your CloudFlare key
   # @section -- Issuer
   cloudFlareKey:
@@ -530,7 +534,7 @@ sonarr:
       expandObjectName: false
       annotations:
         cert-manager.io/cluster-issuer: *issuer
-      ingressClassName: "nginx"
+      ingressClassName: *ingressClassName
       hosts:
         - host: sonarr.local
           paths:
@@ -604,7 +608,7 @@ radarr:
       expandObjectName: false
       annotations:
         cert-manager.io/cluster-issuer: *issuer
-      ingressClassName: "nginx"
+      ingressClassName: *ingressClassName
       hosts:
         - host: radarr.local
           paths:
@@ -699,7 +703,7 @@ jellyfin:
       expandObjectName: false
       annotations:
         cert-manager.io/cluster-issuer: *issuer
-      ingressClassName: "nginx"
+      ingressClassName: *ingressClassName
       hosts:
         - host: jellyfin.local
           paths:
@@ -787,7 +791,7 @@ jellyseerr:
       expandObjectName: false
       annotations:
         cert-manager.io/cluster-issuer: *issuer
-      ingressClassName: "nginx"
+      ingressClassName: *ingressClassName
       hosts:
         - host: jellyseerr.local
           paths:
@@ -852,7 +856,7 @@ qbittorrent:
       expandObjectName: false
       annotations:
         cert-manager.io/cluster-issuer: *issuer
-      ingressClassName: "nginx"
+      ingressClassName: *ingressClassName
       hosts:
         - host: torrent.local
           paths:
@@ -910,7 +914,7 @@ prowlarr:
       expandObjectName: false
       annotations:
         cert-manager.io/cluster-issuer: *issuer
-      ingressClassName: "nginx"
+      ingressClassName: *ingressClassName
       hosts:
         - host: prowlarr.local
           paths:
