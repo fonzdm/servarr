@@ -8,3 +8,8 @@ Deployment Info:
   Release Name:  {{ .Release.Name }}
 
 ** Please be patient while the chart is being deployed **
+
+Get more information about the deployment:
+  $ helm status -n {{ .Release.Namespace }} {{ .Release.Name }}
+  $ helm get all -n {{ .Release.Namespace }} {{ .Release.Name }}
+  $ helm get values -n {{ .Release.Namespace }} {{ .Release.Name }} -a
