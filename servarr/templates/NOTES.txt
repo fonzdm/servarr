@@ -2,3 +2,9 @@ Chart Details:
   Name:          {{ .Chart.Name }}
   Chart Version: {{ .Chart.Version }}
   App Version:   {{ .Chart.AppVersion }}
+
+Deployment Info:
+  Namespace:     {{ .Release.Namespace }}
+  Release Name:  {{ .Release.Name }}
+
+** Please be patient while the chart is being deployed **
