@@ -1,6 +1,7 @@
 global:
   apikey: &apikey "gs12345678fc4923f1dm45b5a71098s2"
   storageClassName: &storageClassName "longhorn"
+    ingressClassName: &ingressClassName "nginx"
   certManagerClusterIssuer: &issuer "letsencrypt-cloudflare"
 
 metrics:
@@ -17,6 +18,8 @@ dash:
   username: admin
   password: str0ngP4ssw0rd.
   mail: admin@gmail.com
+  countryCode: "US"
+  preferredLanguage: "en"
 
 torrent:
   username: admin
@@ -254,7 +257,7 @@ issuer:
   server: https://acme-v02.api.letsencrypt.org/directory
   email: admin@gmail.com
   secretName: letsencrypt-prod
-  ingressClassName: nginx
+  ingressClassName: *ingressClassName
   cloudFlareKey: wda9d2W_p290dkawWEo102kl1plWpo123l
 
 volumes:
@@ -288,7 +291,7 @@ sonarr:
       expandObjectName: false
       annotations:
         cert-manager.io/cluster-issuer: *issuer
-      ingressClassName: "nginx"
+      ingressClassName: *ingressClassName
       hosts:
         - host: sonarr.media.local
           paths:
@@ -354,7 +357,7 @@ radarr:
       expandObjectName: false
       annotations:
         cert-manager.io/cluster-issuer: *issuer
-      ingressClassName: "nginx"
+      ingressClassName: *ingressClassName
       hosts:
         - host: radarr.media.local
           paths:
@@ -447,7 +450,7 @@ jellyfin:
       expandObjectName: false
       annotations:
         cert-manager.io/cluster-issuer: *issuer
-      ingressClassName: "nginx"
+      ingressClassName: *ingressClassName
       hosts:
         - host: jellyfin.media.local
           paths:
@@ -533,7 +536,7 @@ jellyseerr:
       expandObjectName: false
       annotations:
         cert-manager.io/cluster-issuer: *issuer
-      ingressClassName: "nginx"
+      ingressClassName: *ingressClassName
       hosts:
         - host: jellyseerr.media.local
           paths:
@@ -572,8 +575,8 @@ jellyseerr:
           main:
             mountPath: /mnt/media
 
-# $QBITTORRENT__USE_PROFILE
 qbittorrent:
+  csrf_protection: false
   metrics:
     main:
       enabled: *metricsEnabled
@@ -592,7 +595,7 @@ qbittorrent:
       expandObjectName: false
       annotations:
         cert-manager.io/cluster-issuer: *issuer
-      ingressClassName: "nginx"
+      ingressClassName: *ingressClassName
       hosts:
         - host: torrent.media.local
           paths:
@@ -648,7 +651,7 @@ prowlarr:
       expandObjectName: false
       annotations:
         cert-manager.io/cluster-issuer: *issuer
-      ingressClassName: "nginx"
+      ingressClassName: *ingressClassName
       hosts:
         - host: prowlarr.media.local
           paths:
