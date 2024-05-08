@@ -7,9 +7,9 @@ global:
   # @section -- Global
   storageClassName: &storageClassName "network-block"
   # -- (string) Insert your ingress class here, e.g.: &ingressClassName nginx. Do not remove the `&ingressCassName` anchor!
-  # @default -- No default value, leave empty to use the default Ingress Class.
+  # @default -- nginx
   # @section -- Global
-  ingressClassName: &ingressClassName
+  ingressClassName: &ingressClassName "nginx"
   # -- (string) Insert your cert manager cluster issuer, e.g.: letsencrypt-cloudflare. Do not remove the `&issuer` anchor!
   # @default -- No default value, leave empty if not required
   # @section -- Global
