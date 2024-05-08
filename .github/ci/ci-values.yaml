@@ -1,7 +1,7 @@
 global:
   apikey: &apikey "gs12345678fc4923f1dm45b5a71098s2"
   storageClassName: &storageClassName "longhorn"
-    ingressClassName: &ingressClassName "nginx"
+  ingressClassName: &ingressClassName "nginx"
   certManagerClusterIssuer: &issuer "letsencrypt-cloudflare"
 
 metrics:
