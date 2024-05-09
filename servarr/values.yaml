@@ -6,7 +6,7 @@ global:
   # -- (string) Insert your storage class here, e.g.: &storageClassName network-block. Do not remove the `&storageClassName` anchor!
   # @section -- Global
   storageClassName: &storageClassName "network-block"
-  # -- (string) Insert your ingress class here, e.g.: &ingressClassName nginx. Do not remove the `&ingressCassName` anchor!
+  # -- (string) Insert your ingress class here, e.g.: &ingressClassName nginx. Do not remove the `&ingressCassName` anchor, and do not leave the anchor value empty, otherwise you will face a `null` value error!
   # @default -- nginx
   # @section -- Global
   ingressClassName: &ingressClassName "nginx"
