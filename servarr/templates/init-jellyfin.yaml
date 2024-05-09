@@ -1,0 +1,59 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: jellyfin-init
+  labels:
+    release: "{{ .Release.Name }}"
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+  annotations:
+    "helm.sh/hook": post-install
+    "helm.sh/hook-delete-policy": before-hook-creation
+    "helm.sh/hook-weight": "30"
+spec:
+  backoffLimit: 1
+  template:
+    metadata:
+      name: "{{.Release.Name}}-jellyfin-finalizer"
+      labels:
+        app: "{{ .Release.Name }}"
+    spec:
+      restartPolicy: Never
+      initContainers:
+        - name: wait-for-jellyfin
+          image: rapidfort/curl:8.7.1
+          imagePullPolicy: IfNotPresent
+          command:
+            [
+              "sh",
+              "-c",
+              "until curl  \"http://{{ .Release.Namespace }}-jellyfin.{{ .Release.Namespace }}.svc.cluster.local:8096\"; do echo waiting for servarr-jellyfin; sleep 5; done;sleep 10;",
+            ]
+      containers:
+      - name: initialize-jellyfin
+        image: "nyurik/alpine-python3-requests"
+        imagePullPolicy: IfNotPresent
+        env:
+          - name: PYTHONUNBUFFERED
+            value: "1"
+          - name: JELLYFIN_HOST
+            value: "{{ .Release.Namespace }}-jellyfin.{{ .Release.Namespace }}.svc.cluster.local:8096"
+          - name: JELLYFIN_USERNAME
+            value: "{{ $.Values.dash.username }}"
+          - name: JELLYFIN_PASSWORD
+            value: "{{ $.Values.dash.password }}"
+          - name: COUNTRY_CODE
+            value: "{{ $.Values.dash.countryCode }}"
+          - name: PREFERRED_LANGUAGE
+            value: "{{ $.Values.dash.preferredLanguage }}"
+        command:
+          - "/bin/sh"
+          - "-ec"
+        args:
+          - "python3 -u /mnt/init-jellyfin.py 2>&1;"
+        volumeMounts:
+          - mountPath: "/mnt"
+            name: python-script
+      volumes:
+        - name: python-script
+          configMap:
+            name: init-jellyfin-script

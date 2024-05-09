@@ -1,0 +1,15 @@
+Chart Details:
+  Name:          {{ .Chart.Name }}
+  Chart Version: {{ .Chart.Version }}
+  App Version:   {{ .Chart.AppVersion }}
+
+Deployment Info:
+  Namespace:     {{ .Release.Namespace }}
+  Release Name:  {{ .Release.Name }}
+
+** Please be patient while the chart is being deployed **
+
+Get more information about the deployment:
+  $ helm status -n {{ .Release.Namespace }} {{ .Release.Name }}
+  $ helm get all -n {{ .Release.Namespace }} {{ .Release.Name }}
+  $ helm get values -n {{ .Release.Namespace }} {{ .Release.Name }} -a

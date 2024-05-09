@@ -2,8 +2,17 @@
 
 import requests
 import os
+import logging
+from json import JSONDecodeError
 
-APIKEY = os.getenv("APIKEY")
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+console_handler = logging.StreamHandler()
+log_format = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+console_handler.setFormatter(log_format)
+logger.addHandler(console_handler)
+
+API_KEY = os.getenv("API_KEY")
 JELLYFIN_USERNAME = os.getenv("JELLYFIN_USERNAME")
 JELLYFIN_PASSWORD = os.getenv("JELLYFIN_PASSWORD")
 JELLYFIN_EMAIL = os.getenv("JELLYFIN_EMAIL")
@@ -20,18 +29,26 @@ session = requests.Session()
 def make_get(endpoint=""):
 
     url = "{0}{1}".format(jellyseer_url, endpoint)
-    print("Using url =  {0}".format(str(url)))
+
+    logger.debug(" ".join([
+        url,
+        "GET",
+        ", ".join([f'{key}: {value}' for key,value in session.headers.items()]),
+        ", ".join([f'{key}: {value}' for key,value in session.cookies.items()])
+    ]))
 
     response = session.get(
         url=url,
         verify=False,
     )
 
-    print(
-        "Response code: {0}. Response body: {1}".format(
-            str(response.status_code), str(response.text)
-        )
-    )
+    logger.debug(" ".join([
+        "Status Code:",
+        str(response.status_code),
+        "Response body:",
+        response.text
+    ]))
+
     response.raise_for_status()
     try:
         return response.json()
@@ -41,8 +58,15 @@ def make_get(endpoint=""):
 def make_post(endpoint="", body=None):
 
     url = "{0}{1}".format(jellyseer_url, endpoint)
-    print("Using url =  {0}".format(str(url)))
-    print("Using body =  {0}".format(str(body)))
+
+    logger.debug(" ".join([
+        url,
+        "POST",
+        "Body:",
+        str(body),
+        ", ".join([f'{key}: {value}' for key,value in session.headers.items()]),
+        ", ".join([f'{key}: {value}' for key,value in session.cookies.items()])
+    ]))
 
     response = session.post(
         url=url,
@@ -50,26 +74,24 @@ def make_post(endpoint="", body=None):
         verify=False,
     )
 
-    print(
-        "Response code: {0}. Response body: {1}".format(str(response.status_code), str(response.text))
-        )
+    logger.debug(" ".join([
+        "Status Code:",
+        str(response.status_code),
+        "Response body:",
+        response.text
+    ]))
+
     response.raise_for_status()
     try:
         return response.json()
     except JSONDecodeError:
         return response.text
 
-print("")
-print("#######################")
-print("Initizalizing JellySeer")
-print("#######################")
-print("")
+logger.info("Initizalizing JellySeer")
 
 ########## JELLYFIN INTEGRATION
 
-print("")
-print("Integrating Jellyfin")
-print("")
+logger.info("Integrating Jellyfin")
 
 jellyfin_endpoint = "/api/v1/auth/jellyfin"
 
@@ -83,13 +105,11 @@ jellyfin_body = {
 
 jellyfin_response = make_post(jellyfin_endpoint, body=jellyfin_body)
 
-print("Fetching info from response...")
+logger.debug("Fetching info from response..")
 token = jellyfin_response["jellyfinAuthToken"]
 device_id = jellyfin_response["jellyfinDeviceId"]
 
-print("")
-print("Device ID: {0}. Jellyfin Token: {1}".format(device_id, token))
-print("")
+logger.debug("Device ID: {0}. Jellyfin Token: {1}".format(device_id, token))
 
 ######### AUTH
 
@@ -108,16 +128,14 @@ print("")
 
 ############ SONARR
 
-print("")
-print("Integrating Sonarr")
-print("")
+logger.info("Integrating Sonarr")
 
 sonarr_endpoint = "/api/v1/settings/sonarr"
 sonarr_body = {
     "name": "Sonarr",
     "hostname": "servarr-sonarr",
     "port": 8989,
-    "apiKey": APIKEY,
+    "apiKey": API_KEY,
     "useSsl": False,
     "activeProfileId": 4,
     "activeLanguageProfileId": 1,
@@ -141,18 +159,14 @@ sonarr_response = make_post(sonarr_endpoint, body=sonarr_body)
 
 ############ RADARR
 
-print("")
-print("Integrating Radarr")
-print("")
-
-print("")
+logger.info("Integrating Radarr")
 
 radarr_endpoint = "/api/v1/settings/radarr"
 radarr_body = {
     "name": "Radarr",
     "hostname": "servarr-radarr",
     "port": 7878,
-    "apiKey": APIKEY,
+    "apiKey": API_KEY,
     "useSsl": False,
     "activeProfileId": 4,
     "activeProfileName": "HD-1080p",
@@ -171,9 +185,7 @@ radarr_response = make_post(radarr_endpoint, body=radarr_body)
 
 ############ FINALIZE
 
-print("")
-print("Finalize")
-print("")
+logger.info("Finalization phase")
 
 finalize_endpoint = "/api/v1/settings/initialize"
 finalize_body = {}

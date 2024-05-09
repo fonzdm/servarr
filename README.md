@@ -21,12 +21,24 @@ These instructions will get you a copy of the project up and running on your loc
 $ git clone https://github.com/fonzdm/servarr.git && cd servarr
 ```
 
-2. Do your magic by updating/adding files 😎
-3. Prepare your [`values.yaml`](#values)
-4. Try it in your cluster to check that everything is fine (replace the dot with the `servarr` folder if you workdir is different):
+2. Retrieve the dependencies
 
 ```shell
-$ helm install servarr-dev . \
+$ helm dependency update
+```
+
+> [!NOTE]
+> If the previous command fails or goes in timeout (or takes too much), try adding the truecharts Helm repository:
+> ```shell
+> $ helm repo add truecharts https://charts.truecharts.org
+> ```
+> and then execute again the `helm dependency update` command.
+  
+3. Prepare your [`values.yaml`](#values)
+4. Try it in your cluster to check that everything is fine (replace the `servarr/` with the chart folder if your workdir is different):
+
+```shell
+$ helm install servarr-dev servarr/ \
 --namespace servarr-dev \
 --create-namespace \
 --values values.yaml
@@ -34,23 +46,28 @@ $ helm install servarr-dev . \
 
 ## Deployment
 
-The deployment is as easy as running the following command:
+To deploy the Helm Chart:
+
+1. Add the Helm repository:
 
 ```shell
-$ helm install <release-name> <servarr-chart> \
+$ helm repo add fonzdm https://fonzdm.github.io/servarr
+```
+
+2. Install the release:
+
+```shell
+$ helm install <release-name> fonzdm/servarr \
 --namespace servarr \
 --create-namespace \
 --values values.yaml
 ```
 
+If you want to install a specific version, execute the previous command adding: `--version x.y.z`
+
 ### Values
 
-| **Parameter** | **Optional** | **Description** | **Default Value** | **Example Value** |
-|---------------|--------------|-----------------|-------------------|-------------------|
-| `global.apikey` | Required | Define a common API key that will be used to automate the entire integration. | `None` | `6d9df216-cac6-4f4a-9b25-5462026ce7be` |
-| `global.storageClassName` | Required | Cluster storage class to be used for the volume creation. | `None` | `longhorn` |
-
-<!-- Table init with some values just to give the idea on how it will be. A lot of values (almost all of them) are missing and MUST be filled in the table. -->
+Please read [Helm Chart README.md](./servarr/README.md) for details on how to configure the values needed for this chart.
 
 ## Contributing
 
