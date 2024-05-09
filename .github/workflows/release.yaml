@@ -40,7 +40,7 @@ jobs:
           config: ./.github/ci/cr.yaml
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-          CR_SKIP_EXISTING: "false"
+          CR_SKIP_EXISTING: "true"
 
       - name: Login to GHCR
         uses: docker/login-action@v3.0.0
