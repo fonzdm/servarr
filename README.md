@@ -10,7 +10,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 - Git
 - Helm
-- Kuberentes Cluster (for testing purposes)
+- Kubernetes Cluster (for testing purposes)
 - Python 3
 
 ### Installing
