@@ -46,14 +46,24 @@ $ helm install servarr-dev servarr/ \
 
 ## Deployment
 
-The deployment is as easy as running the following command:
+To deploy the Helm Chart:
+
+1. Add the Helm repository:
 
 ```shell
-$ helm install <release-name> <servarr-chart> \
+$ helm repo add fonzdm https://fonzdm.github.io/servarr
+```
+
+2. Install the release:
+
+```shell
+$ helm install <release-name> fonzdm/servarr \
 --namespace servarr \
 --create-namespace \
 --values values.yaml
 ```
+
+If you want to install a specific version, execute the previous command adding: `--version x.y.z`
 
 ### Values
 
