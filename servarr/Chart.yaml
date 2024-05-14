@@ -43,6 +43,13 @@ annotations:
   artifacthub.io/category: integration-delivery
   artifacthub.io/license: AGPL-3.0-or-later
   artifacthub.io/prerelease: "false"
+  artifacthub.io/maintainers: |
+    - name: imgios
+      email: g.sulipano@outlook.it
+    - name: mrgions
+      email: g.pasquariello96@gmail.com
+    - name: lucaam
+      email: luca.amoriello@hotmail.it
 maintainers:
   - name: Alfonso De Masi
     email: adm220297@proton.me
