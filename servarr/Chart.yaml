@@ -44,9 +44,11 @@ annotations:
   artifacthub.io/license: AGPL-3.0-or-later
   artifacthub.io/prerelease: "false"
   artifacthub.io/maintainers: |
+    - name: fonzdm
+      email: adm220297@proton.me
     - name: imgios
       email: g.sulipano@outlook.it
-    - name: mrgions
+    - name: mrgionsi
       email: g.pasquariello96@gmail.com
     - name: lucaam
       email: luca.amoriello@hotmail.it
