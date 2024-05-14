@@ -1,24 +1,24 @@
-* **Please check if the PR fulfills these requirements**
+#### **Please check if the PR fulfills these requirements**
 - [ ] The branch naming convention follows our guidelines
 - [ ] Docs have been added / updated (for bug fixes / features)
 
-* **What kind of change does this PR introduce?** (Bug fix, feature, docs update, ...)
+#### **What kind of change does this PR introduce?** (Bug fix, feature, docs update, ...)
 
 <placeholder>
 
-* **What is the current behavior?** (You can also link to an open issue here)
+#### **What is the current behavior?** (You can also link to an open issue here)
 
 <placeholder>
 
-* **What is the new behavior (if this is a feature change)?**
+#### **What is the new behavior (if this is a feature change)?**
 
 <placeholder>
 
-* **Does this PR introduce a breaking change?** (What changes might users need to make in their application due to this PR?)
+#### **Does this PR introduce a breaking change?** (What changes might users need to make in their application due to this PR?)
 
 <placeholder>
 
-* **Other information**:
+#### **Other information**:
 
 <placeholder>
 
