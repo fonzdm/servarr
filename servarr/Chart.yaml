@@ -38,7 +38,11 @@ dependencies:
   - name: flaresolverr
     version: "13.4.1"
     repository: "https://charts.truecharts.org"
-
+annotations:
+  artifacthub.io/alternativeName: servar
+  artifacthub.io/category: integration-delivery
+  artifacthub.io/license: AGPL-3.0-or-later
+  artifacthub.io/prerelease: "false"
 maintainers:
   - name: Alfonso De Masi
     email: adm220297@proton.me
