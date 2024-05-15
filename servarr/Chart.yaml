@@ -18,7 +18,7 @@ sources:
   - https://github.com/fonzdm/servarr
 dependencies:
   - name: sonarr
-    version: "21.2.1"
+    version: "22.0.5"
     repository: "https://charts.truecharts.org"
   - name: radarr
     version: "21.2.1"
