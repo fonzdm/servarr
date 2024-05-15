@@ -30,7 +30,7 @@ dependencies:
     version: "19.4.1"
     repository: "https://charts.truecharts.org"
   - name: jellyseerr
-    version: "9.5.2"
+    version: "10.0.4"
     repository: "https://charts.truecharts.org"
   - name: jellyfin
     version: "19.1.2"
