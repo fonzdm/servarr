@@ -36,7 +36,7 @@ dependencies:
     version: "19.1.2"
     repository: "https://charts.truecharts.org"
   - name: flaresolverr
-    version: "13.4.1"
+    version: "14.0.4"
     repository: "https://charts.truecharts.org"
 annotations:
   artifacthub.io/alternativeName: servar
