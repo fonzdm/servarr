@@ -87,7 +87,7 @@ See the full list of [contributors](https://github.com/fonzdm/servarr/contributo
 
 We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [releases on this repository](https://github.com/fonzdm/servarr/releases). 
 
-###### Keep in mind that each dependency has its own author and their contributors. Please, reach them out on their repositories.
+###### Remember that each dependency has its own author(s) and contributors. Please contact them via their repositories.
 
 ## :scroll: License
 
