@@ -1,10 +1,10 @@
 [![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/servarr)](https://artifacthub.io/packages/search?repo=servarr)
 
-# Servarr
+# `*arr` Servarr
 
 This project is a complete Servarr Helm Chart that includes also Sonarr, Radarr, Prowlarr, qBitTorrent, Jellyseerr, Jellyfin and Flaresovlerr as sub-charts.
 
-## Getting Started
+## :test_tube: Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See [deployment](#deployment) for notes on how to deploy the project on a live system.
 
@@ -46,7 +46,7 @@ $ helm install servarr-dev servarr/ \
 --values values.yaml
 ```
 
-## Deployment
+## :rocket: Deployment
 
 To deploy the Helm Chart:
 
@@ -71,11 +71,11 @@ If you want to install a specific version, execute the previous command adding: 
 
 Please read [Helm Chart README.md](./servarr/README.md) for details on how to configure the values needed for this chart.
 
-## Contributing
+## :memo: Contributing
 
 Please read [CONTRIBUTING.md](./CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
-## Contributors
+## :busts_in_silhouette: Contributors
 
 <a href="https://github.com/fonzdm/servarr/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=fonzdm/servarr" />
@@ -83,13 +83,13 @@ Please read [CONTRIBUTING.md](./CONTRIBUTING.md) for details on our code of cond
 
 See the full list of [contributors](https://github.com/fonzdm/servarr/contributors) who participated in this project.
 
-## Versioning
+## :label: Versioning
 
 We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [releases on this repository](https://github.com/fonzdm/servarr/releases). 
 
 ###### Keep in mind that each dependency has its own author and their contributors. Please, reach them out on their repositories.
 
-## License
+## :scroll: License
 
 This project is licensed under the GNU AGPL v3 License - see the [LICENSE](LICENSE) file for details.
 
