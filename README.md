@@ -69,7 +69,7 @@ If you want to install a specific version, execute the previous command adding: 
 
 ### Values
 
-Please read [Helm Chart README.md](./servarr/README.md) for details on how to configure the values needed for this chart.
+Please read the [Helm Chart README.md](./servarr/README.md) for details on how to configure the values needed for this chart.
 
 ## :memo: Contributing
 
