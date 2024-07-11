@@ -15,6 +15,20 @@ global:
   # @section -- Global
   certManagerClusterIssuer: &issuer
 
+tags:
+  # -- (bool) This tag will deploy: Radarr, Prowlarr, QBitTorrent, Jellyseerr, Jellyfin, Flaresolverr
+  # @default -- true
+  # @section -- Tags
+  movies: true
+  # -- (bool) This tag will deploy: Sonarr, Prowlarr, QBitTorrent, Jellyseerr, Jellyfin, Flaresolverr
+  # @default -- true
+  # @section -- Tags
+  tvseries: true
+  # -- (bool) This tag will deploy: Prowlarr, QBitTorrent, Jellyfin, Flaresolverr
+  # @default -- true
+  # @section -- Tags
+  music: true
+
 metrics:
   # -- Anchor to set wether to deploy the export sidecar pods or not. Requires the Prometheus stack. Do not remove the `&metricsEnabled` anchor!
   # @section -- Metrics
