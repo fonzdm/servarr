@@ -15,6 +15,20 @@ global:
   # @section -- Global
   certManagerClusterIssuer: &issuer
 
+tags:
+  # -- (bool) This tag will deploy: Radarr, Prowlarr, QBitTorrent, Jellyseerr, Jellyfin, Flaresolverr
+  # @default -- true
+  # @section -- Tags
+  movies: true
+  # -- (bool) This tag will deploy: Sonarr, Prowlarr, QBitTorrent, Jellyseerr, Jellyfin, Flaresolverr
+  # @default -- true
+  # @section -- Tags
+  tvseries: true
+  # -- (bool) This tag will deploy: Prowlarr, QBitTorrent, Jellyfin, Flaresolverr
+  # @default -- true
+  # @section -- Tags
+  music: true
+
 metrics:
   # -- Anchor to set wether to deploy the export sidecar pods or not. Requires the Prometheus stack. Do not remove the `&metricsEnabled` anchor!
   # @section -- Metrics
@@ -510,8 +524,11 @@ volumes:
     # @section -- Storage
     size: 250Mi
 
-# @ignore
 sonarr:
+  # # -- Choose whether Sonarr should be installed or not.
+  # # @section Services
+  # # @default -- true
+  # enabled: true
   # @ignore
   metrics:
     main:
@@ -584,8 +601,11 @@ sonarr:
           main:
             mountPath: /mnt/downloads
 
-# @ignore
 radarr:
+  # # -- Choose whether Radarr should be installed or not.
+  # # @section Services
+  # # @default -- true
+  # enabled: true
   # @ignore
   metrics:
     main:
@@ -623,6 +643,7 @@ radarr:
           enabled: false
         traefik:
           enabled: false
+  # @ignore
   persistence:
     config:
       enabled: true
@@ -638,6 +659,7 @@ radarr:
           exportarr:
             mountPath: /config
             readOnly: true
+    # @ignore
     media:
       enabled: true
       type: pvc
@@ -646,6 +668,7 @@ radarr:
         main:
           main:
             mountPath: /mnt/media
+    # @ignore
     downloads:
       enabled: true
       type: pvc
@@ -655,8 +678,12 @@ radarr:
           main:
             mountPath: /mnt/downloads
 
-# @ignore
 jellyfin:
+  # # -- Choose whether Jellyfin should be installed or not.
+  # # @section Services
+  # # @default -- true
+  # enabled: true
+  # @ignore
   metrics:
     main:
       enabled: *metricsEnabled
@@ -694,7 +721,9 @@ jellyfin:
         failureThreshold: 60
         successThreshold: 1
     pgVersion: 16
+  # @ignore
   serviceProtocol: tcp
+  # @ignore
   ingress:
     jellyfin-ing:
       enabled: true
@@ -718,6 +747,7 @@ jellyfin:
           enabled: false
         traefik:
           enabled: false
+  # @ignore
   persistence:
     transcode:
       enabled: false
@@ -744,8 +774,12 @@ jellyfin:
           main:
             mountPath: /mnt/media
 
-# @ignore
 jellyseerr:
+  # # -- Choose whether Jellyseerr should be installed or not.
+  # # @section Services
+  # # @default -- true
+  # enabled: true
+  # @ignore
   metrics:
     main:
       enabled: *metricsEnabled
@@ -783,6 +817,7 @@ jellyseerr:
         failureThreshold: 60
         successThreshold: 1
     pgVersion: 16
+  # @ignore
   ingress:
     jellyseerr-ing:
       enabled: true
@@ -806,6 +841,7 @@ jellyseerr:
           enabled: false
         traefik:
           enabled: false
+  # @ignore
   persistence:
     config:
       enabled: true
@@ -831,6 +867,10 @@ jellyseerr:
             mountPath: /mnt/media
 
 qbittorrent:
+  # # -- Choose whether QBitTorrent should be installed or not.
+  # # @section Services
+  # # @default -- true
+  # enabled: true
   # -- Whether to enable or disable CSRF Protection on qBitTorrent WebGUI
   # @section -- Torrent
   # @default -- false
@@ -894,11 +934,16 @@ qbittorrent:
           main:
             mountPath: /downloads
 
-# @ignore
 prowlarr:
+  # # -- Choose whether Prowlarr should be installed or not.
+  # # @section Services
+  # # @default -- true
+  # enabled: true
+  # @ignore
   metrics:
     main:
       enabled: *metricsEnabled
+  # @ignore
   workload:
     main:
       podSpec:
@@ -906,6 +951,7 @@ prowlarr:
           main:
             env:
               PROWLARR__API_KEY: *apikey
+  # @ignore
   ingress:
     prowlarr-ing:
       enabled: true
@@ -929,6 +975,7 @@ prowlarr:
           enabled: false
         traefik:
           enabled: false
+  # @ignore
   persistence:
     config:
       enabled: true
@@ -945,11 +992,16 @@ prowlarr:
             mountPath: /config
             readOnly: true
 
-# @ignore
 flaresolverr:
+  # # -- Choose whether Flaresolverr should be installed or not.
+  # # @section Services
+  # # @default -- true
+  # enabled: true
+  # @ignore
   metrics:
     main:
       enabled: *metricsEnabled
+  # @ignore
   persistence:
     config:
       enabled: true

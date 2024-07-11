@@ -20,24 +20,54 @@ dependencies:
   - name: sonarr
     version: "21.2.1"
     repository: "https://charts.truecharts.org"
+    # condition: sonarr.enabled
+    tags:
+      - tvseries
   - name: radarr
     version: "21.2.1"
     repository: "https://charts.truecharts.org"
+    # condition: radarr.enabled
+    tags:
+      - movies
   - name: prowlarr
     version: "16.2.1"
     repository: "https://charts.truecharts.org"
+    # condition: prowlarr.enabled
+    tags:
+      - movies
+      - tvseries
+      - music
   - name: qbittorrent
     version: "19.4.1"
     repository: "https://charts.truecharts.org"
+    # condition: qbittorrent.enabled
+    tags:
+      - movies
+      - tvseries
+      - music
   - name: jellyseerr
     version: "9.5.2"
     repository: "https://charts.truecharts.org"
+    # condition: jellyseerr.enabled
+    tags:
+      - movies
+      - tvseries
   - name: jellyfin
     version: "18.7.7"
     repository: "https://charts.truecharts.org"
+    # condition: jellyfin.enabled
+    tags:
+      - movies
+      - tvseries
+      - music
   - name: flaresolverr
     version: "13.4.1"
     repository: "https://charts.truecharts.org"
+    # condition: flaresolverr.enabled
+    tags:
+      - movies
+      - tvseries
+      - music
 annotations:
   artifacthub.io/alternativeName: servar
   artifacthub.io/category: integration-delivery
