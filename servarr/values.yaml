@@ -510,7 +510,6 @@ volumes:
     # @section -- Storage
     size: 250Mi
 
-# @ignore
 sonarr:
   # -- Choose whether Sonarr should be installed or not.
   # @section Services
@@ -588,7 +587,6 @@ sonarr:
           main:
             mountPath: /mnt/downloads
 
-# @ignore
 radarr:
   # -- Choose whether Radarr should be installed or not.
   # @section Services
@@ -631,6 +629,7 @@ radarr:
           enabled: false
         traefik:
           enabled: false
+  # @ignore
   persistence:
     config:
       enabled: true
@@ -646,6 +645,7 @@ radarr:
           exportarr:
             mountPath: /config
             readOnly: true
+    # @ignore
     media:
       enabled: true
       type: pvc
@@ -654,6 +654,7 @@ radarr:
         main:
           main:
             mountPath: /mnt/media
+    # @ignore
     downloads:
       enabled: true
       type: pvc
@@ -663,12 +664,12 @@ radarr:
           main:
             mountPath: /mnt/downloads
 
-# @ignore
 jellyfin:
   # -- Choose whether Jellyfin should be installed or not.
   # @section Services
   # @default -- true
   enabled: true
+  # @ignore
   metrics:
     main:
       enabled: *metricsEnabled
@@ -706,7 +707,9 @@ jellyfin:
         failureThreshold: 60
         successThreshold: 1
     pgVersion: 16
+  # @ignore
   serviceProtocol: tcp
+  # @ignore
   ingress:
     jellyfin-ing:
       enabled: true
@@ -730,6 +733,7 @@ jellyfin:
           enabled: false
         traefik:
           enabled: false
+  # @ignore
   persistence:
     transcode:
       enabled: false
@@ -756,12 +760,12 @@ jellyfin:
           main:
             mountPath: /mnt/media
 
-# @ignore
 jellyseerr:
   # -- Choose whether Jellyseerr should be installed or not.
   # @section Services
   # @default -- true
   enabled: true
+  # @ignore
   metrics:
     main:
       enabled: *metricsEnabled
@@ -799,6 +803,7 @@ jellyseerr:
         failureThreshold: 60
         successThreshold: 1
     pgVersion: 16
+  # @ignore
   ingress:
     jellyseerr-ing:
       enabled: true
@@ -822,6 +827,7 @@ jellyseerr:
           enabled: false
         traefik:
           enabled: false
+  # @ignore
   persistence:
     config:
       enabled: true
@@ -914,15 +920,16 @@ qbittorrent:
           main:
             mountPath: /downloads
 
-# @ignore
 prowlarr:
   # -- Choose whether Prowlarr should be installed or not.
   # @section Services
   # @default -- true
   enabled: true
+  # @ignore
   metrics:
     main:
       enabled: *metricsEnabled
+  # @ignore
   workload:
     main:
       podSpec:
@@ -930,6 +937,7 @@ prowlarr:
           main:
             env:
               PROWLARR__API_KEY: *apikey
+  # @ignore
   ingress:
     prowlarr-ing:
       enabled: true
@@ -953,6 +961,7 @@ prowlarr:
           enabled: false
         traefik:
           enabled: false
+  # @ignore
   persistence:
     config:
       enabled: true
@@ -969,15 +978,16 @@ prowlarr:
             mountPath: /config
             readOnly: true
 
-# @ignore
 flaresolverr:
   # -- Choose whether Flaresolverr should be installed or not.
   # @section Services
   # @default -- true
   enabled: true
+  # @ignore
   metrics:
     main:
       enabled: *metricsEnabled
+  # @ignore
   persistence:
     config:
       enabled: true
