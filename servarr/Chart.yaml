@@ -20,19 +20,19 @@ dependencies:
   - name: sonarr
     version: "21.2.1"
     repository: "https://charts.truecharts.org"
-    condition: sonarr.enabled
+    # condition: sonarr.enabled
     tags:
       - tvseries
   - name: radarr
     version: "21.2.1"
     repository: "https://charts.truecharts.org"
-    condition: radarr.enabled
+    # condition: radarr.enabled
     tags:
       - movies
   - name: prowlarr
     version: "16.2.1"
     repository: "https://charts.truecharts.org"
-    condition: prowlarr.enabled
+    # condition: prowlarr.enabled
     tags:
       - movies
       - tvseries
@@ -40,7 +40,7 @@ dependencies:
   - name: qbittorrent
     version: "19.4.1"
     repository: "https://charts.truecharts.org"
-    condition: qbittorrent.enabled
+    # condition: qbittorrent.enabled
     tags:
       - movies
       - tvseries
@@ -48,14 +48,14 @@ dependencies:
   - name: jellyseerr
     version: "9.5.2"
     repository: "https://charts.truecharts.org"
-    condition: jellyseerr.enabled
+    # condition: jellyseerr.enabled
     tags:
       - movies
       - tvseries
   - name: jellyfin
     version: "18.7.7"
     repository: "https://charts.truecharts.org"
-    condition: jellyfin.enabled
+    # condition: jellyfin.enabled
     tags:
       - movies
       - tvseries
@@ -63,7 +63,7 @@ dependencies:
   - name: flaresolverr
     version: "13.4.1"
     repository: "https://charts.truecharts.org"
-    condition: flaresolverr.enabled
+    # condition: flaresolverr.enabled
     tags:
       - movies
       - tvseries

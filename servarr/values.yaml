@@ -525,10 +525,10 @@ volumes:
     size: 250Mi
 
 sonarr:
-  # -- Choose whether Sonarr should be installed or not.
-  # @section Services
-  # @default -- true
-  enabled: true
+  # # -- Choose whether Sonarr should be installed or not.
+  # # @section Services
+  # # @default -- true
+  # enabled: true
   # @ignore
   metrics:
     main:
@@ -602,10 +602,10 @@ sonarr:
             mountPath: /mnt/downloads
 
 radarr:
-  # -- Choose whether Radarr should be installed or not.
-  # @section Services
-  # @default -- true
-  enabled: true
+  # # -- Choose whether Radarr should be installed or not.
+  # # @section Services
+  # # @default -- true
+  # enabled: true
   # @ignore
   metrics:
     main:
@@ -679,10 +679,10 @@ radarr:
             mountPath: /mnt/downloads
 
 jellyfin:
-  # -- Choose whether Jellyfin should be installed or not.
-  # @section Services
-  # @default -- true
-  enabled: true
+  # # -- Choose whether Jellyfin should be installed or not.
+  # # @section Services
+  # # @default -- true
+  # enabled: true
   # @ignore
   metrics:
     main:
@@ -775,10 +775,10 @@ jellyfin:
             mountPath: /mnt/media
 
 jellyseerr:
-  # -- Choose whether Jellyseerr should be installed or not.
-  # @section Services
-  # @default -- true
-  enabled: true
+  # # -- Choose whether Jellyseerr should be installed or not.
+  # # @section Services
+  # # @default -- true
+  # enabled: true
   # @ignore
   metrics:
     main:
@@ -867,10 +867,10 @@ jellyseerr:
             mountPath: /mnt/media
 
 qbittorrent:
-  # -- Choose whether QBitTorrent should be installed or not.
-  # @section Services
-  # @default -- true
-  enabled: true
+  # # -- Choose whether QBitTorrent should be installed or not.
+  # # @section Services
+  # # @default -- true
+  # enabled: true
   # -- Whether to enable or disable CSRF Protection on qBitTorrent WebGUI
   # @section -- Torrent
   # @default -- false
@@ -935,10 +935,10 @@ qbittorrent:
             mountPath: /downloads
 
 prowlarr:
-  # -- Choose whether Prowlarr should be installed or not.
-  # @section Services
-  # @default -- true
-  enabled: true
+  # # -- Choose whether Prowlarr should be installed or not.
+  # # @section Services
+  # # @default -- true
+  # enabled: true
   # @ignore
   metrics:
     main:
@@ -993,10 +993,10 @@ prowlarr:
             readOnly: true
 
 flaresolverr:
-  # -- Choose whether Flaresolverr should be installed or not.
-  # @section Services
-  # @default -- true
-  enabled: true
+  # # -- Choose whether Flaresolverr should be installed or not.
+  # # @section Services
+  # # @default -- true
+  # enabled: true
   # @ignore
   metrics:
     main:
