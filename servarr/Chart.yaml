@@ -16,28 +16,40 @@ keywords:
 home: https://github.com/fonzdm/servarr
 sources:
   - https://github.com/fonzdm/servarr
+
+# Movies: jellyfin, jellyseerr, radarr, qbittorrent, bazarr
+# Serie TV:  jellyfin, jellyseerr, sonarr, qbittorrent, bazarr
+# Music:  jellyfin, lidarr, qbittorrent
+
 dependencies:
   - name: sonarr
     version: "21.2.1"
     repository: "https://charts.truecharts.org"
+    condition: sonarr.enabled
   - name: radarr
     version: "21.2.1"
     repository: "https://charts.truecharts.org"
+    condition: radarr.enabled
   - name: prowlarr
     version: "16.2.1"
     repository: "https://charts.truecharts.org"
+    condition: prowlarr.enabled
   - name: qbittorrent
     version: "19.4.1"
     repository: "https://charts.truecharts.org"
+    condition: qbittorrent.enabled
   - name: jellyseerr
     version: "9.5.2"
     repository: "https://charts.truecharts.org"
+    condition: jellyseerr.enabled
   - name: jellyfin
     version: "18.7.7"
     repository: "https://charts.truecharts.org"
+    condition: jellyfin.enabled
   - name: flaresolverr
     version: "13.4.1"
     repository: "https://charts.truecharts.org"
+    condition: flaresolverr.enabled
 annotations:
   artifacthub.io/alternativeName: servar
   artifacthub.io/category: integration-delivery

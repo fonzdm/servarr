@@ -512,6 +512,10 @@ volumes:
 
 # @ignore
 sonarr:
+  # -- Choose whether Sonarr should be installed or not.
+  # @section Services
+  # @default -- true
+  enabled: true
   # @ignore
   metrics:
     main:
@@ -586,6 +590,10 @@ sonarr:
 
 # @ignore
 radarr:
+  # -- Choose whether Radarr should be installed or not.
+  # @section Services
+  # @default -- true
+  enabled: true
   # @ignore
   metrics:
     main:
@@ -657,6 +665,10 @@ radarr:
 
 # @ignore
 jellyfin:
+  # -- Choose whether Jellyfin should be installed or not.
+  # @section Services
+  # @default -- true
+  enabled: true
   metrics:
     main:
       enabled: *metricsEnabled
@@ -746,6 +758,10 @@ jellyfin:
 
 # @ignore
 jellyseerr:
+  # -- Choose whether Jellyseerr should be installed or not.
+  # @section Services
+  # @default -- true
+  enabled: true
   metrics:
     main:
       enabled: *metricsEnabled
@@ -831,6 +847,10 @@ jellyseerr:
             mountPath: /mnt/media
 
 qbittorrent:
+  # -- Choose whether QBitTorrent should be installed or not.
+  # @section Services
+  # @default -- true
+  enabled: true
   # -- Whether to enable or disable CSRF Protection on qBitTorrent WebGUI
   # @section -- Torrent
   # @default -- false
@@ -896,6 +916,10 @@ qbittorrent:
 
 # @ignore
 prowlarr:
+  # -- Choose whether Prowlarr should be installed or not.
+  # @section Services
+  # @default -- true
+  enabled: true
   metrics:
     main:
       enabled: *metricsEnabled
@@ -947,6 +971,10 @@ prowlarr:
 
 # @ignore
 flaresolverr:
+  # -- Choose whether Flaresolverr should be installed or not.
+  # @section Services
+  # @default -- true
+  enabled: true
   metrics:
     main:
       enabled: *metricsEnabled
