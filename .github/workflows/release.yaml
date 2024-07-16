@@ -29,10 +29,6 @@ jobs:
         with:
           version: v3.12.0
 
-      - name: Add dependency chart repos
-        run: |
-          helm repo add truecharts https://charts.truecharts.org
-
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.5.0
         with:

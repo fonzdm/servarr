@@ -1,4 +1,4 @@
-name: Helm Chart Lint & Build
+name: Helm Chart Lint
 
 on:
   push:
@@ -36,25 +36,3 @@ jobs:
 
       - name: Run chart-testing (lint)
         run: ct lint --chart-dirs=servarr/ --charts=servarr/ --validate-maintainers=false
-
-  build:
-    name: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ github.head_ref }}
-          fetch-depth: 0
-
-      - name: Install Helm
-        uses: azure/setup-helm@v4.1.0
-
-      - name: Helm Dependency update
-        run: helm dependency update servarr/ --debug
-
-      - name: Helm Template
-        run: helm template servarr servarr/ --debug -f .github/ci/ci-values.yaml
-
-      - name: Create Package
-        run: helm package servarr/
