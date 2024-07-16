@@ -31,7 +31,7 @@ jobs:
 
       - name: Add dependency chart repos
         run: |
-          helm repo add truecharts https://charts.truecharts.org
+          helm repo add truecharts oci://tccr.io/truecharts
 
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.5.0
