@@ -97,12 +97,6 @@ Servarr complete Helm Chart for Kubernetes
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| qbittorrent.addons | object | `{"vpn":{"env":{"VPN_SERVICE_PROVIDER":"protonvpn"},"excludedNetworks_IPv4":["192.168.0.1/24"],"inputPorts":[80,8080,443,50413],"killSwitch":true,"type":"disabled"}}` | Addon configuration for the VPN |
-| qbittorrent.addons.vpn.env | map | `{"VPN_SERVICE_PROVIDER":"protonvpn"}` | Environment variables to inject into the sidecar container. See the related VPN config in TrueCharts |
-| qbittorrent.addons.vpn.excludedNetworks_IPv4 | list | 192.168.0.1/24 | Which subnets to exclude from the VPN |
-| qbittorrent.addons.vpn.inputPorts | list | [80,8080,443,50513] | Ports to be mapped for external access |
-| qbittorrent.addons.vpn.killSwitch | bool | true | Service is working only if a VPN tunnel is established |
-| qbittorrent.addons.vpn.type | string | disabled | Type of the VPN to use, defaults to disabled. See: https://truecharts.org/guides/addons/vpn-setup/ |
 | qbittorrent.csrf_protection | bool | false | Whether to enable or disable CSRF Protection on qBitTorrent WebGUI |
 | torrent.password | string | No default value | password of the qBitTorrent admin user. Must be at least of 8 characters. |
 | torrent.username | string | No default value | username of the qBitTorrent admin user |
