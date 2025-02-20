@@ -875,10 +875,10 @@ qbittorrent:
   # @section -- Torrent
   # @default -- false
   csrf_protection: false
-  # @ignore
   addons:
     # -- Addon configuration for the VPN
     # @section -- Torrent
+    # @default -- See configuration below
     vpn:
       # -- (string) Type of the VPN to use, defaults to disabled. See: https://truecharts.org/guides/addons/vpn-setup/
       # @section -- Torrent
