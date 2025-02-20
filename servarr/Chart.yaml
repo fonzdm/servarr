@@ -18,19 +18,19 @@ sources:
   - https://github.com/fonzdm/servarr
 dependencies:
   - name: sonarr
-    version: "21.2.1"
+    version: "23.6.4"
     repository: "oci://tccr.io/truecharts"
     # condition: sonarr.enabled
     tags:
       - tvseries
   - name: radarr
-    version: "21.2.1"
+    version: "23.18.0"
     repository: "oci://tccr.io/truecharts"
     # condition: radarr.enabled
     tags:
       - movies
   - name: prowlarr
-    version: "16.2.1"
+    version: "18.15.2"
     repository: "oci://tccr.io/truecharts"
     # condition: prowlarr.enabled
     tags:
@@ -38,7 +38,7 @@ dependencies:
       - tvseries
       - music
   - name: qbittorrent
-    version: "19.4.1"
+    version: "22.4.4"
     repository: "oci://tccr.io/truecharts"
     # condition: qbittorrent.enabled
     tags:
@@ -46,14 +46,14 @@ dependencies:
       - tvseries
       - music
   - name: jellyseerr
-    version: "9.5.2"
+    version: "12.6.1"
     repository: "oci://tccr.io/truecharts"
     # condition: jellyseerr.enabled
     tags:
       - movies
       - tvseries
   - name: jellyfin
-    version: "18.7.7"
+    version: "20.6.9"
     repository: "oci://tccr.io/truecharts"
     # condition: jellyfin.enabled
     tags:
@@ -61,7 +61,7 @@ dependencies:
       - tvseries
       - music
   - name: flaresolverr
-    version: "13.4.1"
+    version: "15.5.1"
     repository: "oci://tccr.io/truecharts"
     # condition: flaresolverr.enabled
     tags:
