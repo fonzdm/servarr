@@ -71,14 +71,6 @@ Servarr complete Helm Chart for Kubernetes
 |-----|------|---------|-------------|
 | indexers | list | The body of the 1337x index is provided as default | The indexers list. Each element of the list is the yaml-formatted body of the [Prowlarr API request](https://prowlarr.com/docs/api/#/Indexer/post_api_v1_indexer) to add that index. |
 
-### Issuer
-
-| Key | Type | Default | Description |
-|-----|------|---------|-------------|
-| issuer | object | See the sub fields | For tracking purpose, not used - replaced with pre-existing cluster issuer |
-| issuer.cloudFlareKey | string | `nil` | Insert your CloudFlare key |
-| issuer.email | string | `nil` | Insert your email address |
-
 ### Metrics
 
 | Key | Type | Default | Description |

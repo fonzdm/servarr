@@ -473,23 +473,6 @@ indexers:
       supportsSearch: true
       tags: []
 
-# -- For tracking purpose, not used - replaced with pre-existing cluster issuer
-# @section -- Issuer
-# @default -- See the sub fields
-issuer:
-  # @section -- Issuer
-  server: https://acme-v02.api.letsencrypt.org/directory
-  # -- Insert your email address
-  # @section -- Issuer
-  email:
-  # @section -- Issuer
-  secretName: letsencrypt-prod
-  # @section -- Issuer
-  ingressClassName: *ingressClassName
-  # -- Insert your CloudFlare key
-  # @section -- Issuer
-  cloudFlareKey:
-
 volumes:
   # @ignore
   storageClass: *storageClassName
