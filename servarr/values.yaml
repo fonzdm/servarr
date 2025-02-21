@@ -1026,3 +1026,107 @@ flaresolverr:
           exportarr:
             mountPath: /config
             readOnly: true
+
+# @ignore
+bazarr:
+  enabled: true
+  # @ignore
+  operator:
+    register: false
+    verify:
+      enabled: true
+      additionalsystem: []
+  # @ignore
+  fallbackDefaults:
+    storageClass:
+    probeType: http
+    serviceProtocol: tcp
+    serviceType: ClusterIP
+    persistenceType: pvc
+    pvcRetain: false
+    pvcSize: 100Gi
+    vctSize: 100Gi
+    accessModes:
+      - ReadWriteMany
+    vctAccessModes:
+      - ReadWriteMany
+    probeTimeouts:
+      liveness:
+        initialDelaySeconds: 10
+        periodSeconds: 10
+        timeoutSeconds: 5
+        failureThreshold: 5
+        successThreshold: 1
+      readiness:
+        initialDelaySeconds: 10
+        periodSeconds: 10
+        timeoutSeconds: 5
+        failureThreshold: 5
+        successThreshold: 2
+      startup:
+        initialDelaySeconds: 10
+        periodSeconds: 5
+        timeoutSeconds: 2
+        failureThreshold: 60
+        successThreshold: 1
+    pgVersion: 16
+  serviceProtocol: tcp
+  metrics:
+    main:
+      enabled: *metricsEnabled
+  # @ignore
+  workload:
+    main:
+      podSpec:
+        containers:
+          main:
+            env:
+              BAZARR__API_KEY: *apikey
+  # @ignore
+  ingress:
+    # @ignore
+    bazarr-ing:
+      enabled: true
+      primary: true
+      required: true
+      expandObjectName: false
+      annotations:
+        cert-manager.io/cluster-issuer: *issuer
+      ingressClassName: *ingressClassName
+      hosts:
+        - host: bazarr.local
+          paths:
+            - path: /
+              pathType: Prefix
+      tls:
+        - hosts:
+            - bazarr.local
+          secretName: bazarr-tls
+      integrations:
+        certManager:
+          enabled: false
+        traefik:
+          enabled: false
+  persistence:
+    config:
+      enabled: true
+      type: pvc
+      size: 500Mi
+      accessModes: ReadWriteMany
+      storageClass: *storageClassName
+      targetSelector:
+        main:
+          main:
+            mountPath: /config
+        exportarr:
+          exportarr:
+            mountPath: /config
+            readOnly: true
+    media:
+      enabled: true
+      type: pvc
+      existingClaim: *media-volume
+      targetSelector:
+        main:
+          main:
+            mountPath: /mnt/media
