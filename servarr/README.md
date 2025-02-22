@@ -29,6 +29,7 @@ Servarr complete Helm Chart for Kubernetes
 | oci://tccr.io/truecharts | qbittorrent | 19.4.1 |
 | oci://tccr.io/truecharts | radarr | 21.2.1 |
 | oci://tccr.io/truecharts | sonarr | 21.2.1 |
+| https://github.com/imgios | scarparr | 1.0.1 |
 
 ---
 
@@ -70,6 +71,19 @@ Servarr complete Helm Chart for Kubernetes
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | indexers | list | The body of the 1337x index is provided as default | The indexers list. Each element of the list is the yaml-formatted body of the [Prowlarr API request](https://prowlarr.com/docs/api/#/Indexer/post_api_v1_indexer) to add that index. |
+
+### Scraparr
+
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| scarparr.enabled | bool | `true` | Anchor to set wether to deploy the export sidecar pods or not. Do not remove the `&metricsEnabled` anchor! |
+| scarparr.apiKey | anchor | `&apiKey` | Anchor to set API key for interacting with radarr, sonarr, prowlarr. Do not remove the `&apiKey` anchor! |
+| scarparr.radar.url | string | `nil` | External URL or internal SVC name for interacting with service. Suggesting to keep interaction internal and use SVC name in following format {{ .Release.Namespace }}-radarr |
+| scarparr.radar.api_version | string | `v3` | Insert Radarr API versions, if different version wants to be used. Dedault is v3. |
+| scarparr.sonarr.url | string | `nil` | External URL or internal SVC name for interacting with service. Suggesting to keep interaction internal and use SVC name in following format {{ .Release.Namespace }}-sonarr |
+| scarparr.sonarr.api_version | string | `v3` | Insert Sonarr API versions, if different version wants to be used. Dedault is v3. |
+| scarparr.prowlarr.url | string | `nil` | External URL or internal SVC name for interacting with service. Suggesting to keep interaction internal and use SVC name in following format {{ .Release.Namespace }}-prowlarr |
+| scarparr.prowlarr.api_version | string | `v3` | Insert Prowlarr API versions, if different version wants to be used. Dedault is v3. |
 
 ### Issuer
 
