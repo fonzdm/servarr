@@ -1,5 +1,5 @@
 global:
-  # -- (string) Insert your Prowlarr, Sonarr, Radarr API key here (one to rule them all!). Do not remove the `&apikey` anchor!
+  # -- (string) Insert your Prowlarr, Sonarr, Radarr API key here (one to rule them all!). Do not remove the `&` anchor!
   # @default -- No default value is configured for security reasons
   # @section -- Global
   apikey: &apikey
@@ -49,7 +49,7 @@ scraparr:
     # @section -- Scraparr
     # @default -- No default value  
     url: 
-    # -- (string)  - Insert Radarr API versions, if different wants to be used
+    # -- (string)  - Insert Radarr API versions, if different version wants to be used
     # @section -- Scraparr
     # @default -- v3
     api_version: v3
@@ -58,7 +58,7 @@ scraparr:
     # @section -- Scraparr
     # @default -- No default value  
     url: 
-    # -- (string)  - Insert Sonarr API versions, if different wants to be used
+    # -- (string)  - Insert Sonarr API versions, if different version wants to be used
     # @section -- Scraparr
     # @default -- v3
     api_version: v3
@@ -67,7 +67,7 @@ scraparr:
     # @section -- Scraparr
     # @default -- No default value  
     url: 
-    # -- (string)  - Insert Prowlarr API versions, if different wants to be used
+    # -- (string)  - Insert Prowlarr API versions, if different version wants to be used
     # @section -- Scraparr
     # @default -- v3
     api_version: v3
