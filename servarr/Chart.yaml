@@ -71,7 +71,7 @@ dependencies:
       - music
   - name: scraparr
     version: "1.0.1"
-    repository: "https://github.com/imgios"
+    repository: "https://imgios.github.io"
     # condition: scraparr.enabled
     tags:
       - metrics
