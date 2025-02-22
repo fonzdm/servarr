@@ -2,7 +2,7 @@
 
 
 
-![Version: 1.0.1](https://img.shields.io/badge/Version-1.0.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.0](https://img.shields.io/badge/AppVersion-1.0.0-informational?style=flat-square) 
+![Version: 1.0.2](https://img.shields.io/badge/Version-1.0.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.0](https://img.shields.io/badge/AppVersion-1.0.0-informational?style=flat-square) 
 
 Servarr complete Helm Chart for Kubernetes
 
@@ -22,6 +22,7 @@ Servarr complete Helm Chart for Kubernetes
 
 | Repository | Name | Version |
 |------------|------|---------|
+| https://github.com/imgios | scraparr | 1.0.1 |
 | oci://tccr.io/truecharts | flaresolverr | 13.4.1 |
 | oci://tccr.io/truecharts | jellyfin | 18.7.7 |
 | oci://tccr.io/truecharts | jellyseerr | 9.5.2 |
@@ -29,7 +30,6 @@ Servarr complete Helm Chart for Kubernetes
 | oci://tccr.io/truecharts | qbittorrent | 19.4.1 |
 | oci://tccr.io/truecharts | radarr | 21.2.1 |
 | oci://tccr.io/truecharts | sonarr | 21.2.1 |
-| https://github.com/imgios | scarparr | 1.0.1 |
 
 ---
 
@@ -61,7 +61,7 @@ Servarr complete Helm Chart for Kubernetes
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| global.apikey | string | No default value is configured for security reasons | Insert your Prowlarr, Sonarr, Radarr API key here (one to rule them all!). Do not remove the `&apikey` anchor! |
+| global.apikey | string | No default value is configured for security reasons | Insert your Prowlarr, Sonarr, Radarr API key here (one to rule them all!). Do not remove the `&` anchor! |
 | global.certManagerClusterIssuer | string | No default value, leave empty if not required | Insert your cert manager cluster issuer, e.g.: letsencrypt-cloudflare. Do not remove the `&issuer` anchor! |
 | global.ingressClassName | string | nginx | Insert your ingress class here, e.g.: &ingressClassName nginx. Do not remove the `&ingressCassName` anchor, and do not leave the anchor value empty, otherwise you will face a `null` value error! |
 | global.storageClassName | string | `"network-block"` | Insert your storage class here, e.g.: &storageClassName network-block. Do not remove the `&storageClassName` anchor! |
@@ -71,29 +71,6 @@ Servarr complete Helm Chart for Kubernetes
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | indexers | list | The body of the 1337x index is provided as default | The indexers list. Each element of the list is the yaml-formatted body of the [Prowlarr API request](https://prowlarr.com/docs/api/#/Indexer/post_api_v1_indexer) to add that index. |
-
-
-### Scraparr
-
-| Key | Type | Default | Description |
-|-----|------|---------|-------------|
-| scarparr.enabled | bool | `true` | Anchor to set wether to deploy the export sidecar pods or not. Do not remove the `&metricsEnabled` anchor! |
-| scarparr.apiKey | anchor | `&apiKey` | Anchor to set API key for interacting with radarr, sonarr, prowlarr. Do not remove the `&apiKey` anchor! |
-| scarparr.radar.url | string | `nil` | External URL or internal SVC name for interacting with service. Suggesting to keep interaction internal and use SVC name in following format {{ .Release.Namespace }}-radarr |
-| scarparr.radar.api_version | string | `v3` | Insert Radarr API versions, if different version wants to be used. Dedault is v3. |
-| scarparr.sonarr.url | string | `nil` | External URL or internal SVC name for interacting with service. Suggesting to keep interaction internal and use SVC name in following format {{ .Release.Namespace }}-sonarr |
-| scarparr.sonarr.api_version | string | `v3` | Insert Sonarr API versions, if different version wants to be used. Dedault is v3. |
-| scarparr.prowlarr.url | string | `nil` | External URL or internal SVC name for interacting with service. Suggesting to keep interaction internal and use SVC name in following format {{ .Release.Namespace }}-prowlarr |
-| scarparr.prowlarr.api_version | string | `v3` | Insert Prowlarr API versions, if different version wants to be used. Dedault is v3. |
-
-### Issuer
-
-| Key | Type | Default | Description |
-|-----|------|---------|-------------|
-| issuer | object | See the sub fields | For tracking purpose, not used - replaced with pre-existing cluster issuer |
-| issuer.cloudFlareKey | string | `nil` | Insert your CloudFlare key |
-| issuer.email | string | `nil` | Insert your email address |
-
 
 ### Metrics
 
@@ -123,10 +100,28 @@ Servarr complete Helm Chart for Kubernetes
 | torrent.password | string | No default value | password of the qBitTorrent admin user. Must be at least of 8 characters. |
 | torrent.username | string | No default value | username of the qBitTorrent admin user |
 
+### scarparr
+
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| scraparr.apiKey | string | `nil` | Anchor to apiKey. As a single key is used for all services, same will be used for interacting with Sonarr, Radarr, Prowlarr @default  |
+
+### Scraparr
+
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| scraparr.prowlarr.api_version | string | v3 | - Insert Prowlarr API versions, if different version wants to be used |
+| scraparr.prowlarr.url | string | No default value   | Mandatory - Insert Prowlarr service name in format: {{ .Release.Namespace }}-prowlarr |
+| scraparr.radarr.api_version | string | v3 | - Insert Radarr API versions, if different version wants to be used |
+| scraparr.radarr.url | string | No default value   | Mandatory - Insert Radarr service name in format: {{ .Release.Namespace }}-radarr |
+| scraparr.sonarr.api_version | string | v3 | - Insert Sonarr API versions, if different version wants to be used |
+| scraparr.sonarr.url | string | No default value   | Mandatory - Insert Sonarr service name in format: {{ .Release.Namespace }}-sonarr |
+
 ### Tags
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| tags.metrics | bool | `false` | This tag will deploy: Scraparr @default false |
 | tags.movies | bool | true | This tag will deploy: Radarr, Prowlarr, QBitTorrent, Jellyseerr, Jellyfin, Flaresolverr |
 | tags.music | bool | true | This tag will deploy: Prowlarr, QBitTorrent, Jellyfin, Flaresolverr |
 | tags.tvseries | bool | true | This tag will deploy: Sonarr, Prowlarr, QBitTorrent, Jellyseerr, Jellyfin, Flaresolverr |
@@ -154,6 +149,7 @@ Servarr complete Helm Chart for Kubernetes
 | jellyseerr | object | `{}` |  |
 | prowlarr | object | `{}` |  |
 | radarr | object | `{}` |  |
+| scraparr.enabled | bool | `false` |  |
 | sonarr | object | `{}` |  |
 
 
