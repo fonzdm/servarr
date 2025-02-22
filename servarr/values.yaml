@@ -28,11 +28,49 @@ tags:
   # @default -- true
   # @section -- Tags
   music: true
+  # -- (bool) This tag will deploy: Scraparr
+  # @default false
+  # @section -- Tags
+  metrics: false
 
 metrics:
   # -- Anchor to set wether to deploy the export sidecar pods or not. Requires the Prometheus stack. Do not remove the `&metricsEnabled` anchor!
   # @section -- Metrics
   enabled: &metricsEnabled false
+
+scraparr: 
+  enabled: false
+  # -- Anchor to apiKey. As a single key is used for all services, same will be used for interacting with Sonarr, Radarr, Prowlarr
+  # @default 
+  # @section -- scarparr 
+  apiKey: *apiKey
+  radarr:
+    # -- (string) Mandatory - Insert Radarr service name in format: {{ .Release.Namespace }}-radarr
+    # @section -- Scraparr
+    # @default -- No default value  
+    url: 
+    # -- (string)  - Insert Radarr API versions, if different wants to be used
+    # @section -- Scraparr
+    # @default -- v3
+    api_version: v3
+  sonarr:
+    # -- (string) Mandatory - Insert Sonarr service name in format: {{ .Release.Namespace }}-sonarr
+    # @section -- Scraparr
+    # @default -- No default value  
+    url: 
+    # -- (string)  - Insert Sonarr API versions, if different wants to be used
+    # @section -- Scraparr
+    # @default -- v3
+    api_version: v3
+  prowlarr:
+    # -- (string) Mandatory - Insert Prowlarr service name in format: {{ .Release.Namespace }}-prowlarr
+    # @section -- Scraparr
+    # @default -- No default value  
+    url: 
+    # -- (string)  - Insert Prowlarr API versions, if different wants to be used
+    # @section -- Scraparr
+    # @default -- v3
+    api_version: v3
 
 # @ignore
 initJellyseerr: true
