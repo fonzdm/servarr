@@ -100,11 +100,11 @@ Servarr complete Helm Chart for Kubernetes
 | torrent.password | string | No default value | password of the qBitTorrent admin user. Must be at least of 8 characters. |
 | torrent.username | string | No default value | username of the qBitTorrent admin user |
 
-### scarparr
+### Scarparr
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| scraparr.config.api_key | string | `nil` | Anchor to apiKey. As a single key is used for all services, same will be used for interacting with Sonarr, Radarr, Prowlarr @default  |
+| scraparr.config.prowlarr.api_key | string | `nil` | Anchor to apiKey. As a single key is used for all services, same will be used for interacting with Sonarr, Radarr, Prowlarr @default  |
 | scraparr.config.radarr.api_key | string | `nil` | Anchor to apiKey. As a single key is used for all services, same will be used for interacting with Sonarr, Radarr, Prowlarr @default  |
 | scraparr.config.sonarr.api_key | string | `nil` | Anchor to apiKey. As a single key is used for all services, same will be used for interacting with Sonarr, Radarr, Prowlarr @default  |
 
