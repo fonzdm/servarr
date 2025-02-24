@@ -30,7 +30,7 @@ spec:
             ]
       containers:
       - name: initialize-prowlarr
-        image: "nyurik/alpine-python3-requests"
+        image: python:3.10
         imagePullPolicy: IfNotPresent
         env:
           - name: PYTHONUNBUFFERED
