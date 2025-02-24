@@ -57,7 +57,7 @@ spec:
           - "/bin/sh"
           - "-ec"
         args:
-          - "python3 -u /mnt/init-prowlarr.py 2>&1;"
+          - "pip install requests && python3 -u /mnt/init-prowlarr.py 2>&1;"
         volumeMounts:
           - mountPath: "/mnt"
             name: python-script-and-indexers
