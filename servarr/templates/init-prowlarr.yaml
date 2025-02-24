@@ -20,7 +20,7 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: wait-for-prowlarr
-          image: rapidfort/curl:8.7.1
+          image: busybox:1.37.0
           imagePullPolicy: IfNotPresent
           command:
             [
