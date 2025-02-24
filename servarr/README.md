@@ -100,13 +100,11 @@ Servarr complete Helm Chart for Kubernetes
 | torrent.password | string | No default value | password of the qBitTorrent admin user. Must be at least of 8 characters. |
 | torrent.username | string | No default value | username of the qBitTorrent admin user |
 
-### Scarparr
+### Scraparr 
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| scraparr.config.prowlarr.api_key | string | `nil` | Anchor to apiKey. As a single key is used for all services, same will be used for interacting with Sonarr, Radarr, Prowlarr @default  |
-| scraparr.config.radarr.api_key | string | `nil` | Anchor to apiKey. As a single key is used for all services, same will be used for interacting with Sonarr, Radarr, Prowlarr @default  |
-| scraparr.config.sonarr.api_key | string | `nil` | Anchor to apiKey. As a single key is used for all services, same will be used for interacting with Sonarr, Radarr, Prowlarr @default  |
+| scraparr.config.prowlarr.api_key | string | *apikey | Anchor to apiKey. As a single key is used for all services, same will be used for interacting with Sonarr, Radarr, Prowlarr |
 
 ### Scraparr
 
@@ -118,6 +116,18 @@ Servarr complete Helm Chart for Kubernetes
 | scraparr.config.radarr.url | string | No default value   | Mandatory - Insert Radarr service name in format: {{ .Release.Namespace }}-radarr |
 | scraparr.config.sonarr.api_version | string | v3 | - Insert Sonarr API versions, if different version wants to be used |
 | scraparr.config.sonarr.url | string | No default value   | Mandatory - Insert Sonarr service name in format: {{ .Release.Namespace }}-sonarr |
+
+### Scarparr
+
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| scraparr.config.radarr.api_key | string | *apikey | Anchor to apiKey. As a single key is used for all services, same will be used for interacting with Sonarr, Radarr, Prowlarr |
+
+### Scraparr
+
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| scraparr.config.sonarr.api_key | string | *apikey | Anchor to apiKey. As a single key is used for all services, same will be used for interacting with Sonarr, Radarr, Prowlarr |
 
 ### Tags
 
