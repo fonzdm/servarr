@@ -47,7 +47,7 @@ scraparr:
       # @default -- v3
       api_version: v3
       # -- Anchor to apiKey. As a single key is used for all services, same will be used for interacting with Sonarr, Radarr, Prowlarr
-      # @default 
+      # @default -- *apikey
       # @section -- Scarparr 
       api_key: *apikey
     sonarr:
@@ -60,8 +60,8 @@ scraparr:
       # @default -- v3
       api_version: v3
       # -- Anchor to apiKey. As a single key is used for all services, same will be used for interacting with Sonarr, Radarr, Prowlarr
-      # @default 
-      # @section -- Scarparr 
+      # @default -- *apikey
+      # @section -- Scraparr 
       api_key: *apikey    
     prowlarr:
       # -- (string) Mandatory - Insert Prowlarr service name in format: {{ .Release.Namespace }}-prowlarr
@@ -73,8 +73,8 @@ scraparr:
       # @default -- v3
       api_version: v3
       # -- Anchor to apiKey. As a single key is used for all services, same will be used for interacting with Sonarr, Radarr, Prowlarr
-      # @default 
-      # @section -- Scarparr 
+      # @default -- *apikey
+      # @section -- Scraparr  
       api_key: *apikey    
 
 # @ignore
