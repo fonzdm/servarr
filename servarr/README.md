@@ -111,11 +111,11 @@ Servarr complete Helm Chart for Kubernetes
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | scraparr.config.prowlarr.api_version | string | v3 | - Insert Prowlarr API versions, if different version wants to be used |
-| scraparr.config.prowlarr.url | string | No default value   | Mandatory - Insert Prowlarr service name in format: {{ .Release.Namespace }}-prowlarr |
+| scraparr.config.prowlarr.url | string | No default value | Mandatory - Insert Prowlarr service name in format: {{ .Release.Namespace }}-prowlarr |
 | scraparr.config.radarr.api_version | string | v3 | - Insert Radarr API versions, if different version wants to be used |
-| scraparr.config.radarr.url | string | No default value   | Mandatory - Insert Radarr service name in format: {{ .Release.Namespace }}-radarr |
+| scraparr.config.radarr.url | string | No default value | Mandatory - Insert Radarr service name in format: {{ .Release.Namespace }}-radarr |
 | scraparr.config.sonarr.api_version | string | v3 | - Insert Sonarr API versions, if different version wants to be used |
-| scraparr.config.sonarr.url | string | No default value   | Mandatory - Insert Sonarr service name in format: {{ .Release.Namespace }}-sonarr |
+| scraparr.config.sonarr.url | string | No default value | Mandatory - Insert Sonarr service name in format: {{ .Release.Namespace }}-sonarr |
 
 ### Scraparr
 
