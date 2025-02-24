@@ -117,16 +117,11 @@ Servarr complete Helm Chart for Kubernetes
 | scraparr.config.sonarr.api_version | string | v3 | - Insert Sonarr API versions, if different version wants to be used |
 | scraparr.config.sonarr.url | string | No default value   | Mandatory - Insert Sonarr service name in format: {{ .Release.Namespace }}-sonarr |
 
-### Scarparr
-
-| Key | Type | Default | Description |
-|-----|------|---------|-------------|
-| scraparr.config.radarr.api_key | string | *apikey | Anchor to apiKey. As a single key is used for all services, same will be used for interacting with Sonarr, Radarr, Prowlarr |
-
 ### Scraparr
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| scraparr.config.radarr.api_key | string | *apikey | Anchor to apiKey. As a single key is used for all services, same will be used for interacting with Sonarr, Radarr, Prowlarr |
 | scraparr.config.sonarr.api_key | string | *apikey | Anchor to apiKey. As a single key is used for all services, same will be used for interacting with Sonarr, Radarr, Prowlarr |
 
 ### Tags
