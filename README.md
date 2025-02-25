@@ -284,7 +284,7 @@ flaresolverr:
 
 </details>
 
-Please read [Helm Chart README.md](./servarr/README.md) for details on how to configure the values needed for this chart.
+Please read [Helm Chart README.md](./servarr/README.md) for further details on the values supported by the Chart.
 
 ## Contributing
 
