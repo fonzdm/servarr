@@ -49,7 +49,16 @@ jobs:
         run: ls -halF servarr/charts
 
       - name: Run chart-testing (lint)
-        run: ct lint --chart-dirs=servarr/ --charts=servarr/ --validate-maintainers=false
+        env:
+          CACHE_HIT: ${{ steps.cache-charts.outputs.cache-hit != 'true' }}
+        run: |
+          extraArgs=""
+          if [[ "$CACHE_HIT" == "true" ]] ; then
+            extraArgs="--skip-helm-dependencies"
+          fi
+          echo "debug: $CACHE_HIT"
+          echo "debug: $extraArgs"
+          ct lint --chart-dirs=servarr/ --charts=servarr/ --validate-maintainers=false $extraArgs
 
       - name: Save dependencies charts in the cache
         if: ${{ steps.cache-charts.outputs.cache-hit != 'true' }}
