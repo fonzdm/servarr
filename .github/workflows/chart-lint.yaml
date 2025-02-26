@@ -42,7 +42,7 @@ jobs:
           path: |
             servarr/charts
             servarr/Chart.lock
-          key: dep-charts-${{ hashFiles('servarr/Chart.lock') }}
+          key: dep-charts-${{ hashFiles('servarr/Chart.yaml') }}
 
       - name: Run chart-testing (lint)
         run: ct lint --chart-dirs=servarr/ --charts=servarr/ --validate-maintainers=false
