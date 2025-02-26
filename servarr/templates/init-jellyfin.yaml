@@ -20,17 +20,17 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: wait-for-jellyfin
-          image: rapidfort/curl:8.7.1
+          image: busybox:1.37.0
           imagePullPolicy: IfNotPresent
           command:
             [
               "sh",
               "-c",
-              "until curl  \"http://{{ .Release.Namespace }}-jellyfin.{{ .Release.Namespace }}.svc.cluster.local:8096\"; do echo waiting for servarr-jellyfin; sleep 5; done;sleep 10;",
+              "until wget --spider -S -T 10 \"http://{{ .Release.Namespace }}-jellyfin.{{ .Release.Namespace }}.svc.cluster.local:8096\" 2>&1 | grep -qw '200\\|301\\|302' > /dev/null ; do echo Waiting for servarr-jellyfin ; sleep 5 ; done ; sleep 10 ;"
             ]
       containers:
       - name: initialize-jellyfin
-        image: "nyurik/alpine-python3-requests"
+        image: python:3.10
         imagePullPolicy: IfNotPresent
         env:
           - name: PYTHONUNBUFFERED
@@ -49,7 +49,7 @@ spec:
           - "/bin/sh"
           - "-ec"
         args:
-          - "python3 -u /mnt/init-jellyfin.py 2>&1;"
+          - "pip install requests && python3 -u /mnt/init-jellyfin.py 2>&1;"
         volumeMounts:
           - mountPath: "/mnt"
             name: python-script
