@@ -39,8 +39,10 @@ jobs:
         id: cache-charts
         uses: actions/cache/restore@v4
         with:
-          path: servarr/charts
-          key: dep-charts-${{ hashFiles('servarr/Chart.yaml') }}
+          path: |
+            servarr/charts
+            Chart.lock
+          key: dep-charts-${{ hashFiles('servarr/Chart.lock') }}
 
       - name: Run chart-testing (lint)
         run: ct lint --chart-dirs=servarr/ --charts=servarr/ --validate-maintainers=false
@@ -50,5 +52,7 @@ jobs:
         id: cache-charts-save
         uses: actions/cache/save@v4
         with:
-          path: servarr/charts
+          path: |
+            servarr/charts
+            Chart.lock
           key: dep-charts-${{ hashFiles('servarr/Chart.yaml') }}

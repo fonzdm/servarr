@@ -29,7 +29,9 @@ jobs:
         id: cache-charts
         uses: actions/cache/restore@v4
         with:
-          path: servarr/charts
+          path: |
+            servarr/charts
+            Chart.lock
           key: dep-charts-${{ hashFiles('servarr/Chart.yaml') }}
 
       - name: Helm Dependency update
@@ -41,7 +43,9 @@ jobs:
         id: cache-charts-save
         uses: actions/cache/save@v4
         with:
-          path: servarr/charts
+          path: |
+            servarr/charts
+            Chart.lock
           key: dep-charts-${{ hashFiles('servarr/Chart.yaml') }}
 
       - name: Helm Template
