@@ -37,12 +37,6 @@ jobs:
           path: servarr/charts
           key: dep-charts-${{ hashFiles('servarr/Chart.yaml') }}
 
-      - name: Check servarr/ content
-        run: ls -halF servarr
-
-      - name: Check /charts content
-        run: ls -halF servarr/charts
-
       - name: Run chart-testing (lint)
         env:
           CACHE_HIT: ${{ steps.cache-charts.outputs.cache-hit == 'true' }}
@@ -51,8 +45,6 @@ jobs:
           if [[ "$CACHE_HIT" == "true" ]] ; then
             extraArgs="--skip-helm-dependencies"
           fi
-          echo "debug: $CACHE_HIT"
-          echo "debug: $extraArgs"
           ct lint --chart-dirs=servarr/ --charts=servarr/ --validate-maintainers=false $extraArgs
 
       - name: Save dependencies charts in the cache
