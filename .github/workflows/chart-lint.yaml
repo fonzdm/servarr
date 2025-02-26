@@ -4,6 +4,9 @@ on:
   workflow_run:
     workflows: [Helm Chart Build]
     types: [completed]
+    branches:
+      - dev
+      - main
 
 jobs:
   lint:
