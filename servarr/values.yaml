@@ -867,7 +867,7 @@ qbittorrent:
       # @section -- Torrent
       # @default -- disabled
       type: disabled
-      # -- (bool) The flag changes the behavior in case of a tunnel failure (for example, the VPN tunnel cannot be established because the credentials are incorrect). If set to true, a failed tunnel will result in a missing connection (qBitTorrent won't connect externally). If set to false, the connection will use the standard configuration (exposing the user IP). 
+      # -- (bool) The flag changes the behavior in case of a tunnel failure (for example, the VPN tunnel cannot be established because the credentials are incorrect). If set to true, a failed tunnel will result in a missing connection (qBitTorrent won't connect externally). If set to false, the connection will use the standard configuration (exposing the user IP).
       # @section -- Torrent
       # @default -- true
       killSwitch: true
@@ -878,8 +878,8 @@ qbittorrent:
         - "192.168.0.1/24"
       # -- (list) Ports to be mapped for external access
       # @section -- Torrent
-      # @default -- [80,8080,443,50513]
-      inputPorts: [80,8080,443, 50413]
+      # @default -- [80, 8080, 443, 50513]
+      inputPorts: [80, 8080, 443, 50413]
       # -- (map) Environment variables to inject into the sidecar container. See the related VPN config in TrueCharts
       # @section -- Torrent
       # @default -- Empty map
