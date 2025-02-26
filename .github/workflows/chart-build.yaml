@@ -22,9 +22,25 @@ jobs:
 
       - name: Install Helm
         uses: azure/setup-helm@v4.1.0
+      
+      - name: Fetch cached dependencies charts
+        id: cache-charts
+        uses: actions/cache/restore@v4
+        with:
+          path: servarr/charts
+          key: dep-charts-${{ hashFiles('servarr/Chart.yaml') }}
 
       - name: Helm Dependency update
+        if: ${{ steps.cache-charts.outputs.cache-hit != 'true' }}
         run: helm dependency update servarr/ --debug
+      
+      - name: Save dependencies charts in the cache
+        if: ${{ steps.cache-charts.outputs.cache-hit != 'true' }}
+        id: cache-charts-save
+        uses: actions/cache/save@v4
+        with:
+          path: servarr/charts
+          key: dep-charts-${{ hashFiles('servarr/Chart.yaml') }}
 
       - name: Helm Template
         run: helm template servarr servarr/ --debug -f .github/ci/ci-values.yaml
