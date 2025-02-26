@@ -1029,6 +1029,9 @@ flaresolverr:
 
 # @ignore
 bazarr:
+  # # -- Choose whether Bazarr should be installed or not.
+  # # @section Bazarr
+  # # @default -- true
   enabled: true
   # @ignore
   operator:
