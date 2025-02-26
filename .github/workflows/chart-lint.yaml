@@ -42,6 +42,9 @@ jobs:
           path: servarr/charts
           key: dep-charts-${{ hashFiles('servarr/Chart.yaml') }}
 
+      - name: Check servarr/ content
+        run: ls -halF servarr
+
       - name: Check /charts content
         run: ls -halF servarr/charts
 
