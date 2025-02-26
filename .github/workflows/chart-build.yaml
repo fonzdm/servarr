@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - 'dev'
+      - 'ci/cache-usage'
   pull_request:
     branches:
       - 'dev'
