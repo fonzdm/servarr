@@ -1,12 +1,13 @@
 name: Helm Chart Lint
 
 on:
-  workflow_run:
-    workflows: [Helm Chart Build]
-    types: [completed]
+  push:
     branches:
-      - dev
-      - main
+      - 'dev'
+  pull_request:
+    branches:
+      - 'dev'
+      - 'main'
 
 jobs:
   lint:
