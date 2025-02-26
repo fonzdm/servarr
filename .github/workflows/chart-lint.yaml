@@ -1,13 +1,12 @@
 name: Helm Chart Lint
 
 on:
-  push:
+  workflow_run:
+    workflows: [Helm Chart Build]
+    types: [completed]
     branches:
-      - 'dev'
-  pull_request:
-    branches:
-      - 'dev'
-      - 'main'
+      - dev
+      - main
 
 jobs:
   lint:
@@ -32,7 +31,29 @@ jobs:
           python-version: 3.x
 
       - name: Set up chart-testing
-        uses: helm/chart-testing-action@v2.6.1
+        uses: helm/chart-testing-action@v2.7.0
+
+      - name: Fetch cached dependencies charts
+        id: cache-charts
+        uses: actions/cache/restore@v4
+        with:
+          path: servarr/charts
+          key: dep-charts-${{ hashFiles('servarr/Chart.yaml') }}
 
       - name: Run chart-testing (lint)
-        run: ct lint --chart-dirs=servarr/ --charts=servarr/ --validate-maintainers=false
+        env:
+          CACHE_HIT: ${{ steps.cache-charts.outputs.cache-hit == 'true' }}
+        run: |
+          extraArgs=""
+          if [[ "$CACHE_HIT" == "true" ]] ; then
+            extraArgs="--skip-helm-dependencies"
+          fi
+          ct lint --chart-dirs=servarr/ --charts=servarr/ --validate-maintainers=false $extraArgs
+
+      - name: Save dependencies charts in the cache
+        if: ${{ steps.cache-charts.outputs.cache-hit != 'true' }}
+        id: cache-charts-save
+        uses: actions/cache/save@v4
+        with:
+          path: servarr/charts
+          key: dep-charts-${{ hashFiles('servarr/Chart.yaml') }}
