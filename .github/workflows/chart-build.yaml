@@ -31,7 +31,7 @@ jobs:
         with:
           path: |
             servarr/charts
-            Chart.lock
+            servarr/Chart.lock
           key: dep-charts-${{ hashFiles('servarr/Chart.yaml') }}
 
       - name: Helm Dependency update
@@ -45,7 +45,7 @@ jobs:
         with:
           path: |
             servarr/charts
-            Chart.lock
+            servarr/Chart.lock
           key: dep-charts-${{ hashFiles('servarr/Chart.yaml') }}
 
       - name: Helm Template

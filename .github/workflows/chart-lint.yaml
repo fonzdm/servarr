@@ -41,7 +41,7 @@ jobs:
         with:
           path: |
             servarr/charts
-            Chart.lock
+            servarr/Chart.lock
           key: dep-charts-${{ hashFiles('servarr/Chart.lock') }}
 
       - name: Run chart-testing (lint)
@@ -54,5 +54,5 @@ jobs:
         with:
           path: |
             servarr/charts
-            Chart.lock
+            servarr/Chart.lock
           key: dep-charts-${{ hashFiles('servarr/Chart.yaml') }}
