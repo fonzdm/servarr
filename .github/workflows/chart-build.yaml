@@ -30,7 +30,7 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: servarr/charts
-          key: ${{ runner.os }}-dep-charts
+          key: dep-charts-${{ hashFiles('servarr/Chart.yaml') }}
 
       - name: Helm Dependency update
         if: ${{ steps.cache-charts.outputs.cache-hit != 'true' }}
@@ -42,7 +42,7 @@ jobs:
         uses: actions/cache/save@v4
         with:
           path: servarr/charts
-          key: ${{ runner.os }}-dep-charts # ${{ steps.cache-primes-restore.outputs.cache-primary-key }}
+          key: dep-charts-${{ hashFiles('servarr/Chart.yaml') }}
 
       - name: Helm Template
         run: helm template servarr servarr/ --debug -f .github/ci/ci-values.yaml
