@@ -50,7 +50,7 @@ jobs:
 
       - name: Run chart-testing (lint)
         env:
-          CACHE_HIT: ${{ steps.cache-charts.outputs.cache-hit != 'true' }}
+          CACHE_HIT: ${{ steps.cache-charts.outputs.cache-hit == 'true' }}
         run: |
           extraArgs=""
           if [[ "$CACHE_HIT" == "true" ]] ; then
