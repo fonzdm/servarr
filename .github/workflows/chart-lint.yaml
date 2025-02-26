@@ -1,14 +1,9 @@
 name: Helm Chart Lint
 
 on:
-  push:
-    branches:
-      - 'dev'
-      - 'ci/cache-usage' # test-purposes
-  pull_request:
-    branches:
-      - 'dev'
-      - 'main'
+  workflow_run:
+    workflows: [Helm Chart Build]
+    types: [completed]
 
 jobs:
   lint:
