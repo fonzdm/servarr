@@ -5,59 +5,10 @@ import sys
 import logging
 import base64
 import hashlib
-import jinja2
 
 MIN_PASS_LEN = 8
 QBITTORRENT_CONF_FILENAME = "qBittorrent.conf"
 QBITTORRENT_CONF_FILEPATH = "/mnt/qBittorrent/config"
-QBITTORRENT_CONF_TEMPLATE = r"""
-[Application]
-FileLogger\Age=1
-FileLogger\AgeType=1
-FileLogger\Backup=true
-FileLogger\DeleteOld=true
-FileLogger\Enabled=true
-FileLogger\MaxSizeBytes=66560
-FileLogger\Path=/config/qBittorrent/logs
-
-[BitTorrent]
-Session\DefaultSavePath=/downloads
-Session\ExcludedFileNames=
-Session\Port=50413
-Session\QueueingSystemEnabled=true
-Session\TempPath=/downloads/temp
-
-[Core]
-AutoDeleteAddedTorrentFile=Never
-
-[LegalNotice]
-Accepted=true
-
-[Meta]
-MigrationVersion=6
-
-[Network]
-Proxy\HostnameLookupEnabled=false
-Proxy\Profiles\BitTorrent=true
-Proxy\Profiles\Misc=true
-Proxy\Profiles\RSS=true
-
-[Preferences]
-General\Locale=en
-MailNotification\req_auth=true
-WebUI\HostHeaderValidation=false
-WebUI\LocalHostAuth=false
-{{- if not (default .Values.qbittorrent.csrf_protection false) }}
-WebUI\CSRFProtection=false
-WebUI\ClickjackingProtection=false
-{{- end }}
-WebUI\Password_PBKDF2="{{`{{ torrentPassword }}`}}"
-WebUI\UseUPnP=false
-WebUI\Username={{`{{ torrentUsername }}`}}
-
-[RSS]
-AutoDownloader\DownloadRepacks=true
-"""
 
 
 def create_file(file_content: str):
@@ -122,14 +73,55 @@ except Exception:
 logger.info("Hashed password: {0}".format(hashed_password))
 
 logger.info("Parsing the configuration template")
-conf_template = jinja2.Template(QBITTORRENT_CONF_TEMPLATE)
 
-rendering_dict = {
-    "torrentUsername": TORRENT_USERNAME,
-    "torrentPassword": hashed_password,
-}
+conf_rendered = f'''
+[Application]
+FileLogger\\Age=1
+FileLogger\\AgeType=1
+FileLogger\\Backup=true
+FileLogger\\DeleteOld=true
+FileLogger\\Enabled=true
+FileLogger\\MaxSizeBytes=66560
+FileLogger\\Path=/config/qBittorrent/logs
 
-conf_rendered = conf_template.render(rendering_dict)
+[BitTorrent]
+Session\\DefaultSavePath=/downloads
+Session\\ExcludedFileNames=
+Session\\Port=50413
+Session\\QueueingSystemEnabled=true
+Session\\TempPath=/downloads/temp
+
+[Core]
+AutoDeleteAddedTorrentFile=Never
+
+[LegalNotice]
+Accepted=true
+
+[Meta]
+MigrationVersion=6
+
+[Network]
+Proxy\\HostnameLookupEnabled=false
+Proxy\\Profiles\\BitTorrent=true
+Proxy\\Profiles\\Misc=true
+Proxy\\Profiles\\RSS=true
+
+[Preferences]
+General\\Locale=en
+MailNotification\\req_auth=true
+WebUI\\HostHeaderValidation=false
+WebUI\\LocalHostAuth=false
+{{- if not (default .Values.qbittorrent.csrf_protection false) }}
+WebUI\\CSRFProtection=false
+WebUI\\ClickjackingProtection=false
+{{- end }}
+WebUI\\Password_PBKDF2="{hashed_password}"
+WebUI\\UseUPnP=false
+WebUI\\Username={TORRENT_USERNAME}
+
+[RSS]
+AutoDownloader\\DownloadRepacks=true
+'''
 
 logger.info("Rendered configuration file:\n\n{0}\n\n".format(conf_rendered))
 
