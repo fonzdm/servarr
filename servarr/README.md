@@ -40,7 +40,7 @@ Servarr complete Helm Chart for Kubernetes
 > Follow the table below and forget everything else. 
 
 > [!CAUTION] 
-> Please, do not remove Anchors when you see them (the strage syntax with the `&`)
+> Please, do not remove Anchors when you see them (the strange syntax with the `&`)
 
 ---
 
