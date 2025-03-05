@@ -26,7 +26,7 @@ spec:
             [
               "sh",
               "-c",
-              "until wget --spider -S -T 10 \"http://{{ .Release.Namespace }}-radarr.{{ .Release.Namespace }}.svc.cluster.local:7878\" 2>&1 | grep -qw '200\\|301\\|302' > /dev/null ; do echo Waiting for servarr-radarr ; sleep 5 ; done ; sleep 10 ;"
+              "until wget --spider -S -T 10 \"http://{{ .Release.Name }}-radarr.{{ .Release.Namespace }}.svc.cluster.local:7878\" 2>&1 | grep -qw '200\\|301\\|302' > /dev/null ; do echo Waiting for servarr-radarr ; sleep 5 ; done ; sleep 10 ;"
             ]
       containers:
       - name: initialize-radarr
@@ -36,11 +36,11 @@ spec:
           - name: PYTHONUNBUFFERED
             value: "1"
           - name: RADARR_HOST
-            value: "{{ .Release.Namespace }}-radarr.{{ .Release.Namespace }}.svc.cluster.local:7878"
+            value: "{{ .Release.Name }}-radarr.{{ .Release.Namespace }}.svc.cluster.local:7878"
           - name: API_KEY
             value: "{{ $.Values.global.apikey }}"
           - name: TORRENT_SERVICE
-            value: "{{ .Release.Namespace }}-qbittorrent"
+            value: "{{ .Release.Name }}-qbittorrent"
           - name: TORRENT_ADMIN
             value: "{{ $.Values.torrent.username }}"
           - name: TORRENT_PASSWORD
