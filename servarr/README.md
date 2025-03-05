@@ -40,7 +40,220 @@ Servarr complete Helm Chart for Kubernetes
 > Follow the table below and forget everything else. 
 
 > [!CAUTION] 
-> Please, do not remove Anchors when you see them (the strage syntax with the `&`)
+> Please, do not remove Anchors when you see them (the strage syntax with the `&`) and make sure you include all the parameters that are using the anchors. Check the minimal `values.yaml` reference.
+
+<details><summary>Minimal <code>values.yaml</code> sample</summary>
+
+```yaml
+global:
+  apikey: &apikey "<replace-with-an-api-key>"
+  storageClassName: &storageClassName "<replace-with-your-storage-class-name>"
+  ingressClassName: &ingressClassName "<replace-with-your-ingress-class-name>"
+  certManagerClusterIssuer: &issuer
+
+metrics:
+  enabled: &metricsEnabled false
+
+dash:
+  username:
+  password:
+  mail:
+  countryCode: "US"
+  preferredLanguage: "en"
+
+torrent:
+  username:
+  password:
+
+volumes:
+  storageClass: *storageClassName
+  downloads:
+    name: &downloads-volume downloads-volume
+    size: 100Gi
+  media:
+    name: &media-volume media-volume
+    size: 250Gi
+  torrentConfig:
+    name: &torrentConfig torrent-config
+    size: 250Mi
+
+sonarr:
+  metrics:
+    main:
+      enabled: *metricsEnabled
+  workload:
+    main:
+      podSpec:
+        containers:
+          main:
+            env:
+              SONARR__API_KEY: *apikey
+  ingress:
+    sonarr-ing:
+      annotations:
+        cert-manager.io/cluster-issuer: *issuer
+      ingressClassName: *ingressClassName
+      hosts:
+        - host: sonarr.local
+          paths:
+            - path: /
+              pathType: Prefix
+      tls:
+        - hosts:
+            - sonarr.local
+          secretName: sonarr-tls
+  persistence:
+    config:
+      storageClass: *storageClassName
+    media:
+      existingClaim: *media-volume
+    downloads:
+      existingClaim: *downloads-volume
+
+radarr:
+  metrics:
+    main:
+      enabled: *metricsEnabled
+  workload:
+    main:
+      podSpec:
+        containers:
+          main:
+            env:
+              RADARR__API_KEY: *apikey
+  ingress:
+    radarr-ing:
+      annotations:
+        cert-manager.io/cluster-issuer: *issuer
+      ingressClassName: *ingressClassName
+      hosts:
+        - host: radarr.local
+          paths:
+            - path: /
+              pathType: Prefix
+      tls:
+        - hosts:
+            - radarr.local
+          secretName: radarr-tls
+  persistence:
+    config:
+      storageClass: *storageClassName
+    media:
+      existingClaim: *media-volume
+    downloads:
+      existingClaim: *downloads-volume
+
+jellyfin:
+  metrics:
+    main:
+      enabled: *metricsEnabled
+  ingress:
+    jellyfin-ing:
+      annotations:
+        cert-manager.io/cluster-issuer: *issuer
+      ingressClassName: *ingressClassName
+      hosts:
+        - host: jellyfin.local
+          paths:
+            - path: /
+              pathType: Prefix
+      tls:
+        - hosts:
+            - jellyfin.local
+          secretName: jellyfin-tls
+  persistence:
+    config:
+      storageClass: *storageClassName
+    media:
+      existingClaim: *media-volume
+
+jellyseerr:
+  metrics:
+    main:
+      enabled: *metricsEnabled
+  ingress:
+    jellyseerr-ing:
+      annotations:
+        cert-manager.io/cluster-issuer: *issuer
+      ingressClassName: *ingressClassName
+      hosts:
+        - host: jellyseerr.local
+          paths:
+            - path: /
+              pathType: Prefix
+      tls:
+        - hosts:
+            - jellyseerr.local
+          secretName: jellyseerr-tls
+  persistence:
+    config:
+      storageClass: *storageClassName
+    media:
+      existingClaim: *media-volume
+
+qbittorrent:
+  metrics:
+    main:
+      enabled: *metricsEnabled
+  ingress:
+    qbittorrent-ing:
+      annotations:
+        cert-manager.io/cluster-issuer: *issuer
+      ingressClassName: *ingressClassName
+      hosts:
+        - host: torrent.local
+          paths:
+            - path: /
+              pathType: Prefix
+      tls:
+        - hosts:
+            - torrent.local
+          secretName: torrent-tls
+  persistence:
+    config:
+      existingClaim: *torrentConfig
+    downloads:
+      existingClaim: *downloads-volume
+
+prowlarr:
+  metrics:
+    main:
+      enabled: *metricsEnabled
+  workload:
+    main:
+      podSpec:
+        containers:
+          main:
+            env:
+              PROWLARR__API_KEY: *apikey
+  ingress:
+    prowlarr-ing:
+      annotations:
+        cert-manager.io/cluster-issuer: *issuer
+      ingressClassName: *ingressClassName
+      hosts:
+        - host: prowlarr.local
+          paths:
+            - path: /
+              pathType: Prefix
+      tls:
+        - hosts:
+            - prowlarr.local
+          secretName: prowlarr-tls
+  persistence:
+    config:
+      storageClass: *storageClassName
+
+flaresolverr:
+  metrics:
+    main:
+      enabled: *metricsEnabled
+  persistence:
+    config:
+      storageClass: *storageClassName
+```
+
+</details>
 
 ---
 
