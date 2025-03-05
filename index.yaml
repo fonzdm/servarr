@@ -2,6 +2,53 @@ apiVersion: v1
 entries:
   servarr:
   - apiVersion: v2
+    appVersion: 1.0.2
+    created: "2025-03-05T10:50:32.684367987Z"
+    dependencies:
+    - name: sonarr
+      repository: oci://tccr.io/truecharts
+      version: 21.2.1
+    - name: radarr
+      repository: oci://tccr.io/truecharts
+      version: 21.2.1
+    - name: prowlarr
+      repository: oci://tccr.io/truecharts
+      version: 16.2.1
+    - name: qbittorrent
+      repository: oci://tccr.io/truecharts
+      version: 19.4.1
+    - name: jellyseerr
+      repository: oci://tccr.io/truecharts
+      version: 9.5.2
+    - name: jellyfin
+      repository: oci://tccr.io/truecharts
+      version: 18.7.7
+    - name: flaresolverr
+      repository: oci://tccr.io/truecharts
+      version: 13.4.1
+    description: Servarr complete Helm Chart for Kubernetes
+    digest: df08e01dded15d6180fc3762840d3816848a4649741fdffac0d929f1334334e0
+    home: https://github.com/fonzdm/servarr
+    keywords:
+    - servarr
+    - prowlarr
+    - radarr
+    - sonarr
+    - qbittorrent
+    - jellyseerr
+    - jellyfin
+    - flaresolverr
+    maintainers:
+    - email: adm220297@proton.me
+      name: Alfonso De Masi
+    name: servarr
+    sources:
+    - https://github.com/fonzdm/servarr
+    type: application
+    urls:
+    - https://github.com/fonzdm/servarr/releases/download/servarr-1.0.2/servarr-1.0.2.tgz
+    version: 1.0.2
+  - apiVersion: v2
     appVersion: 1.0.0
     created: "2024-07-16T15:03:54.571123538Z"
     dependencies:
@@ -95,4 +142,4 @@ entries:
     urls:
     - https://github.com/fonzdm/servarr/releases/download/servarr-1.0.0/servarr-1.0.0.tgz
     version: 1.0.0
-generated: "2024-07-16T15:03:54.571137574Z"
+generated: "2025-03-05T10:50:32.684381382Z"
