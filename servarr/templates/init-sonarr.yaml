@@ -20,27 +20,27 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: wait-for-sonarr
-          image: rapidfort/curl:8.7.1
+          image: busybox:1.37.0
           imagePullPolicy: IfNotPresent
           command:
             [
               "sh",
               "-c",
-              "until curl  \"http://{{ .Release.Namespace }}-sonarr.{{ .Release.Namespace }}.svc.cluster.local:8989\"; do echo waiting for servarr-sonarr; sleep 5; done;",
+              "until wget --spider -S -T 10 \"http://{{ .Release.Name }}-sonarr.{{ .Release.Namespace }}.svc.cluster.local:8989\" 2>&1 | grep -qw '200\\|301\\|302' > /dev/null ; do echo Waiting for servarr-sonarr ; sleep 5 ; done ; sleep 10 ;"
             ]
       containers:
       - name: initialize-sonarr
-        image: "nyurik/alpine-python3-requests"
+        image: python:3.10
         imagePullPolicy: IfNotPresent
         env:
           - name: PYTHONUNBUFFERED
             value: "1"
           - name: SONARR_HOST
-            value: "{{ .Release.Namespace }}-sonarr.{{ .Release.Namespace }}.svc.cluster.local:8989"
+            value: "{{ .Release.Name }}-sonarr.{{ .Release.Namespace }}.svc.cluster.local:8989"
           - name: API_KEY
             value: "{{ $.Values.global.apikey }}"
           - name: TORRENT_SERVICE
-            value: "{{ .Release.Namespace }}-qbittorrent"
+            value: "{{ .Release.Name }}-qbittorrent"
           - name: TORRENT_ADMIN
             value: "{{ $.Values.torrent.username }}"
           - name: TORRENT_PASSWORD
@@ -49,7 +49,7 @@ spec:
           - "/bin/sh"
           - "-ec"
         args:
-          - "python3 -u /mnt/init-sonarr.py 2>&1;"
+          - "pip install requests && python3 -u /mnt/init-sonarr.py 2>&1;"
         volumeMounts:
           - mountPath: "/mnt"
             name: python-script

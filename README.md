@@ -32,7 +32,7 @@ $ helm dependency update
 > [!NOTE]
 > If the previous command fails or goes in timeout (or takes too much), try adding the truecharts Helm repository:
 > ```shell
-> $ helm repo add truecharts https://charts.truecharts.org
+> $ helm repo add truecharts oci://tccr.io/truecharts
 > ```
 > and then execute again the `helm dependency update` command.
   
@@ -83,11 +83,11 @@ Please read [CONTRIBUTING.md](./CONTRIBUTING.md) for details on our code of cond
 
 See the full list of [contributors](https://github.com/fonzdm/servarr/contributors) who participated in this project.
 
+###### Remember that each dependency has its own author(s) and contributors. Please contact them via their repositories.
+
 ## :label: Versioning
 
 We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [releases on this repository](https://github.com/fonzdm/servarr/releases). 
-
-###### Remember that each dependency has its own author(s) and contributors. Please contact them via their repositories.
 
 ## :scroll: License
 

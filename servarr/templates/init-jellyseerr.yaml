@@ -21,25 +21,25 @@ spec:
       restartPolicy: Never
       initContainers:
         - name: wait-for-jellyseerr
-          image: rapidfort/curl:8.7.1
+          image: busybox:1.37.0
           imagePullPolicy: IfNotPresent
           command:
             - "sh"
             - "-c"
-            - "until curl \"http://{{ .Release.Namespace }}-jellyseerr.{{ .Release.Namespace }}.svc.cluster.local:10241\"; do echo waiting for servarr-jellyseerr; sleep 5; done;sleep 10;"
+            - "until wget --spider -S -T 10 \"http://{{ .Release.Name }}-jellyseerr.{{ .Release.Namespace }}.svc.cluster.local:10241\" 2>&1 | grep -qw '200\\|301\\|302' > /dev/null ; do echo Waiting for servarr-jellyseerr ; sleep 5 ; done ; sleep 10 ;"
       containers:
       - name: initialize-jellyseer
-        image: "nyurik/alpine-python3-requests"
+        image: python:3.10
         imagePullPolicy: IfNotPresent
         env:
           - name: PYTHONUNBUFFERED
             value: "1"
           - name: JELLYSEERR_HOST
-            value: "{{ .Release.Namespace }}-jellyseerr.{{ .Release.Namespace }}.svc.cluster.local"
+            value: "{{ .Release.Name }}-jellyseerr.{{ .Release.Namespace }}.svc.cluster.local"
           - name: JELLYSEERR_PORT
             value: "10241"
           - name: JELLYFIN_HOST
-            value: "{{ .Release.Namespace }}-jellyfin"
+            value: "{{ .Release.Name }}-jellyfin"
           - name: JELLYFIN_PORT
             value: "8096"
           - name: JELLYFIN_USERNAME
@@ -60,7 +60,7 @@ spec:
           - "/bin/sh"
           - "-ec"
         args:
-          - "python3 -u /mnt/init-jellyseerr.py 2>&1;"
+          - "pip install requests && python3 -u /mnt/init-jellyseerr.py 2>&1;"
         volumeMounts:
           - mountPath: "/mnt"
             name: python-script

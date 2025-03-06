@@ -1,8 +1,6 @@
 # servarr
 
-
-
-![Version: 1.0.2](https://img.shields.io/badge/Version-1.0.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.0](https://img.shields.io/badge/AppVersion-1.0.0-informational?style=flat-square) 
+![Version: 1.0.2](https://img.shields.io/badge/Version-1.0.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.2](https://img.shields.io/badge/AppVersion-1.0.2-informational?style=flat-square) 
 
 Servarr complete Helm Chart for Kubernetes
 
@@ -41,7 +39,7 @@ Servarr complete Helm Chart for Kubernetes
 > Follow the table below and forget everything else. 
 
 > [!CAUTION] 
-> Please, do not remove Anchors when you see them (the strage syntax with the `&`)
+> Please, do not remove Anchors when you see them (the strange syntax with the `&`)
 
 ---
 
@@ -93,8 +91,8 @@ Servarr complete Helm Chart for Kubernetes
 | qbittorrent.addons.vpn | object | See configuration below | Addon configuration for the VPN |
 | qbittorrent.addons.vpn.env | map | Empty map | Environment variables to inject into the sidecar container. See the related VPN config in TrueCharts |
 | qbittorrent.addons.vpn.excludedNetworks_IPv4 | list | 192.168.0.1/24 | Which subnets to exclude from the VPN |
-| qbittorrent.addons.vpn.inputPorts | list | [80,8080,443,50513] | Ports to be mapped for external access |
-| qbittorrent.addons.vpn.killSwitch | bool | true | The flag changes the behavior in case of a tunnel failure (for example, the VPN tunnel cannot be established because the credentials are incorrect). If set to true, a failed tunnel will result in a missing connection (qBitTorrent won't connect externally). If set to false, the connection will use the standard configuration (exposing the user IP).  |
+| qbittorrent.addons.vpn.inputPorts | list | [80, 8080, 443, 50513] | Ports to be mapped for external access |
+| qbittorrent.addons.vpn.killSwitch | bool | true | The flag changes the behavior in case of a tunnel failure (for example, the VPN tunnel cannot be established because the credentials are incorrect). If set to true, a failed tunnel will result in a missing connection (qBitTorrent won't connect externally). If set to false, the connection will use the standard configuration (exposing the user IP). |
 | qbittorrent.addons.vpn.type | string | disabled | Type of the VPN to use, defaults to disabled. See: https://truecharts.org/guides/addons/vpn-setup/ |
 | qbittorrent.csrf_protection | bool | false | Whether to enable or disable CSRF Protection on qBitTorrent WebGUI |
 | torrent.password | string | No default value | password of the qBitTorrent admin user. Must be at least of 8 characters. |
