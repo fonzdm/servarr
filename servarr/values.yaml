@@ -38,7 +38,7 @@ scraparr:
   enabled: false
   config:
     radarr:
-      # -- (string) Mandatory - Insert Radarr service name in format: {{ .Release.Namespace }}-radarr
+      # -- (string) Mandatory - Insert Radarr service name in format: `{{ .Release.Name }}-radarr`
       # @default -- No default value
       # @section -- Scraparr
       url:
@@ -51,7 +51,7 @@ scraparr:
       # @section -- Scraparr
       api_key: *apikey
     sonarr:
-      # -- (string) Mandatory - Insert Sonarr service name in format: {{ .Release.Namespace }}-sonarr
+      # -- (string) Mandatory - Insert Sonarr service name in format: `{{ .Release.Name }}-sonarr`
       # @default -- No default value
       # @section -- Scraparr
       url:
@@ -64,7 +64,7 @@ scraparr:
       # @section -- Scraparr
       api_key: *apikey
     prowlarr:
-      # -- (string) Mandatory - Insert Prowlarr service name in format: {{ .Release.Namespace }}-prowlarr
+      # -- (string) Mandatory - Insert Prowlarr service name in format: `{{ .Release.Name }}-prowlarr`
       # @default -- No default value
       # @section -- Scraparr
       url:
