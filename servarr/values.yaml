@@ -35,6 +35,9 @@ metrics:
   enabled: &metricsEnabled false
 
 scraparr:
+  # -- (bool) Enable or disable the Scraparr app deployment
+  # @default -- false
+  # @section -- Scraparr
   enabled: false
   config:
     radarr:
