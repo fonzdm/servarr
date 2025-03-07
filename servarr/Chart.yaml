@@ -13,6 +13,7 @@ keywords:
   - jellyseerr
   - jellyfin
   - flaresolverr
+  - scraparr
 home: https://github.com/fonzdm/servarr
 sources:
   - https://github.com/fonzdm/servarr
@@ -68,6 +69,12 @@ dependencies:
       - movies
       - tvseries
       - music
+  - name: scraparr
+    version: "1.1.0"
+    repository: "https://imgios.github.io/scraparr"
+    # condition: scraparr.enabled
+    tags:
+      - metrics
 annotations:
   artifacthub.io/alternativeName: servar
   artifacthub.io/category: integration-delivery
