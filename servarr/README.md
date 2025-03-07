@@ -106,13 +106,13 @@ Servarr complete Helm Chart for Kubernetes
 |-----|------|---------|-------------|
 | scraparr.config.prowlarr.api_key | string | *apikey | Anchor to apiKey. As a single key is used for all services, same will be used for interacting with Sonarr, Radarr, Prowlarr |
 | scraparr.config.prowlarr.api_version | string | v3 | - Insert Prowlarr API versions, if different version wants to be used |
-| scraparr.config.prowlarr.url | string | No default value | Mandatory - Insert Prowlarr service name in format: {{ .Release.Namespace }}-prowlarr |
+| scraparr.config.prowlarr.url | string | No default value | Mandatory - Insert Prowlarr service name in format: `{{ .Release.Name }}-prowlarr` |
 | scraparr.config.radarr.api_key | string | *apikey | Anchor to apiKey. As a single key is used for all services, same will be used for interacting with Sonarr, Radarr, Prowlarr |
 | scraparr.config.radarr.api_version | string | v3 | - Insert Radarr API versions, if different version wants to be used |
-| scraparr.config.radarr.url | string | No default value | Mandatory - Insert Radarr service name in format: {{ .Release.Namespace }}-radarr |
+| scraparr.config.radarr.url | string | No default value | Mandatory - Insert Radarr service name in format: `{{ .Release.Name }}-radarr` |
 | scraparr.config.sonarr.api_key | string | *apikey | Anchor to apiKey. As a single key is used for all services, same will be used for interacting with Sonarr, Radarr, Prowlarr |
 | scraparr.config.sonarr.api_version | string | v3 | - Insert Sonarr API versions, if different version wants to be used |
-| scraparr.config.sonarr.url | string | No default value | Mandatory - Insert Sonarr service name in format: {{ .Release.Namespace }}-sonarr |
+| scraparr.config.sonarr.url | string | No default value | Mandatory - Insert Sonarr service name in format: `{{ .Release.Name }}-sonarr` |
 
 ### Tags
 
