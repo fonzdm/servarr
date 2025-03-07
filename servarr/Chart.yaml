@@ -70,7 +70,7 @@ dependencies:
       - tvseries
       - music
   - name: scraparr
-    version: "1.0.1"
+    version: "1.1.0"
     repository: "https://imgios.github.io/scraparr"
     # condition: scraparr.enabled
     tags:
