@@ -22,7 +22,7 @@ Servarr complete Helm Chart for Kubernetes
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://imgios.github.io/scraparr | scraparr | 1.0.1 |
+| https://imgios.github.io/scraparr | scraparr | 1.1.0 |
 | oci://tccr.io/truecharts | flaresolverr | 13.4.1 |
 | oci://tccr.io/truecharts | jellyfin | 18.7.7 |
 | oci://tccr.io/truecharts | jellyseerr | 9.5.2 |
