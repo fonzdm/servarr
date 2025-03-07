@@ -63,11 +63,15 @@ $ helm install <release-name> fonzdm/servarr \
 --values values.yaml
 ```
 
+> [!WARNING]
+>
+> A minimum set of values must include the various parameters with the anchor reference, otherwise the anchors won't work as intended and the deployment may fail. Please, read the [Helm Chart README.md](./servarr/README.md) section to see a minimal `values.yaml` sample.
+
 If you want to install a specific version, execute the previous command adding: `--version x.y.z`
 
 ### Values
 
-Please read [Helm Chart README.md](./servarr/README.md) for details on how to configure the values needed for this chart.
+Please read [Helm Chart README.md](./servarr/README.md) for further details on the values supported by the Chart.
 
 ## Contributing
 
