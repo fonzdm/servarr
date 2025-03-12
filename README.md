@@ -29,7 +29,7 @@ $ git clone https://github.com/fonzdm/servarr.git && cd servarr
 $ helm dependency update
 ```
 
-> [!NOTE]
+> [!TIP]
 > If the previous command fails or goes in timeout (or takes too much), try adding the truecharts Helm repository:
 > ```shell
 > $ helm repo add truecharts oci://tccr.io/truecharts
