@@ -68,6 +68,14 @@ dependencies:
       - movies
       - tvseries
       - music
+  - name: bazarr
+    version: "21.6.2"
+    repository: "oci://tccr.io/truecharts"
+    condition: bazarr.enabled
+    tags:
+      - movies
+      - tvseries
+      - subtitles
 annotations:
   artifacthub.io/alternativeName: servar
   artifacthub.io/category: integration-delivery
