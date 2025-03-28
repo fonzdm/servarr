@@ -22,6 +22,7 @@ Servarr complete Helm Chart for Kubernetes
 
 | Repository | Name | Version |
 |------------|------|---------|
+| https://imgios.github.io/scraparr | scraparr | 1.1.0 |
 | oci://tccr.io/truecharts | flaresolverr | 13.4.1 |
 | oci://tccr.io/truecharts | jellyfin | 18.7.7 |
 | oci://tccr.io/truecharts | jellyseerr | 9.5.2 |
@@ -273,7 +274,7 @@ flaresolverr:
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| global.apikey | string | No default value is configured for security reasons | Insert your Prowlarr, Sonarr, Radarr API key here (one to rule them all!). Do not remove the `&apikey` anchor! |
+| global.apikey | string | No default value is configured for security reasons | Insert your Prowlarr, Sonarr, Radarr API key here (one to rule them all!). Do not remove the `&` anchor! |
 | global.certManagerClusterIssuer | string | No default value, leave empty if not required | Insert your cert manager cluster issuer, e.g.: letsencrypt-cloudflare. Do not remove the `&issuer` anchor! |
 | global.ingressClassName | string | nginx | Insert your ingress class here, e.g.: &ingressClassName nginx. Do not remove the `&ingressCassName` anchor, and do not leave the anchor value empty, otherwise you will face a `null` value error! |
 | global.storageClassName | string | `"network-block"` | Insert your storage class here, e.g.: &storageClassName network-block. Do not remove the `&storageClassName` anchor! |
@@ -311,6 +312,21 @@ flaresolverr:
 | qbittorrent.csrf_protection | bool | false | Whether to enable or disable CSRF Protection on qBitTorrent WebGUI |
 | torrent.password | string | No default value | password of the qBitTorrent admin user. Must be at least of 8 characters. |
 | torrent.username | string | No default value | username of the qBitTorrent admin user |
+
+### Scraparr
+
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| scraparr.config.prowlarr.api_key | string | *apikey | Anchor to apiKey. As a single key is used for all services, same will be used for interacting with Sonarr, Radarr, Prowlarr |
+| scraparr.config.prowlarr.api_version | string | v3 | - Insert Prowlarr API versions, if different version wants to be used |
+| scraparr.config.prowlarr.url | string | No default value | Mandatory - Insert Prowlarr service name in format: `{{ .Release.Name }}-prowlarr` |
+| scraparr.config.radarr.api_key | string | *apikey | Anchor to apiKey. As a single key is used for all services, same will be used for interacting with Sonarr, Radarr, Prowlarr |
+| scraparr.config.radarr.api_version | string | v3 | - Insert Radarr API versions, if different version wants to be used |
+| scraparr.config.radarr.url | string | No default value | Mandatory - Insert Radarr service name in format: `{{ .Release.Name }}-radarr` |
+| scraparr.config.sonarr.api_key | string | *apikey | Anchor to apiKey. As a single key is used for all services, same will be used for interacting with Sonarr, Radarr, Prowlarr |
+| scraparr.config.sonarr.api_version | string | v3 | - Insert Sonarr API versions, if different version wants to be used |
+| scraparr.config.sonarr.url | string | No default value | Mandatory - Insert Sonarr service name in format: `{{ .Release.Name }}-sonarr` |
+| scraparr.enabled | bool | false | Enable or disable the Scraparr app deployment |
 
 ### Tags
 
